@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:football_collection/features/regions/presentation/screens/regions_screen/regions_screen.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../features/albums/presentation/screens/album/album_screen.dart';
+import '../../features/albums/presentation/screens/open_pack_screen/sticker_pack_screen.dart';
+import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
+
+final rootNavigatorKey = GlobalKey<NavigatorState>();
+
+class RoutePaths {
+  static const album = '/album';
+  static const stickerpack = '/stickerpack';
+  static const regions = '/regions';
+  static const countries = '/countries';
+  // static const main = '/main';
+  // static const auth = '/auth';
+  // static const map = '/map';
+  // static const profile = '/profile';
+  // static const tickets = '/tickets';
+  // static const mediaGalleryFullScreen = '/mediaGalleryFullScreen';
+  // static const qrScanner = '/qrScanner';
+  // static const paymentWebview = '/paymentWebview';
+}
+
+class FootballCollectionRouter {
+  late GoRouter router;
+
+  static final FootballCollectionRouter _inst = FootballCollectionRouter._internal();
+
+  factory FootballCollectionRouter(String initialRoute) {
+    _inst.router = GoRouter(
+      navigatorKey: rootNavigatorKey,
+      initialLocation: initialRoute,
+      routes: [
+        GoRoute(
+          path: RoutePaths.album,
+          builder: (context, state) => const AlbumScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.stickerpack,
+          builder: (context, state) => const StickerPackScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.regions,
+          builder: (context, state) => const RegionsScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.countries,
+          builder: (context, state) => const CountriesScreen(),
+        ),
+        // GoRoute(
+        //   path: RoutePaths.main,
+        //   builder: (context, state) => const MainScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.map,
+        //   builder: (context, state) => const MapScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.auth,
+        //   builder: (context, state) => const AuthScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.profile,
+        //   builder: (context, state) => const ProfileScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.tickets,
+        //   builder: (context, state) => const TicketsScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.sandbox,
+        //   builder: (context, state) => const SandboxScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.qrScanner,
+        //   builder: (context, state) => const QrScannerScreen(),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.mediaGalleryFullScreen,
+        //   pageBuilder: (context, state) => buildMenuPageWithDefaultTransition(
+        //     context: context,
+        //     state: state,
+        //     child: MediaGalleryFullScreen(
+        //       args: state.extra as MediaGalleryFullScreenArguments,
+        //     ),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: RoutePaths.paymentWebview,
+        //   builder: (context, state) => PaymentWebviewScreen(
+        //     args: state.extra as PaymentWebViewScreenArgs,
+        //   ),
+        // ),
+      ],
+    );
+
+    return _inst;
+  }
+
+  FootballCollectionRouter._internal();
+}

@@ -1,0 +1,30 @@
+part of 'saved_players_bloc.dart';
+
+sealed class SavedPlayersState {
+  List<PlayerModel>? get savedPlayers {
+    return switch (this) {
+      SavedPlayersStateLoadSucceeded() => (this as SavedPlayersStateLoadSucceeded).players,
+      _ => null,
+    };
+  }
+}
+
+final class SavedPlayersStateInitial extends SavedPlayersState {}
+
+final class SavedPlayersStatePending extends SavedPlayersState {}
+
+final class SavedPlayersStateLoadSucceeded extends SavedPlayersState {
+  final List<PlayerModel> players;
+
+  SavedPlayersStateLoadSucceeded({
+    required this.players,
+  });
+}
+
+final class SavedPlayersStateFailed extends SavedPlayersState {
+  final String message;
+
+  SavedPlayersStateFailed({
+    required this.message,
+  });
+}

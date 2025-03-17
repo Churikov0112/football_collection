@@ -1,0 +1,19 @@
+bricks:
+  bloc:
+    path: "bricks/bloc"
+  screen:
+    path: "bricks/screen"
+  feature:
+    path: "bricks/feature"
+  model:
+    path: "bricks/model"
+  query:
+    path: "bricks/query"
+  stateless_widget:
+    path: "bricks/stateless_widget"
+  fragment:
+    path: "bricks/fragment"
+  bs:
+    path: "bricks/bs"
+  variables:
+    path: "bricks/variables"
