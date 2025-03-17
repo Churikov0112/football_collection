@@ -1,14 +1,14 @@
-part of '../regions_screen.dart';
+part of '../countries_screen.dart';
 
-class _RegionsList extends StatelessWidget {
-  const _RegionsList();
+class _CountriesList extends StatelessWidget {
+  const _CountriesList();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegionsBloc, RegionsState>(
+    return BlocBuilder<CountriesBloc, CountriesState>(
       bloc: getIt.get(),
-      builder: (context, regionsState) {
-        final regions = regionsState.regions ?? [];
+      builder: (context, countriesState) {
+        final countries = countriesState.countries ?? [];
 
         return Expanded(
           child: GridView.builder(
@@ -19,10 +19,10 @@ class _RegionsList extends StatelessWidget {
               mainAxisSpacing: 20,
             ),
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 120),
-            itemCount: regions.length,
+            itemCount: countries.length,
             itemBuilder: (context, index) {
-              return _RegionTile(
-                region: regions[index],
+              return _CountryTile(
+                country: countries[index],
               );
             },
           ),
@@ -32,18 +32,18 @@ class _RegionsList extends StatelessWidget {
   }
 }
 
-class _RegionTile extends StatelessWidget {
-  const _RegionTile({
-    required this.region,
+class _CountryTile extends StatelessWidget {
+  const _CountryTile({
+    required this.country,
   });
 
-  final RegionModel region;
+  final CountryModel country;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(RoutePaths.countries, extra: region);
+        context.push(RoutePaths.album, extra: country);
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -53,8 +53,9 @@ class _RegionTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(region.name),
-            Text(region.code),
+            Text(country.name),
+            Text(country.code),
+            Text(country.regionCode),
           ],
         ),
       ),

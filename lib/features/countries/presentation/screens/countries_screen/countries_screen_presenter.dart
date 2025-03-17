@@ -1,4 +1,3 @@
-
 part of 'countries_screen.dart';
 
 class CountriesScreenPresenter extends StatefulWidget {
@@ -7,17 +6,26 @@ class CountriesScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
+  final RegionModel region;
 
   const CountriesScreenPresenter({
+    required this.region,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<CountriesScreenPresenter> createState() => CountriesScreenPresenterState();
 }
 
 class CountriesScreenPresenterState extends State<CountriesScreenPresenter> {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      getIt.get<CountriesBloc>().add(CountriesEventGet(regionCode: widget.region.code));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

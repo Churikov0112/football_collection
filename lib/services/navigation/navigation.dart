@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/features/regions/domain/models/region.dart';
 import 'package:football_collection/features/regions/presentation/screens/regions_screen/regions_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/albums/presentation/screens/album/album_screen.dart';
 import '../../features/albums/presentation/screens/open_pack_screen/sticker_pack_screen.dart';
+import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -35,7 +37,9 @@ class FootballCollectionRouter {
       routes: [
         GoRoute(
           path: RoutePaths.album,
-          builder: (context, state) => const AlbumScreen(),
+          builder: (context, state) => AlbumScreen(
+            country: state.extra as CountryModel,
+          ),
         ),
         GoRoute(
           path: RoutePaths.stickerpack,
@@ -47,7 +51,9 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.countries,
-          builder: (context, state) => const CountriesScreen(),
+          builder: (context, state) => CountriesScreen(
+            region: state.extra as RegionModel,
+          ),
         ),
         // GoRoute(
         //   path: RoutePaths.main,

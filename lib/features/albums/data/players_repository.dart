@@ -11,6 +11,19 @@ class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
   List<PlayerModel> savedPlayersCache = [];
 
+  Future<List<PlayerModel>> playersGet(String? countryCode) async {
+    if (allPlayersCache.isNotEmpty) {
+      return allPlayersCache;
+    }
+
+    allPlayersCache = await compute<List<Map<String, Object>>, List<PlayerModel>>(
+      _parsePlayer,
+      allPlayers,
+    );
+    return allPlayersCache;
+  }
+
+  @Deprecated("use playersGet instead")
   Future<List<PlayerModel>> getAllPlayers(bool fromRuntimeCache) async {
     if (fromRuntimeCache) {
       return allPlayersCache;

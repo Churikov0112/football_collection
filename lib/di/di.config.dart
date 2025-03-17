@@ -14,6 +14,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../features/albums/data/players_repository.dart' as _i385;
 import '../features/albums/presentation/blocs/all_players_bloc/all_players_bloc.dart'
     as _i678;
+import '../features/albums/presentation/blocs/country_players_bloc/country_players_bloc.dart'
+    as _i433;
 import '../features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart'
     as _i826;
 import '../features/countries/domain/repos/countries_repository.dart' as _i71;
@@ -36,12 +38,15 @@ _i174.GetIt $initGetIt(
   );
   gh.singleton<_i826.SavedPlayersBloc>(() => _i826.SavedPlayersBloc());
   gh.singleton<_i297.RegionsRepository>(() => _i297.RegionsRepository());
-  gh.singleton<_i167.CountriesBloc>(() => _i167.CountriesBloc());
   gh.singleton<_i385.PlayersRepository>(() => _i385.PlayersRepository());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
+  gh.singleton<_i167.CountriesBloc>(
+      () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
   gh.singleton<_i610.RegionsBloc>(
       () => _i610.RegionsBloc(gh<_i297.RegionsRepository>()));
   gh.singleton<_i678.AllPlayersBloc>(
       () => _i678.AllPlayersBloc(repository: gh<_i385.PlayersRepository>()));
+  gh.singleton<_i433.CountryPlayersBloc>(
+      () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
   return getIt;
 }
