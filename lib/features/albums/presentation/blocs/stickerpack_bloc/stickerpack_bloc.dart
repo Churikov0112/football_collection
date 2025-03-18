@@ -22,7 +22,7 @@ class StickerpackBloc extends Bloc<StickerpackEvent, StickerpackState> {
   ) async {
     try {
       emit(StickerpackStatePending());
-      final players = _repository.getRandomPlayers(5);
+      final players = await _repository.getRandomPlayers(5);
       emit(StickerpackStateLoadSucceeded(players));
     } on Object catch (_) {
       emit(StickerpackStateFailed('Произошла ошибка'));

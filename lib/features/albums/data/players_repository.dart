@@ -11,12 +11,16 @@ import '../domain/models/player.dart';
 class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
 
-  Future<List<PlayerModel>> playersGet([String? countryId]) async {
+  Future<void> _ensurePlayersInitialized() async {
     if (allPlayersCache.isEmpty) {
       String jsonString = await rootBundle.loadString('assets/json/players_data.json');
       List<dynamic> data = jsonDecode(jsonString);
       allPlayersCache = await compute(_parsePlayers, data);
     }
+  }
+
+  Future<List<PlayerModel>> playersGet([String? countryId]) async {
+    await _ensurePlayersInitialized();
     if (countryId == null) return [...allPlayersCache];
     return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
   }
@@ -76,13 +80,13 @@ class PlayersRepository {
   //   return result;
   // }
 
-  List<PlayerModel> getRandomPlayers(int count) {
+  Future<List<PlayerModel>> getRandomPlayers(int count) async {
+    await _ensurePlayersInitialized();
     final result = <PlayerModel>[];
     while (result.length < count) {
       final player = _getRandomPlayer();
       result.add(player);
     }
-
     return result;
   }
 

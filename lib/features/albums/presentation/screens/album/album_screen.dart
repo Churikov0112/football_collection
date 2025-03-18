@@ -8,7 +8,6 @@ import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../domain/models/player.dart';
-import '../../blocs/all_players_bloc/all_players_bloc.dart';
 import '../../blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../widgets/saved_player_card.dart';
 
@@ -37,7 +36,7 @@ class AlbumScreen extends StatelessWidget {
               Text(country.name),
               const Spacer(),
               ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
                 child: Image.asset(
                   'assets/raster/team_flags/${country.id}.png',
                   height: 36,

@@ -42,9 +42,13 @@ class SavedPlayerCard extends StatelessWidget {
           Positioned(
             top: 5,
             left: 5,
-            child: CircleAvatar(
-              radius: 15,
-              foregroundImage: AssetImage('assets/raster/team_flags/${player.countryId}.png'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: Image.asset(
+                'assets/raster/team_flags/${player.countryId}.png',
+                height: 32,
+                width: 32,
+              ),
             ),
           ),
           // Positioned(

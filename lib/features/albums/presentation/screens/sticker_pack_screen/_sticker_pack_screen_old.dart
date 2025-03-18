@@ -1,9 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:football_collection/di/di.dart';
 
-import '../../../data/players_repository.dart';
 import '../../../domain/models/player.dart';
 import '../../widgets/saved_player_card.dart';
 
@@ -52,7 +50,7 @@ class OldStickerPackScreenState extends State<OldStickerPackScreen> with SingleT
       ),
     );
 
-    packPlayers = getIt.get<PlayersRepository>().getRandomPlayers(5);
+    // packPlayers = getIt.get<PlayersRepository>().getRandomPlayers(5);
     for (var packPlayer in packPlayers) {
       packPlayerCards.add(SavedPlayerCard(player: packPlayer));
     }
