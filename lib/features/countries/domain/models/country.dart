@@ -1,32 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 
 class CountryModel extends Equatable {
+  final String id;
   final String name;
-  final String code;
-  final String regionCode;
+  final Confederations confederation;
 
   const CountryModel({
+    required this.id,
     required this.name,
-    required this.code,
-    required this.regionCode,
+    required this.confederation,
   });
 
   factory CountryModel.fromJson(Map<dynamic, dynamic> json) {
     return CountryModel(
+      id: json['id'],
       name: json['name'],
-      code: json['code'],
-      regionCode: json['regionCode'],
+      confederation: confederationFromCountryName(json['name']),
     );
   }
 
-  Map<dynamic, dynamic> toJson() {
-    return {
-      'name': name,
-      'code': code,
-      'regionCode': regionCode,
-    };
-  }
-
   @override
-  List<Object?> get props => [code];
+  List<Object?> get props => [id];
 }

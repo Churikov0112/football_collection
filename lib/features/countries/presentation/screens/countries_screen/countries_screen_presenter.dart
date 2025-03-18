@@ -6,10 +6,10 @@ class CountriesScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
-  final RegionModel region;
+  final Confederations confederation;
 
   const CountriesScreenPresenter({
-    required this.region,
+    required this.confederation,
     required this.child,
     super.key,
   });
@@ -23,7 +23,7 @@ class CountriesScreenPresenterState extends State<CountriesScreenPresenter> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      getIt.get<CountriesBloc>().add(CountriesEventGet(regionCode: widget.region.code));
+      getIt.get<CountriesBloc>().add(CountriesEventGet(confederation: widget.confederation));
     });
   }
 

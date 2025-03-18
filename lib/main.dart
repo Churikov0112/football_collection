@@ -75,7 +75,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
       isInitialized = true;
     });
 
-    _router = FootballCollectionRouter(isLogged ? RoutePaths.regions : RoutePaths.regions);
+    _router = FootballCollectionRouter(isLogged ? RoutePaths.confederations : RoutePaths.confederations);
   }
 
   // This widget is the root of your application.

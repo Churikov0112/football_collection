@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/regions/domain/models/region.dart';
-import 'package:football_collection/features/regions/presentation/screens/regions_screen/regions_screen.dart';
+import 'package:football_collection/features/confederations/domain/models/confederation.dart';
+import 'package:football_collection/features/confederations/presentation/screens/regions_screen/confederations_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/albums/presentation/screens/album/album_screen.dart';
@@ -13,7 +13,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 class RoutePaths {
   static const album = '/album';
   static const stickerpack = '/stickerpack';
-  static const regions = '/regions';
+  static const confederations = '/confederations';
   static const countries = '/countries';
   // static const main = '/main';
   // static const auth = '/auth';
@@ -46,13 +46,13 @@ class FootballCollectionRouter {
           builder: (context, state) => const StickerPackScreen(),
         ),
         GoRoute(
-          path: RoutePaths.regions,
-          builder: (context, state) => const RegionsScreen(),
+          path: RoutePaths.confederations,
+          builder: (context, state) => const ConfederationsScreen(),
         ),
         GoRoute(
           path: RoutePaths.countries,
           builder: (context, state) => CountriesScreen(
-            region: state.extra as RegionModel,
+            confederation: state.extra as Confederations,
           ),
         ),
         // GoRoute(

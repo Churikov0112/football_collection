@@ -54,8 +54,8 @@ class _CountryTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(country.name),
-            Text(country.code),
-            Text(country.regionCode),
+            Text(country.id),
+            Text(country.confederation.name),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:football_collection/features/countries/domain/repos/countries_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -23,7 +24,7 @@ class CountriesBloc extends Bloc<CountriesEvent, CountriesState> {
   ) async {
     try {
       emit(CountriesStatePending());
-      final countries = await _repository.countriesGet(event.regionCode);
+      final countries = await _repository.countriesGet(event.confederation);
       emit(CountriesStateLoadSucceeded(countries));
     } on Object catch (_) {
       emit(CountriesStateFailed('Произошла ошибка'));

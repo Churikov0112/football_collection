@@ -4,8 +4,8 @@ sealed class CountriesEvent {}
 
 final class CountriesEventGet extends CountriesEvent {
   CountriesEventGet({
-    required this.regionCode,
+    required this.confederation,
   });
 
-  final String regionCode;
+  final Confederations confederation;
 }

@@ -18,12 +18,13 @@ import '../features/albums/presentation/blocs/country_players_bloc/country_playe
     as _i433;
 import '../features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart'
     as _i826;
+import '../features/confederations/domain/repos/confederations_repository.dart'
+    as _i108;
+import '../features/confederations/presentation/blocs/regions_bloc/confederations_bloc.dart'
+    as _i855;
 import '../features/countries/domain/repos/countries_repository.dart' as _i71;
 import '../features/countries/presentation/blocs/countries_bloc/countries_bloc.dart'
     as _i167;
-import '../features/regions/domain/repos/regions_repository.dart' as _i297;
-import '../features/regions/presentation/blocs/regions_bloc/regions_bloc.dart'
-    as _i610;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -36,17 +37,18 @@ _i174.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.singleton<_i826.SavedPlayersBloc>(() => _i826.SavedPlayersBloc());
-  gh.singleton<_i297.RegionsRepository>(() => _i297.RegionsRepository());
-  gh.singleton<_i385.PlayersRepository>(() => _i385.PlayersRepository());
+  gh.singleton<_i108.ConnfederationsRepository>(
+      () => _i108.ConnfederationsRepository());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
+  gh.singleton<_i385.PlayersRepository>(() => _i385.PlayersRepository());
+  gh.singleton<_i826.SavedPlayersBloc>(() => _i826.SavedPlayersBloc());
   gh.singleton<_i167.CountriesBloc>(
       () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
-  gh.singleton<_i610.RegionsBloc>(
-      () => _i610.RegionsBloc(gh<_i297.RegionsRepository>()));
   gh.singleton<_i678.AllPlayersBloc>(
       () => _i678.AllPlayersBloc(repository: gh<_i385.PlayersRepository>()));
   gh.singleton<_i433.CountryPlayersBloc>(
       () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
+  gh.singleton<_i855.ConfederationsBloc>(
+      () => _i855.ConfederationsBloc(gh<_i108.ConnfederationsRepository>()));
   return getIt;
 }

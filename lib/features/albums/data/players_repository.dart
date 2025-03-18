@@ -11,7 +11,7 @@ class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
   List<PlayerModel> savedPlayersCache = [];
 
-  Future<List<PlayerModel>> playersGet(String? countryCode) async {
+  Future<List<PlayerModel>> playersGet(String? countryId) async {
     if (allPlayersCache.isNotEmpty) {
       return allPlayersCache;
     }

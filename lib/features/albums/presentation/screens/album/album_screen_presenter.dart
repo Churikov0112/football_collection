@@ -25,7 +25,7 @@ class AlbumScreenPresenterState extends State<AlbumScreenPresenter> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       // getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad());
       getIt.get<SavedPlayersBloc>().add(SavedPlayersEventLoad());
-      getIt.get<CountryPlayersBloc>().add(CountryPlayersEventGet(countryCode: widget.country.code));
+      getIt.get<CountryPlayersBloc>().add(CountryPlayersEventGet(countryId: widget.country.id));
     });
   }
 

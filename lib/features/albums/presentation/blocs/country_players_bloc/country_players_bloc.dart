@@ -24,7 +24,7 @@ class CountryPlayersBloc extends Bloc<CountryPlayersEvent, CountryPlayersState> 
   ) async {
     try {
       emit(CountryPlayersStatePending());
-      final players = await _repository.playersGet(event.countryCode);
+      final players = await _repository.playersGet(event.countryId);
       emit(CountryPlayersStateLoadSucceeded(players));
     } on Object catch (_) {
       emit(CountryPlayersStateFailed('Произошла ошибка'));

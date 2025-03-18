@@ -3,9 +3,9 @@ part of 'country_players_bloc.dart';
 sealed class CountryPlayersEvent {}
 
 final class CountryPlayersEventGet extends CountryPlayersEvent {
-  final String countryCode;
+  final String countryId;
 
   CountryPlayersEventGet({
-    required this.countryCode,
+    required this.countryId,
   });
 }

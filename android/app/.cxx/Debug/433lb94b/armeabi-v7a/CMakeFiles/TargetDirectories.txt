@@ -1,0 +1,2 @@
+/Users/egorchurikov/Desktop/projects/football_collection/android/app/.cxx/Debug/433lb94b/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/egorchurikov/Desktop/projects/football_collection/android/app/.cxx/Debug/433lb94b/armeabi-v7a/CMakeFiles/rebuild_cache.dir
