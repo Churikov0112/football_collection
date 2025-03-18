@@ -4,17 +4,18 @@ import 'package:football_collection/features/confederations/presentation/screens
 import 'package:go_router/go_router.dart';
 
 import '../../features/albums/presentation/screens/album/album_screen.dart';
-import '../../features/albums/presentation/screens/open_pack_screen/sticker_pack_screen.dart';
+import '../../features/albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class RoutePaths {
-  static const album = '/album';
-  static const stickerpack = '/stickerpack';
   static const confederations = '/confederations';
   static const countries = '/countries';
+  static const album = '/album';
+  static const stickerpack = '/stickerpack';
+
   // static const main = '/main';
   // static const auth = '/auth';
   // static const map = '/map';
@@ -43,7 +44,9 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.stickerpack,
-          builder: (context, state) => const StickerPackScreen(),
+          builder: (context, state) => StickerpackScreen(
+            country: state.extra as CountryModel,
+          ),
         ),
         GoRoute(
           path: RoutePaths.confederations,

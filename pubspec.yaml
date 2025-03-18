@@ -58,6 +58,7 @@ dependencies:
   toastification: 2.3.0
   cached_network_image: 3.4.0
   flutter_image: 4.1.11
+  flutter_card_swiper: 7.0.2
 
   #Other
   rxdart: 0.27.7

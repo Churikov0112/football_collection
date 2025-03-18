@@ -7,14 +7,14 @@ import '../../../data/players_repository.dart';
 import '../../../domain/models/player.dart';
 import '../../widgets/saved_player_card.dart';
 
-class StickerPackScreen extends StatefulWidget {
-  const StickerPackScreen({super.key});
+class OldStickerPackScreen extends StatefulWidget {
+  const OldStickerPackScreen({super.key});
 
   @override
-  StickerPackScreenState createState() => StickerPackScreenState();
+  OldStickerPackScreenState createState() => OldStickerPackScreenState();
 }
 
-class StickerPackScreenState extends State<StickerPackScreen> with SingleTickerProviderStateMixin {
+class OldStickerPackScreenState extends State<OldStickerPackScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _slideAnimation;
   late Animation<double> _rotateAnimation;

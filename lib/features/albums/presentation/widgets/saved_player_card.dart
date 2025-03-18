@@ -39,18 +39,14 @@ class SavedPlayerCard extends StatelessWidget {
               ),
             ),
           ),
-          // Positioned(
-          //   top: 5,
-          //   left: 5,
-          //   child: Row(
-          //     children: [
-          //       Text(
-          //         getCountryEmoji(player),
-          //         style: const TextStyle(fontSize: 20),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Positioned(
+            top: 5,
+            left: 5,
+            child: CircleAvatar(
+              radius: 15,
+              foregroundImage: AssetImage('assets/raster/team_flags/${player.countryId}.png'),
+            ),
+          ),
           // Positioned(
           //   top: 5,
           //   right: 5,

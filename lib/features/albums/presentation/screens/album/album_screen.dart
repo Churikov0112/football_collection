@@ -39,7 +39,9 @@ class AlbumScreen extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.push(RoutePaths.stickerpack, extra: country);
+          },
           child: Icon(Icons.style),
         ),
       ),
