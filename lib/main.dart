@@ -12,6 +12,10 @@ import 'ui_kit/ui_kit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
+  );
+
   runApp(const FootballPackCollectionApp());
 }
 
@@ -35,10 +39,6 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   bool isLogged = false;
 
   Future<void> initializeApp() async {
-    HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
-    );
-
     await configureDependencies();
     await getIt.allReady();
 

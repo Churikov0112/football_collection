@@ -25,7 +25,7 @@ class PlayerModel extends Equatable {
   Map<dynamic, dynamic> toJson() {
     return {
       'id': id,
-      'countryId': countryId,
+      'team_id': countryId,
       'name': name,
       'position': position,
     };

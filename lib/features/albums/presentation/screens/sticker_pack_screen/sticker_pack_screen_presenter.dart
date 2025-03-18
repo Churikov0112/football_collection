@@ -39,6 +39,10 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     _isPackOpenedSubject.add(false);
   }
 
+  void savePlayer(PlayerModel player) {
+    getIt.get<SavedPlayersBloc>().add(SavedPlayersEventAdd(player: player));
+  }
+
   @override
   void dispose() {
     _isPackOpenedSubject.close();

@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:rxdart/rxdart.dart';
@@ -49,9 +50,7 @@ class StickerpackScreen extends StatelessWidget {
 
                       return Center(
                         child: GestureDetector(
-                          onTap: () {
-                            presenter.openPack();
-                          },
+                          onTap: presenter.openPack,
                           child: Container(
                             height: 300,
                             width: 200,

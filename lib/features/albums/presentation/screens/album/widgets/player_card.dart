@@ -9,13 +9,13 @@ class _PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SavedPlayerCard(player: player);
+    // return SavedPlayerCard(player: player);
 
     final absentWIdget = GestureDetector(
       onTap: () {
         context.push(RoutePaths.stickerpack).whenComplete(() {
           getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad(fromRuntimeCache: true));
-          getIt.get<SavedPlayersBloc>().add(SavedPlayersEventLoad(fromRuntimeCache: true));
+          // getIt.get<SavedPlayersBloc>().add(SavedPlayersEventLoad(fromRuntimeCache: true));
         });
       },
       child: Container(
@@ -23,7 +23,7 @@ class _PlayerCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 player.name,
@@ -31,9 +31,15 @@ class _PlayerCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black26,
                 ),
               ),
-              const SizedBox.shrink(),
+              Icon(
+                Icons.person,
+                size: 64,
+                color: Colors.black26,
+              )
+              // const SizedBox.shrink(),
               // Opacity(
               //   opacity: 0.3,
               //   child: Text(
@@ -41,14 +47,14 @@ class _PlayerCard extends StatelessWidget {
               //     style: const TextStyle(fontSize: 24),
               //   ),
               // ),
-              Text(
-                player.id.toString(),
-                style: const TextStyle(
-                  fontSize: 54,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black26,
-                ),
-              ),
+              // Text(
+              //   player.id.toString(),
+              //   style: const TextStyle(
+              //     fontSize: 54,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.black26,
+              //   ),
+              // ),
             ],
           ),
         ),
