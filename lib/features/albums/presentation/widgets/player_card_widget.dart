@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/network.dart';
 
 import '../../domain/models/player.dart';
 
@@ -70,7 +68,7 @@ class PlayerPackCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
+    // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
 
     return Container(
       height: 300,
@@ -89,8 +87,8 @@ class PlayerPackCardWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Image(
-                  image: kIsWeb ? NetworkImage(imageUrl) : NetworkImageWithRetry(imageUrl),
+                child: Image.asset(
+                  "assets/raster/faces/183288.jpg",
                   fit: BoxFit.cover,
                 ),
               ),

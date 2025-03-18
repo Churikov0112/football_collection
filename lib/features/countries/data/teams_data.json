@@ -1,0 +1,1232 @@
+[
+    {
+        "id": "3299",
+        "name": "England",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/189.png"
+    },
+    {
+        "id": "3377",
+        "name": "France",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/50.png"
+    },
+    {
+        "id": "3375",
+        "name": "Spain",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/157.png"
+    },
+    {
+        "id": "3439",
+        "name": "Brazil",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/26.png"
+    },
+    {
+        "id": "3300",
+        "name": "Portugal",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/136.png"
+    },
+    {
+        "id": "3379",
+        "name": "Netherlands",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/122.png"
+    },
+    {
+        "id": "3376",
+        "name": "Italy",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/75.png"
+    },
+    {
+        "id": "3437",
+        "name": "Argentina",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/9.png"
+    },
+    {
+        "id": "3262",
+        "name": "Germany",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/40.png"
+    },
+    {
+        "id": "3382",
+        "name": "Belgium",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/19.png"
+    },
+    {
+        "id": "3440",
+        "name": "Norway",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/125.png"
+    },
+    {
+        "id": "3436",
+        "name": "Denmark",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/39.png"
+    },
+    {
+        "id": "3557",
+        "name": "Sweden",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/147.png"
+    },
+    {
+        "id": "3449",
+        "name": "Uruguay",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/179.png"
+    },
+    {
+        "id": "3575",
+        "name": "Morocco",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/107.png"
+    },
+    {
+        "id": "3381",
+        "name": "Turkiye",
+        "confederation": "30",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/174.png"
+    },
+    {
+        "id": "3444",
+        "name": "Nigeria",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/124.png"
+    },
+    {
+        "id": "3699",
+        "name": "Ukraine",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/177.png"
+    },
+    {
+        "id": "3435",
+        "name": "Japan",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/77.png"
+    },
+    {
+        "id": "3816",
+        "name": "Colombia",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/83.png"
+    },
+    {
+        "id": "3556",
+        "name": "Croatia",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/37.png"
+    },
+    {
+        "id": "3505",
+        "name": "United States",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/184.png"
+    },
+    {
+        "id": "5750",
+        "name": "Ecuador",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/44.png"
+    },
+    {
+        "id": "3591",
+        "name": "Ivory Coast",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/38.png"
+    },
+    {
+        "id": "3438",
+        "name": "Serbia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/215.png"
+    },
+    {
+        "id": "3499",
+        "name": "Senegal",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/149.png"
+    },
+    {
+        "id": "3434",
+        "name": "Cameroon",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/31.png"
+    },
+    {
+        "id": "3378",
+        "name": "Greece",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/56.png"
+    },
+    {
+        "id": "3384",
+        "name": "Switzerland",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/148.png"
+    },
+    {
+        "id": "3442",
+        "name": "Poland",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/135.png"
+    },
+    {
+        "id": "3383",
+        "name": "Austria",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/127.png"
+    },
+    {
+        "id": "3509",
+        "name": "Republic of Ireland",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/72.png"
+    },
+    {
+        "id": "6303",
+        "name": "Mexico",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/110.png"
+    },
+    {
+        "id": "3441",
+        "name": "Ghana",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/54.png"
+    },
+    {
+        "id": "3669",
+        "name": "Georgia",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/53.png"
+    },
+    {
+        "id": "3614",
+        "name": "Algeria",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/4.png"
+    },
+    {
+        "id": "3510",
+        "name": "Canada",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/80.png"
+    },
+    {
+        "id": "3380",
+        "name": "Scotland",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/190.png"
+    },
+    {
+        "id": "3468",
+        "name": "Hungary",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/178.png"
+    },
+    {
+        "id": "3864",
+        "name": "Wales",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/191.png"
+    },
+    {
+        "id": "3445",
+        "name": "Czech Republic",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/172.png"
+    },
+    {
+        "id": "3672",
+        "name": "Egypt",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/2.png"
+    },
+    {
+        "id": "3588",
+        "name": "Slovenia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/155.png"
+    },
+    {
+        "id": "3503",
+        "name": "Slovakia",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/154.png"
+    },
+    {
+        "id": "3448",
+        "name": "Russia",
+        "confederation": "31",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/141.png"
+    },
+    {
+        "id": "3589",
+        "name": "South Korea",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/87.png"
+    },
+    {
+        "id": "3581",
+        "name": "Paraguay",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/132.png"
+    },
+    {
+        "id": "3674",
+        "name": "Mali",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/105.png"
+    },
+    {
+        "id": "3854",
+        "name": "Democratic Republic of the Congo",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/193.png"
+    },
+    {
+        "id": "5872",
+        "name": "Burkina Faso",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/29.png"
+    },
+    {
+        "id": "3561",
+        "name": "Albania",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/3.png"
+    },
+    {
+        "id": "3446",
+        "name": "Bosnia-Herzegovina",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/24.png"
+    },
+    {
+        "id": "5547",
+        "name": "Israel",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/74.png"
+    },
+    {
+        "id": "3504",
+        "name": "Venezuela",
+        "confederation": "34",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/182.png"
+    },
+    {
+        "id": "3671",
+        "name": "Jamaica",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/76.png"
+    },
+    {
+        "id": "3447",
+        "name": "Romania",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/140.png"
+    },
+    {
+        "id": "3856",
+        "name": "Guinea",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/59.png"
+    },
+    {
+        "id": "53982",
+        "name": "Kosovo",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/244.png"
+    },
+    {
+        "id": "3700",
+        "name": "Chile",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/33.png"
+    },
+    {
+        "id": "3670",
+        "name": "Tunisia",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/173.png"
+    },
+    {
+        "id": "3574",
+        "name": "Iceland",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/73.png"
+    },
+    {
+        "id": "6186",
+        "name": "The Gambia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/52.png"
+    },
+    {
+        "id": "3585",
+        "name": "Angola",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/6.png"
+    },
+    {
+        "id": "3563",
+        "name": "Uzbekistan",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/180.png"
+    },
+    {
+        "id": "3582",
+        "name": "Iran",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/71.png"
+    },
+    {
+        "id": "5147",
+        "name": "United Arab Emirates",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/183.png"
+    },
+    {
+        "id": "4311",
+        "name": "Cape Verde",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/32.png"
+    },
+    {
+        "id": "3443",
+        "name": "Finland",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/49.png"
+    },
+    {
+        "id": "3701",
+        "name": "Guinea-Bissau",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/60.png"
+    },
+    {
+        "id": "3394",
+        "name": "Bulgaria",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/28.png"
+    },
+    {
+        "id": "5674",
+        "name": "Northern Ireland",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/192.png"
+    },
+    {
+        "id": "3584",
+        "name": "Peru",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/133.png"
+    },
+    {
+        "id": "5148",
+        "name": "North Macedonia",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/100.png"
+    },
+    {
+        "id": "13958",
+        "name": "Indonesia",
+        "confederation": "29",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/68.png"
+    },
+    {
+        "id": "8497",
+        "name": "Costa Rica",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/36.png"
+    },
+    {
+        "id": "5704",
+        "name": "Gabon",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/51.png"
+    },
+    {
+        "id": "3806",
+        "name": "South Africa",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/159.png"
+    },
+    {
+        "id": "3807",
+        "name": "Saudi Arabia",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/146.png"
+    },
+    {
+        "id": "11953",
+        "name": "Montenegro",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/216.png"
+    },
+    {
+        "id": "3580",
+        "name": "Luxembourg",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/99.png"
+    },
+    {
+        "id": "5129",
+        "name": "Mozambique",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/115.png"
+    },
+    {
+        "id": "3815",
+        "name": "Togo",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/168.png"
+    },
+    {
+        "id": "8987",
+        "name": "Kenya",
+        "confederation": "44",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/82.png"
+    },
+    {
+        "id": "3583",
+        "name": "Zimbabwe",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/187.png"
+    },
+    {
+        "id": "16430",
+        "name": "Comoros",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/35.png"
+    },
+    {
+        "id": "3433",
+        "name": "Australia",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/12.png"
+    },
+    {
+        "id": "9171",
+        "name": "New Zealand",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/120.png"
+    },
+    {
+        "id": "14162",
+        "name": "Qatar",
+        "confederation": "30",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/137.png"
+    },
+    {
+        "id": "3577",
+        "name": "Panama",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/130.png"
+    },
+    {
+        "id": "13485",
+        "name": "Equatorial Guinea",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/8.png"
+    },
+    {
+        "id": "15359",
+        "name": "Suriname",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/161.png"
+    },
+    {
+        "id": "3668",
+        "name": "Cyprus",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/188.png"
+    },
+    {
+        "id": "6219",
+        "name": "Armenia",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/10.png"
+    },
+    {
+        "id": "9172",
+        "name": "Liberia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/95.png"
+    },
+    {
+        "id": "7149",
+        "name": "Trinidad and Tobago",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/170.png"
+    },
+    {
+        "id": "3590",
+        "name": "Honduras",
+        "confederation": "30",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/66.png"
+    },
+    {
+        "id": "8605",
+        "name": "Azerbaijan",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/13.png"
+    },
+    {
+        "id": "13943",
+        "name": "Burundi",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/30.png"
+    },
+    {
+        "id": "3851",
+        "name": "Lithuania",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/98.png"
+    },
+    {
+        "id": "3702",
+        "name": "Republic of the Congo",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/85.png"
+    },
+    {
+        "id": "32364",
+        "name": "Curaçao",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/260.png"
+    },
+    {
+        "id": "6090",
+        "name": "Moldova",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/112.png"
+    },
+    {
+        "id": "3560",
+        "name": "Iraq",
+        "confederation": "30",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/70.png"
+    },
+    {
+        "id": "14161",
+        "name": "Haiti",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/62.png"
+    },
+    {
+        "id": "12933",
+        "name": "Central African Republic",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/138.png"
+    },
+    {
+        "id": "15737",
+        "name": "Jordan",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/78.png"
+    },
+    {
+        "id": "5598",
+        "name": "China",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/34.png"
+    },
+    {
+        "id": "9110",
+        "name": "Kazakhstan",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/81.png"
+    },
+    {
+        "id": "3587",
+        "name": "Malta",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/106.png"
+    },
+    {
+        "id": "5233",
+        "name": "Bolivia",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/23.png"
+    },
+    {
+        "id": "15232",
+        "name": "Dominican Republic",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/43.png"
+    },
+    {
+        "id": "3703",
+        "name": "Zambia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/142.png"
+    },
+    {
+        "id": "3450",
+        "name": "Belarus",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/18.png"
+    },
+    {
+        "id": "3955",
+        "name": "Benin",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/21.png"
+    },
+    {
+        "id": "13674",
+        "name": "Syria",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/163.png"
+    },
+    {
+        "id": "6133",
+        "name": "Estonia",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/47.png"
+    },
+    {
+        "id": "14238",
+        "name": "Mauritania",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/108.png"
+    },
+    {
+        "id": "17758",
+        "name": "Palestine",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/240.png"
+    },
+    {
+        "id": "3555",
+        "name": "Latvia",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/92.png"
+    },
+    {
+        "id": "14635",
+        "name": "Madagascar",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/101.png"
+    },
+    {
+        "id": "7214",
+        "name": "Bahrain",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/15.png"
+    },
+    {
+        "id": "14163",
+        "name": "Niger",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/123.png"
+    },
+    {
+        "id": "13975",
+        "name": "Tajikistan",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/165.png"
+    },
+    {
+        "id": "5676",
+        "name": "Thailand",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/167.png"
+    },
+    {
+        "id": "14165",
+        "name": "Oman",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/126.png"
+    },
+    {
+        "id": "15033",
+        "name": "Bangladesh",
+        "confederation": "30",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/16.png"
+    },
+    {
+        "id": "13342",
+        "name": "Guatemala",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/58.png"
+    },
+    {
+        "id": "3956",
+        "name": "Kyrgyzstan",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/90.png"
+    },
+    {
+        "id": "15738",
+        "name": "Malaysia",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/103.png"
+    },
+    {
+        "id": "15457",
+        "name": "North Korea",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/86.png"
+    },
+    {
+        "id": "8778",
+        "name": "Vietnam",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/185.png"
+    },
+    {
+        "id": "13957",
+        "name": "India",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/67.png"
+    },
+    {
+        "id": "3432",
+        "name": "Kuwait",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/89.png"
+    },
+    {
+        "id": "3855",
+        "name": "Rwanda",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/139.png"
+    },
+    {
+        "id": "15736",
+        "name": "Guyana",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/61.png"
+    },
+    {
+        "id": "15234",
+        "name": "Philippines",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/134.png"
+    },
+    {
+        "id": "3586",
+        "name": "Lebanon",
+        "confederation": "21",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/94.png"
+    },
+    {
+        "id": "15977",
+        "name": "Hong Kong",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/218.png"
+    },
+    {
+        "id": "9173",
+        "name": "Faroe Islands",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/208.png"
+    },
+    {
+        "id": "13951",
+        "name": "El Salvador",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/45.png"
+    },
+    {
+        "id": "3573",
+        "name": "Namibia",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/117.png"
+    },
+    {
+        "id": "13497",
+        "name": "Uganda",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/176.png"
+    },
+    {
+        "id": "19755",
+        "name": "Guadeloupe",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/251.png"
+    },
+    {
+        "id": "15351",
+        "name": "Nicaragua",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/121.png"
+    },
+    {
+        "id": "10533",
+        "name": "Andorra",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/5.png"
+    },
+    {
+        "id": "16423",
+        "name": "Myanmar",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/116.png"
+    },
+    {
+        "id": "6187",
+        "name": "Sierra Leone",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/152.png"
+    },
+    {
+        "id": "19758",
+        "name": "Martinique",
+        "confederation": "21",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/207.png"
+    },
+    {
+        "id": "14666",
+        "name": "Tanzania",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/166.png"
+    },
+    {
+        "id": "14248",
+        "name": "Turkmenistan",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/175.png"
+    },
+    {
+        "id": "16038",
+        "name": "Cambodia",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/79.png"
+    },
+    {
+        "id": "15357",
+        "name": "Singapore",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/153.png"
+    },
+    {
+        "id": "13955",
+        "name": "Fiji",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/48.png"
+    },
+    {
+        "id": "3808",
+        "name": "Cuba",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/88.png"
+    },
+    {
+        "id": "15229",
+        "name": "Botswana",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/25.png"
+    },
+    {
+        "id": "15350",
+        "name": "Nepal",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/119.png"
+    },
+    {
+        "id": "15922",
+        "name": "Yemen",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/186.png"
+    },
+    {
+        "id": "15352",
+        "name": "Pakistan",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/128.png"
+    },
+    {
+        "id": "15363",
+        "name": "Chinese Taipei",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/164.png"
+    },
+    {
+        "id": "13313",
+        "name": "Sudan",
+        "confederation": "27",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/160.png"
+    },
+    {
+        "id": "14175",
+        "name": "Grenada",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/55.png"
+    },
+    {
+        "id": "16431",
+        "name": "Laos",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/91.png"
+    },
+    {
+        "id": "15358",
+        "name": "Sri Lanka",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/158.png"
+    },
+    {
+        "id": "15456",
+        "name": "Maldives",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/104.png"
+    },
+    {
+        "id": "37574",
+        "name": "Gibraltar",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/266.png"
+    },
+    {
+        "id": "17757",
+        "name": "Timor-Leste",
+        "confederation": "26",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/242.png"
+    },
+    {
+        "id": "15739",
+        "name": "Mongolia",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/114.png"
+    },
+    {
+        "id": "8988",
+        "name": "Malawi",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/102.png"
+    },
+    {
+        "id": "17759",
+        "name": "Puerto Rico",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/228.png"
+    },
+    {
+        "id": "15920",
+        "name": "Bhutan",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/22.png"
+    },
+    {
+        "id": "14233",
+        "name": "Brunei Darussalam",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/27.png"
+    },
+    {
+        "id": "5673",
+        "name": "Liechtenstein",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/97.png"
+    },
+    {
+        "id": "15740",
+        "name": "Solomon Islands",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/69.png"
+    },
+    {
+        "id": "10521",
+        "name": "San Marino",
+        "confederation": "28",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/144.png"
+    },
+    {
+        "id": "3576",
+        "name": "Afghanistan",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/1.png"
+    },
+    {
+        "id": "14239",
+        "name": "Mauritius",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/109.png"
+    },
+    {
+        "id": "17761",
+        "name": "Saint Lucia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/230.png"
+    },
+    {
+        "id": "15236",
+        "name": "São Tomé and Príncipe",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/145.png"
+    },
+    {
+        "id": "15238",
+        "name": "Vanuatu",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/181.png"
+    },
+    {
+        "id": "13974",
+        "name": "Somalia",
+        "confederation": "18",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/156.png"
+    },
+    {
+        "id": "16030",
+        "name": "Barbados",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/17.png"
+    },
+    {
+        "id": "38280",
+        "name": "Saint-Martin",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/267.png"
+    },
+    {
+        "id": "17762",
+        "name": "Saint Vincent and the Grenadines",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/224.png"
+    },
+    {
+        "id": "41853",
+        "name": "Bonaire",
+        "confederation": "18",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/269.png"
+    },
+    {
+        "id": "17760",
+        "name": "Saint Kitts and Nevis",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/225.png"
+    },
+    {
+        "id": "17754",
+        "name": "Montserrat",
+        "confederation": "17",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/235.png"
+    },
+    {
+        "id": "37561",
+        "name": "Sint Maarten",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/265.png"
+    },
+    {
+        "id": "15919",
+        "name": "Belize",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/20.png"
+    },
+    {
+        "id": "17753",
+        "name": "Guam",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/241.png"
+    },
+    {
+        "id": "13941",
+        "name": "Ethiopia",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/11.png"
+    },
+    {
+        "id": "15735",
+        "name": "Bermuda",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/211.png"
+    },
+    {
+        "id": "17755",
+        "name": "New Caledonia",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/236.png"
+    },
+    {
+        "id": "15235",
+        "name": "Samoa",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/143.png"
+    },
+    {
+        "id": "16028",
+        "name": "Antigua and Barbuda",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/7.png"
+    },
+    {
+        "id": "19753",
+        "name": "French Guiana",
+        "confederation": "22",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/252.png"
+    },
+    {
+        "id": "17764",
+        "name": "Turks and Caicos Islands",
+        "confederation": "16",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/226.png"
+    },
+    {
+        "id": "3562",
+        "name": "Seychelles",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/151.png"
+    },
+    {
+        "id": "13978",
+        "name": "Chad",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/171.png"
+    },
+    {
+        "id": "17751",
+        "name": "Cayman Islands",
+        "confederation": "24",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/229.png"
+    },
+    {
+        "id": "15233",
+        "name": "Papua New Guinea",
+        "confederation": "25",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/131.png"
+    },
+    {
+        "id": "16427",
+        "name": "Djibouti",
+        "confederation": "18",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/41.png"
+    },
+    {
+        "id": "17749",
+        "name": "Aruba",
+        "confederation": "23",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/233.png"
+    },
+    {
+        "id": "17750",
+        "name": "British Virgin Islands",
+        "confederation": "20",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/231.png"
+    },
+    {
+        "id": "17763",
+        "name": "Tahiti",
+        "confederation": "17",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/237.png"
+    },
+    {
+        "id": "90763",
+        "name": "Mayotte",
+        "confederation": "9",
+        "flag_url": "https://tmssl.akamaized.net//images/flagge/head/277.png"
+    }
+]

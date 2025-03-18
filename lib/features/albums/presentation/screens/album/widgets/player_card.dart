@@ -9,6 +9,8 @@ class _PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return PlayerPackCardWidget(player: player);
+
     final absentWIdget = GestureDetector(
       onTap: () {
         context.push(RoutePaths.stickerpack).whenComplete(() {
