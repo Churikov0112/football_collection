@@ -6,7 +6,7 @@ class StickerpackScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
-  final CountryModel country;
+  final CountryModel? country;
 
   const StickerpackScreenPresenter({
     required this.country,

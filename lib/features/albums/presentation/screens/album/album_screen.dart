@@ -31,14 +31,18 @@ class AlbumScreen extends StatelessWidget {
     return AlbumScreenPresenter(
       country: country,
       child: Scaffold(
-        backgroundColor: Colors.amber,
         appBar: AppBar(
           title: Row(
             children: [
               Text(country.name),
               const Spacer(),
-              CircleAvatar(
-                foregroundImage: AssetImage('assets/raster/team_flags/${country.id}.png'),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                child: Image.asset(
+                  'assets/raster/team_flags/${country.id}.png',
+                  height: 36,
+                  width: 36,
+                ),
               ),
             ],
           ),

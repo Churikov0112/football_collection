@@ -11,52 +11,37 @@ class _PlayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // return SavedPlayerCard(player: player);
 
-    final absentWIdget = GestureDetector(
-      onTap: () {
-        context.push(RoutePaths.stickerpack).whenComplete(() {
-          getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad(fromRuntimeCache: true));
-          // getIt.get<SavedPlayersBloc>().add(SavedPlayersEventLoad(fromRuntimeCache: true));
-        });
-      },
-      child: Container(
-        color: Colors.grey[300],
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                player.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black26,
-                ),
-              ),
-              Icon(
-                Icons.person,
-                size: 64,
+    final absentWIdget = Container(
+      color: Colors.grey[300],
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              player.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
                 color: Colors.black26,
-              )
-              // const SizedBox.shrink(),
-              // Opacity(
-              //   opacity: 0.3,
-              //   child: Text(
-              //     getCountryEmoji(player),
-              //     style: const TextStyle(fontSize: 24),
-              //   ),
-              // ),
-              // Text(
-              //   player.id.toString(),
-              //   style: const TextStyle(
-              //     fontSize: 54,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.black26,
-              //   ),
-              // ),
-            ],
-          ),
+              ),
+            ),
+            Icon(
+              Icons.person,
+              size: 64,
+              color: Colors.black26,
+            ),
+            Text(
+              player.position,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black26,
+              ),
+            ),
+          ],
         ),
       ),
     );

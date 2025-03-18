@@ -21,7 +21,7 @@ class StickerpackScreen extends StatelessWidget {
     super.key,
   });
 
-  final CountryModel country;
+  final CountryModel? country;
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:football_collection/features/confederations/domain/models/confed
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../blocs/regions_bloc/confederations_bloc.dart';
+import '../../blocs/confederations_bloc/confederations_bloc.dart';
 
 part 'confederations_screen_presenter.dart';
 part 'widgets/confederations_list.dart';
@@ -21,7 +21,7 @@ class ConfederationsScreen extends StatelessWidget {
     return ConfederationsScreenPresenter(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Конфедерации"),
+          title: const Text("Confederations"),
         ),
         body: DecoratedBox(
           decoration: BoxDecoration(
@@ -32,6 +32,12 @@ class ConfederationsScreen extends StatelessWidget {
               const _RegionsList(),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.push(RoutePaths.stickerpack);
+          },
+          child: Icon(Icons.style),
         ),
       ),
     );

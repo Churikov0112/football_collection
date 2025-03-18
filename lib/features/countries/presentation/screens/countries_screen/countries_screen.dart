@@ -40,6 +40,12 @@ class CountriesScreen extends StatelessWidget {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.push(RoutePaths.stickerpack);
+          },
+          child: Icon(Icons.style),
+        ),
       ),
     );
   }
