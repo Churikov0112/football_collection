@@ -32,7 +32,17 @@ class AlbumScreen extends StatelessWidget {
       country: country,
       child: Scaffold(
         backgroundColor: Colors.amber,
-        appBar: AppBar(title: Text(country.name)),
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Text(country.name),
+              const Spacer(),
+              CircleAvatar(
+                foregroundImage: AssetImage('assets/raster/team_flags/${country.id}.png'),
+              ),
+            ],
+          ),
+        ),
         body: Column(
           children: [
             const _PlayersList(),
