@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/all_players_bloc/all_players_bloc.dart';
 import '../../blocs/saved_players_bloc/saved_players_bloc.dart';
-import '../../widgets/player_card_widget.dart';
+import '../../widgets/saved_player_card.dart';
 
 part 'album_screen_presenter.dart';
 part 'widgets/player_card.dart';
@@ -31,12 +31,16 @@ class AlbumScreen extends StatelessWidget {
     return AlbumScreenPresenter(
       country: country,
       child: Scaffold(
+        backgroundColor: Colors.amber,
         appBar: AppBar(title: Text(country.name)),
-        backgroundColor: const Color.fromRGBO(43, 92, 255, 1),
         body: Column(
           children: [
             const _PlayersList(),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.style),
         ),
       ),
     );

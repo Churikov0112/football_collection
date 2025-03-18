@@ -2,63 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../domain/models/player.dart';
 
-String getCountryEmoji(PlayerModel player) {
-  switch (player.countryName) {
-    case "Германия":
-      return "🇩🇪";
-    case "Шотландия":
-      return "🏴󠁧󠁢󠁳󠁣󠁴󠁿";
-    case "Швейцария":
-      return "🇨🇭";
-    case "Венгрия":
-      return "🇭🇺";
-    case "Испания":
-      return "🇪🇸";
-    case "Италия":
-      return "🇮🇹";
-    case "Хорватия":
-      return "🇭🇷";
-    case "Албания":
-      return "🇦🇱";
-    case "Англия":
-      return "🏴󠁧󠁢󠁥󠁮󠁧󠁿";
-    case "Сербия":
-      return "🇷🇸";
-    case "Дания":
-      return "🇩🇰";
-    case "Словения":
-      return "🇸🇮";
-    case "Франция":
-      return "🇫🇷";
-    case "Нидерланды":
-      return "🇳🇱";
-    case "Австрия":
-      return "🇦🇹";
-    case "Польша":
-      return "🇵🇱";
-    case "Бельгия":
-      return "🇧🇪";
-    case "Румыния":
-      return "🇷🇴";
-    case "Словакия":
-      return "🇸🇰";
-    case "Украина":
-      return "🇺🇦";
-    case "Португалия":
-      return "🇵🇹";
-    case "Турция":
-      return "🇹🇷";
-    case "Чехия":
-      return "🇨🇿";
-    case "Грузия":
-      return "🇬🇪";
-    default:
-      return "";
-  }
-}
-
-class PlayerPackCardWidget extends StatelessWidget {
-  const PlayerPackCardWidget({
+class SavedPlayerCard extends StatelessWidget {
+  const SavedPlayerCard({
     required this.player,
     super.key,
   });
@@ -88,50 +33,50 @@ class PlayerPackCardWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Image.asset(
-                  "assets/raster/faces/183288.jpg",
+                  "assets/raster/player_faces/${player.id}.jpg",
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          Positioned(
-            top: 5,
-            left: 5,
-            child: Row(
-              children: [
-                Text(
-                  getCountryEmoji(player),
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 5,
-            right: 5,
-            child: Row(
-              children: [
-                DecoratedBox(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(image: AssetImage("assets/shirt.png")),
-                  ),
-                  child: SizedBox(
-                    height: 32,
-                    width: 32,
-                    child: Center(
-                      child: Text(
-                        player.number.toString(),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Positioned(
+          //   top: 5,
+          //   left: 5,
+          //   child: Row(
+          //     children: [
+          //       Text(
+          //         getCountryEmoji(player),
+          //         style: const TextStyle(fontSize: 20),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Positioned(
+          //   top: 5,
+          //   right: 5,
+          //   child: Row(
+          //     children: [
+          //       DecoratedBox(
+          //         decoration: const BoxDecoration(
+          //           image: DecorationImage(image: AssetImage("assets/shirt.png")),
+          //         ),
+          //         child: SizedBox(
+          //           height: 32,
+          //           width: 32,
+          //           child: Center(
+          //             child: Text(
+          //               player.number.toString(),
+          //               style: const TextStyle(
+          //                 fontSize: 12,
+          //                 fontWeight: FontWeight.bold,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Positioned(
             bottom: 0,
             right: 0,

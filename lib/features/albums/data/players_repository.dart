@@ -1,44 +1,50 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 import '../domain/models/player.dart';
-import 'players_json.dart';
 
 @singleton
 class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
-  List<PlayerModel> savedPlayersCache = [];
 
-  Future<List<PlayerModel>> playersGet(String? countryId) async {
-    if (allPlayersCache.isNotEmpty) {
-      return allPlayersCache;
+  Future<List<PlayerModel>> playersGet([String? countryId]) async {
+    if (allPlayersCache.isEmpty) {
+      String jsonString = await rootBundle.loadString('assets/json/players_data.json');
+      List<dynamic> data = jsonDecode(jsonString);
+      allPlayersCache = await compute(_parsePlayers, data);
     }
-
-    allPlayersCache = await compute<List<Map<String, Object>>, List<PlayerModel>>(
-      _parsePlayer,
-      allPlayers,
-    );
-    return allPlayersCache;
+    if (countryId == null) return [...allPlayersCache];
+    return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
   }
 
-  @Deprecated("use playersGet instead")
-  Future<List<PlayerModel>> getAllPlayers(bool fromRuntimeCache) async {
-    if (fromRuntimeCache) {
-      return allPlayersCache;
+  List<PlayerModel> _parsePlayers(List<dynamic> data) {
+    List<PlayerModel> players = [];
+    for (var item in data) {
+      players.add(PlayerModel.fromJson(item));
     }
-
-    allPlayersCache = await compute<List<Map<String, Object>>, List<PlayerModel>>(
-      _parsePlayer,
-      allPlayers,
-    );
-    return allPlayersCache;
+    return players;
   }
 
-  List<PlayerModel> _parsePlayer(List<Map<String, Object>> data) {
-    return data.map((e) => PlayerModel.fromJson(e)).toList();
-  }
+  // @Deprecated("use playersGet instead")
+  // Future<List<PlayerModel>> getAllPlayers(bool fromRuntimeCache) async {
+  //   if (fromRuntimeCache) {
+  //     return allPlayersCache;
+  //   }
+
+  //   allPlayersCache = await compute<List<Map<String, Object>>, List<PlayerModel>>(
+  //     _parsePlayer,
+  //     allPlayers,
+  //   );
+  //   return allPlayersCache;
+  // }
+
+  // List<PlayerModel> _parsePlayer(List<Map<String, Object>> data) {
+  //   return data.map((e) => PlayerModel.fromJson(e)).toList();
+  // }
 
   // Future<void> savePlayers(List<PlayerModel> players) async {
   //   var box = await Hive.openBox<List<int>>('saved_players_ids');
@@ -81,7 +87,7 @@ class PlayersRepository {
   }
 
   PlayerModel _getRandomPlayer() {
-    final index = Random().nextInt(allPlayers.length);
-    return PlayerModel.fromJson(allPlayers[index]);
+    final index = Random().nextInt(allPlayersCache.length);
+    return allPlayersCache[index];
   }
 }

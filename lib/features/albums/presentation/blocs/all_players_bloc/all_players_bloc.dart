@@ -24,7 +24,7 @@ class AllPlayersBloc extends Bloc<AllPlayersEvent, AllPlayersState> {
   Future<void> _load(AllPlayersEventLoad event, Emitter emit) async {
     try {
       emit(AllPlayersStatePending());
-      final players = await repository.getAllPlayers(event.fromRuntimeCache);
+      final players = await repository.playersGet();
       emit(AllPlayersStateLoadSucceeded(players: players));
     } catch (e) {
       emit(AllPlayersStateFailed(message: e.toString()));

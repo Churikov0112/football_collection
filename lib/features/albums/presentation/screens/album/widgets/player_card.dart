@@ -9,7 +9,7 @@ class _PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlayerPackCardWidget(player: player);
+    return SavedPlayerCard(player: player);
 
     final absentWIdget = GestureDetector(
       onTap: () {
@@ -34,13 +34,13 @@ class _PlayerCard extends StatelessWidget {
                 ),
               ),
               const SizedBox.shrink(),
-              Opacity(
-                opacity: 0.3,
-                child: Text(
-                  getCountryEmoji(player),
-                  style: const TextStyle(fontSize: 24),
-                ),
-              ),
+              // Opacity(
+              //   opacity: 0.3,
+              //   child: Text(
+              //     getCountryEmoji(player),
+              //     style: const TextStyle(fontSize: 24),
+              //   ),
+              // ),
               Text(
                 player.id.toString(),
                 style: const TextStyle(
@@ -62,7 +62,7 @@ class _PlayerCard extends StatelessWidget {
         if (savedPlayersState is SavedPlayersStateLoadSucceeded) {
           final isPlayerSaved = savedPlayersState.players.contains(player);
           if (isPlayerSaved) {
-            return PlayerPackCardWidget(player: player);
+            return SavedPlayerCard(player: player);
           }
         }
         return absentWIdget;

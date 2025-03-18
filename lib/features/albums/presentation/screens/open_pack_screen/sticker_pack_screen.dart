@@ -5,7 +5,7 @@ import 'package:football_collection/di/di.dart';
 
 import '../../../data/players_repository.dart';
 import '../../../domain/models/player.dart';
-import '../../widgets/player_card_widget.dart';
+import '../../widgets/saved_player_card.dart';
 
 class StickerPackScreen extends StatefulWidget {
   const StickerPackScreen({super.key});
@@ -54,7 +54,7 @@ class StickerPackScreenState extends State<StickerPackScreen> with SingleTickerP
 
     packPlayers = getIt.get<PlayersRepository>().getRandomPlayers(5);
     for (var packPlayer in packPlayers) {
-      packPlayerCards.add(PlayerPackCardWidget(player: packPlayer));
+      packPlayerCards.add(SavedPlayerCard(player: packPlayer));
     }
     setState(() {});
 
