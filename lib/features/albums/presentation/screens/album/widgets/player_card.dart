@@ -33,7 +33,7 @@ class _PlayerCard extends StatelessWidget {
               color: Colors.black26,
             ),
             Text(
-              player.position,
+              player.position ?? "?",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 16,
@@ -51,9 +51,10 @@ class _PlayerCard extends StatelessWidget {
       buildWhen: (previous, current) => current is SavedPlayersStateLoadSucceeded,
       builder: (context, savedPlayersState) {
         if (savedPlayersState is SavedPlayersStateLoadSucceeded) {
-          final isPlayerSaved = savedPlayersState.players.contains(player);
+          final isPlayerSaved = savedPlayersState.savedIds?.contains(player.id) ?? false;
+          final count = savedPlayersState.savedIds?.where((id) => id == player.id).length ?? 1;
           if (isPlayerSaved) {
-            return SavedPlayerCard(player: player);
+            return SavedPlayerCard(player: player, count: count);
           }
         }
         return absentWIdget;

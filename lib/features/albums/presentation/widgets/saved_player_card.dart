@@ -6,22 +6,30 @@ import '../screens/sticker_pack_screen/sticker_pack_screen.dart';
 class SavedPlayerCard extends StatelessWidget {
   const SavedPlayerCard({
     required this.player,
+    required this.count,
     super.key,
   });
 
   final PlayerModel player;
+  final int count;
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
 
+    final faceImage = Image.asset(
+      "assets/raster/player_faces/${player.id}.jpg",
+      fit: BoxFit.cover,
+    );
+
     return Container(
       height: packHeight,
       width: packWidth,
       padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(color: Colors.black12, width: 1),
       ),
       child: Stack(
         children: [
@@ -33,10 +41,16 @@ class SavedPlayerCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Image.asset(
-                  "assets/raster/player_faces/${player.id}.jpg",
-                  fit: BoxFit.cover,
-                ),
+                child: count > 1
+                    ? Banner(
+                        location: BannerLocation.topEnd,
+                        message: 'x$count',
+                        color: Colors.green,
+                        textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+                        textDirection: TextDirection.ltr,
+                        child: faceImage,
+                      )
+                    : faceImage,
               ),
             ),
           ),
@@ -98,7 +112,7 @@ class SavedPlayerCard extends StatelessWidget {
                       width: 32,
                       child: Center(
                         child: Text(
-                          player.position,
+                          player.position ?? "?",
                           maxLines: 1,
                           style: const TextStyle(
                             fontSize: 12,

@@ -61,6 +61,7 @@ dependencies:
   flutter_card_swiper: 7.0.2
   flutter_gallery_3d: 1.1.1
   gif: 2.3.0
+  flutter_confetti: 0.5.1
 
   #Other
   rxdart: 0.27.7

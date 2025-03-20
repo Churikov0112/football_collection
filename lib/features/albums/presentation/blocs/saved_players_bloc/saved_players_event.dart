@@ -3,17 +3,9 @@ part of 'saved_players_bloc.dart';
 sealed class SavedPlayersEvent {}
 
 class SavedPlayersEventAdd extends SavedPlayersEvent {
-  final PlayerModel player;
+  final String playerId;
 
   SavedPlayersEventAdd({
-    required this.player,
+    required this.playerId,
   });
 }
-
-// class SavedPlayersEventLoad extends SavedPlayersEvent {
-//   final bool fromRuntimeCache;
-
-//   SavedPlayersEventLoad({
-//     this.fromRuntimeCache = false,
-//   });
-// }

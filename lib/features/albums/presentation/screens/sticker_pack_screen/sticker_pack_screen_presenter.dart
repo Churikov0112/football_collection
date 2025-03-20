@@ -24,7 +24,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
   late AnimationController _selectPackAnimationController;
   late Animation<double> _selectPackAnimation;
 
-  late GifController gifController;
+  GifController? _gifController;
 
   final BehaviorSubject<bool> _isPackSelectingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isPackSelectingStream$ => _isPackSelectingSubject.stream;
@@ -38,37 +38,30 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<StickerpackBloc>().add(StickerpackEventGet());
+    context.read<StickerpackBloc>().add(StickerpackEventGet());
 
-      _selectPackAnimationController = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1000),
-      );
-      _selectPackAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(parent: _selectPackAnimationController, curve: Curves.easeInOut),
-      );
-
-      // gifController = GifController(vsync: this);
-    });
+    _selectPackAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500), // Уменьшено
+    );
+    _selectPackAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _selectPackAnimationController, curve: Curves.linear), // Упрощено
+    );
   }
 
   Future<void> selectPack() async {
-    // if (gifController.) return; // Проверяем, не удален ли контроллер
-    // gifController.stop();
-    gifController = GifController(vsync: this);
-    unawaited(HapticFeedback.lightImpact());
-    // HapticFeedback.vibrate();
+    _gifController = GifController(vsync: this); // Ленивая инициализация
+    // unawaited(HapticFeedback.lightImpact());
     await Future.delayed(const Duration(milliseconds: 1000));
     _isPackSelectingSubject.add(true);
     _selectPackAnimationController.forward();
   }
 
   void unpackCards() async {
-    gifController.forward();
-    unawaited(HapticFeedback.vibrate());
+    _gifController?.forward();
+    // unawaited(HapticFeedback.vibrate());
     await Future.delayed(const Duration(milliseconds: 3800));
-    gifController.stop();
+    _gifController?.stop();
     _isUnpackingSubject.add(true);
     _selectPackAnimationController.reverse();
   }
@@ -81,15 +74,16 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
   }
 
   void savePlayer(PlayerModel player) {
-    getIt.get<SavedPlayersBloc>().add(SavedPlayersEventAdd(player: player));
+    getIt.get<SavedPlayersBloc>().add(SavedPlayersEventAdd(playerId: player.id));
   }
 
   @override
   void dispose() {
-    _selectPackAnimationController.dispose(); // Удаляем AnimationController
-    _isPackOpenedSubject.close();
+    _selectPackAnimationController.dispose();
+    _gifController?.dispose();
     _isPackSelectingSubject.close();
     _isUnpackingSubject.close();
+    _isPackOpenedSubject.close();
     super.dispose();
   }
 
