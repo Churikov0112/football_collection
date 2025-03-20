@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/models/player.dart';
+import '../screens/sticker_pack_screen/sticker_pack_screen.dart';
 
 class SavedPlayerCard extends StatelessWidget {
   const SavedPlayerCard({
@@ -16,8 +17,8 @@ class SavedPlayerCard extends StatelessWidget {
     // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
 
     return Container(
-      height: 300,
-      width: 200,
+      height: packHeight,
+      width: packWidth,
       padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
       decoration: const BoxDecoration(
         color: Colors.white,

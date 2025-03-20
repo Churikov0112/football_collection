@@ -59,6 +59,8 @@ dependencies:
   cached_network_image: 3.4.0
   flutter_image: 4.1.11
   flutter_card_swiper: 7.0.2
+  flutter_gallery_3d: 1.1.1
+  gif: 2.3.0
 
   #Other
   rxdart: 0.27.7
@@ -96,9 +98,11 @@ flutter:
 
   assets:
     - assets/json/
-    - assets/raster/
+    - assets/3d/
+    - assets/gif/
     - assets/raster/player_faces/
     - assets/raster/team_flags/
+    - assets/raster/packs/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
