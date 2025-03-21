@@ -3,27 +3,17 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:football_collection/features/albums/domain/models/pack.dart';
+import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../confederations/domain/models/confederation.dart';
 import '../domain/models/player.dart';
 
 @singleton
 class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
-
-  Future<void> _ensurePlayersInitialized() async {
-    if (allPlayersCache.isEmpty) {
-      String jsonString = await rootBundle.loadString('assets/json/players_data.json');
-      List<dynamic> data = jsonDecode(jsonString);
-      allPlayersCache = await compute(_parsePlayers, data);
-    }
-  }
-
-  Future<List<PlayerModel>> playersGet([String? countryId]) async {
-    await _ensurePlayersInitialized();
-    if (countryId == null) return [...allPlayersCache];
-    return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
-  }
+  List<CountryModel> allTeamsCache = [];
 
   List<PlayerModel> _parsePlayers(List<dynamic> data) {
     List<PlayerModel> players = [];
@@ -33,65 +23,124 @@ class PlayersRepository {
     return players;
   }
 
-  // @Deprecated("use playersGet instead")
-  // Future<List<PlayerModel>> getAllPlayers(bool fromRuntimeCache) async {
-  //   if (fromRuntimeCache) {
-  //     return allPlayersCache;
-  //   }
+  List<CountryModel> _parseTeams(List<dynamic> data) {
+    List<CountryModel> countries = [];
+    for (var item in data) {
+      countries.add(CountryModel.fromJson(item));
+    }
+    return countries;
+  }
 
-  //   allPlayersCache = await compute<List<Map<String, Object>>, List<PlayerModel>>(
-  //     _parsePlayer,
-  //     allPlayers,
-  //   );
-  //   return allPlayersCache;
-  // }
+  Future<void> _ensureInitialized() async {
+    if (allTeamsCache.isEmpty) {
+      String jsonString = await rootBundle.loadString('assets/json/teams_data.json');
+      List<dynamic> data = jsonDecode(jsonString);
+      allTeamsCache = await compute(_parseTeams, data);
+    }
+    if (allPlayersCache.isEmpty) {
+      String jsonString = await rootBundle.loadString('assets/json/players_data.json');
+      List<dynamic> data = jsonDecode(jsonString);
+      allPlayersCache = await compute(_parsePlayers, data);
+    }
+  }
 
-  // List<PlayerModel> _parsePlayer(List<Map<String, Object>> data) {
-  //   return data.map((e) => PlayerModel.fromJson(e)).toList();
-  // }
+  Future<List<PlayerModel>> playersGet([String? countryId]) async {
+    await _ensureInitialized();
+    if (countryId == null) return [...allPlayersCache];
+    return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
+  }
 
-  // Future<void> savePlayers(List<PlayerModel> players) async {
-  //   var box = await Hive.openBox<List<int>>('saved_players_ids');
-  //   savedPlayersCache.addAll(players);
-  //   savedPlayersCache.toSet().toList();
-  //   box.put('players', savedPlayersCache.map((e) => e.id).toList());
-  // }
+  Future<List<PackModel>> getPacks({
+    Confederations? confederation,
+    CountryModel? country,
+  }) async {
+    final List<PackModel> packs = [
+      PackModel(
+        title: "World tour",
+        isFree: true,
+        players: await getRandomPlayers(),
+      ),
+      if (confederation != null || country != null)
+        PackModel(
+          title: confederation?.name ?? country!.confederation.name,
+          isFree: true,
+          players: await getRandomPlayers(confederation: confederation ?? country!.confederation),
+        )
+      else
+        for (final conf in Confederations.values)
+          if (conf != Confederations.unknown)
+            PackModel(
+              title: conf.name,
+              isFree: true,
+              players: await getRandomPlayers(confederation: conf),
+            ),
+      if (country != null)
+        PackModel(
+          title: country.name,
+          isFree: false,
+          players: await getRandomPlayers(country: country),
+        ),
+      PackModel(
+        title: "Top 25 countries",
+        isFree: false,
+        players: await getRandomPlayers(topCountries: true),
+      ),
+      PackModel(
+        title: "Top players",
+        isFree: false,
+        players: await getRandomPlayers(topPlayers: true),
+      ),
+    ];
+    return packs;
+  }
 
-  // Future<List<PlayerModel>> getSavedPlayers(bool fromRuntimeCache) async {
-  //   if (fromRuntimeCache) {
-  //     return savedPlayersCache;
-  //   }
-
-  //   var box = await Hive.openBox<List<int>>('saved_players_ids');
-  //   final data = box.get('players', defaultValue: null);
-  //   final players = await compute<List<int>?, List<PlayerModel>>(
-  //     _parseSavedPlayerIds,
-  //     data,
-  //   );
-  //   savedPlayersCache = players;
-  //   return savedPlayersCache;
-  // }
-
-  // List<PlayerModel> _parseSavedPlayerIds(List<int>? ids) {
-  //   final result = <PlayerModel>[];
-  //   for (final id in ids ?? []) {
-  //     result.add(PlayerModel.fromJson(allPlayers.firstWhere((player) => player['id'] == id)));
-  //   }
-  //   return result;
-  // }
-
-  Future<List<PlayerModel>> getRandomPlayers(int count) async {
-    await _ensurePlayersInitialized();
+  Future<List<PlayerModel>> getRandomPlayers({
+    int count = 5,
+    CountryModel? country,
+    Confederations? confederation,
+    bool? topPlayers,
+    bool? topCountries,
+  }) async {
+    await _ensureInitialized();
     final result = <PlayerModel>[];
     while (result.length < count) {
-      final player = _getRandomPlayer();
+      final player = await _getRandomPlayer(
+        country: country,
+        confederation: confederation,
+        topPlayers: topPlayers,
+        topCountries: topCountries,
+      );
       result.add(player);
     }
     return result;
   }
 
-  PlayerModel _getRandomPlayer() {
-    final index = Random().nextInt(allPlayersCache.length);
-    return allPlayersCache[index];
+  Future<PlayerModel> _getRandomPlayer({
+    CountryModel? country,
+    Confederations? confederation,
+    bool? topPlayers,
+    bool? topCountries,
+  }) async {
+    final playersSublist = allPlayersCache.where((player) {
+      if (country != null) {
+        return player.countryId == country.id;
+      }
+      if (confederation != null) {
+        final playerCountryName = allTeamsCache.firstWhere((team) => team.id == player.countryId).name;
+        return confederation == confederationFromCountryName(playerCountryName);
+      }
+      if (topPlayers == true) {
+        if (player.maxMarketValue == null) return false;
+        return player.maxMarketValue! > 50000000;
+      }
+      if (topCountries == true) {
+        final top25Countries = allTeamsCache.sublist(0, 25);
+        return top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.countryId));
+      }
+      return true;
+    }).toList();
+
+    final index = Random().nextInt(playersSublist.length);
+    return playersSublist[index];
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gallery_3d/gallery3d.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/albums/domain/models/pack.dart';
 import 'package:football_collection/features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
@@ -15,7 +16,7 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../../../confederations/domain/models/confederation.dart';
 import '../../../domain/models/player.dart';
-import '../../blocs/stickerpack_bloc/stickerpack_bloc.dart';
+import '../../blocs/stickerpacks_bloc/stickerpacks_bloc.dart';
 
 part 'mixins/yandex_ads_mixin.dart';
 part 'sticker_pack_screen_presenter.dart';
@@ -43,9 +44,9 @@ class StickerpackScreen extends StatelessWidget {
     final mq = MediaQuery.of(context);
 
     return BlocProvider(
-      create: (context) => StickerpackBloc(getIt.get()),
+      create: (context) => StickerpacksBloc(getIt.get()),
       child: StickerpackScreenPresenter(
-        country: args.country,
+        args: args,
         child: Builder(
           builder: (context) {
             final presenter = StickerpackScreenPresenter.of(context);
@@ -67,10 +68,10 @@ class StickerpackScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   final state = snapshot.data ?? CombinedState(false, false, false);
 
-                  return BlocBuilder<StickerpackBloc, StickerpackState>(
+                  return BlocBuilder<StickerpacksBloc, StickerpacksState>(
                     builder: (context, stickerpackState) {
-                      final pack = stickerpackState.pack ?? [];
-                      if (pack.isEmpty) return const Center(child: CircularProgressIndicator());
+                      final packs = stickerpackState.packs ?? [];
+                      if (packs.isEmpty) return const Center(child: CircularProgressIndicator());
 
                       return Stack(
                         children: [
@@ -83,33 +84,43 @@ class StickerpackScreen extends StatelessWidget {
                                   bottom: -mq.size.height * value,
                                   left: 0,
                                   right: 0,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      presenter.selectPack();
-                                    },
-                                    child: Gallery3D(
-                                      isClip: false,
-                                      controller: presenter.gallery3dController,
-                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                      itemConfig: const GalleryItemConfig(
-                                        width: packWidth,
-                                        height: packHeight,
-                                        isShowTransformMask: false,
-                                      ),
-                                      width: MediaQuery.of(context).size.width,
-                                      height: packHeight + mq.padding.bottom,
-                                      onClickItem: (index) {
-                                        presenter.selectPack();
-                                      },
-                                      itemBuilder: (context, index) {
-                                        return Image.asset("assets/raster/packs/pack_asia.jpg");
-                                      },
+                                  child: Gallery3D(
+                                    isClip: false,
+                                    controller: presenter.gallery3dController,
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    itemConfig: const GalleryItemConfig(
+                                      width: packWidth,
+                                      height: packHeight,
+                                      isShowTransformMask: false,
                                     ),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: packHeight + mq.padding.bottom,
+                                    onClickItem: (index) {
+                                      if (presenter.openedPack == null) {
+                                        presenter.selectPack(packs[index]);
+                                      }
+                                    },
+                                    itemBuilder: (context, index) {
+                                      final pack = packs[index];
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.purple,
+                                          border: Border.all(),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            pack.title,
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 );
                               },
                             ),
-                          if (state.unpacking) _PlayerCardsSwiper(pack: pack),
+                          if (state.unpacking && presenter.openedPack?.players != null)
+                            _PlayerCardsSwiper(players: presenter.openedPack!.players!),
                           if (state.selecting)
                             AnimatedBuilder(
                               animation: presenter._selectPackAnimation,

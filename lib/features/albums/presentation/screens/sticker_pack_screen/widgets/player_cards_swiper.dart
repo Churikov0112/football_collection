@@ -1,10 +1,10 @@
 part of '../sticker_pack_screen.dart';
 
 class _PlayerCardsSwiper extends StatelessWidget {
-  final List<PlayerModel> pack;
+  final List<PlayerModel> players;
 
   const _PlayerCardsSwiper({
-    required this.pack,
+    required this.players,
   });
 
   @override
@@ -15,7 +15,7 @@ class _PlayerCardsSwiper extends StatelessWidget {
     final backgroundHeight = mq.size.height - mq.padding.top - mq.padding.bottom - 56;
 
     return CardSwiper(
-      onEnd: presenter.getNewPack,
+      onEnd: presenter.getNewPacks,
       padding: EdgeInsets.only(
         left: (mq.size.width - packWidth) / 2,
         right: (mq.size.width - packWidth) / 2,
@@ -24,19 +24,13 @@ class _PlayerCardsSwiper extends StatelessWidget {
       isLoop: false,
       numberOfCardsDisplayed: 2,
       backCardOffset: Offset(20, 20),
-      cardsCount: pack.length,
+      cardsCount: players.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) => SavedPlayerCard(
-        player: pack[index],
+        player: players[index],
         count: 1,
       ),
       onSwipe: (previousIndex, currentIndex, direction) {
-        presenter.savePlayer(pack[previousIndex]);
-
-        if (currentIndex != null) {
-//  if(pack[currentIndex].) {
-//         }
-        }
-
+        presenter.savePlayer(players[previousIndex]);
         return true;
       },
     );

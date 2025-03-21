@@ -6,10 +6,10 @@ class StickerpackScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
-  final CountryModel? country;
+  final StickerpackScreenArgs args;
 
   const StickerpackScreenPresenter({
-    required this.country,
+    required this.args,
     required this.child,
     super.key,
   });
@@ -19,7 +19,7 @@ class StickerpackScreenPresenter extends StatefulWidget {
 }
 
 class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> with TickerProviderStateMixin {
-  Gallery3DController gallery3dController = Gallery3DController(itemCount: 4, autoLoop: false);
+  late Gallery3DController gallery3dController;
 
   late AnimationController _selectPackAnimationController;
   late Animation<double> _selectPackAnimation;
@@ -35,10 +35,14 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
   final BehaviorSubject<bool> _isPackOpenedSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isPackOpenedStream$ => _isPackOpenedSubject.stream;
 
+  PackModel? openedPack;
+
   @override
   void initState() {
     super.initState();
-    context.read<StickerpackBloc>().add(StickerpackEventGet());
+    context
+        .read<StickerpacksBloc>()
+        .add(StickerpacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
 
     _selectPackAnimationController = AnimationController(
       vsync: this,
@@ -49,7 +53,8 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     );
   }
 
-  Future<void> selectPack() async {
+  Future<void> selectPack(PackModel pack) async {
+    openedPack = pack;
     _gifController = GifController(vsync: this); // Ленивая инициализация
     // unawaited(HapticFeedback.lightImpact());
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -66,8 +71,9 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     _selectPackAnimationController.reverse();
   }
 
-  void getNewPack() {
-    context.read<StickerpackBloc>().add(StickerpackEventGet());
+  void getNewPacks() {
+    openedPack = null;
+    context.read<StickerpacksBloc>().add(StickerpacksEventGet());
     _isPackOpenedSubject.add(false);
     _isPackSelectingSubject.add(false);
     _isUnpackingSubject.add(false);
@@ -89,6 +95,17 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return BlocListener<StickerpacksBloc, StickerpacksState>(
+      listener: (context, stickerpacksState) {
+        if (stickerpacksState is StickerpacksStateLoadSucceeded) {
+          final packs = stickerpacksState.packs ?? [];
+          gallery3dController = Gallery3DController(
+            itemCount: packs.length,
+            autoLoop: false,
+          );
+        }
+      },
+      child: widget.child,
+    );
   }
 }

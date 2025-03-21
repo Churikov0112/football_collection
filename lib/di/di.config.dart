@@ -18,6 +18,8 @@ import '../features/albums/presentation/blocs/country_players_bloc/country_playe
     as _i433;
 import '../features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart'
     as _i826;
+import '../features/albums/presentation/blocs/stickerpacks_bloc/stickerpacks_bloc.dart'
+    as _i78;
 import '../features/confederations/domain/repos/confederations_repository.dart'
     as _i108;
 import '../features/confederations/presentation/blocs/confederations_bloc/confederations_bloc.dart'
@@ -48,6 +50,8 @@ _i174.GetIt $initGetIt(
       () => _i678.AllPlayersBloc(repository: gh<_i385.PlayersRepository>()));
   gh.singleton<_i433.CountryPlayersBloc>(
       () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
+  gh.singleton<_i78.StickerpacksBloc>(
+      () => _i78.StickerpacksBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i515.ConfederationsBloc>(
       () => _i515.ConfederationsBloc(gh<_i108.ConnfederationsRepository>()));
   return getIt;
