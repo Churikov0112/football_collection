@@ -48,14 +48,22 @@ class _CountryTile extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: Colors.grey,
+          color: country.confederation.color?.darken(),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(country.name),
-            Text(country.id),
-            Text(country.confederation.name),
+            Text(
+              country.emojiFlag ?? "🏴‍☠️",
+              style: TextStyle(fontSize: 32),
+            ),
+            Text(
+              country.name,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+
+            // Text(country.confederation.name),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum Confederations {
   caf,
   concacaf,
@@ -10,6 +12,25 @@ enum Confederations {
 
 extension ConfederationExtension on Confederations {
   String toJson() => name.toUpperCase();
+
+  Color? get color {
+    switch (this) {
+      case Confederations.caf:
+        return Colors.brown;
+      case Confederations.concacaf:
+        return Colors.pink;
+      case Confederations.ofc:
+        return Colors.green;
+      case Confederations.uefa:
+        return Colors.blue;
+      case Confederations.afc:
+        return Colors.amber;
+      case Confederations.conmebol:
+        return Colors.orange;
+      case Confederations.unknown:
+        return null;
+    }
+  }
 }
 
 Confederations confederationFromCountryName(String countryName) {

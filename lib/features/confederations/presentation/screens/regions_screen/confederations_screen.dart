@@ -6,6 +6,7 @@ import 'package:football_collection/features/confederations/domain/models/confed
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../blocs/confederations_bloc/confederations_bloc.dart';
 
 part 'confederations_screen_presenter.dart';
@@ -33,11 +34,15 @@ class ConfederationsScreen extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            context.push(RoutePaths.stickerpack);
+            context.push(
+              RoutePaths.stickerpack,
+              extra: StickerpackScreenArgs(),
+            );
           },
-          child: Icon(Icons.style),
+          label: Text('Open pack'),
+          icon: Icon(Icons.style),
         ),
       ),
     );

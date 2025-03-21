@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'package:football_collection/features/countries/domain/models/country.dar
 import 'package:gif/gif.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../confederations/domain/models/confederation.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/stickerpack_bloc/stickerpack_bloc.dart';
 
@@ -21,13 +24,19 @@ part 'widgets/player_cards_swiper.dart';
 const packHeight = 300.0;
 const packWidth = 200.0;
 
+class StickerpackScreenArgs {
+  final CountryModel? country;
+  final Confederations? confederation;
+  const StickerpackScreenArgs({this.country, this.confederation});
+}
+
 class StickerpackScreen extends StatelessWidget {
   const StickerpackScreen({
-    required this.country,
+    required this.args,
     super.key,
   });
 
-  final CountryModel? country;
+  final StickerpackScreenArgs args;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +45,18 @@ class StickerpackScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => StickerpackBloc(getIt.get()),
       child: StickerpackScreenPresenter(
-        country: country,
+        country: args.country,
         child: Builder(
           builder: (context) {
             final presenter = StickerpackScreenPresenter.of(context);
 
             return Scaffold(
-              backgroundColor: Colors.amber,
-              appBar: AppBar(title: const Text("Open Pack")),
+              backgroundColor: args.confederation?.color?.withOpacity(0.8),
+              appBar: AppBar(
+                backgroundColor: args.confederation?.color,
+                foregroundColor: args.confederation != null ? Colors.white : null,
+                title: const Text("Open Pack"),
+              ),
               body: StreamBuilder<CombinedState>(
                 stream: CombineLatestStream.combine3(
                   presenter.isUnpackingStream$,

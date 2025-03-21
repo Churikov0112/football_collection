@@ -1,15 +1,20 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/presentation/blocs/country_players_bloc/country_players_bloc.dart';
+import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
+import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../domain/models/player.dart';
 import '../../blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../widgets/saved_player_card.dart';
+import '../sticker_pack_screen/sticker_pack_screen.dart';
 
 part 'album_screen_presenter.dart';
 part 'widgets/player_card.dart';
@@ -30,7 +35,10 @@ class AlbumScreen extends StatelessWidget {
     return AlbumScreenPresenter(
       country: country,
       child: Scaffold(
+        backgroundColor: country.confederation.color?.lighten(0.1),
         appBar: AppBar(
+          backgroundColor: country.confederation.color?.darken(),
+          foregroundColor: Colors.white,
           title: Row(
             children: [
               Text(country.name),
@@ -51,11 +59,15 @@ class AlbumScreen extends StatelessWidget {
             const _PlayersList(),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            context.push(RoutePaths.stickerpack, extra: country);
+            context.push(
+              RoutePaths.stickerpack,
+              extra: StickerpackScreenArgs(country: country),
+            );
           },
-          child: Icon(Icons.style),
+          label: Text('Open pack'),
+          icon: Icon(Icons.style),
         ),
       ),
     );

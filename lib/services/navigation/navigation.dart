@@ -45,7 +45,7 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.stickerpack,
           builder: (context, state) => StickerpackScreen(
-            country: state.extra as CountryModel?,
+            args: state.extra as StickerpackScreenArgs,
           ),
         ),
         GoRoute(
