@@ -35,7 +35,7 @@ class AlbumScreen extends StatelessWidget {
     return AlbumScreenPresenter(
       country: country,
       child: Scaffold(
-        backgroundColor: country.confederation.color?.lighten(0.1),
+        backgroundColor: country.confederation.color?.lighten(0.05),
         appBar: AppBar(
           backgroundColor: country.confederation.color?.darken(),
           foregroundColor: Colors.white,
