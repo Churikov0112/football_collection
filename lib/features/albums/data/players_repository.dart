@@ -50,6 +50,12 @@ class PlayersRepository {
     return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
   }
 
+  Future<List<CountryModel>> countriesGet([List<String>? countryIds]) async {
+    await _ensureInitialized();
+    if (countryIds == null) return [...allTeamsCache];
+    return [...allTeamsCache].where((country) => countryIds.contains(country.id)).toList();
+  }
+
   Future<List<PackModel>> getPacks({
     Confederations? confederation,
     CountryModel? country,

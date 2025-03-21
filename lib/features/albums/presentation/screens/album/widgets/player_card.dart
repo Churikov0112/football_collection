@@ -3,16 +3,18 @@ part of '../album_screen.dart';
 class _PlayerCard extends StatelessWidget {
   const _PlayerCard({
     required this.player,
+    required this.country,
   });
 
   final PlayerModel player;
+  final CountryModel country;
 
   @override
   Widget build(BuildContext context) {
     // return SavedPlayerCard(player: player);
 
     final absentWIdget = Container(
-      color: Colors.grey[300],
+      color: country.confederation.color?.darken(),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -24,13 +26,13 @@ class _PlayerCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black26,
+                color: Colors.white54,
               ),
             ),
             Icon(
               Icons.person,
               size: 64,
-              color: Colors.black26,
+              color: Colors.white54,
             ),
             Text(
               player.position ?? "?",
@@ -38,7 +40,7 @@ class _PlayerCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black26,
+                color: Colors.white54,
               ),
             ),
           ],

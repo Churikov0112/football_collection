@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:football_collection/features/albums/data/players_repository.dart';
 import 'package:football_collection/features/albums/domain/models/player.dart';
+import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:injectable/injectable.dart';
 
 part 'country_players_bloc_event.dart';
@@ -25,7 +26,8 @@ class CountryPlayersBloc extends Bloc<CountryPlayersEvent, CountryPlayersState> 
     try {
       emit(CountryPlayersStatePending());
       final players = await _repository.playersGet(event.countryId);
-      emit(CountryPlayersStateLoadSucceeded(players));
+      final countries = await _repository.countriesGet([event.countryId]);
+      emit(CountryPlayersStateLoadSucceeded(players, countries.first));
     } on Object catch (_) {
       emit(CountryPlayersStateFailed('Произошла ошибка'));
     }

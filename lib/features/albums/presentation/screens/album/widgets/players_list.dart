@@ -23,6 +23,7 @@ class _PlayersList extends StatelessWidget {
             itemBuilder: (context, index) {
               return _PlayerCard(
                 player: players[index],
+                country: countryPlayersState.country!,
               );
             },
           ),

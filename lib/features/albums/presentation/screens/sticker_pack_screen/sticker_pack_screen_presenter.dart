@@ -73,7 +73,9 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
 
   void getNewPacks() {
     openedPack = null;
-    context.read<StickerpacksBloc>().add(StickerpacksEventGet());
+    context
+        .read<StickerpacksBloc>()
+        .add(StickerpacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
     _isPackOpenedSubject.add(false);
     _isPackSelectingSubject.add(false);
     _isUnpackingSubject.add(false);

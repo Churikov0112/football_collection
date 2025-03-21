@@ -41,32 +41,71 @@ class _CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.push(RoutePaths.album, extra: country);
-      },
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: country.confederation.color?.darken(),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              country.emojiFlag ?? "🏴‍☠️",
-              style: TextStyle(fontSize: 32),
-            ),
-            Text(
-              country.name,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
+    return BlocBuilder<SavedPlayersBloc, SavedPlayersState>(
+      bloc: getIt.get(),
+      builder: (context, savedPlayersState) {
+        final savedPlayerIds = savedPlayersState.savedIds ?? [];
+        double value = 0;
 
-            // Text(country.confederation.name),
-          ],
-        ),
-      ),
+        final allPlayers = getIt.get<PlayersRepository>().allPlayersCache;
+        final countryPlayers = allPlayers.where((player) => player.countryId == country.id);
+        final savedCountryPlayers = countryPlayers.where((player) => savedPlayerIds.contains(player.id));
+        value = savedCountryPlayers.length / countryPlayers.length;
+
+        return GestureDetector(
+          onTap: () {
+            context.push(RoutePaths.album, extra: country);
+          },
+          child: SquareProgressIndicator(
+            value: value,
+            width: 100,
+            height: 100,
+            borderRadius: 20,
+            startPosition: StartPosition.topCenter,
+            strokeCap: StrokeCap.square,
+            clockwise: true,
+            color: Colors.greenAccent,
+            emptyStrokeColor: Colors.transparent,
+            strokeWidth: 8,
+            emptyStrokeWidth: 8,
+            strokeAlign: SquareStrokeAlign.center,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: country.confederation.color?.darken(),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Align(
+                    child: Text(
+                      country.emojiFlag ?? "🏴‍☠️",
+                      style: TextStyle(fontSize: 32),
+                    ),
+                  ),
+                  Align(
+                    child: Text(
+                      country.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                  Align(
+                    child: Text(
+                      "${savedCountryPlayers.length} / ${countryPlayers.length}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+
+                  // Text(country.confederation.name),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

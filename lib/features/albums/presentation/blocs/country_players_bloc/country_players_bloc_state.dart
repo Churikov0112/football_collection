@@ -7,6 +7,13 @@ sealed class CountryPlayersState {
       _ => null,
     };
   }
+
+  CountryModel? get country {
+    return switch (this) {
+      CountryPlayersStateLoadSucceeded() => (this as CountryPlayersStateLoadSucceeded)._country,
+      _ => null,
+    };
+  }
 }
 
 final class CountryPlayersStateInitial extends CountryPlayersState {
@@ -19,7 +26,12 @@ final class CountryPlayersStatePending extends CountryPlayersState {
 
 final class CountryPlayersStateLoadSucceeded extends CountryPlayersState {
   final List<PlayerModel> _players;
-  CountryPlayersStateLoadSucceeded(this._players);
+  final CountryModel _country;
+
+  CountryPlayersStateLoadSucceeded(
+    this._players,
+    this._country,
+  );
 }
 
 final class CountryPlayersStateFailed extends CountryPlayersState {
