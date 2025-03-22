@@ -65,12 +65,14 @@ class PlayersRepository {
         title: "World tour",
         isFree: true,
         players: await getRandomPlayers(),
+        imageAssetPath: null,
       ),
       if (confederation != null || country != null)
         PackModel(
           title: confederation?.name ?? country!.confederation.name,
           isFree: true,
           players: await getRandomPlayers(confederation: confederation ?? country!.confederation),
+          imageAssetPath: null,
         )
       else
         for (final conf in Confederations.values)
@@ -79,22 +81,26 @@ class PlayersRepository {
               title: conf.name,
               isFree: true,
               players: await getRandomPlayers(confederation: conf),
+              imageAssetPath: null,
             ),
       if (country != null)
         PackModel(
           title: country.name,
           isFree: false,
           players: await getRandomPlayers(country: country),
+          imageAssetPath: null,
         ),
       PackModel(
         title: "Top 25 countries",
         isFree: false,
         players: await getRandomPlayers(topCountries: true),
+        imageAssetPath: null,
       ),
       PackModel(
         title: "Top players",
         isFree: false,
         players: await getRandomPlayers(topPlayers: true),
+        imageAssetPath: null,
       ),
     ];
     return packs;

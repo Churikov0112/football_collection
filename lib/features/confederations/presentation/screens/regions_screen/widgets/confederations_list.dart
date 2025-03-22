@@ -41,28 +41,69 @@ class _RegionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.push(RoutePaths.countries, extra: confederation);
-      },
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: confederation.color,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              confederation.name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
+    return BlocBuilder<SavedPlayersBloc, SavedPlayersState>(
+      bloc: getIt.get(),
+      builder: (context, savedPlayersState) {
+        final savedPlayerIds = savedPlayersState.savedIds ?? [];
+
+        final allPlayers = getIt.get<PlayersRepository>().allPlayersCache;
+        final allCountries = getIt.get<PlayersRepository>().allTeamsCache;
+        final confederationCountries = allCountries.where((country) => country.confederation == confederation);
+
+        final confederationPlayers = allPlayers
+            .where((player) => confederationCountries.firstWhereOrNull((cc) => cc.id == player.countryId) != null);
+        final savedConfederationPlayers = confederationPlayers.where((player) => savedPlayerIds.contains(player.id));
+
+        final value = savedConfederationPlayers.length / confederationPlayers.length;
+
+        return GestureDetector(
+          onTap: () {
+            context.push(RoutePaths.countries, extra: confederation);
+          },
+          child: SquareProgressIndicator(
+            value: value,
+            width: 100,
+            height: 100,
+            borderRadius: 20,
+            startPosition: StartPosition.topCenter,
+            strokeCap: StrokeCap.square,
+            clockwise: true,
+            color: Colors.greenAccent,
+            emptyStrokeColor: Colors.black12,
+            strokeWidth: 8,
+            emptyStrokeWidth: 8,
+            strokeAlign: SquareStrokeAlign.center,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: confederation.color,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    child: Text(
+                      confederation.name,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    child: Text(
+                      "${savedConfederationPlayers.length} / ${confederationPlayers.length}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

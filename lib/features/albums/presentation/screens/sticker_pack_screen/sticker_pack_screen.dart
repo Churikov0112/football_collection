@@ -75,15 +75,16 @@ class StickerpackScreen extends StatelessWidget {
 
                       return Stack(
                         children: [
-                          if (!state.unpacking)
-                            AnimatedBuilder(
-                              animation: presenter._selectPackAnimation,
-                              builder: (context, child) {
-                                final value = presenter._selectPackAnimation.value;
-                                return Positioned(
-                                  bottom: -mq.size.height * value,
-                                  left: 0,
-                                  right: 0,
+                          AnimatedBuilder(
+                            animation: presenter._selectPackAnimation,
+                            builder: (context, child) {
+                              final value = presenter._selectPackAnimation.value;
+                              return Positioned(
+                                bottom: -mq.size.height * value,
+                                left: 0,
+                                right: 0,
+                                child: Visibility.maintain(
+                                  visible: !state.unpacking,
                                   child: Gallery3D(
                                     isClip: false,
                                     controller: presenter.gallery3dController,
@@ -116,9 +117,10 @@ class StickerpackScreen extends StatelessWidget {
                                       );
                                     },
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
+                          ),
                           if (state.unpacking && presenter.openedPack?.players != null)
                             _PlayerCardsSwiper(players: presenter.openedPack!.players!),
                           if (state.selecting)

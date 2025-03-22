@@ -1,12 +1,16 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/albums/data/players_repository.dart';
 import 'package:football_collection/features/albums/presentation/blocs/all_players_bloc/all_players_bloc.dart';
 import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:square_progress_indicator/square_progress_indicator.dart';
 
+import '../../../../albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../../../albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../blocs/confederations_bloc/confederations_bloc.dart';
 
@@ -24,6 +28,12 @@ class ConfederationsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Confederations"),
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(Icons.language),
+          //   ),
+          // ],
         ),
         body: DecoratedBox(
           decoration: BoxDecoration(

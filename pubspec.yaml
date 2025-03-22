@@ -50,6 +50,7 @@ dependencies:
   # Backend
   equatable: 2.0.5
   json_annotation: 4.9.0
+  collection: 1.19.1
 
   # Navigation
   go_router: 14.2.3

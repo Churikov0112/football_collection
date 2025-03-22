@@ -65,7 +65,7 @@ class _CountryTile extends StatelessWidget {
             strokeCap: StrokeCap.square,
             clockwise: true,
             color: Colors.greenAccent,
-            emptyStrokeColor: Colors.transparent,
+            emptyStrokeColor: Colors.black12,
             strokeWidth: 8,
             emptyStrokeWidth: 8,
             strokeAlign: SquareStrokeAlign.center,
