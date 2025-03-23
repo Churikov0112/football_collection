@@ -31,6 +31,12 @@ class _PlayerCardsSwiper extends StatelessWidget {
       ),
       onSwipe: (previousIndex, currentIndex, direction) {
         presenter.savePlayer(players[previousIndex]);
+        if (currentIndex != null) {
+          final player = players[currentIndex];
+          if ((player.maxMarketValue ?? 0) > 30000000) {
+            Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
+          }
+        }
         return true;
       },
     );

@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:flutter_gallery_3d/gallery3d.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/domain/models/pack.dart';
