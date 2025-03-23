@@ -21,6 +21,7 @@ class ConfederationsScreenPresenterState extends State<ConfederationsScreenPrese
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      getIt.get<AllCountriesBloc>().add(AllCountriesEventGet());
       getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad());
       getIt.get<ConfederationsBloc>().add(ConfederationsEventGet());
     });

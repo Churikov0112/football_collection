@@ -12,6 +12,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../features/albums/data/players_repository.dart' as _i385;
+import '../features/albums/presentation/blocs/all_countries_bloc/all_countries_bloc.dart'
+    as _i255;
 import '../features/albums/presentation/blocs/all_players_bloc/all_players_bloc.dart'
     as _i678;
 import '../features/albums/presentation/blocs/country_players_bloc/country_players_bloc.dart'
@@ -48,6 +50,8 @@ _i174.GetIt $initGetIt(
       () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
   gh.singleton<_i678.AllPlayersBloc>(
       () => _i678.AllPlayersBloc(repository: gh<_i385.PlayersRepository>()));
+  gh.singleton<_i255.AllCountriesBloc>(
+      () => _i255.AllCountriesBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i433.CountryPlayersBloc>(
       () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i78.StickerpacksBloc>(

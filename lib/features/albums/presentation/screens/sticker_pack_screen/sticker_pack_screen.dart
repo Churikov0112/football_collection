@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:flutter_gallery_3d/gallery3d.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/domain/models/pack.dart';
@@ -105,16 +104,28 @@ class StickerpackScreen extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       final pack = packs[index];
                                       return Container(
+                                        height: packHeight,
+                                        width: packWidth,
                                         decoration: BoxDecoration(
-                                          color: Colors.purple,
-                                          border: Border.all(),
+                                          // image: pack.imageAssetPath != null
+                                          //     ? DecorationImage(image: AssetImage(pack.imageAssetPath!))
+                                          //     : null,
+                                          color: pack.imageAssetPath == null ? Colors.purple : null,
+                                          // border: Border.all(),
                                         ),
-                                        child: Center(
-                                          child: Text(
-                                            pack.title,
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                        ),
+                                        child: pack.imageAssetPath == null
+                                            ? Center(
+                                                child: Text(
+                                                  pack.title,
+                                                  style: TextStyle(color: Colors.white),
+                                                ),
+                                              )
+                                            : Image.asset(
+                                                pack.imageAssetPath!,
+                                                height: packHeight,
+                                                width: packWidth,
+                                                fit: BoxFit.contain,
+                                              ),
                                       );
                                     },
                                   ),

@@ -65,14 +65,14 @@ class PlayersRepository {
         title: "World tour",
         isFree: true,
         players: await getRandomPlayers(),
-        imageAssetPath: null,
+        imageAssetPath: "assets/raster/packs/pack-world-tour.png",
       ),
       if (confederation != null || country != null)
         PackModel(
           title: confederation?.name ?? country!.confederation.name,
           isFree: true,
           players: await getRandomPlayers(confederation: confederation ?? country!.confederation),
-          imageAssetPath: null,
+          imageAssetPath: "assets/raster/packs/pack-${confederation?.name ?? country!.confederation.name}.png",
         )
       else
         for (final conf in Confederations.values)
@@ -81,7 +81,7 @@ class PlayersRepository {
               title: conf.name,
               isFree: true,
               players: await getRandomPlayers(confederation: conf),
-              imageAssetPath: null,
+              imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
             ),
       if (country != null)
         PackModel(
@@ -94,13 +94,13 @@ class PlayersRepository {
         title: "Top 25 countries",
         isFree: false,
         players: await getRandomPlayers(topCountries: true),
-        imageAssetPath: null,
+        imageAssetPath: "assets/raster/packs/pack-top-countries.png",
       ),
       PackModel(
         title: "Top players",
         isFree: false,
         players: await getRandomPlayers(topPlayers: true),
-        imageAssetPath: null,
+        imageAssetPath: "assets/raster/packs/pack-top-players.png",
       ),
     ];
     return packs;
