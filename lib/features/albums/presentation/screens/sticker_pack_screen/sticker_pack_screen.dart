@@ -124,7 +124,7 @@ class StickerpackScreen extends StatelessWidget {
                                                 pack.imageAssetPath!,
                                                 height: packHeight,
                                                 width: packWidth,
-                                                fit: BoxFit.contain,
+                                                fit: BoxFit.fill,
                                               ),
                                       );
                                     },
