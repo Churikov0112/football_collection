@@ -143,7 +143,7 @@ class StickerpackScreen extends StatelessWidget {
                                 return Positioned(
                                   left: 0,
                                   right: 0,
-                                  bottom: -2 * packHeight + (2.2 * packHeight) * value,
+                                  bottom: -2 * packHeight + (2.5 * packHeight) * value,
                                   child: GestureDetector(
                                     onTap: () {
                                       if (value == 1.0 && !(presenter._gifController?.isAnimating ?? false)) {
@@ -153,10 +153,10 @@ class StickerpackScreen extends StatelessWidget {
                                     child: Gif(
                                       fps: 30, // Уменьшенный FPS
                                       autostart: Autostart.no,
-                                      image: const AssetImage("assets/gif/ImageToStl.com_card-pack.glb.gif"),
+                                      image: const AssetImage("assets/gif/python_opt_50.gif"),
                                       controller: presenter._gifController,
-                                      height: packHeight * 2,
-                                      width: packWidth * 2,
+                                      height: packHeight * 1.5,
+                                      width: packWidth * 1.5,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
