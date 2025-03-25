@@ -89,6 +89,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
               routerConfig: _router.router,
               title: 'Football Pack Collection',
               color: Colors.black,
+              debugShowCheckedModeBanner: false,
               builder: (context, child) {
                 return child == null
                     ? const SizedBox.shrink()

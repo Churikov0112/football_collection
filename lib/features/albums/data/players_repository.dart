@@ -14,6 +14,7 @@ import '../domain/models/player.dart';
 class PlayersRepository {
   List<PlayerModel> allPlayersCache = [];
   List<CountryModel> allTeamsCache = [];
+  final Random _random = Random();
 
   List<PlayerModel> _parsePlayers(List<dynamic> data) {
     List<PlayerModel> players = [];
@@ -112,6 +113,7 @@ class PlayersRepository {
     Confederations? confederation,
     bool? topPlayers,
     bool? topCountries,
+    bool? hasCurrentTransferValue,
   }) async {
     await _ensureInitialized();
     final result = <PlayerModel>[];
@@ -121,6 +123,7 @@ class PlayersRepository {
         confederation: confederation,
         topPlayers: topPlayers,
         topCountries: topCountries,
+        hasCurrentTransferValue: hasCurrentTransferValue,
       );
       result.add(player);
     }
@@ -132,8 +135,16 @@ class PlayersRepository {
     Confederations? confederation,
     bool? topPlayers,
     bool? topCountries,
+    bool? hasCurrentTransferValue,
   }) async {
     final playersSublist = allPlayersCache.where((player) {
+      if (hasCurrentTransferValue != null) {
+        if (hasCurrentTransferValue == true) {
+          if (player.currentMarketValue == null) return false;
+        } else {
+          if (player.currentMarketValue != null) return false;
+        }
+      }
       if (country != null) {
         return player.countryId == country.id;
       }
@@ -145,6 +156,7 @@ class PlayersRepository {
         if (player.maxMarketValue == null) return false;
         return player.maxMarketValue! > 50000000;
       }
+
       if (topCountries == true) {
         final top25Countries = allTeamsCache.sublist(0, 25);
         return top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.countryId));
@@ -152,7 +164,7 @@ class PlayersRepository {
       return true;
     }).toList();
 
-    final index = Random().nextInt(playersSublist.length);
+    final index = _random.nextInt(playersSublist.length);
     return playersSublist[index];
   }
 }

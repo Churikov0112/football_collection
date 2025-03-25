@@ -6,6 +6,7 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/features/albums/presentation/blocs/all_players_bloc/all_players_bloc.dart';
 import 'package:football_collection/features/confederations/domain/models/confederation.dart';
+import 'package:football_collection/features/menu/presentation/screens/menu_drawer.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
@@ -26,14 +27,15 @@ class ConfederationsScreen extends StatelessWidget {
 
     return ConfederationsScreenPresenter(
       child: Scaffold(
+        drawer: MenuDrawer(),
         appBar: AppBar(
-          title: const Text("Confederations"),
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Icons.language),
-          //   ),
-          // ],
+          title: Row(
+            children: [
+              const Text("Confederations"),
+              const Spacer(),
+              Text("🏆"),
+            ],
+          ),
         ),
         body: DecoratedBox(
           decoration: BoxDecoration(

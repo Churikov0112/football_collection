@@ -29,6 +29,10 @@ import '../features/confederations/presentation/blocs/confederations_bloc/confed
 import '../features/countries/domain/repos/countries_repository.dart' as _i71;
 import '../features/countries/presentation/blocs/countries_bloc/countries_bloc.dart'
     as _i167;
+import '../features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart'
+    as _i550;
+import '../features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart'
+    as _i603;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -46,6 +50,7 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
   gh.singleton<_i385.PlayersRepository>(() => _i385.PlayersRepository());
   gh.singleton<_i826.SavedPlayersBloc>(() => _i826.SavedPlayersBloc());
+  gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i167.CountriesBloc>(
       () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
   gh.singleton<_i678.AllPlayersBloc>(
@@ -56,6 +61,8 @@ _i174.GetIt $initGetIt(
       () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i78.StickerpacksBloc>(
       () => _i78.StickerpacksBloc(gh<_i385.PlayersRepository>()));
+  gh.singleton<_i603.RandomPlayersBloc>(
+      () => _i603.RandomPlayersBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i515.ConfederationsBloc>(
       () => _i515.ConfederationsBloc(gh<_i108.ConnfederationsRepository>()));
   return getIt;

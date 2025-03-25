@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 import 'package:football_collection/features/confederations/presentation/screens/regions_screen/confederations_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/albums/presentation/screens/album/album_screen.dart';
@@ -15,6 +17,10 @@ class RoutePaths {
   static const countries = '/countries';
   static const album = '/album';
   static const stickerpack = '/stickerpack';
+
+  // minigames
+  static const miniGames = '/miniGames';
+  static const miniGameGuessTransferValue = '/miniGameGuessTransferValue';
 
   // static const main = '/main';
   // static const auth = '/auth';
@@ -58,6 +64,15 @@ class FootballCollectionRouter {
             confederation: state.extra as Confederations,
           ),
         ),
+        GoRoute(
+          path: RoutePaths.miniGames,
+          builder: (context, state) => MiniGamesScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.miniGameGuessTransferValue,
+          builder: (context, state) => GuessTransferValueScreen(),
+        ),
+
         // GoRoute(
         //   path: RoutePaths.main,
         //   builder: (context, state) => const MainScreen(),

@@ -13,11 +13,7 @@ class ToastService {
       autoCloseDuration: Duration(seconds: seconds),
       dismissDirection: DismissDirection.up,
       context: context,
-      icon: Image.asset(
-        'assets/raster/icon.png',
-        width: 38,
-        height: 38,
-      ),
+      icon: const Icon(Icons.check_outlined, size: 36, color: Color.fromARGB(255, 0, 208, 49)),
       title: Text(
         title,
         style: const TextStyle(
