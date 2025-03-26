@@ -26,6 +26,9 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
 
   GifController? _gifController;
 
+  final BehaviorSubject<bool> _isWaitingConfirmSubject = BehaviorSubject.seeded(false);
+  Stream<bool> get isWaitingConfirmStream$ => _isWaitingConfirmSubject.stream;
+
   final BehaviorSubject<bool> _isPackSelectingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isPackSelectingStream$ => _isPackSelectingSubject.stream;
 
@@ -53,13 +56,72 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     );
   }
 
-  Future<void> selectPack(PackModel pack) async {
+  Future<void> getPack(PackModel pack) async {
     openedPack = pack;
     _gifController = GifController(vsync: this); // Ленивая инициализация
     // unawaited(HapticFeedback.lightImpact());
     await Future.delayed(const Duration(milliseconds: 1000));
     _isPackSelectingSubject.add(true);
     _selectPackAnimationController.forward();
+  }
+
+  Future<void> requestBuyPackConfirm(PackModel pack) async {
+    _isWaitingConfirmSubject.add(true);
+    // TODO add not enought balance bs
+    final confirmed = await showModalBottomSheet<bool>(
+      context: context,
+      builder: (context) {
+        final mq = MediaQuery.of(context);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 20),
+              Text("Confirm to buy pack for ${pack.price} 🏆"),
+              const SizedBox(height: 20),
+              Row(
+                spacing: 8,
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        context.pop(false);
+                      },
+                      child: Text("Cancel"),
+                    ),
+                  ),
+                  Expanded(
+                    child: FilledButton(
+                      onPressed: () {
+                        context.pop(true);
+                      },
+                      child: Text("Confirm"),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: mq.padding.bottom)
+            ],
+          ),
+        );
+      },
+    );
+    _isWaitingConfirmSubject.add(false);
+    if (confirmed != true) return;
+    // todo confirm bs
+    getIt.get<BalanceBloc>().add(BalanceEventDecrease(amount: pack.price));
+    final balanceState = await getIt
+        .get<BalanceBloc>()
+        .stream
+        .firstWhere((state) => state is BalanceStateReady || state is BalanceStateFailed);
+    if (balanceState is BalanceStateFailed) {
+      ToastService.showErrorToast(title: balanceState.message);
+    } else if (balanceState is BalanceStateReady) {
+      ToastService.showToast(title: "Transaction completed");
+      await getPack(pack);
+    }
   }
 
   void unpackCards() async {
@@ -92,6 +154,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     _isPackSelectingSubject.close();
     _isUnpackingSubject.close();
     _isPackOpenedSubject.close();
+    _isWaitingConfirmSubject.close();
     super.dispose();
   }
 

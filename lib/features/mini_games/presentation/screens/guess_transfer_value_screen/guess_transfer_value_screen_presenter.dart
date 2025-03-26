@@ -23,7 +23,7 @@ class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScr
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      getIt.get<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 1, hasTransferValue: true));
+      context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 1, hasTransferValue: true));
     });
   }
 

@@ -11,10 +11,14 @@ import 'package:football_collection/features/albums/domain/models/pack.dart';
 import 'package:football_collection/features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:gif/gif.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../confederations/domain/models/confederation.dart';
+import '../../../../mini_games/presentation/widgets/balance_widget/balance_widget.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/stickerpacks_bloc/stickerpacks_bloc.dart';
 
@@ -52,21 +56,29 @@ class StickerpackScreen extends StatelessWidget {
             final presenter = StickerpackScreenPresenter.of(context);
 
             return Scaffold(
-              backgroundColor: args.confederation?.color?.withOpacity(0.8),
+              // backgroundColor: args.confederation?.color?.withOpacity(0.8),
               appBar: AppBar(
-                backgroundColor: args.confederation?.color,
-                foregroundColor: args.confederation != null ? Colors.white : null,
-                title: const Text("Open Pack"),
+                // backgroundColor: args.confederation?.color,
+                // foregroundColor: args.confederation != null ? Colors.white : null,
+                title: Row(
+                  children: [
+                    const Text("Open Pack"),
+                    const Spacer(),
+                    const BalanceWidget(),
+                  ],
+                ),
               ),
               body: StreamBuilder<CombinedState>(
-                stream: CombineLatestStream.combine3(
+                stream: CombineLatestStream.combine4(
+                  presenter.isWaitingConfirmStream$,
                   presenter.isUnpackingStream$,
                   presenter.isPackSelectingStream$,
                   presenter.isPackOpenedStream$,
-                  (unpacking, selecting, opened) => CombinedState(unpacking, selecting, opened),
+                  (waitingConfirm, unpacking, selecting, opened) =>
+                      CombinedState(waitingConfirm, unpacking, selecting, opened),
                 ),
                 builder: (context, snapshot) {
-                  final state = snapshot.data ?? CombinedState(false, false, false);
+                  final state = snapshot.data ?? CombinedState(false, false, false, false);
 
                   return BlocBuilder<StickerpacksBloc, StickerpacksState>(
                     builder: (context, stickerpackState) {
@@ -80,7 +92,7 @@ class StickerpackScreen extends StatelessWidget {
                             builder: (context, child) {
                               final value = presenter._selectPackAnimation.value;
                               return Positioned(
-                                bottom: -mq.size.height * value,
+                                bottom: -mq.size.height * value + 40,
                                 left: 0,
                                 right: 0,
                                 child: Visibility.maintain(
@@ -91,41 +103,56 @@ class StickerpackScreen extends StatelessWidget {
                                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                     itemConfig: const GalleryItemConfig(
                                       width: packWidth,
-                                      height: packHeight,
+                                      height: packHeight + 40,
                                       isShowTransformMask: false,
                                     ),
                                     width: MediaQuery.of(context).size.width,
                                     height: packHeight + mq.padding.bottom,
                                     onClickItem: (index) {
-                                      if (presenter.openedPack == null) {
-                                        presenter.selectPack(packs[index]);
+                                      if (presenter.openedPack == null && !state.isWaitingConfirm) {
+                                        if (packs[index].price == 0) {
+                                          presenter.getPack(packs[index]);
+                                        } else {
+                                          presenter.requestBuyPackConfirm(packs[index]);
+                                        }
                                       }
                                     },
                                     itemBuilder: (context, index) {
                                       final pack = packs[index];
-                                      return Container(
-                                        height: packHeight,
-                                        width: packWidth,
-                                        decoration: BoxDecoration(
-                                          // image: pack.imageAssetPath != null
-                                          //     ? DecorationImage(image: AssetImage(pack.imageAssetPath!))
-                                          //     : null,
-                                          color: pack.imageAssetPath == null ? Colors.purple : null,
-                                          // border: Border.all(),
-                                        ),
-                                        child: pack.imageAssetPath == null
-                                            ? Center(
-                                                child: Text(
-                                                  pack.title,
-                                                  style: TextStyle(color: Colors.white),
-                                                ),
-                                              )
-                                            : Image.asset(
-                                                pack.imageAssetPath!,
-                                                height: packHeight,
-                                                width: packWidth,
-                                                fit: BoxFit.fill,
-                                              ),
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: packHeight,
+                                            width: packWidth,
+                                            decoration: BoxDecoration(
+                                              // image: pack.imageAssetPath != null
+                                              //     ? DecorationImage(image: AssetImage(pack.imageAssetPath!))
+                                              //     : null,
+                                              color: pack.imageAssetPath == null ? Colors.purple : null,
+                                              // border: Border.all(),
+                                            ),
+                                            child: pack.imageAssetPath == null
+                                                ? Center(
+                                                    child: Text(
+                                                      pack.title,
+                                                      style: TextStyle(color: Colors.white),
+                                                    ),
+                                                  )
+                                                : Image.asset(
+                                                    pack.imageAssetPath!,
+                                                    height: packHeight,
+                                                    width: packWidth,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                          ),
+                                          Text(
+                                            pack.price > 0 ? "${pack.price} 🏆" : "Free",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ],
                                       );
                                     },
                                   ),
@@ -178,9 +205,15 @@ class StickerpackScreen extends StatelessWidget {
 }
 
 class CombinedState {
+  final bool isWaitingConfirm;
   final bool unpacking;
   final bool selecting;
   final bool opened;
 
-  CombinedState(this.unpacking, this.selecting, this.opened);
+  CombinedState(
+    this.isWaitingConfirm,
+    this.unpacking,
+    this.selecting,
+    this.opened,
+  );
 }

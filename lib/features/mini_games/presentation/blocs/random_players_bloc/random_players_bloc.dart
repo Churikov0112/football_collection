@@ -1,13 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:football_collection/features/albums/domain/models/player.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../../../albums/data/players_repository.dart';
 
 part 'random_players_bloc_event.dart';
 part 'random_players_bloc_state.dart';
 
-@singleton
 class RandomPlayersBloc extends Bloc<RandomPlayersEvent, RandomPlayersState> {
   final PlayersRepository _repository;
 
@@ -25,7 +23,9 @@ class RandomPlayersBloc extends Bloc<RandomPlayersEvent, RandomPlayersState> {
   ) async {
     try {
       emit(RandomPlayersStatePending());
-      final players = await _repository.getRandomPlayers(count: 1, hasCurrentTransferValue: event.hasTransferValue);
+      await Future.delayed(const Duration(seconds: 1));
+      final players =
+          await _repository.getRandomPlayers(count: event.count, hasCurrentTransferValue: event.hasTransferValue);
       emit(RandomPlayersStateLoadSucceeded(players));
     } on Object catch (_) {
       emit(RandomPlayersStateFailed('Произошла ошибка'));

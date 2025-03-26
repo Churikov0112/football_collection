@@ -64,14 +64,15 @@ class PlayersRepository {
     final List<PackModel> packs = [
       PackModel(
         title: "World tour",
-        isFree: true,
+        price: 0,
         players: await getRandomPlayers(),
         imageAssetPath: "assets/raster/packs/pack-world-tour.png",
       ),
       if (confederation != null || country != null)
+        // TODO change prev line
         PackModel(
           title: confederation?.name ?? country!.confederation.name,
-          isFree: true,
+          price: 0,
           players: await getRandomPlayers(confederation: confederation ?? country!.confederation),
           imageAssetPath: "assets/raster/packs/pack-${confederation?.name ?? country!.confederation.name}.png",
         )
@@ -80,26 +81,26 @@ class PlayersRepository {
           if (conf != Confederations.unknown)
             PackModel(
               title: conf.name,
-              isFree: true,
+              price: 0,
               players: await getRandomPlayers(confederation: conf),
               imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
             ),
       if (country != null)
         PackModel(
           title: country.name,
-          isFree: false,
+          price: 50,
           players: await getRandomPlayers(country: country),
           imageAssetPath: null,
         ),
       PackModel(
         title: "Top 25 countries",
-        isFree: false,
+        price: 50,
         players: await getRandomPlayers(topCountries: true),
         imageAssetPath: "assets/raster/packs/pack-top-countries.png",
       ),
       PackModel(
         title: "Top players",
-        isFree: false,
+        price: 50,
         players: await getRandomPlayers(topPlayers: true),
         imageAssetPath: "assets/raster/packs/pack-top-players.png",
       ),

@@ -13,6 +13,7 @@ import 'package:square_progress_indicator/square_progress_indicator.dart';
 
 import '../../../../albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../../../albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
+import '../../../../mini_games/presentation/widgets/balance_widget/balance_widget.dart';
 import '../../blocs/confederations_bloc/confederations_bloc.dart';
 
 part 'confederations_screen_presenter.dart';
@@ -33,7 +34,7 @@ class ConfederationsScreen extends StatelessWidget {
             children: [
               const Text("Confederations"),
               const Spacer(),
-              Text("🏆"),
+              const BalanceWidget(),
             ],
           ),
         ),

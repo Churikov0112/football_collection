@@ -31,8 +31,6 @@ import '../features/countries/presentation/blocs/countries_bloc/countries_bloc.d
     as _i167;
 import '../features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart'
     as _i550;
-import '../features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart'
-    as _i603;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -61,8 +59,6 @@ _i174.GetIt $initGetIt(
       () => _i433.CountryPlayersBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i78.StickerpacksBloc>(
       () => _i78.StickerpacksBloc(gh<_i385.PlayersRepository>()));
-  gh.singleton<_i603.RandomPlayersBloc>(
-      () => _i603.RandomPlayersBloc(gh<_i385.PlayersRepository>()));
   gh.singleton<_i515.ConfederationsBloc>(
       () => _i515.ConfederationsBloc(gh<_i108.ConnfederationsRepository>()));
   return getIt;

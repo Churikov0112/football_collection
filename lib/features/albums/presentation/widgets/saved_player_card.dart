@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 
 import '../../domain/models/player.dart';
 import '../screens/sticker_pack_screen/sticker_pack_screen.dart';
@@ -7,11 +8,13 @@ class SavedPlayerCard extends StatelessWidget {
   const SavedPlayerCard({
     required this.player,
     required this.count,
+    this.hideTransferValue = false,
     super.key,
   });
 
   final PlayerModel player;
   final int count;
+  final bool hideTransferValue;
 
   @override
   Widget build(BuildContext context) {
@@ -101,26 +104,59 @@ class SavedPlayerCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 5, bottom: 5),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(),
-                    ),
-                    child: SizedBox(
-                      height: 32,
-                      width: 32,
-                      child: Center(
-                        child: Text(
-                          player.position ?? "?",
-                          maxLines: 1,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (player.currentMarketValue != null)
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(32)),
+                            border: Border.all(),
+                          ),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: 32,
+                              maxHeight: 32,
+                              minWidth: 32,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              child: Center(
+                                child: Text(
+                                  hideTransferValue ? "?" : beautifyTransferValue(player.currentMarketValue!),
+                                  maxLines: 1,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          border: Border.all(),
+                        ),
+                        child: SizedBox(
+                          height: 32,
+                          width: 32,
+                          child: Center(
+                            child: Text(
+                              player.position ?? "?",
+                              maxLines: 1,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 DecoratedBox(

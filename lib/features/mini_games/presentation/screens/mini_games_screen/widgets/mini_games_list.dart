@@ -17,19 +17,25 @@ class _MiniGamesList extends StatelessWidget {
         children: [
           _MiniGameTile(
             title: "Guess transfer value",
+            color: Colors.blue,
             onTap: () {
               context.push(RoutePaths.miniGameGuessTransferValue);
             },
           ),
           _MiniGameTile(
             title: "Transfer value less/more",
-            onTap: () {},
+            color: Colors.purple,
+            onTap: () {
+              context.push(RoutePaths.miniGameGuessTransferValueLessMore);
+            },
           ),
           _MiniGameTile(
+            color: Colors.orange,
             title: "Guess national team",
             onTap: () {},
           ),
           _MiniGameTile(
+            color: Colors.pink,
             title: "Guess player by properties",
             onTap: () {},
           ),
@@ -42,10 +48,12 @@ class _MiniGamesList extends StatelessWidget {
 class _MiniGameTile extends StatelessWidget {
   const _MiniGameTile({
     required this.title,
+    required this.color,
     required this.onTap,
   });
 
   final String title;
+  final Color color;
   final VoidCallback onTap;
 
   @override
@@ -55,21 +63,24 @@ class _MiniGameTile extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: Colors.blue.shade900,
+          color: color,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

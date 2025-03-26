@@ -14,8 +14,14 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               context.push(RoutePaths.miniGames);
             },
+            leading: Icon(Icons.gamepad),
             title: Text("Mini games"),
-          )
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.qr_code_2),
+            title: Text("Scan QR"),
+          ),
         ],
       ),
     );

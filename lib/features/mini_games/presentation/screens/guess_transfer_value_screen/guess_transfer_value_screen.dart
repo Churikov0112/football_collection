@@ -19,90 +19,100 @@ class GuessTransferValueScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
-    return GuessTransferValueScreenPresenter(
-      child: Builder(builder: (context) {
-        final presenter = GuessTransferValueScreenPresenter.of(context);
+    return BlocProvider(
+      create: (context) => RandomPlayersBloc(getIt.get()),
+      child: GuessTransferValueScreenPresenter(
+        child: Builder(
+          builder: (context) {
+            final presenter = GuessTransferValueScreenPresenter.of(context);
 
-        return Scaffold(
-          body: BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
-            bloc: getIt.get(),
-            builder: (context, randomPlayersState) {
-              final player = randomPlayersState.players?.firstOrNull;
-              if (player == null) return const CircularProgressIndicator();
+            return Scaffold(
+              body: BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
+                builder: (context, randomPlayersState) {
+                  final player = randomPlayersState.players?.firstOrNull;
+                  if (player == null) return Align(child: const CircularProgressIndicator());
 
-              final random = presenter.random;
-              final currentMarketValue = player.currentMarketValue ?? 0;
-              const allDeviationSteps = [-0.5, -0.25, 0.25, 0.5];
-              final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
+                  final random = presenter.random;
+                  final currentMarketValue = player.currentMarketValue ?? 0;
+                  const allDeviationSteps = [-0.5, -0.25, 0.25, 0.5];
+                  final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
 
-              final randomMarketValues = [
-                currentMarketValue,
-                (currentMarketValue * (1 + selectedStep)).round(),
-              ]..shuffle(random);
+                  final randomMarketValues = [
+                    currentMarketValue,
+                    (currentMarketValue * (1 + selectedStep)).round(),
+                  ]..shuffle(random);
 
-              return DecoratedBox(
-                decoration: BoxDecoration(),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(child: SavedPlayerCard(player: player, count: 1)),
+                  return DecoratedBox(
+                    decoration: BoxDecoration(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Align(
+                            child: SavedPlayerCard(
+                              player: player,
+                              count: 1,
+                              hideTransferValue: true,
+                            ),
+                          ),
+                        ),
+                        GuessOptions(
+                          options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
+                          rightAnswer: beautifyTransferValue(currentMarketValue),
+                        ),
+                        SizedBox(height: mq.padding.bottom + 20),
+
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 16),
+                        //   child:
+                        //   Column(
+                        //     children: [
+                        //       Row(
+                        //         children: [
+                        //           Expanded(
+                        //             child: OutlinedButton(
+                        //               onPressed: () {},
+                        //               child: Text("data"),
+                        //             ),
+                        //           ),
+                        //           const SizedBox(width: 16),
+                        //           Expanded(
+                        //             child: OutlinedButton(
+                        //               onPressed: () {},
+                        //               child: Text("data"),
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //       const SizedBox(height: 8),
+                        //       Row(
+                        //         children: [
+                        //           Expanded(
+                        //             child: OutlinedButton(
+                        //               onPressed: () {},
+                        //               child: Text("data"),
+                        //             ),
+                        //           ),
+                        //           const SizedBox(width: 16),
+                        //           Expanded(
+                        //             child: OutlinedButton(
+                        //               onPressed: () {},
+                        //               child: Text("data"),
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                      ],
                     ),
-                    GuessOptions(
-                      options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
-                      rightAnswer: beautifyTransferValue(currentMarketValue),
-                    ),
-                    SizedBox(height: mq.padding.bottom),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16),
-                    //   child:
-                    //   Column(
-                    //     children: [
-                    //       Row(
-                    //         children: [
-                    //           Expanded(
-                    //             child: OutlinedButton(
-                    //               onPressed: () {},
-                    //               child: Text("data"),
-                    //             ),
-                    //           ),
-                    //           const SizedBox(width: 16),
-                    //           Expanded(
-                    //             child: OutlinedButton(
-                    //               onPressed: () {},
-                    //               child: Text("data"),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //       const SizedBox(height: 8),
-                    //       Row(
-                    //         children: [
-                    //           Expanded(
-                    //             child: OutlinedButton(
-                    //               onPressed: () {},
-                    //               child: Text("data"),
-                    //             ),
-                    //           ),
-                    //           const SizedBox(width: 16),
-                    //           Expanded(
-                    //             child: OutlinedButton(
-                    //               onPressed: () {},
-                    //               child: Text("data"),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                  ],
-                ),
-              );
-            },
-          ),
-        );
-      }),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

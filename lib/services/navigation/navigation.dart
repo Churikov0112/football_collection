@@ -9,6 +9,7 @@ import '../../features/albums/presentation/screens/album/album_screen.dart';
 import '../../features/albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
+import '../../features/mini_games/presentation/screens/transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -21,6 +22,7 @@ class RoutePaths {
   // minigames
   static const miniGames = '/miniGames';
   static const miniGameGuessTransferValue = '/miniGameGuessTransferValue';
+  static const miniGameGuessTransferValueLessMore = '/miniGameGuessTransferValueLessMore';
 
   // static const main = '/main';
   // static const auth = '/auth';
@@ -71,6 +73,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.miniGameGuessTransferValue,
           builder: (context, state) => GuessTransferValueScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.miniGameGuessTransferValueLessMore,
+          builder: (context, state) => GuessTransferValueLessMoreScreen(),
         ),
 
         // GoRoute(

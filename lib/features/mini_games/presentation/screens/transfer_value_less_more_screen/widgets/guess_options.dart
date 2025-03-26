@@ -5,8 +5,8 @@ import 'package:football_collection/features/mini_games/presentation/blocs/balan
 import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 
-class GuessOptions extends StatelessWidget {
-  const GuessOptions({
+class GuessOptionsLessMoreEqual extends StatelessWidget {
+  const GuessOptionsLessMoreEqual({
     required this.options,
     required this.rightAnswer,
     super.key,
@@ -17,15 +17,12 @@ class GuessOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shuffledOptions = [...options];
-    shuffledOptions.shuffle();
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         spacing: 16,
         children: [
-          for (final option in shuffledOptions)
+          for (final option in options)
             Expanded(
               child: OutlinedButton(
                 onPressed: () {
@@ -35,7 +32,7 @@ class GuessOptions extends StatelessWidget {
                   } else {
                     ToastService.showErrorToast(title: "Неправильно!", seconds: 1);
                   }
-                  context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 1, hasTransferValue: true));
+                  context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 2, hasTransferValue: true));
                 },
                 child: Text(option),
               ),
