@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
 
-class GuessOptions extends StatelessWidget {
-  const GuessOptions({
+class GuessOptionsLessMoreEqual extends StatelessWidget {
+  const GuessOptionsLessMoreEqual({
     required this.options,
     required this.rightAnswer,
     super.key,
@@ -13,9 +13,7 @@ class GuessOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shuffledOptions = [...options];
-    shuffledOptions.shuffle();
-    final presenter = GuessTransferValueScreenPresenter.of(context);
+    final presenter = GuessTransferValueLessMoreScreenPresenter.of(context);
 
     return StreamBuilder<String?>(
         stream: presenter.selectedOptionStream$,
@@ -28,7 +26,7 @@ class GuessOptions extends StatelessWidget {
             child: Row(
               spacing: 16,
               children: [
-                for (final option in shuffledOptions)
+                for (final option in options)
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -38,6 +36,8 @@ class GuessOptions extends StatelessWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
+                          border: selectedOption == null ? Border.all() : null,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: selectedOption != null
                               ? guessed
                                   ? selectedOption == option
@@ -49,8 +49,6 @@ class GuessOptions extends StatelessWidget {
                                           ? Colors.green
                                           : null
                               : null,
-                          border: selectedOption == null ? Border.all() : null,
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),

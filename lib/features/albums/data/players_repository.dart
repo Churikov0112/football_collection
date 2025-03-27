@@ -62,21 +62,23 @@ class PlayersRepository {
     CountryModel? country,
   }) async {
     final List<PackModel> packs = [
-      PackModel(
-        title: "World tour",
-        price: 0,
-        players: await getRandomPlayers(),
-        imageAssetPath: "assets/raster/packs/pack-world-tour.png",
-      ),
-      if (confederation != null || country != null)
-        // TODO change prev line
+      if (confederation == null && country != null) ...[
         PackModel(
-          title: confederation?.name ?? country!.confederation.name,
-          price: 0,
-          players: await getRandomPlayers(confederation: confederation ?? country!.confederation),
-          imageAssetPath: "assets/raster/packs/pack-${confederation?.name ?? country!.confederation.name}.png",
-        )
-      else
+          title: country.name,
+          price: 50,
+          players: await getRandomPlayers(country: country),
+          imageAssetPath: "assets/raster/packs/pack-general.png",
+          gifAssetPath: "assets/gif/pack-general.gif",
+        ),
+        PackModel(
+          title: country.confederation.name,
+          price: 50,
+          players: await getRandomPlayers(confederation: country.confederation),
+          imageAssetPath: "assets/raster/packs/pack-${country.confederation.name}.png",
+          gifAssetPath: "assets/gif/pack-${country.confederation.name}.gif",
+        ),
+      ],
+      if (confederation == null && country == null)
         for (final conf in Confederations.values)
           if (conf != Confederations.unknown)
             PackModel(
@@ -84,26 +86,36 @@ class PlayersRepository {
               price: 0,
               players: await getRandomPlayers(confederation: conf),
               imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
+              gifAssetPath: "assets/gif/pack-${conf.name}.gif",
             ),
-      if (country != null)
-        PackModel(
-          title: country.name,
+      if (confederation != null && country == null)
+        if (confederation != Confederations.unknown)
+          PackModel(
+            title: confederation.name,
+            price: 0,
+            players: await getRandomPlayers(confederation: confederation),
+            imageAssetPath: "assets/raster/packs/pack-${confederation.name}.png",
+            gifAssetPath: "assets/gif/pack-${confederation.name}.gif",
+          ),
+      PackModel(
+        title: "World tour",
+        price: 0,
+        players: await getRandomPlayers(),
+        imageAssetPath: "assets/raster/packs/pack-world_tour.png",
+        gifAssetPath: "assets/gif/pack-world_tour.gif",
+      ),
+      PackModel(
+          title: "Top 25 countries",
           price: 50,
-          players: await getRandomPlayers(country: country),
-          imageAssetPath: null,
-        ),
+          players: await getRandomPlayers(topCountries: true),
+          imageAssetPath: "assets/raster/packs/pack-top_countries.png",
+          gifAssetPath: "assets/gif/pack-top_countries.gif"),
       PackModel(
-        title: "Top 25 countries",
-        price: 50,
-        players: await getRandomPlayers(topCountries: true),
-        imageAssetPath: "assets/raster/packs/pack-top-countries.png",
-      ),
-      PackModel(
-        title: "Top players",
-        price: 50,
-        players: await getRandomPlayers(topPlayers: true),
-        imageAssetPath: "assets/raster/packs/pack-top-players.png",
-      ),
+          title: "Top players",
+          price: 50,
+          players: await getRandomPlayers(topPlayers: true),
+          imageAssetPath: "assets/raster/packs/pack-top_players.png",
+          gifAssetPath: "assets/gif/pack-top_players.gif"),
     ];
     return packs;
   }

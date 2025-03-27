@@ -162,7 +162,7 @@ class StickerpackScreen extends StatelessWidget {
                           ),
                           if (state.unpacking && presenter.openedPack?.players != null)
                             _PlayerCardsSwiper(players: presenter.openedPack!.players!),
-                          if (state.selecting)
+                          if (state.selecting && presenter.openedPack != null)
                             AnimatedBuilder(
                               animation: presenter._selectPackAnimation,
                               builder: (context, child) {
@@ -178,9 +178,11 @@ class StickerpackScreen extends StatelessWidget {
                                       }
                                     },
                                     child: Gif(
-                                      fps: 30, // Уменьшенный FPS
+                                      // fps: 30, // Уменьшенный FPS
                                       autostart: Autostart.no,
-                                      image: const AssetImage("assets/gif/python_opt_50.gif"),
+                                      image: AssetImage(
+                                        presenter.openedPack?.gifAssetPath ?? "assets/gif/pack-general.gif",
+                                      ),
                                       controller: presenter._gifController,
                                       height: packHeight * 1.5,
                                       width: packWidth * 1.5,

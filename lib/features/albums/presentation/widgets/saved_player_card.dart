@@ -9,12 +9,16 @@ class SavedPlayerCard extends StatelessWidget {
     required this.player,
     required this.count,
     this.hideTransferValue = false,
+    this.height = packHeight,
+    this.width = packWidth,
     super.key,
   });
 
   final PlayerModel player;
   final int count;
   final bool hideTransferValue;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +31,12 @@ class SavedPlayerCard extends StatelessWidget {
     );
 
     return Container(
-      height: packHeight,
-      width: packWidth,
+      height: height,
+      width: width,
       padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.black12, width: 1),
+        border: Border.all(color: Colors.black54, width: 1),
       ),
       child: Stack(
         children: [

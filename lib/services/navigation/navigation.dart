@@ -9,7 +9,7 @@ import '../../features/albums/presentation/screens/album/album_screen.dart';
 import '../../features/albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
-import '../../features/mini_games/presentation/screens/transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 

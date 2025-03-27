@@ -23,7 +23,7 @@ class RandomPlayersBloc extends Bloc<RandomPlayersEvent, RandomPlayersState> {
   ) async {
     try {
       emit(RandomPlayersStatePending());
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(milliseconds: 330));
       final players =
           await _repository.getRandomPlayers(count: event.count, hasCurrentTransferValue: event.hasTransferValue);
       emit(RandomPlayersStateLoadSucceeded(players));

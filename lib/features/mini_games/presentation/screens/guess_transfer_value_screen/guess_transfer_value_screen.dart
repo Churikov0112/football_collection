@@ -6,8 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
+import 'package:rxdart/rxdart.dart';
 
+import '../../blocs/balance_bloc/balance_bloc.dart';
+import '../../widgets/balance_widget/balance_widget.dart';
 import 'widgets/guess_options.dart';
 
 part 'guess_transfer_value_screen_presenter.dart';
@@ -27,6 +31,15 @@ class GuessTransferValueScreen extends StatelessWidget {
             final presenter = GuessTransferValueScreenPresenter.of(context);
 
             return Scaffold(
+              appBar: AppBar(
+                title: Row(
+                  children: [
+                    const Text("Guess Transfer Value"),
+                    const Spacer(),
+                    const BalanceWidget(),
+                  ],
+                ),
+              ),
               body: BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
                 builder: (context, randomPlayersState) {
                   final player = randomPlayersState.players?.firstOrNull;
@@ -45,21 +58,20 @@ class GuessTransferValueScreen extends StatelessWidget {
                   return DecoratedBox(
                     decoration: BoxDecoration(),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: Align(
-                            child: SavedPlayerCard(
-                              player: player,
-                              count: 1,
-                              hideTransferValue: true,
-                            ),
+                        Align(
+                          child: SavedPlayerCard(
+                            player: player,
+                            count: 1,
+                            hideTransferValue: true,
                           ),
                         ),
+                        const SizedBox(height: 20),
                         GuessOptions(
                           options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
                           rightAnswer: beautifyTransferValue(currentMarketValue),
                         ),
-                        SizedBox(height: mq.padding.bottom + 20),
 
                         // Padding(
                         //   padding: const EdgeInsets.symmetric(horizontal: 16),

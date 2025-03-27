@@ -102,7 +102,6 @@ flutter:
 
   assets:
     - assets/json/
-    - assets/3d/
     - assets/gif/
     - assets/raster/player_faces/
     - assets/raster/team_flags/
