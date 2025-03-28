@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flutter_gallery_3d/gallery3d.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/albums/domain/models/pack.dart';
 import 'package:football_collection/features/albums/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
@@ -13,8 +12,8 @@ import 'package:football_collection/features/albums/presentation/widgets/saved_p
 import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
-import 'package:gif/gif.dart';
 import 'package:go_router/go_router.dart';
+import 'package:o3d/o3d.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../confederations/domain/models/confederation.dart';
@@ -69,16 +68,14 @@ class StickerpackScreen extends StatelessWidget {
                 ),
               ),
               body: StreamBuilder<CombinedState>(
-                stream: CombineLatestStream.combine4(
+                stream: CombineLatestStream.combine3(
                   presenter.isWaitingConfirmStream$,
-                  presenter.isUnpackingStream$,
-                  presenter.isPackSelectingStream$,
-                  presenter.isPackOpenedStream$,
-                  (waitingConfirm, unpacking, selecting, opened) =>
-                      CombinedState(waitingConfirm, unpacking, selecting, opened),
+                  presenter.isUnpackingAnimationPlayingStream$,
+                  presenter.isHidePacksAnimationPlayingStream$,
+                  (waitingConfirm, unpacking, packsHiding) => CombinedState(waitingConfirm, unpacking, packsHiding),
                 ),
                 builder: (context, snapshot) {
-                  final state = snapshot.data ?? CombinedState(false, false, false, false);
+                  final state = snapshot.data ?? CombinedState(false, false, false);
 
                   return BlocBuilder<StickerpacksBloc, StickerpacksState>(
                     builder: (context, stickerpackState) {
@@ -88,105 +85,144 @@ class StickerpackScreen extends StatelessWidget {
                       return Stack(
                         children: [
                           AnimatedBuilder(
-                            animation: presenter._selectPackAnimation,
+                            animation: presenter._hidePacksAnimation,
                             builder: (context, child) {
-                              final value = presenter._selectPackAnimation.value;
+                              final value = presenter._hidePacksAnimation.value;
                               return Positioned(
-                                bottom: -mq.size.height * value + 40,
+                                bottom: -mq.size.height * value + 50,
                                 left: 0,
                                 right: 0,
                                 child: Visibility.maintain(
                                   visible: !state.unpacking,
-                                  child: Gallery3D(
-                                    isClip: false,
-                                    controller: presenter.gallery3dController,
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    itemConfig: const GalleryItemConfig(
-                                      width: packWidth,
-                                      height: packHeight + 40,
-                                      isShowTransformMask: false,
+                                  child: SizedBox(
+                                    height: packHeight + 30,
+                                    child: PageView.builder(
+                                      itemCount: packs.length,
+                                      controller: presenter.packsPageController,
+                                      itemBuilder: (context, index) {
+                                        final pack = packs[index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            if (presenter.pack == null && !state.isWaitingConfirm) {
+                                              if (packs[index].price == 0) {
+                                                presenter.create3dModel(packs[index]);
+                                              } else {
+                                                presenter.requestBuyPackConfirm(packs[index]);
+                                              }
+                                            }
+                                          },
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: packHeight,
+                                                width: packWidth,
+                                                child: pack.imageAssetPath == null
+                                                    ? Center(
+                                                        child: Text(
+                                                          pack.title,
+                                                          style: TextStyle(color: Colors.white),
+                                                        ),
+                                                      )
+                                                    : Image.asset(
+                                                        pack.imageAssetPath!,
+                                                        height: packHeight,
+                                                        width: packWidth,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                              ),
+                                              Text(
+                                                pack.price > 0 ? "${pack.price} 🏆" : "Free",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: packHeight + mq.padding.bottom,
-                                    onClickItem: (index) {
-                                      if (presenter.openedPack == null && !state.isWaitingConfirm) {
-                                        if (packs[index].price == 0) {
-                                          presenter.getPack(packs[index]);
-                                        } else {
-                                          presenter.requestBuyPackConfirm(packs[index]);
-                                        }
-                                      }
-                                    },
-                                    itemBuilder: (context, index) {
-                                      final pack = packs[index];
-                                      return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: packHeight,
-                                            width: packWidth,
-                                            decoration: BoxDecoration(
-                                              // image: pack.imageAssetPath != null
-                                              //     ? DecorationImage(image: AssetImage(pack.imageAssetPath!))
-                                              //     : null,
-                                              color: pack.imageAssetPath == null ? Colors.purple : null,
-                                              // border: Border.all(),
-                                            ),
-                                            child: pack.imageAssetPath == null
-                                                ? Center(
-                                                    child: Text(
-                                                      pack.title,
-                                                      style: TextStyle(color: Colors.white),
-                                                    ),
-                                                  )
-                                                : Image.asset(
-                                                    pack.imageAssetPath!,
-                                                    height: packHeight,
-                                                    width: packWidth,
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                          ),
-                                          Text(
-                                            pack.price > 0 ? "${pack.price} 🏆" : "Free",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
                                   ),
+                                  // Gallery3D(
+                                  //   isClip: false,
+                                  //   controller: presenter.gallery3dController,
+                                  //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                  //   itemConfig: const GalleryItemConfig(
+                                  //     width: packWidth,
+                                  //     height: packHeight + 70,
+                                  //     isShowTransformMask: false,
+                                  //   ),
+                                  //   width: MediaQuery.of(context).size.width,
+                                  //   height: 30 + packHeight + mq.padding.bottom,
+                                  //   onClickItem: (index) {
+                                  //     if (presenter.openedPack == null && !state.isWaitingConfirm) {
+                                  //       if (packs[index].price == 0) {
+                                  //         presenter.openPack(packs[index]);
+                                  //       } else {
+                                  //         presenter.requestBuyPackConfirm(packs[index]);
+                                  //       }
+                                  //     }
+                                  //   },
+                                  //   itemBuilder: (context, index) {
+                                  //     final pack = packs[index];
+                                  //     return Column(
+                                  //       children: [
+                                  //         SizedBox(
+                                  //           height: packHeight,
+                                  //           width: packWidth,
+                                  //           child: pack.imageAssetPath == null
+                                  //               ? Center(
+                                  //                   child: Text(
+                                  //                     pack.title,
+                                  //                     style: TextStyle(color: Colors.white),
+                                  //                   ),
+                                  //                 )
+                                  //               : Image.asset(
+                                  //                   pack.imageAssetPath!,
+                                  //                   height: packHeight,
+                                  //                   width: packWidth,
+                                  //                   fit: BoxFit.fill,
+                                  //                 ),
+                                  //         ),
+                                  //         Text(
+                                  //           pack.price > 0 ? "${pack.price} 🏆" : "Free",
+                                  //           style: TextStyle(
+                                  //             fontSize: 20,
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     );
+                                  //   },
+                                  // ),
                                 ),
                               );
                             },
                           ),
-                          if (state.unpacking && presenter.openedPack?.players != null)
-                            _PlayerCardsSwiper(players: presenter.openedPack!.players!),
-                          if (state.selecting && presenter.openedPack != null)
+                          if (state.unpacking && presenter.pack?.players != null)
+                            _PlayerCardsSwiper(players: presenter.pack!.players!),
+                          if (state.packsHiding && presenter.pack != null)
                             AnimatedBuilder(
-                              animation: presenter._selectPackAnimation,
+                              animation: presenter._hidePacksAnimation,
                               builder: (context, child) {
-                                final value = presenter._selectPackAnimation.value;
+                                final value = presenter._hidePacksAnimation.value;
                                 return Positioned(
                                   left: 0,
                                   right: 0,
-                                  bottom: -2 * packHeight + (2.5 * packHeight) * value,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (value == 1.0 && !(presenter._gifController?.isAnimating ?? false)) {
-                                        presenter.unpackCards();
-                                      }
-                                    },
-                                    child: Gif(
-                                      // fps: 30, // Уменьшенный FPS
-                                      autostart: Autostart.no,
-                                      image: AssetImage(
-                                        presenter.openedPack?.gifAssetPath ?? "assets/gif/pack-general.gif",
-                                      ),
-                                      controller: presenter._gifController,
-                                      height: packHeight * 1.5,
-                                      width: packWidth * 1.5,
-                                      fit: BoxFit.cover,
+                                  bottom: -2 * packHeight + (2 * packHeight) * value,
+                                  child: SizedBox(
+                                    height: 2 * packHeight,
+                                    width: 2 * packWidth,
+                                    child: O3D.asset(
+                                      src: 'assets/3d/pack-an.glb',
+                                      controller: presenter.o3dController,
+                                      autoPlay: false,
+                                      disableTap: true,
+                                      disableZoom: true,
+                                      disablePan: true,
+                                      cameraControls: false,
+                                      onWebViewCreated: (value) async {
+                                        await Future.delayed(const Duration(milliseconds: 330));
+                                        presenter.openPack(); // run 3d model pack animation
+                                      },
                                     ),
                                   ),
                                 );
@@ -209,13 +245,11 @@ class StickerpackScreen extends StatelessWidget {
 class CombinedState {
   final bool isWaitingConfirm;
   final bool unpacking;
-  final bool selecting;
-  final bool opened;
+  final bool packsHiding;
 
   CombinedState(
     this.isWaitingConfirm,
     this.unpacking,
-    this.selecting,
-    this.opened,
+    this.packsHiding,
   );
 }
