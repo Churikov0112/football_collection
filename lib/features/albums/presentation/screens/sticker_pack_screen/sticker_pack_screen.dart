@@ -21,7 +21,6 @@ import '../../../../mini_games/presentation/widgets/balance_widget/balance_widge
 import '../../../domain/models/player.dart';
 import '../../blocs/stickerpacks_bloc/stickerpacks_bloc.dart';
 
-part 'mixins/yandex_ads_mixin.dart';
 part 'sticker_pack_screen_presenter.dart';
 part 'widgets/player_cards_swiper.dart';
 
@@ -123,11 +122,42 @@ class StickerpackScreen extends StatelessWidget {
                                                           style: TextStyle(color: Colors.white),
                                                         ),
                                                       )
-                                                    : Image.asset(
-                                                        pack.imageAssetPath!,
-                                                        height: packHeight,
-                                                        width: packWidth,
-                                                        fit: BoxFit.fill,
+                                                    : Stack(
+                                                        children: [
+                                                          Image.asset(
+                                                            pack.imageAssetPath!,
+                                                            height: packHeight,
+                                                            width: packWidth,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          if (pack.imageAssetPath ==
+                                                              "assets/raster/packs/pack-general.png")
+                                                            Positioned(
+                                                              top: 32,
+                                                              right: 16,
+                                                              left: 16,
+                                                              child: Column(
+                                                                children: [
+                                                                  Text(
+                                                                    pack.title,
+                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 20,
+                                                                      fontWeight: FontWeight.bold,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    emojiFlagByCountryName(pack.title) ?? "",
+                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                      fontSize: 32,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                        ],
                                                       ),
                                               ),
                                               Text(
@@ -211,18 +241,51 @@ class StickerpackScreen extends StatelessWidget {
                                   child: SizedBox(
                                     height: 2 * packHeight,
                                     width: 2 * packWidth,
-                                    child: O3D.asset(
-                                      src: 'assets/3d/pack-an.glb',
-                                      controller: presenter.o3dController,
-                                      autoPlay: false,
-                                      disableTap: true,
-                                      disableZoom: true,
-                                      disablePan: true,
-                                      cameraControls: false,
-                                      onWebViewCreated: (value) async {
-                                        await Future.delayed(const Duration(milliseconds: 330));
-                                        presenter.openPack(); // run 3d model pack animation
-                                      },
+                                    child: Stack(
+                                      children: [
+                                        O3D.asset(
+                                          src: 'assets/3d/pack-an.glb',
+                                          controller: presenter.o3dController,
+                                          autoPlay: false,
+                                          disableTap: true,
+                                          disableZoom: true,
+                                          disablePan: true,
+                                          cameraControls: false,
+                                          // onWebViewCreated: (value) async {
+                                          //   await Future.delayed(const Duration(milliseconds: 330));
+                                          //   presenter.openPack(); // run 3d model pack animation
+                                          // },
+                                        ),
+                                        if (presenter.pack?.imageAssetPath == "assets/raster/packs/pack-general.png")
+                                          Positioned(
+                                            top: (2 * packHeight) / 4,
+                                            right: 16,
+                                            left: 16,
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  width: packWidth,
+                                                  child: Text(
+                                                    presenter.pack!.title,
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 32,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  emojiFlagByCountryName(presenter.pack!.title) ?? "",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 32,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                      ],
                                     ),
                                   ),
                                 );

@@ -74,33 +74,39 @@ class _CountryTile extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 color: country.confederation.color?.darken(),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Align(
-                    child: Text(
-                      country.emojiFlag ?? "🏴‍☠️",
-                      style: TextStyle(fontSize: 32),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Align(
+                      child: Text(
+                        emojiFlagByCountryName(country.name) ?? "🏴‍☠️",
+                        style: TextStyle(fontSize: 32),
+                      ),
                     ),
-                  ),
-                  Align(
-                    child: Text(
-                      country.name,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    Align(
+                      child: AutoSizeText(
+                        country.name,
+                        minFontSize: 12,
+                        maxFontSize: 20,
+                        style: TextStyle(color: Colors.white),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                      ),
                     ),
-                  ),
-                  Align(
-                    child: Text(
-                      "${savedCountryPlayers.length} / ${countryPlayers.length}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    Align(
+                      child: Text(
+                        "${savedCountryPlayers.length} / ${countryPlayers.length}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
                     ),
-                  ),
 
-                  // Text(country.confederation.name),
-                ],
+                    // Text(country.confederation.name),
+                  ],
+                ),
               ),
             ),
           ),

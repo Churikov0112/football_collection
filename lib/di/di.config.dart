@@ -45,10 +45,10 @@ _i174.GetIt $initGetIt(
   );
   gh.singleton<_i108.ConnfederationsRepository>(
       () => _i108.ConnfederationsRepository());
+  gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
   gh.singleton<_i385.PlayersRepository>(() => _i385.PlayersRepository());
   gh.singleton<_i826.SavedPlayersBloc>(() => _i826.SavedPlayersBloc());
-  gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i167.CountriesBloc>(
       () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
   gh.singleton<_i678.AllPlayersBloc>(

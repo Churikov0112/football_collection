@@ -55,6 +55,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     o3dController = O3DController();
     pack = selectedPack;
     _isHidePacksAnimationPlayingSubject.add(true); // show 3d model
+    openPack();
   }
 
   Future<void> openPack() async {
@@ -106,7 +107,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
                   ),
                 ],
               ),
-              SizedBox(height: mq.padding.bottom)
+              SizedBox(height: mq.padding.bottom + 20)
             ],
           ),
         );
