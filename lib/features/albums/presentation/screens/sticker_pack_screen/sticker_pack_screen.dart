@@ -244,7 +244,7 @@ class StickerpackScreen extends StatelessWidget {
                                     child: Stack(
                                       children: [
                                         O3D.asset(
-                                          src: 'assets/3d/pack-an.glb',
+                                          src: presenter.pack!.glbAssetPath, // 'assets/3d/europe.glb',
                                           controller: presenter.o3dController,
                                           autoPlay: false,
                                           disableTap: true,

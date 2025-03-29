@@ -5,15 +5,15 @@ class PackModel extends Equatable {
   final String title;
   final int price;
   final List<PlayerModel>? players;
-  final String? imageAssetPath;
-  final String? gifAssetPath;
+  final String imageAssetPath;
+  final String glbAssetPath;
 
   const PackModel({
     required this.title,
     required this.price,
     required this.players,
     required this.imageAssetPath,
-    required this.gifAssetPath,
+    required this.glbAssetPath,
   });
 
   @override

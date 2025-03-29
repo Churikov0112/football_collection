@@ -65,57 +65,57 @@ class PlayersRepository {
       if (confederation == null && country != null) ...[
         PackModel(
           title: country.name,
-          price: 50,
+          price: 100,
           players: await getRandomPlayers(country: country),
           imageAssetPath: "assets/raster/packs/pack-general.png",
-          gifAssetPath: "assets/gif/pack-general.gif",
+          glbAssetPath: "assets/3d/pack-general.gif",
         ),
         PackModel(
           title: country.confederation.name,
-          price: 50,
+          price: 5,
           players: await getRandomPlayers(confederation: country.confederation),
           imageAssetPath: "assets/raster/packs/pack-${country.confederation.name}.png",
-          gifAssetPath: "assets/gif/pack-${country.confederation.name}.gif",
+          glbAssetPath: "assets/3d/pack-${country.confederation.name}.glb",
         ),
       ],
-      if (confederation == null && country == null)
-        for (final conf in Confederations.values)
-          if (conf != Confederations.unknown)
-            PackModel(
-              title: conf.name,
-              price: 0,
-              players: await getRandomPlayers(confederation: conf),
-              imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
-              gifAssetPath: "assets/gif/pack-${conf.name}.gif",
-            ),
       if (confederation != null && country == null)
         if (confederation != Confederations.unknown)
           PackModel(
             title: confederation.name,
-            price: 0,
+            price: 5,
             players: await getRandomPlayers(confederation: confederation),
             imageAssetPath: "assets/raster/packs/pack-${confederation.name}.png",
-            gifAssetPath: "assets/gif/pack-${confederation.name}.gif",
+            glbAssetPath: "assets/3d/pack-${confederation.name}.glb",
           ),
       PackModel(
         title: "World tour",
         price: 0,
         players: await getRandomPlayers(),
-        imageAssetPath: "assets/raster/packs/pack-world_tour.png",
-        gifAssetPath: "assets/gif/pack-world_tour.gif",
+        imageAssetPath: "assets/raster/packs/pack-worldtour.png",
+        glbAssetPath: "assets/3d/pack-worldtour.glb",
       ),
+      if (confederation == null && country == null)
+        for (final conf in Confederations.values)
+          if (conf != Confederations.unknown)
+            PackModel(
+              title: conf.name,
+              price: 5,
+              players: await getRandomPlayers(confederation: conf),
+              imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
+              glbAssetPath: "assets/3d/pack-${conf.name}.glb",
+            ),
       PackModel(
           title: "Top 25 countries",
-          price: 50,
+          price: 25,
           players: await getRandomPlayers(topCountries: true),
-          imageAssetPath: "assets/raster/packs/pack-top_countries.png",
-          gifAssetPath: "assets/gif/pack-top_countries.gif"),
+          imageAssetPath: "assets/raster/packs/pack-topcountries.png",
+          glbAssetPath: "assets/3d/pack-topcountries.glb"),
       PackModel(
           title: "Top players",
-          price: 50,
+          price: 100,
           players: await getRandomPlayers(topPlayers: true),
-          imageAssetPath: "assets/raster/packs/pack-top_players.png",
-          gifAssetPath: "assets/gif/pack-top_players.gif"),
+          imageAssetPath: "assets/raster/packs/pack-topplayers.png",
+          glbAssetPath: "assets/3d/pack-topplayers.glb"),
     ];
     return packs;
   }
