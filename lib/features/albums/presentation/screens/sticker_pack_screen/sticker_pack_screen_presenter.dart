@@ -25,6 +25,12 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
   O3DController? o3dController;
   late PageController packsPageController;
 
+  final BehaviorSubject<int> _selectedPackIndexSubject = BehaviorSubject.seeded(0);
+  Stream<int> get selectedPackIndexStream$ => _selectedPackIndexSubject.stream;
+
+  final BehaviorSubject<bool> _show3dObjectSubject = BehaviorSubject.seeded(false);
+  Stream<bool> get show3dObjectStream$ => _show3dObjectSubject.stream;
+
   final BehaviorSubject<bool> _isWaitingConfirmSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isWaitingConfirmStream$ => _isWaitingConfirmSubject.stream;
 
@@ -33,8 +39,6 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
 
   final BehaviorSubject<bool> _isUnpackingAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isUnpackingAnimationPlayingStream$ => _isUnpackingAnimationPlayingSubject.stream;
-
-  PackModel? pack;
 
   @override
   void initState() {
@@ -51,23 +55,28 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     );
   }
 
-  Future<void> create3dModel(PackModel selectedPack) async {
+  Future<void> setSelectedPackIndex(int index) async {
     o3dController = O3DController();
-    pack = selectedPack;
-    _isHidePacksAnimationPlayingSubject.add(true); // show 3d model
-    openPack();
+    _selectedPackIndexSubject.add(index);
+    _show3dObjectSubject.add(false);
+    await Future.delayed(const Duration(milliseconds: 100));
+    _show3dObjectSubject.add(true);
+    // pack = selectedPack;
   }
 
   Future<void> openPack() async {
-    _hidePacksAnimationController.forward().whenCompleteOrCancel(() async {
-      o3dController?.play(repetitions: 1);
-      await Future.delayed(const Duration(milliseconds: 3500));
-      o3dController?.pause();
-      _isUnpackingAnimationPlayingSubject.add(true);
-      _hidePacksAnimationController.reverse().whenComplete(() {
-        o3dController = null;
+    try {
+      _isHidePacksAnimationPlayingSubject.add(true); // show 3d model
+      _hidePacksAnimationController.forward().whenCompleteOrCancel(() async {
+        o3dController?.play(repetitions: 1);
+        await Future.delayed(const Duration(milliseconds: 3500));
+        o3dController?.pause();
+        _isUnpackingAnimationPlayingSubject.add(true);
+        _hidePacksAnimationController.reverse();
       });
-    });
+    } catch (e) {
+      LogService.log(e.toString());
+    }
   }
 
   Future<void> requestBuyPackConfirm(PackModel pack) async {
@@ -125,12 +134,12 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
       ToastService.showErrorToast(title: balanceState.message);
     } else if (balanceState is BalanceStateReady) {
       ToastService.showToast(title: "Transaction completed");
-      await create3dModel(pack);
+      await openPack();
     }
   }
 
   void getNewPacks() {
-    pack = null;
+    // pack = null;
     context
         .read<StickerpacksBloc>()
         .add(StickerpacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
@@ -149,6 +158,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     _isHidePacksAnimationPlayingSubject.close();
     _isUnpackingAnimationPlayingSubject.close();
     _isWaitingConfirmSubject.close();
+    _show3dObjectSubject.close();
     super.dispose();
   }
 
@@ -158,6 +168,7 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
       listener: (context, stickerpacksState) {
         if (stickerpacksState is StickerpacksStateLoadSucceeded) {
           // final packs = stickerpacksState.packs ?? [];
+          setSelectedPackIndex(_selectedPackIndexSubject.value);
           packsPageController = PageController(viewportFraction: 0.6);
         }
       },

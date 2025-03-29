@@ -11,6 +11,7 @@ import 'package:football_collection/features/albums/presentation/blocs/saved_pla
 import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+import 'package:football_collection/services/log/log_service.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:o3d/o3d.dart';
@@ -54,10 +55,7 @@ class StickerpackScreen extends StatelessWidget {
             final presenter = StickerpackScreenPresenter.of(context);
 
             return Scaffold(
-              // backgroundColor: args.confederation?.color?.withOpacity(0.8),
               appBar: AppBar(
-                // backgroundColor: args.confederation?.color,
-                // foregroundColor: args.confederation != null ? Colors.white : null,
                 title: Row(
                   children: [
                     const Text("Open Pack"),
@@ -67,19 +65,23 @@ class StickerpackScreen extends StatelessWidget {
                 ),
               ),
               body: StreamBuilder<CombinedState>(
-                stream: CombineLatestStream.combine3(
+                stream: CombineLatestStream.combine5(
+                  presenter.selectedPackIndexStream$,
+                  presenter.show3dObjectStream$,
                   presenter.isWaitingConfirmStream$,
                   presenter.isUnpackingAnimationPlayingStream$,
                   presenter.isHidePacksAnimationPlayingStream$,
-                  (waitingConfirm, unpacking, packsHiding) => CombinedState(waitingConfirm, unpacking, packsHiding),
+                  (selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding) =>
+                      CombinedState(selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding),
                 ),
                 builder: (context, snapshot) {
-                  final state = snapshot.data ?? CombinedState(false, false, false);
+                  final state = snapshot.data ?? CombinedState(0, false, false, false, false);
 
                   return BlocBuilder<StickerpacksBloc, StickerpacksState>(
                     builder: (context, stickerpackState) {
                       final packs = stickerpackState.packs ?? [];
                       if (packs.isEmpty) return const Center(child: CircularProgressIndicator());
+                      final selectedPack = packs[state.selectedPackIndex];
 
                       return Stack(
                         children: [
@@ -98,13 +100,16 @@ class StickerpackScreen extends StatelessWidget {
                                     child: PageView.builder(
                                       itemCount: packs.length,
                                       controller: presenter.packsPageController,
+                                      onPageChanged: (index) {
+                                        presenter.setSelectedPackIndex(index);
+                                      },
                                       itemBuilder: (context, index) {
                                         final pack = packs[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            if (presenter.pack == null && !state.isWaitingConfirm) {
+                                            if (!state.unpacking && !state.packsHiding && !state.isWaitingConfirm) {
                                               if (packs[index].price == 0) {
-                                                presenter.create3dModel(packs[index]);
+                                                presenter.openPack();
                                               } else {
                                                 presenter.requestBuyPackConfirm(packs[index]);
                                               }
@@ -115,50 +120,42 @@ class StickerpackScreen extends StatelessWidget {
                                               SizedBox(
                                                 height: packHeight,
                                                 width: packWidth,
-                                                child: pack.imageAssetPath == null
-                                                    ? Center(
-                                                        child: Text(
-                                                          pack.title,
-                                                          style: TextStyle(color: Colors.white),
-                                                        ),
-                                                      )
-                                                    : Stack(
-                                                        children: [
-                                                          Image.asset(
-                                                            pack.imageAssetPath!,
-                                                            height: packHeight,
-                                                            width: packWidth,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                          if (pack.imageAssetPath ==
-                                                              "assets/raster/packs/pack-general.png")
-                                                            Positioned(
-                                                              top: 32,
-                                                              right: 16,
-                                                              left: 16,
-                                                              child: Column(
-                                                                children: [
-                                                                  Text(
-                                                                    pack.title,
-                                                                    textAlign: TextAlign.center,
-                                                                    style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontSize: 20,
-                                                                      fontWeight: FontWeight.bold,
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    emojiFlagByCountryName(pack.title) ?? "",
-                                                                    textAlign: TextAlign.center,
-                                                                    style: TextStyle(
-                                                                      fontSize: 32,
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                child: Stack(
+                                                  children: [
+                                                    Image.asset(
+                                                      pack.imageAssetPath,
+                                                      height: packHeight,
+                                                      width: packWidth,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                    if (pack.imageAssetPath == "assets/raster/packs/pack-general.png")
+                                                      Positioned(
+                                                        top: 32,
+                                                        right: 16,
+                                                        left: 16,
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                              pack.title,
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 20,
+                                                                fontWeight: FontWeight.bold,
                                                               ),
                                                             ),
-                                                        ],
+                                                            Text(
+                                                              emojiFlagByCountryName(pack.title) ?? "",
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                fontSize: 32,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
+                                                  ],
+                                                ),
                                               ),
                                               Text(
                                                 pack.price > 0 ? "${pack.price} 🏆" : "Free",
@@ -172,64 +169,12 @@ class StickerpackScreen extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  // Gallery3D(
-                                  //   isClip: false,
-                                  //   controller: presenter.gallery3dController,
-                                  //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                  //   itemConfig: const GalleryItemConfig(
-                                  //     width: packWidth,
-                                  //     height: packHeight + 70,
-                                  //     isShowTransformMask: false,
-                                  //   ),
-                                  //   width: MediaQuery.of(context).size.width,
-                                  //   height: 30 + packHeight + mq.padding.bottom,
-                                  //   onClickItem: (index) {
-                                  //     if (presenter.openedPack == null && !state.isWaitingConfirm) {
-                                  //       if (packs[index].price == 0) {
-                                  //         presenter.openPack(packs[index]);
-                                  //       } else {
-                                  //         presenter.requestBuyPackConfirm(packs[index]);
-                                  //       }
-                                  //     }
-                                  //   },
-                                  //   itemBuilder: (context, index) {
-                                  //     final pack = packs[index];
-                                  //     return Column(
-                                  //       children: [
-                                  //         SizedBox(
-                                  //           height: packHeight,
-                                  //           width: packWidth,
-                                  //           child: pack.imageAssetPath == null
-                                  //               ? Center(
-                                  //                   child: Text(
-                                  //                     pack.title,
-                                  //                     style: TextStyle(color: Colors.white),
-                                  //                   ),
-                                  //                 )
-                                  //               : Image.asset(
-                                  //                   pack.imageAssetPath!,
-                                  //                   height: packHeight,
-                                  //                   width: packWidth,
-                                  //                   fit: BoxFit.fill,
-                                  //                 ),
-                                  //         ),
-                                  //         Text(
-                                  //           pack.price > 0 ? "${pack.price} 🏆" : "Free",
-                                  //           style: TextStyle(
-                                  //             fontSize: 20,
-                                  //           ),
-                                  //         ),
-                                  //       ],
-                                  //     );
-                                  //   },
-                                  // ),
                                 ),
                               );
                             },
                           ),
-                          if (state.unpacking && presenter.pack?.players != null)
-                            _PlayerCardsSwiper(players: presenter.pack!.players!),
-                          if (state.packsHiding && presenter.pack != null)
+                          if (state.unpacking) _PlayerCardsSwiper(players: selectedPack.players!),
+                          if (state.show3dObject)
                             AnimatedBuilder(
                               animation: presenter._hidePacksAnimation,
                               builder: (context, child) {
@@ -244,19 +189,15 @@ class StickerpackScreen extends StatelessWidget {
                                     child: Stack(
                                       children: [
                                         O3D.asset(
-                                          src: presenter.pack!.glbAssetPath, // 'assets/3d/europe.glb',
+                                          src: selectedPack.glbAssetPath, // 'assets/3d/europe.glb',
                                           controller: presenter.o3dController,
                                           autoPlay: false,
                                           disableTap: true,
                                           disableZoom: true,
                                           disablePan: true,
                                           cameraControls: false,
-                                          // onWebViewCreated: (value) async {
-                                          //   await Future.delayed(const Duration(milliseconds: 330));
-                                          //   presenter.openPack(); // run 3d model pack animation
-                                          // },
                                         ),
-                                        if (presenter.pack?.imageAssetPath == "assets/raster/packs/pack-general.png")
+                                        if (selectedPack.imageAssetPath == "assets/raster/packs/pack-general.png")
                                           Positioned(
                                             top: (2 * packHeight) / 4,
                                             right: 16,
@@ -266,7 +207,7 @@ class StickerpackScreen extends StatelessWidget {
                                                 SizedBox(
                                                   width: packWidth,
                                                   child: Text(
-                                                    presenter.pack!.title,
+                                                    selectedPack.title,
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       color: Colors.white,
@@ -276,11 +217,9 @@ class StickerpackScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  emojiFlagByCountryName(presenter.pack!.title) ?? "",
+                                                  emojiFlagByCountryName(selectedPack.title) ?? "",
                                                   textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 32,
-                                                  ),
+                                                  style: TextStyle(fontSize: 32),
                                                 ),
                                               ],
                                             ),
@@ -306,11 +245,15 @@ class StickerpackScreen extends StatelessWidget {
 }
 
 class CombinedState {
+  final int selectedPackIndex;
+  final bool show3dObject;
   final bool isWaitingConfirm;
   final bool unpacking;
   final bool packsHiding;
 
   CombinedState(
+    this.selectedPackIndex,
+    this.show3dObject,
     this.isWaitingConfirm,
     this.unpacking,
     this.packsHiding,

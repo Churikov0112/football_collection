@@ -68,7 +68,7 @@ class PlayersRepository {
           price: 100,
           players: await getRandomPlayers(country: country),
           imageAssetPath: "assets/raster/packs/pack-general.png",
-          glbAssetPath: "assets/3d/pack-general.gif",
+          glbAssetPath: "assets/3d/pack-general.glb",
         ),
         PackModel(
           title: country.confederation.name,

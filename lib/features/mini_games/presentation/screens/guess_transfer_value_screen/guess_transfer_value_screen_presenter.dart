@@ -41,8 +41,8 @@ class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScr
   }) async {
     _selectedOptionSubject.add(selectedAnswer);
     if (selectedAnswer == rightAnswer) {
-      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 1));
-      ToastService.showToast(title: "Правильно!", subtitle: "Начислено 1 🏆", seconds: 2);
+      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 5));
+      ToastService.showToast(title: "Правильно!", subtitle: "Начислено 5 🏆", seconds: 2);
     } else {
       ToastService.showErrorToast(title: "Неправильно!", seconds: 2);
     }
