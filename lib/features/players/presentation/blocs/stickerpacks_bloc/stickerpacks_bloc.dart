@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:football_collection/features/albums/domain/models/pack.dart';
 import 'package:football_collection/features/confederations/domain/models/confederation.dart';
+import 'package:football_collection/features/players/domain/models/pack.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../countries/domain/models/country.dart';

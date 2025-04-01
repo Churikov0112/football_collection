@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:football_collection/features/albums/domain/models/pack.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/players/domain/models/pack.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../confederations/domain/models/confederation.dart';

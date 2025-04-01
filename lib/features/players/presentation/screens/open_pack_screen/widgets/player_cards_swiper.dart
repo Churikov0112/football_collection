@@ -1,4 +1,4 @@
-part of '../sticker_pack_screen.dart';
+part of '../open_pack_screen.dart';
 
 class _PlayerCardsSwiper extends StatelessWidget {
   final List<PlayerModel> players;
@@ -10,7 +10,7 @@ class _PlayerCardsSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    final presenter = StickerpackScreenPresenter.of(context);
+    final presenter = OpenPackScreenPresenter.of(context);
 
     final backgroundHeight = mq.size.height - mq.padding.top - mq.padding.bottom - 56;
 

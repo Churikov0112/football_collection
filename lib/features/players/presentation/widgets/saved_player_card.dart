@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 
 import '../../domain/models/player.dart';
-import '../screens/sticker_pack_screen/sticker_pack_screen.dart';
+import '../screens/open_pack_screen/open_pack_screen.dart';
 
 class SavedPlayerCard extends StatelessWidget {
   const SavedPlayerCard({

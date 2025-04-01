@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/albums/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
+import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:rxdart/rxdart.dart';
 

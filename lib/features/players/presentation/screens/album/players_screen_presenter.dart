@@ -1,24 +1,24 @@
-part of 'album_screen.dart';
+part of 'players_screen.dart';
 
-class AlbumScreenPresenter extends StatefulWidget {
-  static AlbumScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<AlbumScreenPresenterState>()!;
+class PlayersScreenPresenter extends StatefulWidget {
+  static PlayersScreenPresenterState of(BuildContext context) {
+    return context.findAncestorStateOfType<PlayersScreenPresenterState>()!;
   }
 
   final Widget child;
   final CountryModel country;
 
-  const AlbumScreenPresenter({
+  const PlayersScreenPresenter({
     required this.country,
     required this.child,
     super.key,
   });
 
   @override
-  State<AlbumScreenPresenter> createState() => AlbumScreenPresenterState();
+  State<PlayersScreenPresenter> createState() => PlayersScreenPresenterState();
 }
 
-class AlbumScreenPresenterState extends State<AlbumScreenPresenter> {
+class PlayersScreenPresenterState extends State<PlayersScreenPresenter> {
   @override
   void initState() {
     super.initState();

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:football_collection/features/albums/domain/models/player.dart';
+import 'package:football_collection/features/players/domain/models/player.dart';
 
 class PackModel extends Equatable {
   final String title;

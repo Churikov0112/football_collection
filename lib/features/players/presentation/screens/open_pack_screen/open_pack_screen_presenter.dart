@@ -1,72 +1,76 @@
-part of 'sticker_pack_screen.dart';
+part of 'open_pack_screen.dart';
 
-class StickerpackScreenPresenter extends StatefulWidget {
-  static StickerpackScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<StickerpackScreenPresenterState>()!;
+class OpenPackScreenPresenter extends StatefulWidget {
+  static OpenPackScreenPresenterState of(BuildContext context) {
+    return context.findAncestorStateOfType<OpenPackScreenPresenterState>()!;
   }
 
   final Widget child;
-  final StickerpackScreenArgs args;
+  final OpenPackScreenArgs args;
 
-  const StickerpackScreenPresenter({
+  const OpenPackScreenPresenter({
     required this.args,
     required this.child,
     super.key,
   });
 
   @override
-  State<StickerpackScreenPresenter> createState() => StickerpackScreenPresenterState();
+  State<OpenPackScreenPresenter> createState() => OpenPackScreenPresenterState();
 }
 
-class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> with TickerProviderStateMixin {
+class OpenPackScreenPresenterState extends State<OpenPackScreenPresenter> with TickerProviderStateMixin {
   late AnimationController _hidePacksAnimationController;
   late Animation<double> _hidePacksAnimation;
 
   O3DController? o3dController;
   late PageController packsPageController;
 
+// нужно для показа 3d модели пака
   final BehaviorSubject<int> _selectedPackIndexSubject = BehaviorSubject.seeded(0);
   Stream<int> get selectedPackIndexStream$ => _selectedPackIndexSubject.stream;
 
+// нужно для показа 3d модели пака
   final BehaviorSubject<bool> _show3dObjectSubject = BehaviorSubject.seeded(false);
   Stream<bool> get show3dObjectStream$ => _show3dObjectSubject.stream;
 
+// нужно для предотвращения повторного нажатия на пак
   final BehaviorSubject<bool> _isWaitingConfirmSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isWaitingConfirmStream$ => _isWaitingConfirmSubject.stream;
 
+// нужно для предотвращения повторного нажатия на пак
   final BehaviorSubject<bool> _isHidePacksAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isHidePacksAnimationPlayingStream$ => _isHidePacksAnimationPlayingSubject.stream;
 
+// нужно для показа карточек игроков
   final BehaviorSubject<bool> _isUnpackingAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isUnpackingAnimationPlayingStream$ => _isUnpackingAnimationPlayingSubject.stream;
 
   @override
   void initState() {
     super.initState();
+    _hidePacksAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _hidePacksAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _hidePacksAnimationController, curve: Curves.linear),
+    );
     context
         .read<StickerpacksBloc>()
         .add(StickerpacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
-    _hidePacksAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500), // Уменьшено
-    );
-    _hidePacksAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _hidePacksAnimationController, curve: Curves.linear), // Упрощено
-    );
   }
 
   Future<void> setSelectedPackIndex(int index) async {
     o3dController = O3DController();
     _selectedPackIndexSubject.add(index);
     _show3dObjectSubject.add(false);
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100)); // TODO это безопасно?
     _show3dObjectSubject.add(true);
-    // pack = selectedPack;
   }
 
   Future<void> openPack() async {
     try {
-      _isHidePacksAnimationPlayingSubject.add(true); // show 3d model
+      _isHidePacksAnimationPlayingSubject.add(true);
       _hidePacksAnimationController.forward().whenCompleteOrCancel(() async {
         o3dController?.play(repetitions: 1);
         await Future.delayed(const Duration(milliseconds: 3500));
@@ -81,50 +85,21 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
 
   Future<void> requestBuyPackConfirm(PackModel pack) async {
     _isWaitingConfirmSubject.add(true);
-    // TODO add not enought balance bs
+    final isEnoughtMoney = (getIt.get<BalanceBloc>().state.balance ?? 0) >= pack.price;
+    if (!isEnoughtMoney) {
+      await showModalBottomSheet<bool>(
+        context: context,
+        builder: (context) => NotEnoghtMoneyBottomSheet(pack: pack),
+      );
+      _isWaitingConfirmSubject.add(false);
+      return;
+    }
     final confirmed = await showModalBottomSheet<bool>(
       context: context,
-      builder: (context) {
-        final mq = MediaQuery.of(context);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 20),
-              Text("Confirm to buy pack for ${pack.price} 🏆"),
-              const SizedBox(height: 20),
-              Row(
-                spacing: 8,
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        context.pop(false);
-                      },
-                      child: Text("Cancel"),
-                    ),
-                  ),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        context.pop(true);
-                      },
-                      child: Text("Confirm"),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: mq.padding.bottom + 20)
-            ],
-          ),
-        );
-      },
+      builder: (context) => ConfirmBuyPackBottomSheet(pack: pack),
     );
     _isWaitingConfirmSubject.add(false);
     if (confirmed != true) return;
-    // todo confirm bs
     getIt.get<BalanceBloc>().add(BalanceEventDecrease(amount: pack.price));
     final balanceState = await getIt
         .get<BalanceBloc>()
@@ -133,13 +108,11 @@ class StickerpackScreenPresenterState extends State<StickerpackScreenPresenter> 
     if (balanceState is BalanceStateFailed) {
       ToastService.showErrorToast(title: balanceState.message);
     } else if (balanceState is BalanceStateReady) {
-      ToastService.showToast(title: "Transaction completed");
       await openPack();
     }
   }
 
   void getNewPacks() {
-    // pack = null;
     context
         .read<StickerpacksBloc>()
         .add(StickerpacksEventGet(country: widget.args.country, confederation: widget.args.confederation));

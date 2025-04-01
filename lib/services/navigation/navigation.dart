@@ -5,11 +5,11 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/albums/presentation/screens/album/album_screen.dart';
-import '../../features/albums/presentation/screens/sticker_pack_screen/sticker_pack_screen.dart';
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
+import '../../features/players/presentation/screens/album/players_screen.dart';
+import '../../features/players/presentation/screens/open_pack_screen/open_pack_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -46,14 +46,14 @@ class FootballCollectionRouter {
       routes: [
         GoRoute(
           path: RoutePaths.album,
-          builder: (context, state) => AlbumScreen(
+          builder: (context, state) => PlayersScreen(
             country: state.extra as CountryModel,
           ),
         ),
         GoRoute(
           path: RoutePaths.stickerpack,
-          builder: (context, state) => StickerpackScreen(
-            args: state.extra as StickerpackScreenArgs,
+          builder: (context, state) => OpenPackScreen(
+            args: state.extra as OpenPackScreenArgs,
           ),
         ),
         GoRoute(

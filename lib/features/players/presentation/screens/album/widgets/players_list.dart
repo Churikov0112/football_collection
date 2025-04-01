@@ -1,4 +1,4 @@
-part of '../album_screen.dart';
+part of '../players_screen.dart';
 
 class _PlayersList extends StatelessWidget {
   const _PlayersList();
