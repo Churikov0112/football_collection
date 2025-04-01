@@ -23,22 +23,22 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
-            title: "Transfer value less/more",
+            title: "Who costs more",
             color: Colors.purple,
             onTap: () {
               context.push(RoutePaths.miniGameGuessTransferValueLessMore);
             },
           ),
-          _MiniGameTile(
-            color: Colors.orange,
-            title: "Guess national team",
-            onTap: () {},
-          ),
-          _MiniGameTile(
-            color: Colors.pink,
-            title: "Guess player by properties",
-            onTap: () {},
-          ),
+          // _MiniGameTile(
+          //   color: Colors.orange,
+          //   title: "Guess national team",
+          //   onTap: () {},
+          // ),
+          // _MiniGameTile(
+          //   color: Colors.pink,
+          //   title: "Guess player by properties",
+          //   onTap: () {},
+          // ),
         ],
       ),
     );

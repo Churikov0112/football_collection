@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:football_collection/features/mini_games/presentation/widgets/balance_widget/balance_widget.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +16,13 @@ class MiniGamesScreen extends StatelessWidget {
     return MiniGamesScreenPresenter(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Mini-Games"),
+          title: Row(
+            children: [
+              Text("Mini-Games"),
+              const Spacer(),
+              BalanceWidget(),
+            ],
+          ),
         ),
         body: DecoratedBox(
           decoration: BoxDecoration(),

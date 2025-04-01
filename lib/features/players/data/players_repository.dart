@@ -113,7 +113,7 @@ class PlayersRepository {
       PackModel(
           title: "Top players",
           price: 100,
-          players: await getRandomPlayers(topPlayers: true),
+          players: await getRandomPlayers(minPrimeTransferValue: 50000000),
           imageAssetPath: "assets/raster/packs/pack-topplayers.png",
           glbAssetPath: "assets/3d/pack-topplayers.glb"),
     ];
@@ -124,9 +124,9 @@ class PlayersRepository {
     int count = 5,
     CountryModel? country,
     Confederations? confederation,
-    bool? topPlayers,
+    int? minPrimeTransferValue,
+    int? minCurrentTransferValue,
     bool? topCountries,
-    bool? hasCurrentTransferValue,
   }) async {
     await _ensureInitialized();
     final result = <PlayerModel>[];
@@ -134,9 +134,9 @@ class PlayersRepository {
       final player = await _getRandomPlayer(
         country: country,
         confederation: confederation,
-        topPlayers: topPlayers,
+        minPrimeTransferValue: minPrimeTransferValue,
+        minCurrentTransferValue: minCurrentTransferValue,
         topCountries: topCountries,
-        hasCurrentTransferValue: hasCurrentTransferValue,
       );
       result.add(player);
     }
@@ -146,33 +146,27 @@ class PlayersRepository {
   Future<PlayerModel> _getRandomPlayer({
     CountryModel? country,
     Confederations? confederation,
-    bool? topPlayers,
     bool? topCountries,
-    bool? hasCurrentTransferValue,
+    int? minPrimeTransferValue,
+    int? minCurrentTransferValue,
   }) async {
     final playersSublist = allPlayersCache.where((player) {
-      if (hasCurrentTransferValue != null) {
-        if (hasCurrentTransferValue == true) {
-          if (player.currentMarketValue == null) return false;
-        } else {
-          if (player.currentMarketValue != null) return false;
-        }
-      }
       if (country != null) {
-        return player.countryId == country.id;
+        if (player.countryId != country.id) return false;
       }
       if (confederation != null) {
         final playerCountryName = allTeamsCache.firstWhere((team) => team.id == player.countryId).name;
-        return confederation == confederationFromCountryName(playerCountryName);
+        if (confederation != confederationFromCountryName(playerCountryName)) return false;
       }
-      if (topPlayers == true) {
-        if (player.maxMarketValue == null) return false;
-        return player.maxMarketValue! > 50000000;
+      if (minPrimeTransferValue != null || minCurrentTransferValue != null) {
+        if (minPrimeTransferValue != null && player.maxMarketValue == null) return false;
+        if (minCurrentTransferValue != null && player.currentMarketValue == null) return false;
+        if (minPrimeTransferValue != null && player.maxMarketValue! < minPrimeTransferValue) return false;
+        if (minCurrentTransferValue != null && player.currentMarketValue! < minCurrentTransferValue) return false;
       }
-
       if (topCountries == true) {
         final top25Countries = allTeamsCache.sublist(0, 25);
-        return top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.countryId));
+        if (!top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.countryId))) return false;
       }
       return true;
     }).toList();
