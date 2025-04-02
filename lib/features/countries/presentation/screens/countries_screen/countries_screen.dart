@@ -10,9 +10,12 @@ import 'package:football_collection/features/countries/presentation/blocs/countr
 import 'package:football_collection/features/players/data/players_repository.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
+import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
 
+import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
+import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../../players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../../../players/presentation/screens/open_pack_screen/open_pack_screen.dart';
 import '../../../domain/models/country.dart';
@@ -30,25 +33,25 @@ class CountriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
+    // final mq = MediaQuery.of(context);
 
     return CountriesScreenPresenter(
       confederation: confederation,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(confederation.name),
-          backgroundColor: confederation.color?.darken(),
-          foregroundColor: Colors.white,
-        ),
-        body: DecoratedBox(
-          decoration: BoxDecoration(
-            color: confederation.color?.withOpacity(0.8),
-          ),
-          child: Column(
-            children: [
-              _CountriesList(),
-            ],
-          ),
+        body: Stack(
+          children: [
+            BackgroundImage(),
+            BackgroundImageColorFilter(color: confederation.color),
+            Column(
+              children: [
+                _CountriesList(),
+              ],
+            ),
+            TransparentAppbar(
+              title: confederation.name,
+              backgroundColor: confederation.color,
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {

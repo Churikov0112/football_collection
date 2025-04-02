@@ -43,28 +43,53 @@ class PacksPageView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    pack.price > 0 ? "${pack.price} 🏆" : "Free",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  if (pack.imageAssetPath == "assets/raster/packs/pack-general.png") ...[
-                    SizedBox(
-                      width: packWidth,
-                      child: Text(
-                        "${emojiFlagByCountryName(pack.title) ?? ""} ${pack.title}",
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.black45,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          child: Text(
+                            pack.price > 0 ? "${pack.price} 🏆" : "Free",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                  ],
+                      if (pack.imageAssetPath == "assets/raster/packs/pack-general.png") ...[
+                        const SizedBox(height: 8),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: packWidth),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.black45,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              child: Text(
+                                "${emojiFlagByCountryName(pack.title) ?? ""} ${pack.title}",
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 8),
                   Image.asset(
                     pack.imageAssetPath,
                     height: packHeight,

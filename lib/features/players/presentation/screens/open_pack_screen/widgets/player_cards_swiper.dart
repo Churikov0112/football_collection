@@ -19,7 +19,7 @@ class _PlayerCardsSwiper extends StatelessWidget {
       padding: EdgeInsets.only(
         left: (mq.size.width - packWidth) / 2,
         right: (mq.size.width - packWidth) / 2,
-        top: backgroundHeight / 2 - packHeight / 2,
+        top: backgroundHeight / 2,
       ),
       isLoop: false,
       numberOfCardsDisplayed: 2,

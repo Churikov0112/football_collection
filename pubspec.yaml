@@ -110,6 +110,7 @@ flutter:
     - assets/raster/player_faces/
     - assets/raster/team_flags/
     - assets/raster/packs/
+    - assets/raster/background/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

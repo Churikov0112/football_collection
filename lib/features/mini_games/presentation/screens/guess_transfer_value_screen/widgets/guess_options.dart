@@ -42,19 +42,19 @@ class GuessOptions extends StatelessWidget {
                               ? guessed
                                   ? selectedOption == option
                                       ? Colors.green
-                                      : null
+                                      : Colors.black54
                                   : selectedOption == option
                                       ? Colors.red
                                       : option == rightAnswer
                                           ? Colors.green
-                                          : null
-                              : null,
+                                          : Colors.black54
+                              : Colors.black54,
                           border: selectedOption == null ? Border.all() : null,
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Center(child: Text(option)),
+                          child: Center(child: Text(option, style: TextStyle(color: Colors.white))),
                         ),
                       ),
                     ),

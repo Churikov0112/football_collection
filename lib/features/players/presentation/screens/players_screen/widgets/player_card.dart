@@ -14,7 +14,7 @@ class _PlayerCard extends StatelessWidget {
     // return SavedPlayerCard(player: player);
 
     final absentWIdget = Container(
-      color: country.confederation.color?.darken(),
+      color: country.confederation.color?.darken().withAlpha(200),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

@@ -5,6 +5,8 @@ class _CountriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
     return BlocBuilder<CountriesBloc, CountriesState>(
       bloc: getIt.get(),
       builder: (context, countriesState) {
@@ -18,7 +20,7 @@ class _CountriesList extends StatelessWidget {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 120),
+            padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 120),
             itemCount: countries.length,
             itemBuilder: (context, index) {
               return _CountryTile(
@@ -60,19 +62,19 @@ class _CountryTile extends StatelessWidget {
             value: value,
             width: 100,
             height: 100,
-            borderRadius: 20,
+            borderRadius: 24,
             startPosition: StartPosition.topCenter,
             strokeCap: StrokeCap.square,
             clockwise: true,
             color: Colors.greenAccent,
-            emptyStrokeColor: Colors.black12,
-            strokeWidth: 8,
-            emptyStrokeWidth: 8,
-            strokeAlign: SquareStrokeAlign.center,
+            emptyStrokeColor: country.confederation.color,
+            strokeWidth: 4,
+            emptyStrokeWidth: 4,
+            strokeAlign: SquareStrokeAlign.outside,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: country.confederation.color?.darken(),
+                color: country.confederation.color?.darken().withAlpha(200),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),

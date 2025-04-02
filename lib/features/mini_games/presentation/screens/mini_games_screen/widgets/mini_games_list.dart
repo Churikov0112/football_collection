@@ -5,6 +5,7 @@ class _MiniGamesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
     return Expanded(
       child: GridView(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -13,7 +14,7 @@ class _MiniGamesList extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 120),
+        padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 120),
         children: [
           _MiniGameTile(
             title: "Guess transfer value",
@@ -63,7 +64,8 @@ class _MiniGameTile extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: color,
+          color: color.withAlpha(180),
+          border: Border.all(color: color, width: 4),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),

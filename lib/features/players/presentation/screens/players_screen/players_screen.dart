@@ -10,8 +10,11 @@ import 'package:football_collection/features/players/presentation/blocs/country_
 import 'package:football_collection/features/players/presentation/screens/open_pack_screen/open_pack_screen.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
+import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
+import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/saved_players_bloc/saved_players_bloc.dart';
 import '../../widgets/saved_player_card.dart';
@@ -35,28 +38,15 @@ class PlayersScreen extends StatelessWidget {
     return PlayersScreenPresenter(
       country: country,
       child: Scaffold(
-        backgroundColor: country.confederation.color?.lighten(0.05),
-        appBar: AppBar(
-          backgroundColor: country.confederation.color?.darken(),
-          foregroundColor: Colors.white,
-          title: Row(
-            children: [
-              Text(country.name),
-              const Spacer(),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                child: Image.asset(
-                  'assets/raster/team_flags/${country.id}.png',
-                  height: 36,
-                  width: 36,
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: Column(
+        body: Stack(
           children: [
-            const _PlayersList(),
+            BackgroundImage(),
+            BackgroundImageColorFilter(color: country.confederation.color),
+            Column(children: [const _PlayersList()]),
+            TransparentAppbar(
+              title: "${emojiFlagByCountryName(country.name) ?? ""}  ${country.name}",
+              backgroundColor: country.confederation.color,
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(

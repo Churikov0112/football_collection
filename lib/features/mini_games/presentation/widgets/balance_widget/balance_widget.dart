@@ -5,7 +5,12 @@ import 'package:football_collection/di/di.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 
 class BalanceWidget extends StatelessWidget {
-  const BalanceWidget({super.key});
+  const BalanceWidget({
+    required this.textColor,
+    super.key,
+  });
+
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,14 @@ class BalanceWidget extends StatelessWidget {
       bloc: getIt.get(),
       builder: (context, balanceState) {
         final balance = balanceState.balance ?? 0;
-        return Text("$balance 🏆");
+        return Text(
+          "$balance 🏆",
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
+        );
       },
     );
   }

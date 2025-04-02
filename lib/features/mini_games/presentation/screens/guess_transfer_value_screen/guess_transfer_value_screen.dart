@@ -8,10 +8,11 @@ import 'package:football_collection/features/mini_games/presentation/blocs/rando
 import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
+import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
+import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../blocs/balance_bloc/balance_bloc.dart';
-import '../../widgets/balance_widget/balance_widget.dart';
 import 'widgets/guess_options.dart';
 
 part 'guess_transfer_value_screen_presenter.dart';
@@ -21,7 +22,7 @@ class GuessTransferValueScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
+    // final mq = MediaQuery.of(context);
 
     return BlocProvider(
       create: (context) => RandomPlayersBloc(getIt.get()),
@@ -31,95 +32,48 @@ class GuessTransferValueScreen extends StatelessWidget {
             final presenter = GuessTransferValueScreenPresenter.of(context);
 
             return Scaffold(
-              appBar: AppBar(
-                title: Row(
-                  children: [
-                    const Text("Guess Transfer Value"),
-                    const Spacer(),
-                    const BalanceWidget(),
-                  ],
-                ),
-              ),
-              body: BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
-                builder: (context, randomPlayersState) {
-                  final player = randomPlayersState.players?.firstOrNull;
-                  if (player == null) return Align(child: const CircularProgressIndicator());
+              body: Stack(
+                children: [
+                  BackgroundImage(),
+                  BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
+                    builder: (context, randomPlayersState) {
+                      final player = randomPlayersState.players?.firstOrNull;
+                      if (player == null) return Align(child: const CircularProgressIndicator());
 
-                  final random = presenter.random;
-                  final currentMarketValue = player.currentMarketValue ?? 0;
-                  const allDeviationSteps = [-0.5, -0.25, 0.25, 0.5];
-                  final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
+                      final random = presenter.random;
+                      final currentMarketValue = player.currentMarketValue ?? 0;
+                      const allDeviationSteps = [-0.5, -0.25, 0.25, 0.5];
+                      final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
 
-                  final randomMarketValues = [
-                    currentMarketValue,
-                    (currentMarketValue * (1 + selectedStep)).round(),
-                  ]..shuffle(random);
+                      final randomMarketValues = [
+                        currentMarketValue,
+                        (currentMarketValue * (1 + selectedStep)).round(),
+                      ]..shuffle(random);
 
-                  return DecoratedBox(
-                    decoration: BoxDecoration(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Align(
-                          child: SavedPlayerCard(
-                            player: player,
-                            count: 1,
-                            hideTransferValue: true,
-                          ),
+                      return DecoratedBox(
+                        decoration: BoxDecoration(),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              child: SavedPlayerCard(
+                                player: player,
+                                count: 1,
+                                hideTransferValue: true,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            GuessOptions(
+                              options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
+                              rightAnswer: beautifyTransferValue(currentMarketValue),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 20),
-                        GuessOptions(
-                          options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
-                          rightAnswer: beautifyTransferValue(currentMarketValue),
-                        ),
-
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(horizontal: 16),
-                        //   child:
-                        //   Column(
-                        //     children: [
-                        //       Row(
-                        //         children: [
-                        //           Expanded(
-                        //             child: OutlinedButton(
-                        //               onPressed: () {},
-                        //               child: Text("data"),
-                        //             ),
-                        //           ),
-                        //           const SizedBox(width: 16),
-                        //           Expanded(
-                        //             child: OutlinedButton(
-                        //               onPressed: () {},
-                        //               child: Text("data"),
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //       const SizedBox(height: 8),
-                        //       Row(
-                        //         children: [
-                        //           Expanded(
-                        //             child: OutlinedButton(
-                        //               onPressed: () {},
-                        //               child: Text("data"),
-                        //             ),
-                        //           ),
-                        //           const SizedBox(width: 16),
-                        //           Expanded(
-                        //             child: OutlinedButton(
-                        //               onPressed: () {},
-                        //               child: Text("data"),
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                  TransparentAppbar(title: "Guess transfer value"),
+                ],
               ),
             );
           },
