@@ -35,6 +35,17 @@ class MenuDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.keyboard,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Cheat codes",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ],
       ),
     );

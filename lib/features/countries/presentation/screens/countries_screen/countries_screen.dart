@@ -48,7 +48,7 @@ class CountriesScreen extends StatelessWidget {
               ],
             ),
             TransparentAppbar(
-              title: confederation.name,
+              title: confederation.continentName,
               backgroundColor: confederation.color,
             ),
           ],

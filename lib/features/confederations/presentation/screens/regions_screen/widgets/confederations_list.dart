@@ -85,27 +85,31 @@ class _RegionTile extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         color: confederation.color?.withAlpha(200),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Align(
-                            child: Text(
-                              confederation.name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              child: Text(
+                                confederation.continentName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            child: Text(
-                              "${savedConfederationPlayers.length} / ${confederationPlayers.length}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            Align(
+                              child: Text(
+                                "${savedConfederationPlayers.length} / ${confederationPlayers.length}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16, color: Colors.white),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

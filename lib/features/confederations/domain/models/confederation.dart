@@ -31,6 +31,25 @@ extension ConfederationExtension on Confederations {
         return null;
     }
   }
+
+  String get continentName {
+    switch (this) {
+      case Confederations.caf:
+        return 'Africa';
+      case Confederations.concacaf:
+        return 'North America';
+      case Confederations.ofc:
+        return 'Australia';
+      case Confederations.uefa:
+        return 'Europe';
+      case Confederations.afc:
+        return 'Asia';
+      case Confederations.conmebol:
+        return 'South America';
+      case Confederations.unknown:
+        return 'Unknown';
+    }
+  }
 }
 
 Confederations confederationFromCountryName(String countryName) {

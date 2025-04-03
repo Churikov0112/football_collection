@@ -56,7 +56,11 @@ class _PlayerCard extends StatelessWidget {
           final isPlayerSaved = savedPlayersState.savedIds?.contains(player.id) ?? false;
           final count = savedPlayersState.savedIds?.where((id) => id == player.id).length ?? 1;
           if (isPlayerSaved) {
-            return SavedPlayerCard(player: player, count: count);
+            return SavedPlayerCard(
+              player: player,
+              count: count,
+              enableFlip: true,
+            );
           }
         }
         return absentWIdget;

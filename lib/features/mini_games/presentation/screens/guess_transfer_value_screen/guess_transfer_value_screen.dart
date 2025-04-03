@@ -55,13 +55,17 @@ class GuessTransferValueScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
-                              child: SavedPlayerCard(
-                                player: player,
-                                count: 1,
-                                hideTransferValue: true,
-                              ),
-                            ),
+                            StreamBuilder<String?>(
+                                stream: presenter.selectedOptionStream$,
+                                builder: (context, selectedOptionSnapshot) {
+                                  return Align(
+                                    child: SavedPlayerCard(
+                                      player: player,
+                                      count: 1,
+                                      hideTransferValue: selectedOptionSnapshot.data == null,
+                                    ),
+                                  );
+                                }),
                             const SizedBox(height: 20),
                             GuessOptions(
                               options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),

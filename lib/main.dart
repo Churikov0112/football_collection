@@ -16,7 +16,9 @@ Future<void> main() async {
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
   );
 
-  runApp(const FootballPackCollectionApp());
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((value) => runApp(const FootballPackCollectionApp()));
 }
 
 class FootballPackCollectionApp extends StatefulWidget {
