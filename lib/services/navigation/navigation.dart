@@ -3,6 +3,7 @@ import 'package:football_collection/features/confederations/domain/models/confed
 import 'package:football_collection/features/confederations/presentation/screens/regions_screen/confederations_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
+import 'package:football_collection/features/players/presentation/screens/get_player_by_qr_screen/get_player_by_qr_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/countries/domain/models/country.dart';
@@ -23,6 +24,8 @@ class RoutePaths {
   static const miniGames = '/miniGames';
   static const miniGameGuessTransferValue = '/miniGameGuessTransferValue';
   static const miniGameGuessTransferValueLessMore = '/miniGameGuessTransferValueLessMore';
+
+  static const getPlayerByQr = '/getPlayerByQr';
 
   // static const main = '/main';
   // static const auth = '/auth';
@@ -77,6 +80,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.miniGameGuessTransferValueLessMore,
           builder: (context, state) => GuessTransferValueLessMoreScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.getPlayerByQr,
+          builder: (context, state) => GetPlayerByQrScreen(),
         ),
 
         // GoRoute(

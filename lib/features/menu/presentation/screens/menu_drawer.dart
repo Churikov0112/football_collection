@@ -25,7 +25,9 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              context.push(RoutePaths.getPlayerByQr);
+            },
             leading: Icon(
               Icons.qr_code_2,
               color: Colors.white,
