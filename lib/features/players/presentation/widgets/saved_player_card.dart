@@ -1,7 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../domain/models/player.dart';
@@ -52,204 +54,282 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
     final card = Container(
       height: widget.height,
       width: widget.width,
-      padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.black54, width: 1),
       ),
-      child: Stack(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Positioned.fill(
-            bottom: 30,
-            child: Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: widget.count > 1
-                  ? Banner(
-                      location: BannerLocation.topEnd,
-                      message: 'x${widget.count}',
-                      color: Colors.green,
-                      textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
-                      // textDirection: TextDirection.ltr,
-                      child: faceImage,
-                    )
-                  : faceImage,
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              child: Image.asset(
-                'assets/raster/team_flags/${widget.player.countryId}.png',
-                height: 32,
-                width: 32,
-              ),
-            ),
-          ),
-
-          // Positioned(
-          //   top: 5,
-          //   right: 5,
-          //   child: Row(
-          //     children: [
-          //       DecoratedBox(
-          //         decoration: const BoxDecoration(
-          //           image: DecorationImage(image: AssetImage("assets/shirt.png")),
-          //         ),
-          //         child: SizedBox(
-          //           height: 32,
-          //           width: 32,
-          //           child: Center(
-          //             child: Text(
-          //               player.number.toString(),
-          //               style: const TextStyle(
-          //                 fontSize: 12,
-          //                 fontWeight: FontWeight.bold,
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ],
+          // Positioned.fill(
+          //   bottom: 30,
+          //   child: DecoratedBox(
+          //     decoration: BoxDecoration(
+          //       border: Border.all(color: Colors.black54, width: 1),
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(1.0),
+          //       child: widget.count > 1
+          //           ? Banner(
+          //               location: BannerLocation.topEnd,
+          //               message: 'x${widget.count}',
+          //               color: Colors.green,
+          //               textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+          //               // textDirection: TextDirection.ltr,
+          //               child: faceImage,
+          //             )
+          //           : faceImage,
+          //     ),
           //   ),
           // ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 4, bottom: 4),
-                  child: Wrap(
-                    spacing: 2,
-                    runSpacing: 2,
-                    crossAxisAlignment: WrapCrossAlignment.end,
-                    alignment: WrapAlignment.end,
-                    // mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (widget.player.currentMarketValue != null && widget.hideTransferValue != null)
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(32)),
-                            border: Border.all(),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            child: Text(
-                              widget.hideTransferValue!
-                                  ? "?"
-                                  : beautifyTransferValue(widget.player.currentMarketValue!),
-                              maxLines: 1,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      if (widget.player.position != null) _RoundedWhiteContainer(text: widget.player.position!),
-                      // DecoratedBox(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.all(Radius.circular(32)),
-                      //     border: Border.all(),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      //     child: Text(
-                      //       widget.player.position!,
-                      //       maxLines: 1,
-                      //       style: const TextStyle(
-                      //         fontSize: 12,
-                      //         fontWeight: FontWeight.bold,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // if (player.height != null)
-                      //   DecoratedBox(
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.white,
-                      //       borderRadius: BorderRadius.all(Radius.circular(32)),
-                      //       border: Border.all(),
-                      //     ),
-                      //     child: Padding(
-                      //       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      //       child: Text(
-                      //         player.height!,
-                      //         maxLines: 1,
-                      //         style: const TextStyle(
-                      //           fontSize: 12,
-                      //           fontWeight: FontWeight.bold,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
+          // Positioned(
+          //   top: 5,
+          //   left: 5,
+          //   child: DecoratedBox(
+          //     decoration: BoxDecoration(
+          //       border: Border.all(color: Colors.black54, width: 1),
+          //       borderRadius: BorderRadius.all(Radius.circular(20)),
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(1),
+          //       child: ClipRRect(
+          //         borderRadius: BorderRadius.all(Radius.circular(20)),
+          //         child: Image.asset(
+          //           'assets/raster/team_flags/${widget.player.countryId}.png',
+          //           height: 32,
+          //           width: 32,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
-                      // if (parseCustomDate(player.birthDate) != null)
-                      //   DecoratedBox(
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.white,
-                      //       borderRadius: BorderRadius.all(Radius.circular(32)),
-                      //       border: Border.all(),
-                      //     ),
-                      //     child: Padding(
-                      //       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      //       child: Text(
-                      //         parseCustomDate(player.birthDate)!,
-                      //         maxLines: 1,
-                      //         style: const TextStyle(
-                      //           fontSize: 12,
-                      //           fontWeight: FontWeight.bold,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                    ],
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black54, width: 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: widget.count > 1
+                          ? Banner(
+                              location: BannerLocation.topEnd,
+                              message: 'x${widget.count}',
+                              color: Colors.green,
+                              textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+                              // textDirection: TextDirection.ltr,
+                              child: faceImage,
+                            )
+                          : faceImage,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: mq.size.width,
-                  height: 30,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    child: AutoSizeText(
-                      widget.player.name,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+
+                // Positioned(
+                //   top: 0,
+
+                //   child: child,
+                // ),
+                Positioned(
+                  top: 5,
+                  left: 5,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black54, width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: Image.asset(
+                          'assets/raster/team_flags/${widget.player.countryId}.png',
+                          height: 32,
+                          width: 32,
+                        ),
                       ),
                     ),
                   ),
                 ),
+                if (widget.player.position != null)
+                  Positioned(
+                    bottom: 5,
+                    right: 5,
+                    child: _RoundedWhiteContainer(text: widget.player.position!),
+                  ),
               ],
             ),
           ),
+          const SizedBox(height: 5),
+          Text(
+            widget.player.name.toUpperCase(),
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          // Column(
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          // children: [
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 4, bottom: 4),
+          //   child: Wrap(
+          //     spacing: 2,
+          //     runSpacing: 2,
+          //     crossAxisAlignment: WrapCrossAlignment.end,
+          //     alignment: WrapAlignment.end,
+          //     // mainAxisSize: MainAxisSize.min,
+          //     children: [
+          //       if (widget.player.currentMarketValue != null && widget.hideTransferValue != null)
+          //         _RoundedWhiteContainer(
+          //           text:
+          //               widget.hideTransferValue! ? "?" : beautifyTransferValue(widget.player.currentMarketValue!),
+          //         ),
+          //       if (widget.player.position != null) _RoundedWhiteContainer(text: widget.player.position!),
+          //     ],
+          //   ),
+          // ),
+          // DecoratedBox(
+          //   decoration: BoxDecoration(color: Colors.white),
+          //   child: SizedBox(
+          //     width: mq.size.width,
+          //     child: Padding(
+          //       padding: const EdgeInsets.symmetric(horizontal: 8),
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Text(
+          //             widget.player.name + "fkdfkd",
+          //             textAlign: TextAlign.center,
+          //             style: const TextStyle(
+          //               fontSize: 14,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          //   ],
+          // ),
+          // ),
         ],
       ),
     );
 
     if (widget.enableFlip) {
-      return GestureDetector(
-        onTap: () {
-          flipCardController.flipcard();
-        },
-        child: FlipCard(
-          controller: flipCardController,
-          rotateSide: RotateSide.right,
-          backWidget: _PlayerCardBackWidget(
-            height: widget.height,
-            width: widget.width,
-            player: widget.player,
+      return Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              flipCardController.flipcard();
+            },
+            child: FlipCard(
+              controller: flipCardController,
+              rotateSide: RotateSide.right,
+              backWidget: _PlayerCardBackWidget(
+                height: widget.height,
+                width: widget.width,
+                player: widget.player,
+              ),
+              frontWidget: card,
+            ),
           ),
-          frontWidget: card,
-        ),
+          if (widget.count > 1)
+            Positioned(
+              top: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () async {
+                  final confirmed = await showModalBottomSheet<bool>(
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 16),
+                            Text(
+                              "Convert dublicate to QR code for your friend? Dublicate will be deleted from your collection",
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      context.pop(false);
+                                    },
+                                    child: Text("Cancel"),
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                Expanded(
+                                  child: FilledButton(
+                                    onPressed: () {
+                                      context.pop(true);
+                                    },
+                                    child: Text("Confirm"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: mq.padding.bottom + 16),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+
+                  if (confirmed == true) {
+                    getIt.get<SavedPlayersBloc>().add(SavedPlayersEventRemove(playerId: widget.player.id));
+                    await showModalBottomSheet<bool>(
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SizedBox(
+                            width: mq.size.width,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: mq.size.width / 2,
+                                  height: mq.size.width / 2,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(height: 32),
+                                SizedBox(
+                                  width: mq.size.width * 0.7,
+                                  child: Text(
+                                    "Open QR Scanner on second device from side menu and scan code",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Container(
+                  height: 64,
+                  width: 64,
+                  color: Colors.transparent,
+                ),
+              ),
+            ),
+        ],
       );
     }
     return card;
@@ -280,11 +360,10 @@ class _PlayerCardBackWidget extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (parseCustomDate(player.birthDate) != null)
                 _RoundedWhiteContainer(text: parseCustomDate(player.birthDate)!),
-              if (player.currentClub != null) _RoundedWhiteContainer(text: player.currentClub!),
+              const Spacer(),
               if (player.foot != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -293,6 +372,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: player.foot!),
                   ],
                 ),
+              const Spacer(),
               if (player.height != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -301,6 +381,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: player.height!),
                   ],
                 ),
+              const Spacer(),
               if (player.currentMarketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -309,6 +390,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: beautifyTransferValue(player.currentMarketValue!)),
                   ],
                 ),
+              const Spacer(),
               if (player.currentMarketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -317,6 +399,8 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],
                 ),
+              const Spacer(),
+              if (player.currentClub != null) _RoundedWhiteContainer(text: player.currentClub!.toUpperCase()),
             ],
           ),
         ),
@@ -342,7 +426,14 @@ class _RoundedWhiteContainer extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-        child: Text(text),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+        ),
       ),
     );
   }

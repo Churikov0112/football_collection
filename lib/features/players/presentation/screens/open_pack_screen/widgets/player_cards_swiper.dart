@@ -28,6 +28,7 @@ class _PlayerCardsSwiper extends StatelessWidget {
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) => SavedPlayerCard(
         player: players[index],
         count: 1,
+        hideTransferValue: false,
       ),
       onSwipe: (previousIndex, currentIndex, direction) {
         presenter.savePlayer(players[previousIndex]);

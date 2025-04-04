@@ -9,3 +9,11 @@ class SavedPlayersEventAdd extends SavedPlayersEvent {
     required this.playerId,
   });
 }
+
+class SavedPlayersEventRemove extends SavedPlayersEvent {
+  final String playerId;
+
+  SavedPlayersEventRemove({
+    required this.playerId,
+  });
+}
