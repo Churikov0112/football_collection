@@ -18,7 +18,7 @@ class PacksPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final presenter = OpenPackScreenPresenter.of(context);
 
-    return Visibility.maintain(
+    return Visibility(
       visible: !state.unpacking,
       child: SizedBox(
         height: packHeight + 100,

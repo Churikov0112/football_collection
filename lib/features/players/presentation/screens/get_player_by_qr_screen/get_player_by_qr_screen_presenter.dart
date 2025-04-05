@@ -1,4 +1,3 @@
-
 part of 'get_player_by_qr_screen.dart';
 
 class GetPlayerByQrScreenPresenter extends StatefulWidget {
@@ -10,15 +9,14 @@ class GetPlayerByQrScreenPresenter extends StatefulWidget {
 
   const GetPlayerByQrScreenPresenter({
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<GetPlayerByQrScreenPresenter> createState() => GetPlayerByQrScreenPresenterState();
 }
 
 class GetPlayerByQrScreenPresenterState extends State<GetPlayerByQrScreenPresenter> {
-
   @override
   Widget build(BuildContext context) {
     return widget.child;

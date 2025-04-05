@@ -1,20 +1,23 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
+import '../../data/utils.dart';
 import '../../domain/models/player.dart';
 import '../screens/open_pack_screen/open_pack_screen.dart';
 
-String? parseCustomDate(String? dateString) {
-  if (dateString == null) return null;
-  String cleanedString = dateString.replaceAll(RegExp(r'\s*\(\d+\)\s*$'), '').trim();
-  final dateTime = DateFormat('MMM d, y').parse(cleanedString);
-  return DateFormat('dd.MM.yyyy').format(dateTime);
-}
+part 'parts/back_widget.dart';
+part 'parts/confirm_create_qr_bs.dart';
+part 'parts/flag.dart';
+part 'parts/player_image.dart';
+part 'parts/player_qr_bs.dart';
+part 'parts/price.dart';
+part 'parts/rounded_white_container.dart';
 
 class SavedPlayerCard extends StatefulWidget {
   const SavedPlayerCard({
@@ -43,13 +46,8 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
+    // final mq = MediaQuery.of(context);
     // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
-
-    final faceImage = Image.asset(
-      "assets/raster/player_faces/${widget.player.id}.jpg",
-      fit: BoxFit.cover,
-    );
 
     final card = Container(
       height: widget.height,
@@ -62,114 +60,12 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Positioned.fill(
-          //   bottom: 30,
-          //   child: DecoratedBox(
-          //     decoration: BoxDecoration(
-          //       border: Border.all(color: Colors.black54, width: 1),
-          //     ),
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(1.0),
-          //       child: widget.count > 1
-          //           ? Banner(
-          //               location: BannerLocation.topEnd,
-          //               message: 'x${widget.count}',
-          //               color: Colors.green,
-          //               textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
-          //               // textDirection: TextDirection.ltr,
-          //               child: faceImage,
-          //             )
-          //           : faceImage,
-          //     ),
-          //   ),
-          // ),
-          // Positioned(
-          //   top: 5,
-          //   left: 5,
-          //   child: DecoratedBox(
-          //     decoration: BoxDecoration(
-          //       border: Border.all(color: Colors.black54, width: 1),
-          //       borderRadius: BorderRadius.all(Radius.circular(20)),
-          //     ),
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(1),
-          //       child: ClipRRect(
-          //         borderRadius: BorderRadius.all(Radius.circular(20)),
-          //         child: Image.asset(
-          //           'assets/raster/team_flags/${widget.player.countryId}.png',
-          //           height: 32,
-          //           width: 32,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
           Expanded(
             child: Stack(
               children: [
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black54, width: 1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: widget.count > 1
-                          ? Banner(
-                              location: BannerLocation.topEnd,
-                              message: 'x${widget.count}',
-                              color: Colors.green,
-                              textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
-                              // textDirection: TextDirection.ltr,
-                              child: faceImage,
-                            )
-                          : faceImage,
-                    ),
-                  ),
-                ),
-
-                // Positioned(
-                //   top: 0,
-
-                //   child: child,
-                // ),
-                Positioned(
-                  top: 5,
-                  left: 5,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black54, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(1),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        child: Image.asset(
-                          'assets/raster/team_flags/${widget.player.countryId}.png',
-                          height: 32,
-                          width: 32,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 5,
-                  child: Wrap(
-                    spacing: 4,
-                    children: [
-                      if (widget.player.currentMarketValue != null && widget.hideTransferValue != null)
-                        _RoundedWhiteContainer(
-                            text: widget.hideTransferValue!
-                                ? "?"
-                                : beautifyTransferValue(widget.player.currentMarketValue!)),
-                      if (widget.player.position != null) _RoundedWhiteContainer(text: widget.player.position!),
-                    ],
-                  ),
-                ),
+                _PlayerImage(player: widget.player, count: widget.count),
+                _Flag(player: widget.player),
+                _Price(player: widget.player, hideTransferValue: widget.hideTransferValue),
               ],
             ),
           ),
@@ -178,56 +74,8 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
             widget.player.name.toUpperCase(),
             maxLines: 2,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          // Column(
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          // children: [
-          // Padding(
-          //   padding: const EdgeInsets.only(right: 4, bottom: 4),
-          //   child: Wrap(
-          //     spacing: 2,
-          //     runSpacing: 2,
-          //     crossAxisAlignment: WrapCrossAlignment.end,
-          //     alignment: WrapAlignment.end,
-          //     // mainAxisSize: MainAxisSize.min,
-          //     children: [
-          //       if (widget.player.currentMarketValue != null && widget.hideTransferValue != null)
-          //         _RoundedWhiteContainer(
-          //           text:
-          //               widget.hideTransferValue! ? "?" : beautifyTransferValue(widget.player.currentMarketValue!),
-          //         ),
-          //       if (widget.player.position != null) _RoundedWhiteContainer(text: widget.player.position!),
-          //     ],
-          //   ),
-          // ),
-          // DecoratedBox(
-          //   decoration: BoxDecoration(color: Colors.white),
-          //   child: SizedBox(
-          //     width: mq.size.width,
-          //     child: Padding(
-          //       padding: const EdgeInsets.symmetric(horizontal: 8),
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           Text(
-          //             widget.player.name + "fkdfkd",
-          //             textAlign: TextAlign.center,
-          //             style: const TextStyle(
-          //               fontSize: 14,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          //   ],
-          // ),
-          // ),
         ],
       ),
     );
@@ -258,75 +106,18 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
                 onTap: () async {
                   final confirmed = await showModalBottomSheet<bool>(
                     context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 16),
-                            Text(
-                              "Convert dublicate to QR code for your friend? Dublicate will be deleted from your collection",
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      context.pop(false);
-                                    },
-                                    child: Text("Cancel"),
-                                  ),
-                                ),
-                                SizedBox(width: 12),
-                                Expanded(
-                                  child: FilledButton(
-                                    onPressed: () {
-                                      context.pop(true);
-                                    },
-                                    child: Text("Confirm"),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: mq.padding.bottom + 16),
-                          ],
-                        ),
-                      );
-                    },
+                    builder: (context) => _ConfirmCreateQRBottomSheet(),
                   );
 
-                  if (confirmed == true) {
-                    getIt.get<SavedPlayersBloc>().add(SavedPlayersEventRemove(playerId: widget.player.id));
-                    await showModalBottomSheet<bool>(
+                  if (confirmed == true && mounted) {
+                    await showModalBottomSheet(
                       context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: SizedBox(
-                            width: mq.size.width,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: mq.size.width / 2,
-                                  height: mq.size.width / 2,
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(height: 32),
-                                SizedBox(
-                                  width: mq.size.width * 0.7,
-                                  child: Text(
-                                    "Open QR Scanner on second device from side menu and scan code",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                      builder: (context) => _PlayerQrBottomSheet(),
+                    ).timeout(
+                      const Duration(milliseconds: 300),
+                      onTimeout: () async {
+                        getIt.get<SavedPlayersBloc>().add(SavedPlayersEventRemove(playerId: widget.player.id));
+                        return true;
                       },
                     );
                   }
@@ -342,104 +133,5 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
       );
     }
     return card;
-  }
-}
-
-class _PlayerCardBackWidget extends StatelessWidget {
-  const _PlayerCardBackWidget({
-    required this.height,
-    required this.width,
-    required this.player,
-  });
-
-  final double height;
-  final double width;
-  final PlayerModel player;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: SizedBox(
-        height: height,
-        width: width,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              if (parseCustomDate(player.birthDate) != null)
-                _RoundedWhiteContainer(text: parseCustomDate(player.birthDate)!),
-              if (player.foot != null)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("foot:  "),
-                    _RoundedWhiteContainer(text: player.foot!),
-                  ],
-                ),
-              if (player.height != null)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("height:  "),
-                    _RoundedWhiteContainer(text: player.height!),
-                  ],
-                ),
-              if (player.currentMarketValue != null)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("current:  "),
-                    _RoundedWhiteContainer(text: beautifyTransferValue(player.currentMarketValue!)),
-                  ],
-                ),
-              if (player.currentMarketValue != null)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("prime:  "),
-                    _RoundedWhiteContainer(text: beautifyTransferValue(player.maxMarketValue!)),
-                  ],
-                ),
-              if (player.currentClub != null) _RoundedWhiteContainer(text: player.currentClub!.toUpperCase()),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _RoundedWhiteContainer extends StatelessWidget {
-  const _RoundedWhiteContainer({
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-        border: Border.all(),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -33,8 +33,6 @@ class _PlayerCardsSwiper extends StatelessWidget {
       onSwipe: (previousIndex, currentIndex, direction) {
         presenter.savePlayer(players[previousIndex]);
         return true;
-        // presenter.savePlayer(players[previousIndex]);
-        // return true;
       },
     );
   }

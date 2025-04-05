@@ -142,7 +142,7 @@ class OpenPackScreenPresenterState extends State<OpenPackScreenPresenter> with T
         if (stickerpacksState is StickerpacksStateLoadSucceeded) {
           // final packs = stickerpacksState.packs ?? [];
           setSelectedPackIndex(_selectedPackIndexSubject.value);
-          packsPageController = PageController(viewportFraction: 0.6);
+          packsPageController = PageController(viewportFraction: 0.6, initialPage: _selectedPackIndexSubject.value);
         }
       },
       child: widget.child,
