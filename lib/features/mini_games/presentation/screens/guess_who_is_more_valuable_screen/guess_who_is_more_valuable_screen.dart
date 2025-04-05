@@ -14,10 +14,10 @@ import 'package:rxdart/rxdart.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 import 'widgets/guess_options.dart';
 
-part 'guess_transfer_value_less_more_screen_presenter.dart';
+part 'guess_who_is_more_valuable_screen_presenter.dart';
 
-class GuessTransferValueLessMoreScreen extends StatelessWidget {
-  const GuessTransferValueLessMoreScreen({super.key});
+class GuessWhoIsMoreValuableScreen extends StatelessWidget {
+  const GuessWhoIsMoreValuableScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class GuessTransferValueLessMoreScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => RandomPlayersBloc(getIt.get()),
-      child: GuessTransferValueLessMoreScreenPresenter(
+      child: GuessWhoIsMoreValuableScreenPresenter(
         child: Builder(builder: (context) {
-          final presenter = GuessTransferValueLessMoreScreenPresenter.of(context);
+          final presenter = GuessWhoIsMoreValuableScreenPresenter.of(context);
 
           return Scaffold(
             body: Stack(

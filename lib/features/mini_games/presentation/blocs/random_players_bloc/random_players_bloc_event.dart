@@ -4,10 +4,10 @@ sealed class RandomPlayersEvent {}
 
 final class RandomPlayersEventGet extends RandomPlayersEvent {
   final int count;
-  final bool? hasTransferValue;
+  final int? minPrimeTransferValue;
 
   RandomPlayersEventGet({
     required this.count,
-    this.hasTransferValue,
+    this.minPrimeTransferValue,
   });
 }

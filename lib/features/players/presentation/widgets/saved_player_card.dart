@@ -155,12 +155,21 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
                     ),
                   ),
                 ),
-                if (widget.player.position != null)
-                  Positioned(
-                    bottom: 5,
-                    right: 5,
-                    child: _RoundedWhiteContainer(text: widget.player.position!),
+                Positioned(
+                  bottom: 5,
+                  right: 5,
+                  child: Wrap(
+                    spacing: 4,
+                    children: [
+                      if (widget.player.currentMarketValue != null && widget.hideTransferValue != null)
+                        _RoundedWhiteContainer(
+                            text: widget.hideTransferValue!
+                                ? "?"
+                                : beautifyTransferValue(widget.player.currentMarketValue!)),
+                      if (widget.player.position != null) _RoundedWhiteContainer(text: widget.player.position!),
+                    ],
                   ),
+                ),
               ],
             ),
           ),
@@ -360,10 +369,10 @@ class _PlayerCardBackWidget extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (parseCustomDate(player.birthDate) != null)
                 _RoundedWhiteContainer(text: parseCustomDate(player.birthDate)!),
-              const Spacer(),
               if (player.foot != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -372,7 +381,6 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: player.foot!),
                   ],
                 ),
-              const Spacer(),
               if (player.height != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -381,7 +389,6 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: player.height!),
                   ],
                 ),
-              const Spacer(),
               if (player.currentMarketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -390,7 +397,6 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: beautifyTransferValue(player.currentMarketValue!)),
                   ],
                 ),
-              const Spacer(),
               if (player.currentMarketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -399,7 +405,6 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedWhiteContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],
                 ),
-              const Spacer(),
               if (player.currentClub != null) _RoundedWhiteContainer(text: player.currentClub!.toUpperCase()),
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_who_is_more_valuable_screen/guess_who_is_more_valuable_screen.dart';
 
 class GuessOptionsLessMoreEqual extends StatelessWidget {
   const GuessOptionsLessMoreEqual({
@@ -13,7 +13,7 @@ class GuessOptionsLessMoreEqual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = GuessTransferValueLessMoreScreenPresenter.of(context);
+    final presenter = GuessWhoIsMoreValuableScreenPresenter.of(context);
 
     return StreamBuilder<String?>(
         stream: presenter.selectedOptionStream$,

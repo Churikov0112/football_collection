@@ -1,24 +1,24 @@
-part of 'guess_transfer_value_less_more_screen.dart';
+part of 'guess_who_is_more_valuable_screen.dart';
 
 const _kDefaultRewardValue = 1;
 
-class GuessTransferValueLessMoreScreenPresenter extends StatefulWidget {
-  static GuessTransferValueLessMoreScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<GuessTransferValueLessMoreScreenPresenterState>()!;
+class GuessWhoIsMoreValuableScreenPresenter extends StatefulWidget {
+  static GuessWhoIsMoreValuableScreenPresenterState of(BuildContext context) {
+    return context.findAncestorStateOfType<GuessWhoIsMoreValuableScreenPresenterState>()!;
   }
 
   final Widget child;
 
-  const GuessTransferValueLessMoreScreenPresenter({
+  const GuessWhoIsMoreValuableScreenPresenter({
     required this.child,
     super.key,
   });
 
   @override
-  State<GuessTransferValueLessMoreScreenPresenter> createState() => GuessTransferValueLessMoreScreenPresenterState();
+  State<GuessWhoIsMoreValuableScreenPresenter> createState() => GuessWhoIsMoreValuableScreenPresenterState();
 }
 
-class GuessTransferValueLessMoreScreenPresenterState extends State<GuessTransferValueLessMoreScreenPresenter> {
+class GuessWhoIsMoreValuableScreenPresenterState extends State<GuessWhoIsMoreValuableScreenPresenter> {
   final random = Random();
 
   final BehaviorSubject<String?> _selectedOptionSubject = BehaviorSubject.seeded(null);
@@ -30,13 +30,13 @@ class GuessTransferValueLessMoreScreenPresenterState extends State<GuessTransfer
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 2, hasTransferValue: true));
+      loadRandomPlayers();
     });
   }
 
   void loadRandomPlayers() {
     _selectedOptionSubject.add(null);
-    context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 2, hasTransferValue: true));
+    context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 2, minPrimeTransferValue: 25000000));
   }
 
   // Future<void> showResult({

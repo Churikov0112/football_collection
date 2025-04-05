@@ -35,7 +35,7 @@ class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScr
 
   void loadRandomPlayer() {
     _selectedOptionSubject.add(null);
-    context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 1, hasTransferValue: true));
+    context.read<RandomPlayersBloc>().add(RandomPlayersEventGet(count: 1, minPrimeTransferValue: 25000000));
   }
 
   Future<void> showResult({

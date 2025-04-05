@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
-import '../../features/mini_games/presentation/screens/guess_transfer_value_less_more_screen/guess_transfer_value_less_more_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_who_is_more_valuable_screen/guess_who_is_more_valuable_screen.dart';
 import '../../features/players/presentation/screens/open_pack_screen/open_pack_screen.dart';
 import '../../features/players/presentation/screens/players_screen/players_screen.dart';
 
@@ -79,7 +79,7 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.miniGameGuessTransferValueLessMore,
-          builder: (context, state) => GuessTransferValueLessMoreScreen(),
+          builder: (context, state) => GuessWhoIsMoreValuableScreen(),
         ),
         GoRoute(
           path: RoutePaths.getPlayerByQr,

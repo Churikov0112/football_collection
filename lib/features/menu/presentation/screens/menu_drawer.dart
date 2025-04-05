@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/features/cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,13 +39,54 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) {
+                  return EnterCheatCodeScreen();
+                },
+              );
+            },
             leading: Icon(
               Icons.keyboard,
               color: Colors.white,
             ),
             title: Text(
               "Cheat codes",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Settings",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            ),
+            title: Text(
+              "About",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.language,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Web version (alpha)",
               style: TextStyle(color: Colors.white),
             ),
           ),

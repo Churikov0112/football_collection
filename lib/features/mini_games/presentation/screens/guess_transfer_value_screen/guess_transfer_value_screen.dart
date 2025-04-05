@@ -42,7 +42,7 @@ class GuessTransferValueScreen extends StatelessWidget {
 
                       final random = presenter.random;
                       final currentMarketValue = player.currentMarketValue ?? 0;
-                      const allDeviationSteps = [-0.5, -0.25, 0.25, 0.5];
+                      const allDeviationSteps = [-0.75, -0.5, -0.25, 0.25, 0.5, 0.75, 1];
                       final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
 
                       final randomMarketValues = [

@@ -10,6 +10,14 @@ class SavedPlayersEventAdd extends SavedPlayersEvent {
   });
 }
 
+class SavedPlayersEventAddAll extends SavedPlayersEvent {
+  final List<String> playerIds;
+
+  SavedPlayersEventAddAll({
+    required this.playerIds,
+  });
+}
+
 class SavedPlayersEventRemove extends SavedPlayersEvent {
   final String playerId;
 
