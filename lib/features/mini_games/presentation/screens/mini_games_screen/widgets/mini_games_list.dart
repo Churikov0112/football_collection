@@ -17,14 +17,14 @@ class _MiniGamesList extends StatelessWidget {
         padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 120),
         children: [
           _MiniGameTile(
-            title: "Guess transfer value",
+            title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {
               context.push(RoutePaths.miniGameGuessTransferValue);
             },
           ),
           _MiniGameTile(
-            title: "Who costs more",
+            title: AppGlossary.whoCostsMore,
             color: Colors.purple,
             onTap: () {
               context.push(RoutePaths.miniGameGuessTransferValueLessMore);
@@ -53,7 +53,7 @@ class _MiniGameTile extends StatelessWidget {
     required this.onTap,
   });
 
-  final String title;
+  final AppGlossary title;
   final Color color;
   final VoidCallback onTap;
 
@@ -73,12 +73,15 @@ class _MiniGameTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
+              Translator(
+                termin: title,
+                builder: (value) => Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],

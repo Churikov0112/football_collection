@@ -13,6 +13,7 @@ import 'package:football_collection/features/players/presentation/blocs/saved_pl
 import 'package:football_collection/features/players/presentation/screens/open_pack_screen/widgets/pack_3d_model.dart';
 import 'package:football_collection/features/players/presentation/screens/open_pack_screen/widgets/packs_page_view.dart';
 import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/log/log_service.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -109,7 +110,10 @@ class OpenPackScreen extends StatelessWidget {
                               top: 0,
                               left: 0,
                               right: 0,
-                              child: TransparentAppbar(title: "Open pack"),
+                              child: Translator(
+                                termin: AppGlossary.openPack,
+                                builder: (value) => TransparentAppbar(title: value),
+                              ),
                             ),
                             AnimatedBuilder(
                               animation: presenter._hidePacksAnimation,

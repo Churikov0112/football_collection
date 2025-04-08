@@ -8,6 +8,7 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/confederations/domain/models/confederation.dart';
 import 'package:football_collection/features/countries/presentation/blocs/countries_bloc/countries_bloc.dart';
 import 'package:football_collection/features/players/data/players_repository.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -47,9 +48,12 @@ class CountriesScreen extends StatelessWidget {
                 _CountriesList(),
               ],
             ),
-            TransparentAppbar(
-              title: confederation.continentName,
-              backgroundColor: confederation.color,
+            Translator(
+              termin: confederation.continentTermin,
+              builder: (value) => TransparentAppbar(
+                title: value,
+                backgroundColor: confederation.color,
+              ),
             ),
           ],
         ),
@@ -60,7 +64,10 @@ class CountriesScreen extends StatelessWidget {
               extra: OpenPackScreenArgs(confederation: confederation),
             );
           },
-          label: Text('Open pack'),
+          label: Translator(
+            termin: AppGlossary.openPack,
+            builder: (value) => Text(value),
+          ),
           icon: Icon(Icons.style),
         ),
       ),

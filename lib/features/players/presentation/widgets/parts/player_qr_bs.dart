@@ -27,7 +27,7 @@ class _PlayerQrBottomSheet extends StatelessWidget {
             SizedBox(
               width: mq.size.width * 0.7,
               child: Text(
-                "Open QR Scanner on second device from side menu and scan code",
+                AppGlossary.openQrScannerOnSecondDevice.translate(),
                 textAlign: TextAlign.center,
               ),
             ),

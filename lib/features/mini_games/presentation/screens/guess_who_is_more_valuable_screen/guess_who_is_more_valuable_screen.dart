@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
 import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -83,22 +84,32 @@ class GuessWhoIsMoreValuableScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                  child: Text(
-                                    "Guess which player is more pricy!",
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                  child: Translator(
+                                    termin: AppGlossary.guessWhichPlayerIsMoreExpensive,
+                                    builder: (value) => Text(
+                                      value,
+                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
                                 ),
                               ),
                               SizedBox(height: 16),
-                              GuessOptionsLessMoreEqual(
-                                options: ["< left", "equal", "right >"],
-                                rightAnswer: player2.currentMarketValue! < player1.currentMarketValue!
-                                    ? "< left"
-                                    : player2.currentMarketValue! > player1.currentMarketValue!
-                                        ? "right >"
-                                        : "equal",
+                              Translator(
+                                termin: AppGlossary.left,
+                                builder: (left) => Translator(
+                                  termin: AppGlossary.right,
+                                  builder: (right) => Translator(
+                                    termin: AppGlossary.equal,
+                                    builder: (equal) => GuessOptionsLessMoreEqual(
+                                      options: ["< $left", equal, "$right >"],
+                                      rightAnswer: player2.currentMarketValue! < player1.currentMarketValue!
+                                          ? "< $left"
+                                          : player2.currentMarketValue! > player1.currentMarketValue!
+                                              ? "$right >"
+                                              : equal,
+                                    ),
+                                  ),
+                                ),
                               ),
                               SizedBox(height: mq.padding.bottom + 20),
                             ],
@@ -108,7 +119,10 @@ class GuessWhoIsMoreValuableScreen extends StatelessWidget {
                     );
                   },
                 ),
-                TransparentAppbar(title: "Who costs more?"),
+                Translator(
+                  termin: AppGlossary.whoCostsMore,
+                  builder: (value) => TransparentAppbar(title: value),
+                ),
               ],
             ),
           );

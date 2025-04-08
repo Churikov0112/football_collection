@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:football_collection/services/localization/dictionary.dart';
+import 'package:football_collection/services/localization/language_bloc/language_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:toastification/toastification.dart';
@@ -85,27 +89,39 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   Widget build(BuildContext context) {
     return !isInitialized
         ? const SizedBox.shrink()
-        : ToastificationWrapper(
-            config: toastificationConfig,
-            child: MaterialApp.router(
-              routerConfig: _router.router,
-              title: 'Football Pack Collection',
-              color: Colors.black,
-              debugShowCheckedModeBanner: false,
-              builder: (context, child) {
-                return child == null
-                    ? const SizedBox.shrink()
-                    : ScrollConfiguration(
-                        behavior: DisableBlueGlowBehavior(),
-                        child: AnnotatedRegion(
-                          value: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                          child: MediaQuery.withNoTextScaling(
-                            child: child,
-                          ),
-                        ),
-                      );
-              },
-            ),
+        : BlocBuilder<LanguageBloc, LanguageState>(
+            bloc: getIt.get(),
+            builder: (context, languageState) {
+              return ToastificationWrapper(
+                config: toastificationConfig,
+                child: MaterialApp.router(
+                  routerConfig: _router.router,
+                  title: 'Football Pack Collection',
+                  color: Colors.black,
+                  debugShowCheckedModeBanner: false,
+                  locale: languageState.language.locale,
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: Languages.values.map((e) => e.locale).toList(),
+                  builder: (context, child) {
+                    return child == null
+                        ? const SizedBox.shrink()
+                        : ScrollConfiguration(
+                            behavior: DisableBlueGlowBehavior(),
+                            child: AnnotatedRegion(
+                              value: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+                              child: MediaQuery.withNoTextScaling(
+                                child: child,
+                              ),
+                            ),
+                          );
+                  },
+                ),
+              );
+            },
           );
   }
 }

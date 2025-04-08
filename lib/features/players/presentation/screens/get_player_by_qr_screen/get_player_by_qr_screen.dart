@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -29,9 +30,12 @@ class GetPlayerByQrScreen extends StatelessWidget {
                 BackgroundImage(),
                 Column(
                   children: [
-                    TransparentAppbar(
-                      title: "QR Scanner",
-                      showBalance: false,
+                    Translator(
+                      termin: AppGlossary.scanQr,
+                      builder: (value) => TransparentAppbar(
+                        title: value,
+                        showBalance: false,
+                      ),
                     ),
                     const Spacer(),
                     SizedBox.square(
@@ -49,9 +53,12 @@ class GetPlayerByQrScreen extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8),
-                        child: Text(
-                          "Scan your friend's QR to get players!",
-                          style: TextStyle(color: Colors.white),
+                        child: Translator(
+                          termin: AppGlossary.scanYourFriendQrToGetPlayer,
+                          builder: (value) => Text(
+                            value,
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),

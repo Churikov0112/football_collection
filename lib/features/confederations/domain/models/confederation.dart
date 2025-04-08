@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/services/localization/dictionary.dart';
 
 enum Confederations {
   caf,
@@ -48,6 +49,25 @@ extension ConfederationExtension on Confederations {
         return 'South America';
       case Confederations.unknown:
         return 'Unknown';
+    }
+  }
+
+  AppGlossary get continentTermin {
+    switch (this) {
+      case Confederations.caf:
+        return AppGlossary.africa;
+      case Confederations.concacaf:
+        return AppGlossary.northAmerica;
+      case Confederations.ofc:
+        return AppGlossary.oceania;
+      case Confederations.uefa:
+        return AppGlossary.europe;
+      case Confederations.afc:
+        return AppGlossary.asia;
+      case Confederations.conmebol:
+        return AppGlossary.southAmerica;
+      case Confederations.unknown:
+        return AppGlossary.unknown;
     }
   }
 }

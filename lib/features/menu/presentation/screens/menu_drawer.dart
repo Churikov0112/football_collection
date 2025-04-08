@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,9 +22,12 @@ class MenuDrawer extends StatelessWidget {
               Icons.gamepad,
               color: Colors.white,
             ),
-            title: Text(
-              "Mini games",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.miniGames,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           ListTile(
@@ -34,9 +38,12 @@ class MenuDrawer extends StatelessWidget {
               Icons.qr_code_2,
               color: Colors.white,
             ),
-            title: Text(
-              "Scan QR",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.scanQr,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           ListTile(
@@ -53,20 +60,28 @@ class MenuDrawer extends StatelessWidget {
               Icons.keyboard,
               color: Colors.white,
             ),
-            title: Text(
-              "Cheat codes",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.cheatCodes,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              context.push(RoutePaths.settings);
+            },
             leading: Icon(
               Icons.settings,
               color: Colors.white,
             ),
-            title: Text(
-              "Settings",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.settings,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           ListTile(
@@ -75,9 +90,12 @@ class MenuDrawer extends StatelessWidget {
               Icons.info_outline,
               color: Colors.white,
             ),
-            title: Text(
-              "About",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.about,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           ListTile(
@@ -86,9 +104,12 @@ class MenuDrawer extends StatelessWidget {
               Icons.language,
               color: Colors.white,
             ),
-            title: Text(
-              "Web version (alpha)",
-              style: TextStyle(color: Colors.white),
+            title: Translator(
+              termin: AppGlossary.webVersion,
+              builder: (value) => Text(
+                value,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],

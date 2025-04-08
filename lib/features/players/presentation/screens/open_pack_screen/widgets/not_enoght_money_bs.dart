@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/domain/models/pack.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +27,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 20),
-          Text("You have not enought 🏆 to buy pack"),
+          Text(AppGlossary.youHaveNotEnoughMoneyToBuyPack.translate()),
           const SizedBox(height: 20),
           Row(
             spacing: 8,
@@ -47,7 +48,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                         const SizedBox(height: 16),
                         Icon(Icons.games),
                         const SizedBox(height: 16),
-                        Text("Play Mini-games"),
+                        Text(AppGlossary.playMiniGames.translate()),
                         const SizedBox(height: 16),
                       ],
                     ),
@@ -58,7 +59,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 100)); // TODO remove this cheat
-                    ToastService.showToast(title: "Balance increased by 100 🏆", seconds: 2);
+                    ToastService.showToast(title: "${AppGlossary.balanceIncreased} 100 🏆", seconds: 2);
                     context.pop();
                   },
                   child: Container(
@@ -72,7 +73,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                         const SizedBox(height: 16),
                         Icon(Icons.play_arrow),
                         const SizedBox(height: 16),
-                        Text("Watch Ad => 100 🏆"),
+                        Text("${AppGlossary.watchAd.translate()} => 100 🏆"),
                         const SizedBox(height: 16),
                       ],
                     ),

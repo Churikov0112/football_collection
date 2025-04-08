@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';

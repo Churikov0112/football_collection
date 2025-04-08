@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
 import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -76,7 +77,10 @@ class GuessTransferValueScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  TransparentAppbar(title: "Guess transfer value"),
+                  Translator(
+                    termin: AppGlossary.guessTransferValue,
+                    builder: (value) => TransparentAppbar(title: value),
+                  ),
                 ],
               ),
             );

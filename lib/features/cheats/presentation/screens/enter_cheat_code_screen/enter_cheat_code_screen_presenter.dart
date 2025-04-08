@@ -34,11 +34,11 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
       }
       if (clubPlayers.isNotEmpty) {
         getIt.get<SavedPlayersBloc>().add(SavedPlayersEventAddAll(playerIds: clubPlayers.map((e) => e.id).toList()));
-        ToastService.showToast(title: "Cheat code activated!");
+        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate());
         return;
       }
     }
-    ToastService.showErrorToast(title: "Wrong code :(");
+    ToastService.showErrorToast(title: AppGlossary.cheatCodeNotFound.translate());
   }
 
   @override

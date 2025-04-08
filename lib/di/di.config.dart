@@ -31,6 +31,7 @@ import '../features/players/presentation/blocs/saved_players_bloc/saved_players_
     as _i794;
 import '../features/players/presentation/blocs/stickerpacks_bloc/stickerpacks_bloc.dart'
     as _i347;
+import '../services/localization/language_bloc/language_bloc.dart' as _i381;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -49,6 +50,7 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i794.SavedPlayersBloc>(() => _i794.SavedPlayersBloc());
   gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
+  gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i167.CountriesBloc>(
       () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
   gh.singleton<_i736.AllPlayersBloc>(

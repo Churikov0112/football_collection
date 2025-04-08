@@ -14,7 +14,7 @@ class _ConfirmCreateQRBottomSheet extends StatelessWidget {
         children: [
           SizedBox(height: 16),
           Text(
-            "Convert dublicate to QR code for your friend? Dublicate will be deleted from your collection",
+            AppGlossary.convertDuplicateToQr.translate(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 16),
@@ -25,7 +25,7 @@ class _ConfirmCreateQRBottomSheet extends StatelessWidget {
                   onPressed: () {
                     context.pop(false);
                   },
-                  child: Text("Cancel"),
+                  child: Text(AppGlossary.cancel.translate()),
                 ),
               ),
               SizedBox(width: 12),
@@ -34,7 +34,7 @@ class _ConfirmCreateQRBottomSheet extends StatelessWidget {
                   onPressed: () {
                     context.pop(true);
                   },
-                  child: Text("Confirm"),
+                  child: Text(AppGlossary.confirm.translate()),
                 ),
               ),
             ],

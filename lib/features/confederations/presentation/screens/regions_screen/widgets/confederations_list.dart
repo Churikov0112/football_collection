@@ -92,12 +92,15 @@ class _RegionTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Align(
-                              child: Text(
-                                confederation.continentName,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
+                              child: Translator(
+                                termin: confederation.continentTermin,
+                                builder: (value) => Text(
+                                  value,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                  ),
                                 ),
                               ),
                             ),

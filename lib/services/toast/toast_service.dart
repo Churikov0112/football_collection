@@ -35,7 +35,7 @@ class ToastService {
   }
 
   static void showErrorToast({
-    String? title,
+    required String title,
     BuildContext? context,
     String? subtitle,
     int seconds = 5,
@@ -48,7 +48,7 @@ class ToastService {
       type: ToastificationType.error,
       icon: const Icon(Icons.error_outline, size: 36, color: Color(0xFFED3F3F)),
       title: Text(
-        title ?? 'Ошибка!',
+        title,
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,

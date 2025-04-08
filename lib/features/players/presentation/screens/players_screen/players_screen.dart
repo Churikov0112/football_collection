@@ -13,6 +13,7 @@ import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../services/localization/translator.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../domain/models/player.dart';
@@ -56,7 +57,10 @@ class PlayersScreen extends StatelessWidget {
               extra: OpenPackScreenArgs(country: country),
             );
           },
-          label: Text('Open pack'),
+          label: Translator(
+            termin: AppGlossary.openPack,
+            builder: (value) => Text(value),
+          ),
           icon: Icon(Icons.style),
         ),
       ),

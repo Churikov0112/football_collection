@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/players/domain/models/pack.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:go_router/go_router.dart';
 
 class ConfirmBuyPackBottomSheet extends StatelessWidget {
@@ -21,7 +22,7 @@ class ConfirmBuyPackBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 20),
-          Text("Confirm to buy pack for ${pack.price} 🏆"),
+          Text("${AppGlossary.confirmToBuyPackFor.translate()} ${pack.price} 🏆"),
           const SizedBox(height: 20),
           Row(
             spacing: 8,
@@ -31,7 +32,7 @@ class ConfirmBuyPackBottomSheet extends StatelessWidget {
                   onPressed: () {
                     context.pop(false);
                   },
-                  child: Text("Cancel"),
+                  child: Text(AppGlossary.cancel.translate()),
                 ),
               ),
               Expanded(
@@ -39,7 +40,7 @@ class ConfirmBuyPackBottomSheet extends StatelessWidget {
                   onPressed: () {
                     context.pop(true);
                   },
-                  child: Text("Confirm"),
+                  child: Text(AppGlossary.confirm.translate()),
                 ),
               ),
             ],

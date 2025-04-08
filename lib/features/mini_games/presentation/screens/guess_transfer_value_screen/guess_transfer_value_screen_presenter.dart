@@ -46,15 +46,16 @@ class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScr
     if (selectedAnswer == rightAnswer) {
       getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue + winstrick));
       ToastService.showToast(
-        title: "Correct!",
-        subtitle: "Rewarded ${_kDefaultRewardValue + winstrick} 🏆 ${winstrick > 0 ? "Winstrick $winstrick" : ""}",
+        title: AppGlossary.correct.translate(),
+        subtitle:
+            "${AppGlossary.rewarded.translate()} ${_kDefaultRewardValue + winstrick} 🏆, ${AppGlossary.winstrick.translate()} $winstrick",
         seconds: 2,
       );
       winstrick++;
     } else {
       ToastService.showErrorToast(
-        title: "Incorrect!",
-        subtitle: winstrick > 0 ? "Winstrick lost :(" : "Try again!",
+        title: AppGlossary.incorrect.translate(),
+        subtitle: ":(",
         seconds: 2,
       );
       winstrick = 0;
