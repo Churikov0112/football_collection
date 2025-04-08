@@ -6,6 +6,7 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../data/utils.dart';
 import '../../domain/models/player.dart';
@@ -112,7 +113,7 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
                   if (confirmed == true && mounted) {
                     await showModalBottomSheet(
                       context: context,
-                      builder: (context) => _PlayerQrBottomSheet(),
+                      builder: (context) => _PlayerQrBottomSheet(player: widget.player),
                     ).timeout(
                       const Duration(milliseconds: 300),
                       onTimeout: () async {

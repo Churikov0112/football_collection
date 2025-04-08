@@ -1,7 +1,11 @@
 part of '../saved_player_card.dart';
 
 class _PlayerQrBottomSheet extends StatelessWidget {
-  const _PlayerQrBottomSheet();
+  const _PlayerQrBottomSheet({
+    required this.player,
+  });
+
+  final PlayerModel player;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +18,10 @@ class _PlayerQrBottomSheet extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: mq.size.width / 2,
-              height: mq.size.width / 2,
-              color: Colors.black,
+            QrImageView(
+              data: player.id,
+              version: QrVersions.auto,
+              size: mq.size.width / 2,
             ),
             const SizedBox(height: 32),
             SizedBox(

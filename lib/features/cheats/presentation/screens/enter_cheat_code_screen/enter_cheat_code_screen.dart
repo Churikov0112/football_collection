@@ -42,7 +42,7 @@ class EnterCheatCodeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: mq.padding.bottom + 16),
+                SizedBox(height: mq.viewInsets.bottom + 16),
               ],
             ),
           );

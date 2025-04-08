@@ -12,6 +12,7 @@ class MenuDrawer extends StatelessWidget {
       backgroundColor: Colors.black.withAlpha(175),
       child: ListView(
         children: [
+          const SizedBox(height: 50),
           ListTile(
             onTap: () {
               context.push(RoutePaths.miniGames);

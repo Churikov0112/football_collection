@@ -21,6 +21,8 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
 
   void verifyCheatCode() {
     final cheatCode = cheatCodeTextEditingController.value.text;
+    cheatCodeTextEditingController.clear();
+
     if (cheatCode.contains("CLUB ")) {
       final club = cheatCode.replaceAll("CLUB ", "");
       final allPlayers = getIt.get<AllPlayersBloc>().state.allPlayers ?? [];
