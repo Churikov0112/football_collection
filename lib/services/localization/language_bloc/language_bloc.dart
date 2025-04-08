@@ -8,7 +8,7 @@ part 'language_state.dart';
 
 @singleton
 class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
-  LanguageBloc() : super(const LanguageState(language: Languages.en)) {
+  LanguageBloc() : super(const LanguageState(language: Languages.english)) {
     on<LanguageBlocEvent>(
       (event, emit) => switch (event) {
         LanguageBlocEventSet() => _set(event, emit),
@@ -24,10 +24,10 @@ class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
   LanguageState fromJson(Map<String, dynamic>? json) {
     if (json?['language'] != null) {
       final valueString = json!['language'];
-      final value = Languages.values.firstWhereOrNull((e) => e.name == valueString) ?? Languages.en;
+      final value = Languages.values.firstWhereOrNull((e) => e.name == valueString) ?? Languages.english;
       return LanguageState(language: value);
     } else {
-      return const LanguageState(language: Languages.en);
+      return const LanguageState(language: Languages.english);
     }
   }
 
