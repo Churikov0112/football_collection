@@ -76,7 +76,7 @@ class _SavedPlayerCardState extends State<SavedPlayerCard> {
             widget.player.name.toUpperCase(),
             maxLines: 2,
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ],
       ),

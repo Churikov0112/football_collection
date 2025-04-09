@@ -19,3 +19,8 @@ extension ColorBrightness on Color {
     return hslLight.toColor();
   }
 }
+
+class AppColors {
+  static const Color darkBackgroundPrimary = Color(0xFF1C1C1C);
+  static const Color darkBackgroundSecondary = Color(0xFF282828);
+}

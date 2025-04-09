@@ -20,10 +20,7 @@ class _RoundedWhiteContainer extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.black),
         ),
       ),
     );

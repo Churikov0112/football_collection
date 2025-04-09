@@ -5,7 +5,6 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
-import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -24,10 +23,10 @@ class GetPlayerByQrScreen extends StatelessWidget {
           final presenter = GetPlayerByQrScreenPresenter.of(context);
 
           return Scaffold(
-            backgroundColor: Colors.black,
+            // backgroundColor: Colors.black,
             body: Stack(
               children: [
-                BackgroundImage(),
+                // BackgroundImage(),
                 Column(
                   children: [
                     Translator(
@@ -46,18 +45,22 @@ class GetPlayerByQrScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.black45,
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Translator(
-                          termin: AppGlossary.scanYourFriendQrToGetPlayer,
-                          builder: (value) => Text(
-                            value,
-                            style: TextStyle(color: Colors.white),
+                    SizedBox(
+                      width: mq.size.width * 0.8,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.black45,
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Translator(
+                            termin: AppGlossary.scanYourFriendQrToGetPlayer,
+                            builder: (value) => Text(
+                              value,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),

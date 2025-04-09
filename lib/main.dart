@@ -20,6 +20,13 @@ Future<void> main() async {
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
   );
 
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.black,
+      statusBarColor: Colors.black,
+    ),
+  );
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((value) => runApp(const FootballPackCollectionApp()));
@@ -95,6 +102,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
               return ToastificationWrapper(
                 config: toastificationConfig,
                 child: MaterialApp.router(
+                  theme: ThemeData.dark(),
                   routerConfig: _router.router,
                   title: 'Football Pack Collection',
                   color: Colors.black,

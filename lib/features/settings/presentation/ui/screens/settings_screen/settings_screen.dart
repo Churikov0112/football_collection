@@ -15,22 +15,17 @@ class SettingsScreen extends StatelessWidget {
 
     return SettingsScreenPresenter(
       child: Scaffold(
+        // backgroundColor: AppColors.darkBackgroundSecondary,
         body: Column(
           children: [
             Translator(
               termin: AppGlossary.settings,
               builder: (value) => TransparentAppbar(
                 title: value,
-                backgroundColor: Colors.green,
               ),
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  LanguageTile(),
-                ],
-              ),
-            ),
+            const SizedBox(height: 20),
+            LanguageTile(),
           ],
         ),
       ),

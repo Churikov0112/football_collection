@@ -44,6 +44,33 @@ class FootballCollectionRouter {
 
   static final FootballCollectionRouter _inst = FootballCollectionRouter._internal();
 
+  Page<T> buildPageWithDefaultTransition<T>({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      child: child,
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0.25, 0),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOutQuart,
+          )),
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
+      },
+    );
+  }
+
   factory FootballCollectionRouter(String initialRoute) {
     _inst.router = GoRouter(
       navigatorKey: rootNavigatorKey,

@@ -37,20 +37,29 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                   onTap: () {
                     context.push(RoutePaths.miniGames);
                   },
-                  child: Container(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       border: Border.all(),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 16),
-                        Icon(Icons.games),
-                        const SizedBox(height: 16),
-                        Text(AppGlossary.playMiniGames.translate()),
-                        const SizedBox(height: 16),
-                      ],
+                    child: SizedBox(
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 16),
+                            Icon(Icons.games),
+                            const SizedBox(height: 16),
+                            Text(
+                              "${AppGlossary.playMiniGames.translate()}\n${AppGlossary.free.translate()}",
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -62,20 +71,29 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                     ToastService.showToast(title: "${AppGlossary.balanceIncreased} 100 🏆", seconds: 2);
                     context.pop();
                   },
-                  child: Container(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       border: Border.all(),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 16),
-                        Icon(Icons.play_arrow),
-                        const SizedBox(height: 16),
-                        Text("${AppGlossary.watchAd.translate()} => 100 🏆"),
-                        const SizedBox(height: 16),
-                      ],
+                    child: SizedBox(
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 16),
+                            Icon(Icons.play_arrow),
+                            const SizedBox(height: 16),
+                            Text(
+                              "${AppGlossary.watchAd.translate()}\n + 100 🏆",
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
