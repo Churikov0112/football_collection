@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:football_collection/features/confederations/domain/models/confederation.dart';
+import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 
 class CountryModel extends Equatable {
   final String id;
   final String name;
-  final Confederations confederation;
+  final FootballConfederations confederation;
 
   const CountryModel({
     required this.id,
@@ -16,7 +16,7 @@ class CountryModel extends Equatable {
     return CountryModel(
       id: json['id'],
       name: json['name'],
-      confederation: confederationFromCountryName(json['name']),
+      confederation: footballConfederationFromCountryName(json['name']),
     );
   }
 

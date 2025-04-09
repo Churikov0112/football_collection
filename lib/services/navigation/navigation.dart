@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/confederations/domain/models/confederation.dart';
-import 'package:football_collection/features/confederations/presentation/screens/regions_screen/confederations_screen.dart';
+import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
-import 'package:football_collection/features/players/presentation/screens/get_player_by_qr_screen/get_player_by_qr_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
-import '../../features/mini_games/presentation/screens/guess_who_is_more_valuable_screen/guess_who_is_more_valuable_screen.dart';
-import '../../features/players/presentation/screens/open_pack_screen/open_pack_screen.dart';
-import '../../features/players/presentation/screens/players_screen/players_screen.dart';
+import '../../features/football_confederations/domain/models/football_confederation.dart';
+import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
+import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';
+import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by_qr_screen.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class RoutePaths {
-  static const confederations = '/confederations';
-  static const countries = '/countries';
-  static const album = '/album';
-  static const stickerpack = '/stickerpack';
+  static const footballConfederations = '/footballConfederations';
+  static const footballCountries = '/footballCountries';
+  static const footballPlayersAlbum = '/footballPlayersAlbum';
+  static const footballPlayersPacks = '/footballPlayersPacks';
 
   // minigames
   static const miniGames = '/miniGames';
-  static const miniGameGuessTransferValue = '/miniGameGuessTransferValue';
-  static const miniGameGuessTransferValueLessMore = '/miniGameGuessTransferValueLessMore';
+  static const footballMiniGameGuessTransferValue = '/footballMiniGameGuessTransferValue';
+  static const footballMiniGameGuessWhoIsMoreExpensive = '/footballMiniGameGuessWhoIsMoreExpensive';
 
-  static const getPlayerByQr = '/getPlayerByQr';
+  static const getCardByQr = '/getCardByQr';
   static const settings = '/settings';
 
   // static const main = '/main';
@@ -77,25 +77,25 @@ class FootballCollectionRouter {
       initialLocation: initialRoute,
       routes: [
         GoRoute(
-          path: RoutePaths.album,
-          builder: (context, state) => PlayersScreen(
+          path: RoutePaths.footballPlayersAlbum,
+          builder: (context, state) => FootballPlayersAlbumScreen(
             country: state.extra as CountryModel,
           ),
         ),
         GoRoute(
-          path: RoutePaths.stickerpack,
-          builder: (context, state) => OpenPackScreen(
-            args: state.extra as OpenPackScreenArgs,
+          path: RoutePaths.footballPlayersPacks,
+          builder: (context, state) => FootballPlayersPacksScreen(
+            args: state.extra as FootballPlayersPacksScreenArgs,
           ),
         ),
         GoRoute(
-          path: RoutePaths.confederations,
-          builder: (context, state) => const ConfederationsScreen(),
+          path: RoutePaths.footballConfederations,
+          builder: (context, state) => const FootballConfederationsScreen(),
         ),
         GoRoute(
-          path: RoutePaths.countries,
-          builder: (context, state) => CountriesScreen(
-            confederation: state.extra as Confederations,
+          path: RoutePaths.footballCountries,
+          builder: (context, state) => FootballCountriesScreen(
+            confederation: state.extra as FootballConfederations,
           ),
         ),
         GoRoute(
@@ -103,16 +103,16 @@ class FootballCollectionRouter {
           builder: (context, state) => MiniGamesScreen(),
         ),
         GoRoute(
-          path: RoutePaths.miniGameGuessTransferValue,
+          path: RoutePaths.footballMiniGameGuessTransferValue,
           builder: (context, state) => GuessTransferValueScreen(),
         ),
         GoRoute(
-          path: RoutePaths.miniGameGuessTransferValueLessMore,
-          builder: (context, state) => GuessWhoIsMoreValuableScreen(),
+          path: RoutePaths.footballMiniGameGuessWhoIsMoreExpensive,
+          builder: (context, state) => GuessWhichFootballPlayerIsMoreExpensiveScreen(),
         ),
         GoRoute(
-          path: RoutePaths.getPlayerByQr,
-          builder: (context, state) => GetPlayerByQrScreen(),
+          path: RoutePaths.getCardByQr,
+          builder: (context, state) => GetCardByQrScreen(),
         ),
         GoRoute(
           path: RoutePaths.settings,

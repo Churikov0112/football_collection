@@ -1,29 +1,31 @@
 part of 'countries_screen.dart';
 
-class CountriesScreenPresenter extends StatefulWidget {
-  static CountriesScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<CountriesScreenPresenterState>()!;
+class FootballCountriesScreenPresenter extends StatefulWidget {
+  static FootballCountriesScreenPresenterState of(BuildContext context) {
+    return context.findAncestorStateOfType<FootballCountriesScreenPresenterState>()!;
   }
 
   final Widget child;
-  final Confederations confederation;
+  final FootballConfederations confederation;
 
-  const CountriesScreenPresenter({
+  const FootballCountriesScreenPresenter({
     required this.confederation,
     required this.child,
     super.key,
   });
 
   @override
-  State<CountriesScreenPresenter> createState() => CountriesScreenPresenterState();
+  State<FootballCountriesScreenPresenter> createState() => FootballCountriesScreenPresenterState();
 }
 
-class CountriesScreenPresenterState extends State<CountriesScreenPresenter> {
+class FootballCountriesScreenPresenterState extends State<FootballCountriesScreenPresenter> {
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      getIt.get<CountriesBloc>().add(CountriesEventGet(confederation: widget.confederation));
+      getIt
+          .get<FootballConfederationCountriesBloc>()
+          .add(FootballConfederationCountriesEventGet(confederation: widget.confederation));
     });
   }
 

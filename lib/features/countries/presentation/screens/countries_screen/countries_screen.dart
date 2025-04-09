@@ -5,39 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/confederations/domain/models/confederation.dart';
-import 'package:football_collection/features/countries/presentation/blocs/countries_bloc/countries_bloc.dart';
-import 'package:football_collection/features/players/presentation/blocs/all_players_bloc/all_players_bloc.dart';
+import 'package:football_collection/features/countries/presentation/blocs/football_confederation_countries_bloc/football_confederation_countries_bloc.dart';
+import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
-import 'package:football_collection/ui_kit/effects/touchable_scale.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
-import '../../../../players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart';
-import '../../../../players/presentation/screens/open_pack_screen/open_pack_screen.dart';
+import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import '../../../../football_players/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../../../football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../../domain/models/country.dart';
 
 part 'countries_screen_presenter.dart';
 part 'widgets/countries_list.dart';
 
-class CountriesScreen extends StatelessWidget {
-  const CountriesScreen({
+class FootballCountriesScreen extends StatelessWidget {
+  const FootballCountriesScreen({
     required this.confederation,
     super.key,
   });
 
-  final Confederations confederation;
+  final FootballConfederations confederation;
 
   @override
   Widget build(BuildContext context) {
     // final mq = MediaQuery.of(context);
 
-    return CountriesScreenPresenter(
+    return FootballCountriesScreenPresenter(
       confederation: confederation,
       child: Scaffold(
         body: Stack(
@@ -61,8 +60,8 @@ class CountriesScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             context.push(
-              RoutePaths.stickerpack,
-              extra: OpenPackScreenArgs(confederation: confederation),
+              RoutePaths.footballPlayersPacks,
+              extra: FootballPlayersPacksScreenArgs(confederation: confederation),
             );
           },
           label: Translator(

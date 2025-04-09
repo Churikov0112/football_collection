@@ -7,7 +7,7 @@ class _CountriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
-    return BlocBuilder<CountriesBloc, CountriesState>(
+    return BlocBuilder<FootballConfederationCountriesBloc, FootballConfederationCountriesState>(
       bloc: getIt.get(),
       builder: (context, countriesState) {
         final countries = countriesState.countries ?? [];
@@ -41,11 +41,11 @@ class _CountryTile extends StatelessWidget {
 
   final CountryModel country;
 
-  Future<({double progress, int savedCount, int totalCount})> _calculateProgress(List<String> savedPlayerIds) async {
+  Future<({double progress, int savedCount, int totalCount})> _calculateProgress(List<String> savedCardsIds) async {
     await Future.delayed(Duration.zero); // Даем возможность обновить UI
-    final allPlayers = getIt.get<AllPlayersBloc>().state.allPlayers ?? [];
+    final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
     final countryPlayers = allPlayers.where((player) => player.countryId == country.id).toList();
-    final savedCount = countryPlayers.where((player) => savedPlayerIds.contains(player.id)).length;
+    final savedCount = countryPlayers.where((player) => savedCardsIds.contains(player.cardId)).length;
     final totalCount = countryPlayers.length;
     final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;
     return (progress: progress, savedCount: savedCount, totalCount: totalCount);
@@ -53,10 +53,10 @@ class _CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SavedPlayersBloc, SavedPlayersState>(
-      bloc: getIt.get<SavedPlayersBloc>(),
+    return BlocBuilder<SavedCardsBloc, SavedCardsState>(
+      bloc: getIt.get<SavedCardsBloc>(),
       builder: (context, savedState) {
-        final savedPlayerIds = savedState.savedIds ?? [];
+        final savedPlayerIds = savedState.savedCardsIds ?? [];
 
         return FutureBuilder<({double progress, int savedCount, int totalCount})>(
           future: _calculateProgress(savedPlayerIds),
@@ -67,7 +67,7 @@ class _CountryTile extends StatelessWidget {
             final totalCount = isLoading ? 0 : snapshot.data?.totalCount ?? 0;
 
             return GestureDetector(
-              onTap: () => context.push(RoutePaths.album, extra: country),
+              onTap: () => context.push(RoutePaths.footballPlayersAlbum, extra: country),
               child: SquareProgressIndicator(
                 value: progress,
                 width: 100,

@@ -25,15 +25,15 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
 
     if (cheatCode.contains("CLUB ")) {
       final club = cheatCode.replaceAll("CLUB ", "");
-      final allPlayers = getIt.get<AllPlayersBloc>().state.allPlayers ?? [];
-      final List<PlayerModel> clubPlayers = [];
+      final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
+      final List<FootballPlayerModel> clubPlayers = [];
       for (final player in allPlayers) {
         if (player.currentClub == club) {
           clubPlayers.add(player);
         }
       }
       if (clubPlayers.isNotEmpty) {
-        getIt.get<SavedPlayersBloc>().add(SavedPlayersEventAddAll(playerIds: clubPlayers.map((e) => e.id).toList()));
+        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: clubPlayers.map((e) => e.cardId).toList()));
         ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate());
         return;
       }

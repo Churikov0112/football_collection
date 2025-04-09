@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/mini_games/presentation/blocs/random_players_bloc/random_players_bloc.dart';
-import 'package:football_collection/features/players/presentation/widgets/saved_player_card.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
@@ -13,6 +11,8 @@ import 'package:football_collection/ui_kit/widgets/background_image/background_i
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../football_players/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
+import '../../../../football_players/presentation/widgets/football_player_card.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 import 'widgets/guess_options.dart';
 
@@ -26,7 +26,7 @@ class GuessTransferValueScreen extends StatelessWidget {
     // final mq = MediaQuery.of(context);
 
     return BlocProvider(
-      create: (context) => RandomPlayersBloc(getIt.get()),
+      create: (context) => RandomFootballPlayersBloc(getIt.get()),
       child: GuessTransferValueScreenPresenter(
         child: Builder(
           builder: (context) {
@@ -36,7 +36,7 @@ class GuessTransferValueScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomPlayersBloc, RandomPlayersState>(
+                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
                     builder: (context, randomPlayersState) {
                       final player = randomPlayersState.players?.firstOrNull;
                       if (player == null) return Align(child: const CircularProgressIndicator());
@@ -60,7 +60,7 @@ class GuessTransferValueScreen extends StatelessWidget {
                                 stream: presenter.selectedOptionStream$,
                                 builder: (context, selectedOptionSnapshot) {
                                   return Align(
-                                    child: SavedPlayerCard(
+                                    child: FootballPlayerCard(
                                       player: player,
                                       count: 1,
                                       hideTransferValue: selectedOptionSnapshot.data == null,

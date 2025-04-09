@@ -72,9 +72,9 @@ dependencies:
   mobile_scanner: 6.0.7
   qr_flutter: 4.1.0
   modal_bottom_sheet: 3.0.0
+  flutter_confetti: 0.5.1
   # flutter_gallery_3d: 1.1.1
   # gif: 2.3.0
-  # flutter_confetti: 0.5.1
   # flutter_vap2: 2.0.1
   # vap: ^1.1.0
 

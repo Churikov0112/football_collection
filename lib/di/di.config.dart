@@ -11,26 +11,27 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../features/confederations/domain/repos/confederations_repository.dart'
-    as _i108;
-import '../features/confederations/presentation/blocs/confederations_bloc/confederations_bloc.dart'
-    as _i515;
+import '../features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart'
+    as _i367;
 import '../features/countries/domain/repos/countries_repository.dart' as _i71;
-import '../features/countries/presentation/blocs/countries_bloc/countries_bloc.dart'
-    as _i167;
+import '../features/countries/presentation/blocs/football_confederation_countries_bloc/football_confederation_countries_bloc.dart'
+    as _i91;
+import '../features/football_confederations/domain/repos/football_confederations_repository.dart'
+    as _i47;
+import '../features/football_confederations/presentation/blocs/football_confederations_bloc/football_confederations_bloc.dart'
+    as _i878;
+import '../features/football_players/data/football_players_repository.dart'
+    as _i1036;
+import '../features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart'
+    as _i245;
+import '../features/football_players/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart'
+    as _i873;
+import '../features/football_players/presentation/blocs/country_football_players_bloc/country_football_players_bloc.dart'
+    as _i110;
+import '../features/football_players/presentation/blocs/football_players_packs_bloc/football_players_packs_bloc.dart'
+    as _i785;
 import '../features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart'
     as _i550;
-import '../features/players/data/players_repository.dart' as _i414;
-import '../features/players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart'
-    as _i474;
-import '../features/players/presentation/blocs/all_players_bloc/all_players_bloc.dart'
-    as _i736;
-import '../features/players/presentation/blocs/country_players_bloc/country_players_bloc.dart'
-    as _i845;
-import '../features/players/presentation/blocs/saved_players_bloc/saved_players_bloc.dart'
-    as _i794;
-import '../features/players/presentation/blocs/stickerpacks_bloc/stickerpacks_bloc.dart'
-    as _i347;
 import '../services/localization/language_bloc/language_bloc.dart' as _i381;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -44,24 +45,26 @@ _i174.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.singleton<_i108.ConnfederationsRepository>(
-      () => _i108.ConnfederationsRepository());
-  gh.singleton<_i414.PlayersRepository>(() => _i414.PlayersRepository());
-  gh.singleton<_i794.SavedPlayersBloc>(() => _i794.SavedPlayersBloc());
   gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
   gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
-  gh.singleton<_i167.CountriesBloc>(
-      () => _i167.CountriesBloc(gh<_i71.CountriesRepository>()));
-  gh.singleton<_i736.AllPlayersBloc>(
-      () => _i736.AllPlayersBloc(repository: gh<_i414.PlayersRepository>()));
-  gh.singleton<_i474.AllCountriesBloc>(
-      () => _i474.AllCountriesBloc(gh<_i414.PlayersRepository>()));
-  gh.singleton<_i845.CountryPlayersBloc>(
-      () => _i845.CountryPlayersBloc(gh<_i414.PlayersRepository>()));
-  gh.singleton<_i347.StickerpacksBloc>(
-      () => _i347.StickerpacksBloc(gh<_i414.PlayersRepository>()));
-  gh.singleton<_i515.ConfederationsBloc>(
-      () => _i515.ConfederationsBloc(gh<_i108.ConnfederationsRepository>()));
+  gh.singleton<_i367.SavedCardsBloc>(() => _i367.SavedCardsBloc());
+  gh.singleton<_i47.FootballConfederationsRepository>(
+      () => _i47.FootballConfederationsRepository());
+  gh.singleton<_i1036.FootballPlayersRepository>(
+      () => _i1036.FootballPlayersRepository());
+  gh.singleton<_i873.AllFootballPlayersBloc>(() => _i873.AllFootballPlayersBloc(
+      repository: gh<_i1036.FootballPlayersRepository>()));
+  gh.singleton<_i91.FootballConfederationCountriesBloc>(() =>
+      _i91.FootballConfederationCountriesBloc(gh<_i71.CountriesRepository>()));
+  gh.singleton<_i878.FootballConfederationsBloc>(() =>
+      _i878.FootballConfederationsBloc(
+          gh<_i47.FootballConfederationsRepository>()));
+  gh.singleton<_i245.AllCountriesBloc>(
+      () => _i245.AllCountriesBloc(gh<_i1036.FootballPlayersRepository>()));
+  gh.singleton<_i110.CountryFootballPlayersBloc>(() =>
+      _i110.CountryFootballPlayersBloc(gh<_i1036.FootballPlayersRepository>()));
+  gh.singleton<_i785.FootballPlayersPacksBloc>(() =>
+      _i785.FootballPlayersPacksBloc(gh<_i1036.FootballPlayersRepository>()));
   return getIt;
 }

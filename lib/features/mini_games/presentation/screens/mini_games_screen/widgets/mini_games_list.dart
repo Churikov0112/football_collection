@@ -20,14 +20,14 @@ class _MiniGamesList extends StatelessWidget {
             title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {
-              context.push(RoutePaths.miniGameGuessTransferValue);
+              context.push(RoutePaths.footballMiniGameGuessTransferValue);
             },
           ),
           _MiniGameTile(
             title: AppGlossary.whoCostsMore,
             color: Colors.purple,
             onTap: () {
-              context.push(RoutePaths.miniGameGuessTransferValueLessMore);
+              context.push(RoutePaths.footballMiniGameGuessWhoIsMoreExpensive);
             },
           ),
           // _MiniGameTile(
