@@ -59,6 +59,14 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     context
         .read<FootballPlayersPacksBloc>()
         .add(FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
+
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) async {
+        await FirebaseAnalytics.instance.logEvent(
+          name: "test",
+        );
+      },
+    );
   }
 
   Future<void> setSelectedPackIndex(int index) async {

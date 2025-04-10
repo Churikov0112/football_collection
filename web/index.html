@@ -33,10 +33,30 @@
   <title>football_collection</title>
   <link rel="manifest" href="manifest.json">
   <script type="module" src="./assets/packages/o3d/assets/model-viewer.min.js" defer></script>
+  <script> const serviceWorkerVersion = '{{flutter_service_worker_version}}'; </script>
 </head>
 
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function (ev) {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+
+        _flutter.loader.load({
+          serviceWorker: {
+            serviceWorkerVersion: serviceWorkerVersion,
+          },
+          onEntrypointLoaded: function (engineInitializer) {
+            engineInitializer.initializeEngine().then(function (appRunner) {
+              appRunner.runApp();
+            });
+          }
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

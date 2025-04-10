@@ -1,4 +1,4 @@
-package com.example.football_collection
+package com.dosbrosdev.football_collection
 
 import io.flutter.embedding.android.FlutterActivity
 

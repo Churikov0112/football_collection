@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 enum Languages {
-  russian,
   english,
   spanish,
   portuguese,
-  turkish,
   french,
+  italian,
+  russian,
+  turkish,
   chinese,
   arabic,
   japanese,
@@ -14,7 +15,6 @@ enum Languages {
   bengal,
   german,
   korean,
-  italian,
 }
 
 extension LanguagesExtension on Languages {
@@ -114,6 +114,39 @@ extension LanguagesExtension on Languages {
         return '한국어';
       case Languages.italian:
         return 'Italiano';
+    }
+  }
+
+  String get englishName {
+    switch (this) {
+      case Languages.english:
+        return 'English';
+      case Languages.russian:
+        return 'Russian';
+      case Languages.spanish:
+        return 'Spanish';
+      case Languages.portuguese:
+        return 'Portuguese';
+      case Languages.turkish:
+        return 'Turkish';
+      case Languages.french:
+        return 'French';
+      case Languages.chinese:
+        return 'Chinese';
+      case Languages.arabic:
+        return 'Arabic';
+      case Languages.japanese:
+        return 'Japanese';
+      case Languages.hindi:
+        return 'Hindi';
+      case Languages.bengal:
+        return 'Bengali';
+      case Languages.german:
+        return 'German';
+      case Languages.korean:
+        return 'Korean';
+      case Languages.italian:
+        return 'Italian';
     }
   }
 
