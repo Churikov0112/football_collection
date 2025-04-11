@@ -12,4 +12,10 @@ final getIt = GetIt.instance;
 )
 Future<void> configureDependencies() async {
   $initGetIt(getIt);
+
+  // bool gsEnabled = false;
+  // if (Platform.isAndroid) {
+  //   const platform = MethodChannel('android_utils_channel');
+  //   gsEnabled = await platform.invokeMethod('checkGoogleServicesAvailability');
+  // }
 }

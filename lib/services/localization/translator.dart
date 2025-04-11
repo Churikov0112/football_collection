@@ -20,6 +20,7 @@ class Translator extends StatelessWidget {
       bloc: getIt.get(),
       builder: (context, state) {
         final word = dictionary[termin]![state.language]!;
+
         return builder(word);
       },
     );

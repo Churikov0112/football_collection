@@ -11,6 +11,7 @@ import 'package:football_collection/firebase_options.dart';
 import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 import 'package:football_collection/services/localization/language_bloc/language_bloc.dart';
+import 'package:football_collection/services/log/log_service.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:toastification/toastification.dart';
@@ -35,26 +36,29 @@ Future<void> main() async {
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
   );
 
-  // final firebaseAppName = Platform.isIOS ? "parking_spb_app" : null;
-  await Firebase.initializeApp(
-    // name: firebaseAppName,
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    // final firebaseAppName = Platform.isIOS ? "parking_spb_app" : null;
+    await Firebase.initializeApp(
+      // name: firebaseAppName,
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  await FirebaseStaticMethods.requestNotificationPermission();
-  await FirebaseStaticMethods.getToken();
-  final defaultLanguage = Languages.english;
-  FirebaseStaticMethods.initInfo(defaultLanguage);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+    await FirebaseStaticMethods.requestNotificationPermission();
+    await FirebaseStaticMethods.getToken();
+    final defaultLanguage = Languages.english;
+    FirebaseStaticMethods.initInfo(defaultLanguage);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  } catch (e) {
+    LogService.error(e.toString(), e);
+  }
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -133,9 +137,13 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
     MobileAds.setAgeRestrictedUser(true);
     MobileAds.initialize();
 
-    await Future.delayed(const Duration(milliseconds: 330), () {
-      setupInteractedMessage();
-    });
+    try {
+      await Future.delayed(const Duration(milliseconds: 330), () {
+        setupInteractedMessage();
+      });
+    } catch (e) {
+      LogService.error(e.toString(), e);
+    }
   }
 
   Future<void> setupInteractedMessage() async {
