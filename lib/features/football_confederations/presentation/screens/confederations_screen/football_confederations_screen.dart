@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
+import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/widgets/yandex_ads_banner_mixin.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -18,6 +19,7 @@ import '../../../../football_players/presentation/blocs/all_football_players_blo
 import '../../../../football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../../../menu/presentation/screens/drawer/menu_drawer.dart';
 import '../../blocs/football_confederations_bloc/football_confederations_bloc.dart';
+import 'widgets/open_packs_screen_button.dart';
 
 part 'football_confederations_screen_presenter.dart';
 part 'widgets/confederations_list.dart';
@@ -27,51 +29,72 @@ class FootballConfederationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
+    final mq = MediaQuery.of(context);
 
     return FootballConfederationsScreenPresenter(
-      child: Scaffold(
-        drawer: MenuDrawer(),
-        body: Stack(
-          children: [
-            BackgroundImage(),
-            Column(
+      child: Builder(
+        builder: (context) {
+          final presenter = FootballConfederationsScreenPresenter.of(context);
+          return Scaffold(
+            drawer: MenuDrawer(),
+            body: Stack(
               children: [
+                BackgroundImage(),
+                Column(
+                  children: [
+                    BlocBuilder<AllFootballPlayersBloc, AllFootballPlayersState>(
+                      bloc: getIt.get(),
+                      builder: (context, allPlayersState) {
+                        return BlocBuilder<AllCountriesBloc, AllCountriesState>(
+                          bloc: getIt.get(),
+                          builder: (context, allCountriesState) {
+                            final allCountries = allCountriesState.countries ?? [];
+                            final allPlayers = allPlayersState.allPlayers ?? [];
+                            if (allCountries.isEmpty || allPlayers.isEmpty) return const LinearProgressIndicator();
+                            return const _RegionsList();
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
                 Translator(
                   termin: AppGlossary.continents,
                   builder: (value) => TransparentAppbar(title: value, showDrawer: true),
                 ),
-                BlocBuilder<AllFootballPlayersBloc, AllFootballPlayersState>(
-                  bloc: getIt.get(),
-                  builder: (context, allPlayersState) {
-                    return BlocBuilder<AllCountriesBloc, AllCountriesState>(
-                      bloc: getIt.get(),
-                      builder: (context, allCountriesState) {
-                        final allCountries = allCountriesState.countries ?? [];
-                        final allPlayers = allPlayersState.allPlayers ?? [];
-                        if (allCountries.isEmpty || allPlayers.isEmpty) return const LinearProgressIndicator();
-                        return const _RegionsList();
-                      },
-                    );
-                  },
+                Positioned(
+                  bottom: mq.padding.bottom,
+                  right: 0,
+                  left: 0,
+                  child: StreamBuilder<bool>(
+                    stream: presenter.isBannerAlreadyCreatedStream$,
+                    builder: (context, isBannerAlreadyCreatedSnapshot) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: OpenPacksScreenButton(
+                              onPressed: () {
+                                context.push(
+                                  RoutePaths.footballPlayersPacks,
+                                  extra: FootballPlayersPacksScreenArgs(),
+                                );
+                              },
+                            ),
+                          ),
+                          // if (isBannerAlreadyCreatedSnapshot.data == true)
+                          //   AdWidget(
+                          //     bannerAd: presenter.banner,
+                          //   ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            context.push(
-              RoutePaths.footballPlayersPacks,
-              extra: FootballPlayersPacksScreenArgs(),
-            );
-          },
-          label: Translator(
-            termin: AppGlossary.openPack,
-            builder: (value) => Text(value),
-          ),
-          icon: Icon(Icons.style),
-        ),
+          );
+        },
       ),
     );
   }

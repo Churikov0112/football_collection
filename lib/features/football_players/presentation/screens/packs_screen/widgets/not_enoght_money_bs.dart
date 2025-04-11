@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
+import 'package:football_collection/features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
@@ -11,10 +12,12 @@ import '../../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.d
 class NotEnoghtMoneyBottomSheet extends StatelessWidget {
   const NotEnoghtMoneyBottomSheet({
     required this.pack,
+    required this.presenter,
     super.key,
   });
 
   final PackModel pack;
+  final FootballPlayersPacksScreenPresenterState presenter;
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +70,11 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 100)); // TODO remove this cheat
-                    ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} 100 🏆", seconds: 2);
-                    context.pop();
+                    presenter.showRewardedAd(() {
+                      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 100)); // TODO remove this cheat
+                      ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} 100 🏆", seconds: 2);
+                      context.pop();
+                    });
                   },
                   child: DecoratedBox(
                     decoration: BoxDecoration(

@@ -18,11 +18,13 @@ class FootballPlayersAlbumScreenPresenter extends StatefulWidget {
   State<FootballPlayersAlbumScreenPresenter> createState() => FootballPlayersAlbumScreenPresenterState();
 }
 
-class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbumScreenPresenter> {
+class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbumScreenPresenter>
+    with FootballPlayersAlbumYandexAdsBannerMixin {
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
       // getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad());
       // getIt.get<SavedCardsBloc>().add(SavedCardsEventLoad());
       getIt.get<CountryFootballPlayersBloc>().add(CountryFootballPlayersEventGet(countryId: widget.country.id));

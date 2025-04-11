@@ -5,6 +5,8 @@ class _RegionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
     return BlocBuilder<FootballConfederationsBloc, FootballConfederationsState>(
       bloc: getIt.get(),
       builder: (context, regionsState) {
@@ -18,7 +20,7 @@ class _RegionsList extends StatelessWidget {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 120),
+            padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 250),
             itemCount: confederations.length,
             itemBuilder: (context, index) {
               return _RegionTile(

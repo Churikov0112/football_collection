@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -17,7 +18,14 @@ class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
   }
 
   Future<void> _set(LanguageBlocEventSet event, Emitter<LanguageState> emit) async {
-    emit(LanguageState(language: event.language));
+    try {
+      final previousLanguage = state.language;
+      FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
+      FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
+      emit(LanguageState(language: event.language));
+    } catch (e) {
+      emit(LanguageState(language: event.language));
+    }
   }
 
   @override

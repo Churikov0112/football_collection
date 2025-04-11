@@ -16,13 +16,22 @@ class GetCardByQrScreenPresenter extends StatefulWidget {
   State<GetCardByQrScreenPresenter> createState() => GetCardByQrScreenPresenterState();
 }
 
-class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter> with WidgetsBindingObserver {
+class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter>
+    with WidgetsBindingObserver, GetCardByQrYandexAdsBannerMixin {
   StreamSubscription<Object?>? _subscription;
 
   MobileScannerController mobileScannerController = MobileScannerController(
     facing: CameraFacing.back,
     detectionSpeed: DetectionSpeed.noDuplicates,
   );
+
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
+    });
+  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {

@@ -18,11 +18,13 @@ class FootballCountriesScreenPresenter extends StatefulWidget {
   State<FootballCountriesScreenPresenter> createState() => FootballCountriesScreenPresenterState();
 }
 
-class FootballCountriesScreenPresenterState extends State<FootballCountriesScreenPresenter> {
+class FootballCountriesScreenPresenterState extends State<FootballCountriesScreenPresenter>
+    with FootballCountriesYandexAdsBannerMixin {
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
       getIt
           .get<FootballConfederationCountriesBloc>()
           .add(FootballConfederationCountriesEventGet(confederation: widget.confederation));

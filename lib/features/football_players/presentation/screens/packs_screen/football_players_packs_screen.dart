@@ -13,6 +13,7 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/football_players/presentation/screens/packs_screen/widgets/yandex_ads_rewarded_mixin.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/log/log_service.dart';
@@ -20,6 +21,7 @@ import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:o3d/o3d.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
@@ -31,6 +33,7 @@ import 'widgets/confirm_buy_pack_bs.dart';
 import 'widgets/not_enoght_money_bs.dart';
 import 'widgets/pack_3d_model.dart';
 import 'widgets/packs_page_view.dart';
+import 'widgets/yandex_ads_banner_mixin.dart';
 
 part 'football_players_packs_screen_presenter.dart';
 part 'widgets/player_cards_swiper.dart';
@@ -125,7 +128,7 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                               builder: (context, child) {
                                 final value = presenter._hidePacksAnimation.value;
                                 return Positioned(
-                                  bottom: -mq.size.height * value + mq.padding.bottom,
+                                  bottom: -mq.size.height * value + mq.padding.bottom + 120,
                                   left: 0,
                                   right: 0,
                                   child: PacksPageView(state: state, packs: packs),
@@ -146,6 +149,20 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                                   );
                                 },
                               ),
+                            Positioned(
+                              bottom: mq.padding.bottom,
+                              right: 0,
+                              left: 0,
+                              child: StreamBuilder<bool>(
+                                stream: presenter.isBannerAlreadyCreatedStream$,
+                                builder: (context, isBannerAlreadyCreatedSnapshot) {
+                                  if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox();
+                                  return AdWidget(
+                                    bannerAd: presenter.banner,
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         );
                       },

@@ -10,11 +10,13 @@ import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart'
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../../../../football_players/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
 import '../../../../football_players/presentation/widgets/football_player_card.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 import 'widgets/guess_options.dart';
+import 'widgets/yandex_ads_banner_mixin.dart';
 
 part 'guess_transfer_value_screen_presenter.dart';
 
@@ -23,7 +25,7 @@ class GuessTransferValueScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
+    final mq = MediaQuery.of(context);
 
     return BlocProvider(
       create: (context) => RandomFootballPlayersBloc(getIt.get()),
@@ -80,6 +82,18 @@ class GuessTransferValueScreen extends StatelessWidget {
                   Translator(
                     termin: AppGlossary.guessTransferValue,
                     builder: (value) => TransparentAppbar(title: value),
+                  ),
+                  Positioned(
+                    bottom: mq.padding.bottom,
+                    right: 0,
+                    left: 0,
+                    child: StreamBuilder<bool>(
+                      stream: presenter.isBannerAlreadyCreatedStream$,
+                      builder: (context, isBannerAlreadyCreatedSnapshot) {
+                        if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
+                        return AdWidget(bannerAd: presenter.banner);
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -16,7 +16,15 @@ class SettingsScreenPresenter extends StatefulWidget {
   State<SettingsScreenPresenter> createState() => SettingsScreenPresenterState();
 }
 
-class SettingsScreenPresenterState extends State<SettingsScreenPresenter> {
+class SettingsScreenPresenterState extends State<SettingsScreenPresenter> with SettingsYandexAdsBannerMixin {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.child;

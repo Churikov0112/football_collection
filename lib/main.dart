@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/firebase_options.dart';
 import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
@@ -13,6 +14,7 @@ import 'package:football_collection/services/localization/language_bloc/language
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:toastification/toastification.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
 
 import 'config/toastification.dart';
 import 'di/di.dart';
@@ -117,14 +119,19 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
 
     // TODO remove after auth done
     isLogged = true;
+    final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
 
     setState(() {
       isInitialized = true;
     });
 
     _router = FootballCollectionRouter(
-      isLogged ? RoutePaths.footballConfederations : RoutePaths.footballConfederations,
+      isFirstLaunch ? RoutePaths.onboarding : RoutePaths.footballConfederations,
     );
+
+    MobileAds.setUserConsent(true);
+    MobileAds.setAgeRestrictedUser(true);
+    MobileAds.initialize();
 
     await Future.delayed(const Duration(milliseconds: 330), () {
       setupInteractedMessage();

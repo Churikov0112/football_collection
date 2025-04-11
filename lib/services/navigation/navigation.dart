@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
+import 'package:football_collection/features/onboarding/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,6 +17,8 @@ import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class RoutePaths {
+  static const onboarding = '/onboarding';
+
   static const footballConfederations = '/footballConfederations';
   static const footballCountries = '/footballCountries';
   static const footballPlayersAlbum = '/footballPlayersAlbum';
@@ -117,6 +120,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.settings,
           builder: (context, state) => SettingsScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.onboarding,
+          builder: (context, state) => OnboardingScreen(),
         ),
 
         // GoRoute(

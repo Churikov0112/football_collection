@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 import 'package:football_collection/services/localization/language_bloc/language_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class LanguageTile extends StatelessWidget {
-  const LanguageTile({super.key});
+class LanguageSettingsTile extends StatelessWidget {
+  const LanguageSettingsTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class LanguageTile extends StatelessWidget {
           child: SizedBox(
             width: mq.size.width * 0.4,
             height: mq.size.width * 0.4,
-            child: _LanguageTile(language: languageState.language),
+            child: LanguageTile(language: languageState.language),
           ),
         );
       },
@@ -65,12 +64,10 @@ class _SelectLanguageBottomSheet extends StatelessWidget {
                 Navigator.of(context).pop();
                 return;
               }
-              FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
-              FirebaseStaticMethods.subscribeToTopic(language.englishName);
               getIt.get<LanguageBloc>().add(LanguageBlocEventSet(language: language));
               Navigator.of(context).pop();
             },
-            child: _LanguageTile(
+            child: LanguageTile(
               language: language,
             ),
           );
@@ -80,9 +77,10 @@ class _SelectLanguageBottomSheet extends StatelessWidget {
   }
 }
 
-class _LanguageTile extends StatelessWidget {
-  const _LanguageTile({
+class LanguageTile extends StatelessWidget {
+  const LanguageTile({
     required this.language,
+    super.key,
   });
 
   final Languages language;

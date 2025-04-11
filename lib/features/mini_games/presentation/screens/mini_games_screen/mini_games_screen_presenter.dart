@@ -16,7 +16,15 @@ class MiniGamesScreenPresenter extends StatefulWidget {
   State<MiniGamesScreenPresenter> createState() => MiniGamesScreenPresenterState();
 }
 
-class MiniGamesScreenPresenterState extends State<MiniGamesScreenPresenter> {
+class MiniGamesScreenPresenterState extends State<MiniGamesScreenPresenter> with MiniGamesYandexAdsBannerMixin {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.child;

@@ -19,7 +19,10 @@ class FootballPlayersPacksScreenPresenter extends StatefulWidget {
 }
 
 class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPacksScreenPresenter>
-    with TickerProviderStateMixin {
+    with
+        TickerProviderStateMixin,
+        FootballPlayersPacksYandexAdsBannerMixin,
+        FootballPlayersPacksYandexAdsRewardedMixin {
   late AnimationController _hidePacksAnimationController;
   late Animation<double> _hidePacksAnimation;
 
@@ -62,6 +65,9 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
 
     SchedulerBinding.instance.addPostFrameCallback(
       (_) async {
+        loadBannerAd();
+        createRewardedAdLoader();
+
         await FirebaseAnalytics.instance.logEvent(
           name: "test",
         );
@@ -103,7 +109,10 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     if (!isEnoughtMoney) {
       await showModalBottomSheet<bool>(
         context: context,
-        builder: (context) => NotEnoghtMoneyBottomSheet(pack: pack),
+        builder: (context) => NotEnoghtMoneyBottomSheet(
+          pack: pack,
+          presenter: this,
+        ),
       );
       _isWaitingConfirmSubject.add(false);
       return;
@@ -146,6 +155,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isUnpackingAnimationPlayingSubject.close();
     _isWaitingConfirmSubject.close();
     _show3dObjectSubject.close();
+    rewardedAd?.destroy();
     super.dispose();
   }
 

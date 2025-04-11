@@ -20,7 +20,8 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreenPresenter extends StatefulWid
 }
 
 class GuessWhichFootballPlayerIsMoreExpensiveScreenPresenterState
-    extends State<GuessWhichFootballPlayerIsMoreExpensiveScreenPresenter> {
+    extends State<GuessWhichFootballPlayerIsMoreExpensiveScreenPresenter>
+    with GuessWhichFootballPlayerIsMoreExpensiveYandexAdsBannerMixin {
   final random = Random();
 
   final BehaviorSubject<String?> _selectedOptionSubject = BehaviorSubject.seeded(null);
@@ -33,6 +34,7 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreenPresenterState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       loadRandomPlayers();
+      loadBannerAd();
     });
   }
 

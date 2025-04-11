@@ -18,7 +18,8 @@ class GuessTransferValueScreenPresenter extends StatefulWidget {
   State<GuessTransferValueScreenPresenter> createState() => GuessTransferValueScreenPresenterState();
 }
 
-class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScreenPresenter> {
+class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScreenPresenter>
+    with GuessTransferValueYandexAdsBannerMixin {
   final BehaviorSubject<String?> _selectedOptionSubject = BehaviorSubject.seeded(null);
   Stream<String?> get selectedOptionStream$ => _selectedOptionSubject.stream;
 
@@ -30,6 +31,7 @@ class GuessTransferValueScreenPresenterState extends State<GuessTransferValueScr
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       loadRandomPlayer();
+      loadBannerAd();
     });
   }
 

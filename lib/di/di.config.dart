@@ -11,6 +11,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart'
+    as _i717;
 import '../features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart'
     as _i367;
 import '../features/countries/domain/repos/countries_repository.dart' as _i71;
@@ -45,14 +47,15 @@ _i174.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
-  gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
-  gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i367.SavedCardsBloc>(() => _i367.SavedCardsBloc());
-  gh.singleton<_i47.FootballConfederationsRepository>(
-      () => _i47.FootballConfederationsRepository());
+  gh.singleton<_i717.FirstLaunchBloc>(() => _i717.FirstLaunchBloc());
   gh.singleton<_i1036.FootballPlayersRepository>(
       () => _i1036.FootballPlayersRepository());
+  gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
+  gh.singleton<_i47.FootballConfederationsRepository>(
+      () => _i47.FootballConfederationsRepository());
+  gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
+  gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i873.AllFootballPlayersBloc>(() => _i873.AllFootballPlayersBloc(
       repository: gh<_i1036.FootballPlayersRepository>()));
   gh.singleton<_i91.FootballConfederationCountriesBloc>(() =>

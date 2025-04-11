@@ -16,11 +16,13 @@ class FootballConfederationsScreenPresenter extends StatefulWidget {
   State<FootballConfederationsScreenPresenter> createState() => FootballConfederationsScreenPresenterState();
 }
 
-class FootballConfederationsScreenPresenterState extends State<FootballConfederationsScreenPresenter> {
+class FootballConfederationsScreenPresenterState extends State<FootballConfederationsScreenPresenter>
+    with FootballConfederationsYandexAdsBannerMixin {
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
+      loadBannerAd();
       getIt.get<AllCountriesBloc>().add(AllCountriesEventGet());
       getIt.get<AllFootballPlayersBloc>().add(AllFootballPlayersEventLoad());
       getIt.get<FootballConfederationsBloc>().add(FootballConfederationsEventGet());
