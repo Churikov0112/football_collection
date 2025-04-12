@@ -12,7 +12,6 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../services/firebase/firebase_methods.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
@@ -35,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
+    // final mq = MediaQuery.of(context);
 
     return BlocProvider(
       create: (context) => RandomFootballPlayersBloc(getIt.get()),
