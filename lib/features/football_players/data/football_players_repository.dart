@@ -97,6 +97,20 @@ class FootballPlayersRepository extends CardsRepository {
         imageAssetPath: "assets/raster/packs/pack-worldtour.png",
         glbAssetPath: "assets/3d/pack-worldtour.glb",
       ),
+      PackModel(
+        title: "Top players",
+        price: 100,
+        cards: await getRandomCards(minPrimeTransferValue: 50000000),
+        imageAssetPath: "assets/raster/packs/pack-topplayers.png",
+        glbAssetPath: "assets/3d/pack-topplayers.glb",
+      ),
+      PackModel(
+        title: "Top 25 countries",
+        price: 25,
+        cards: await getRandomCards(topCountries: true),
+        imageAssetPath: "assets/raster/packs/pack-topcountries.png",
+        glbAssetPath: "assets/3d/pack-topcountries.glb",
+      ),
       if (confederation == null && country == null)
         for (final conf in FootballConfederations.values)
           if (conf != FootballConfederations.unknown)
@@ -107,18 +121,6 @@ class FootballPlayersRepository extends CardsRepository {
               imageAssetPath: "assets/raster/packs/pack-${conf.name}.png",
               glbAssetPath: "assets/3d/pack-${conf.name}.glb",
             ),
-      PackModel(
-          title: "Top 25 countries",
-          price: 25,
-          cards: await getRandomCards(topCountries: true),
-          imageAssetPath: "assets/raster/packs/pack-topcountries.png",
-          glbAssetPath: "assets/3d/pack-topcountries.glb"),
-      PackModel(
-          title: "Top players",
-          price: 100,
-          cards: await getRandomCards(minPrimeTransferValue: 50000000),
-          imageAssetPath: "assets/raster/packs/pack-topplayers.png",
-          glbAssetPath: "assets/3d/pack-topplayers.glb"),
     ];
     return packs;
   }
