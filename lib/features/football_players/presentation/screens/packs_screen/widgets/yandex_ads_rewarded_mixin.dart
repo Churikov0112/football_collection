@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/config/ad_config.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
@@ -24,7 +25,7 @@ mixin FootballPlayersPacksYandexAdsRewardedMixin on State<FootballPlayersPacksSc
     final adLoader = await _adLoader;
     await adLoader.loadAd(
       adRequestConfiguration: AdRequestConfiguration(
-        adUnitId: 'demo-rewarded-yandex', // adConfig.openPackAd, // 'demo-rewarded-yandex',
+        adUnitId: adConfig.openPackRewardedAd, // 'demo-rewarded-yandex',
       ),
     );
   }

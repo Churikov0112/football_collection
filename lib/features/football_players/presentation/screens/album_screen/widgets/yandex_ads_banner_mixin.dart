@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/config/ad_config.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
@@ -17,7 +18,7 @@ mixin FootballPlayersAlbumYandexAdsBannerMixin on State<FootballPlayersAlbumScre
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: "demo-banner-yandex", // adConfig.confederationsBottomBanner, // "demo-banner-yandex",
+      adUnitId: adConfig.playersAlbumBottomBanner, // "demo-banner-yandex",
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {
