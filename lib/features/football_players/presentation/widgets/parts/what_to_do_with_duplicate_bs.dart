@@ -1,23 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/abstract/domain/models/pack.dart';
-import 'package:football_collection/features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
-import 'package:football_collection/services/localization/translator.dart';
-import 'package:football_collection/services/navigation/navigation.dart';
-import 'package:football_collection/services/toast/toast_service.dart';
-import 'package:go_router/go_router.dart';
+part of '../football_player_card.dart';
 
-import '../../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+enum _WhatToDoWithDuplicate { sell, qr }
 
-class NotEnoghtMoneyBottomSheet extends StatelessWidget {
-  const NotEnoghtMoneyBottomSheet({
-    required this.pack,
-    required this.presenter,
-    super.key,
-  });
-
-  final PackModel pack;
-  final FootballPlayersPacksScreenPresenterState presenter;
+class _WhatToDoWithDuplicateBottomSheet extends StatelessWidget {
+  const _WhatToDoWithDuplicateBottomSheet();
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +12,46 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
-          Text(AppGlossary.youHaveNotEnoughMoneyToBuyPack.translate()),
-          const SizedBox(height: 20),
+          SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              AppGlossary.whatToDoWithDuplicate.translate(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(height: 16),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: TextButton(
+          //         onPressed: () {
+          //           context.pop(false);
+          //         },
+          //         child: Text(AppGlossary.cancel.translate()),
+          //       ),
+          //     ),
+          //     SizedBox(width: 12),
+          //     Expanded(
+          //       child: FilledButton(
+          //         onPressed: () {
+          //           context.pop(true);
+          //         },
+          //         child: Text(AppGlossary.confirm.translate()),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Row(
             spacing: 8,
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    context.push(RoutePaths.miniGames);
+                    context.pop(_WhatToDoWithDuplicate.sell);
                   },
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -53,10 +66,10 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(height: 16),
-                            Icon(Icons.games),
+                            Text("+ 1 🏆"),
                             const SizedBox(height: 16),
                             Text(
-                              "${AppGlossary.playMiniGames.translate()}\n${AppGlossary.free.translate()}",
+                              AppGlossary.sell.translate(),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 16),
@@ -70,11 +83,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    presenter.showRewardedAd(() {
-                      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 100)); // TODO remove this cheat
-                      ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} + 100 🏆", seconds: 2);
-                      context.pop();
-                    });
+                    context.pop(_WhatToDoWithDuplicate.qr);
                   },
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -89,10 +98,10 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(height: 16),
-                            Icon(Icons.play_arrow),
+                            Icon(Icons.qr_code),
                             const SizedBox(height: 16),
                             Text(
-                              "${AppGlossary.watchAd.translate()}\n + 100 🏆",
+                              AppGlossary.shareViaQr.translate(),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 16),
@@ -105,7 +114,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: mq.padding.bottom + 20)
+          SizedBox(height: mq.padding.bottom + 16),
         ],
       ),
     );

@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/log/log_service.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -16,12 +18,12 @@ import '../../domain/models/player.dart';
 import '../screens/packs_screen/football_players_packs_screen.dart';
 
 part 'parts/back_widget.dart';
-part 'parts/confirm_create_qr_bs.dart';
 part 'parts/flag.dart';
 part 'parts/player_image.dart';
 part 'parts/player_qr_bs.dart';
 part 'parts/price.dart';
 part 'parts/rounded_white_container.dart';
+part 'parts/what_to_do_with_duplicate_bs.dart';
 
 class FootballPlayerCard extends StatefulWidget {
   const FootballPlayerCard({
@@ -109,12 +111,12 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
               right: 0,
               child: GestureDetector(
                 onTap: () async {
-                  final confirmed = await showModalBottomSheet<bool>(
+                  final whatToDo = await showModalBottomSheet<_WhatToDoWithDuplicate>(
                     context: context,
-                    builder: (context) => _ConfirmCreateQRBottomSheet(),
+                    builder: (context) => _WhatToDoWithDuplicateBottomSheet(),
                   );
 
-                  if (confirmed == true && mounted) {
+                  if (whatToDo == _WhatToDoWithDuplicate.qr && mounted) {
                     try {
                       await FirebaseAnalytics.instance.logEvent(
                         name: "player_to_qr",
@@ -140,6 +142,26 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                         return true;
                       },
                     );
+                  }
+                  if (whatToDo == _WhatToDoWithDuplicate.sell && mounted) {
+                    try {
+                      await FirebaseAnalytics.instance.logEvent(
+                        name: "player_sell",
+                        parameters: {
+                          "player_id": widget.player.playerId,
+                          "player_country_id": widget.player.countryId,
+                          "player_club": widget.player.currentClub ?? "no_data",
+                          "player_position": widget.player.position ?? "no_data",
+                          "current_current_market_value": widget.player.currentMarketValue ?? "no_data",
+                          "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
+                        },
+                      );
+                    } catch (e) {
+                      LogService.error(e.toString(), e);
+                    }
+                    getIt.get<SavedCardsBloc>().add(SavedCardsEventRemove(cardId: widget.player.cardId));
+                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 1));
+                    ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} + 1 🏆", seconds: 2);
                   }
                 },
                 child: Container(
