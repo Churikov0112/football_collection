@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
+import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
 import 'package:go_router/go_router.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -85,27 +86,15 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.about,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          ListTile(
-            onTap: () {},
+            onTap: () async {
+              await openInBrowser("http://football-collection.tilda.ws");
+            },
             leading: Icon(
               Icons.language,
               color: Colors.white,
             ),
             title: Translator(
-              termin: AppGlossary.webVersion,
+              termin: AppGlossary.ourWebsite,
               builder: (value) => Text(
                 value,
                 style: TextStyle(color: Colors.white),

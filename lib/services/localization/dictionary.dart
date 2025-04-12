@@ -244,6 +244,7 @@ enum AppGlossary {
   onboardingShareCardsWithFriendsDescription,
   onboardingStartCollectioning,
   settingsVibrationOnPackOpening,
+  ourWebsite,
 }
 
 const dictionary = {
@@ -1204,5 +1205,21 @@ const dictionary = {
     Languages.german: 'Vibration beim Öffnen des Pakets',
     Languages.korean: '팩을 열 때 진동',
     Languages.italian: 'Vibrazione all\'apertura del pacchetto',
+  },
+  AppGlossary.ourWebsite: {
+    Languages.english: 'Our website',
+    Languages.russian: 'Наш веб-сайт',
+    Languages.spanish: 'Nuestro sitio web',
+    Languages.portuguese: 'Nosso site',
+    Languages.turkish: 'Web sitesi',
+    Languages.french: 'Notre site web',
+    Languages.chinese: '我们的网站',
+    Languages.arabic: 'موقعنا',
+    Languages.japanese: '私たちのウェブサイト',
+    Languages.hindi: 'हमारा वेबसाइट',
+    Languages.bengal: 'আমাদের ওয়েবসাইট',
+    Languages.german: 'Unsere Website',
+    Languages.korean: '우리 웹사이트',
+    Languages.italian: 'Il nostro sito web',
   },
 };
