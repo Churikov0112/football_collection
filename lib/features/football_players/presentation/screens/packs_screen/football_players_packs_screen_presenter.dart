@@ -68,9 +68,17 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
         loadBannerAd();
         createRewardedAdLoader();
 
-        await FirebaseAnalytics.instance.logEvent(
-          name: "test",
-        );
+        try {
+          await FirebaseAnalytics.instance.logEvent(
+            name: "open_packs_screen",
+            parameters: {
+              if (widget.args.country != null) "country": widget.args.country!.name,
+              if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
+            },
+          );
+        } catch (e) {
+          LogService.error(e.toString(), e);
+        }
       },
     );
   }
@@ -85,12 +93,25 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
 
   Future<void> openPack() async {
     try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: "pack_opened",
+        parameters: {
+          if (widget.args.country != null) "country": widget.args.country!.name,
+          if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
+          "pack_index": _selectedPackIndexSubject.value,
+        },
+      );
+    } catch (e) {
+      LogService.error(e.toString(), e);
+    }
+    final settings = getIt.get<SettingsBloc>().state;
+    try {
       _isHidePacksAnimationPlayingSubject.add(true);
       _hidePacksAnimationController.forward().whenCompleteOrCancel(() async {
         o3dController?.play(repetitions: 1);
         await Future.delayed(const Duration(milliseconds: 200));
         for (var i = 0; i < 27; i++) {
-          unawaited(HapticFeedback.lightImpact());
+          if (settings.enableVibrationOnPackOpening) unawaited(HapticFeedback.lightImpact());
           await Future.delayed(const Duration(milliseconds: 100));
         }
         await Future.delayed(const Duration(milliseconds: 700));

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 import 'widgets/select_language.dart';
@@ -19,6 +22,7 @@ class SettingsScreen extends StatelessWidget {
     return SettingsScreenPresenter(
       child: Builder(builder: (context) {
         final presenter = SettingsScreenPresenter.of(context);
+
         return Scaffold(
           // backgroundColor: AppColors.darkBackgroundSecondary,
           body: Stack(
@@ -33,6 +37,22 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   LanguageSettingsTile(),
+                  const SizedBox(height: 20),
+                  StreamBuilder<bool>(
+                    stream: presenter.enableVibrationOnPackOpeningStream$,
+                    builder: (context, enableVibrationOnPackOpeningSnapshot) {
+                      return SwitchListTile(
+                        title: Translator(
+                          termin: AppGlossary.settingsVibrationOnPackOpening,
+                          builder: (value) => Text(value),
+                        ),
+                        value: enableVibrationOnPackOpeningSnapshot.data ?? false,
+                        onChanged: (val) {
+                          presenter.toggleEnableVibrationOnPackOpening(val);
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               Positioned(

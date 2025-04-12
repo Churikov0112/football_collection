@@ -29,6 +29,7 @@ class Pack3dModel extends StatelessWidget {
             disableZoom: true,
             disablePan: true,
             cameraControls: false,
+            exposure: 0.75, // уменьшает яркость
           ),
         ],
       ),

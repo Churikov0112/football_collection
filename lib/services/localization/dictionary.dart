@@ -240,6 +240,7 @@ enum AppGlossary {
   onboardingShareCardsWithFriends,
   onboardingShareCardsWithFriendsDescription,
   onboardingStartCollectioning,
+  settingsVibrationOnPackOpening,
 }
 
 const dictionary = {
@@ -1136,5 +1137,21 @@ const dictionary = {
     Languages.german: 'Packungen öffnen!',
     Languages.korean: '팩을 열어!',
     Languages.italian: 'Apri i pacchetti!',
+  },
+  AppGlossary.settingsVibrationOnPackOpening: {
+    Languages.english: 'Vibration on pack opening',
+    Languages.russian: 'Вибрация при открытии пака',
+    Languages.spanish: 'Vibración al abrir el paquete',
+    Languages.portuguese: 'Vibração ao abrir o pacote',
+    Languages.turkish: 'Paket açılışında titreşim',
+    Languages.french: 'Vibration au déballage du paquet',
+    Languages.chinese: '包打开时的振动',
+    Languages.arabic: 'تذبذب عند فتح الحزمة',
+    Languages.japanese: 'パックを開くときの振動',
+    Languages.hindi: 'पैक खोलने पर दौलन',
+    Languages.bengal: 'প্যাকের খোলার সময়ে ঝগড়া',
+    Languages.german: 'Vibration beim Öffnen des Pakets',
+    Languages.korean: '팩을 열 때 진동',
+    Languages.italian: 'Vibrazione all\'apertura del pacchetto',
   },
 };

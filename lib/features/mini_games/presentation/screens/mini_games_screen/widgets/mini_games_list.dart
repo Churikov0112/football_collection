@@ -20,6 +20,16 @@ class _MiniGamesList extends StatelessWidget {
             title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {
+                    "mini_game": "guess_transfer_value",
+                  },
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
               context.push(RoutePaths.footballMiniGameGuessTransferValue);
             },
           ),
@@ -27,6 +37,16 @@ class _MiniGamesList extends StatelessWidget {
             title: AppGlossary.whoCostsMore,
             color: Colors.purple,
             onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {
+                    "mini_game": "who_is_more_expensive",
+                  },
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
               context.push(RoutePaths.footballMiniGameGuessWhoIsMoreExpensive);
             },
           ),

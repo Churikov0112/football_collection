@@ -42,6 +42,7 @@ class ToastService {
     int seconds = 5,
   }) {
     toastification.show(
+      borderSide: BorderSide(color: Colors.transparent),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       autoCloseDuration: Duration(seconds: seconds),
       dismissDirection: DismissDirection.up,

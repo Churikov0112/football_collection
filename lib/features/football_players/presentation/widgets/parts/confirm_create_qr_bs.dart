@@ -21,7 +21,7 @@ class _ConfirmCreateQRBottomSheet extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: OutlinedButton(
+                child: TextButton(
                   onPressed: () {
                     context.pop(false);
                   },

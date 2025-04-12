@@ -28,7 +28,7 @@ class ConfirmBuyPackBottomSheet extends StatelessWidget {
             spacing: 8,
             children: [
               Expanded(
-                child: OutlinedButton(
+                child: TextButton(
                   onPressed: () {
                     context.pop(false);
                   },

@@ -192,7 +192,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
               return ToastificationWrapper(
                 config: toastificationConfig,
                 child: MaterialApp.router(
-                  theme: ThemeData.dark(),
+                  theme: ThemeData.dark().copyWith(colorScheme: ColorScheme.dark(primary: Colors.deepOrange)),
                   routerConfig: _router.router,
                   title: 'Football Pack Collection',
                   color: Colors.black,

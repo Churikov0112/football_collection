@@ -21,6 +21,18 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
 
   void verifyCheatCode() {
     final cheatCode = cheatCodeTextEditingController.value.text;
+
+    try {
+      FirebaseAnalytics.instance.logEvent(
+        name: "cheat_code_entered",
+        parameters: {
+          "cheat_code": cheatCode,
+        },
+      );
+    } catch (e) {
+      LogService.error(e.toString(), e);
+    }
+
     cheatCodeTextEditingController.clear();
 
     if (cheatCode.contains("CLUB ")) {

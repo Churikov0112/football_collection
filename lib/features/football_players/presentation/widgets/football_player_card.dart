@@ -1,10 +1,12 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/log/log_service.dart';
 import 'package:football_collection/ui_kit/utils/transfer_value_beautifier.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -113,6 +115,21 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                   );
 
                   if (confirmed == true && mounted) {
+                    try {
+                      await FirebaseAnalytics.instance.logEvent(
+                        name: "player_to_qr",
+                        parameters: {
+                          "player_id": widget.player.playerId,
+                          "player_country_id": widget.player.countryId,
+                          "player_club": widget.player.currentClub ?? "no_data",
+                          "player_position": widget.player.position ?? "no_data",
+                          "current_current_market_value": widget.player.currentMarketValue ?? "no_data",
+                          "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
+                        },
+                      );
+                    } catch (e) {
+                      LogService.error(e.toString(), e);
+                    }
                     await showModalBottomSheet(
                       context: context,
                       builder: (context) => _PlayerQrBottomSheet(player: widget.player),
