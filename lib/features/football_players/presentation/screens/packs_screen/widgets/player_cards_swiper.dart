@@ -24,6 +24,8 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
   }
 
   Future<void> checkConfetti(FootballPlayerModel player) async {
+    final settings = getIt.get<SettingsBloc>().state;
+    if (!settings.enableConfetti) return;
     final needConfetti = (player.maxMarketValue ?? 0) >= 50000000;
     if (needConfetti) Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
   }

@@ -17,33 +17,28 @@ class SettingsScreenPresenter extends StatefulWidget {
 }
 
 class SettingsScreenPresenterState extends State<SettingsScreenPresenter> with SettingsYandexAdsBannerMixin {
-  late BehaviorSubject<bool> enableVibrationOnPackOpeningSubject;
-  Stream<bool> get enableVibrationOnPackOpeningStream$ => enableVibrationOnPackOpeningSubject.stream;
-
   @override
   void initState() {
-    final settingsState = getIt.get<SettingsBloc>().state;
-    enableVibrationOnPackOpeningSubject = BehaviorSubject.seeded(settingsState.enableVibrationOnPackOpening);
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       loadBannerAd();
     });
   }
 
-  void toggleEnableVibrationOnPackOpening(bool value) {
-    enableVibrationOnPackOpeningSubject.add(value);
-    // final settingsState = getIt.get<SettingsBloc>().state;
-    getIt.get<SettingsBloc>().add(
-          SettingsEventSet(
-            enableVibrationOnPackOpening: value,
-          ),
-        );
+  void toggleEnableVibration(bool enabled) {
+    if (enabled) unawaited(HapticFeedback.lightImpact());
+    final settingsState = getIt.get<SettingsBloc>().state;
+    getIt
+        .get<SettingsBloc>()
+        .add(SettingsEventSet(enableVibration: enabled, enableConfetti: settingsState.enableConfetti));
   }
 
-  @override
-  void dispose() {
-    enableVibrationOnPackOpeningSubject.close();
-    super.dispose();
+  void toggleEnableConfetti(bool enabled) {
+    if (enabled) Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
+    final settingsState = getIt.get<SettingsBloc>().state;
+    getIt
+        .get<SettingsBloc>()
+        .add(SettingsEventSet(enableVibration: settingsState.enableVibration, enableConfetti: enabled));
   }
 
   @override

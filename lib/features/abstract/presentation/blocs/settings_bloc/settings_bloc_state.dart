@@ -1,16 +1,24 @@
 part of 'settings_bloc.dart';
 
 sealed class SettingsState {
-  bool get enableVibrationOnPackOpening {
+  bool get enableVibration {
     return switch (this) {
-      SettingsStateReady() => (this as SettingsStateReady).enableVibrationOnPackOpeningSetting,
+      SettingsStateReady() => (this as SettingsStateReady).enableVibrationSettings,
+    };
+  }
+
+  bool get enableConfetti {
+    return switch (this) {
+      SettingsStateReady() => (this as SettingsStateReady).enableConfettiSettings,
     };
   }
 }
 
 final class SettingsStateReady extends SettingsState {
-  final bool enableVibrationOnPackOpeningSetting;
+  final bool enableVibrationSettings;
+  final bool enableConfettiSettings;
   SettingsStateReady({
-    required this.enableVibrationOnPackOpeningSetting,
+    required this.enableVibrationSettings,
+    required this.enableConfettiSettings,
   });
 }

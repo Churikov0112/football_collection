@@ -3,8 +3,11 @@ part of 'settings_bloc.dart';
 sealed class SettingsEvent {}
 
 final class SettingsEventSet extends SettingsEvent {
-  final bool enableVibrationOnPackOpening;
+  final bool enableVibration;
+  final bool enableConfetti;
+
   SettingsEventSet({
-    required this.enableVibrationOnPackOpening,
+    required this.enableVibration,
+    required this.enableConfetti,
   });
 }

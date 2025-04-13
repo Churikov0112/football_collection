@@ -5,7 +5,8 @@ part 'settings_bloc_event.dart';
 part 'settings_bloc_state.dart';
 
 final _default = SettingsStateReady(
-  enableVibrationOnPackOpeningSetting: true,
+  enableVibrationSettings: true,
+  enableConfettiSettings: true,
 );
 
 @singleton
@@ -24,7 +25,8 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   ) async {
     emit(
       SettingsStateReady(
-        enableVibrationOnPackOpeningSetting: event.enableVibrationOnPackOpening,
+        enableVibrationSettings: event.enableVibration,
+        enableConfettiSettings: event.enableConfetti,
       ),
     );
   }
@@ -33,7 +35,8 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsState fromJson(Map<String, dynamic> json) {
     try {
       return SettingsStateReady(
-        enableVibrationOnPackOpeningSetting: json["enableVibrationOnPackOpening"],
+        enableVibrationSettings: json["enableVibrationSettings"],
+        enableConfettiSettings: json["enableConfettiSettings"],
       );
     } catch (e) {
       return _default;
@@ -43,7 +46,8 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   @override
   Map<String, dynamic>? toJson(SettingsState state) {
     final json = {
-      "enableVibrationOnPackOpening": state.enableVibrationOnPackOpening,
+      "enableVibrationSettings": state.enableVibration,
+      "enableConfettiSettings": state.enableConfetti,
     };
     return json;
   }

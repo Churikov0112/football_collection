@@ -111,7 +111,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
         o3dController?.play(repetitions: 1);
         await Future.delayed(const Duration(milliseconds: 200));
         for (var i = 0; i < 27; i++) {
-          if (settings.enableVibrationOnPackOpening) unawaited(HapticFeedback.lightImpact());
+          if (settings.enableVibration) unawaited(HapticFeedback.lightImpact());
           await Future.delayed(const Duration(milliseconds: 100));
         }
         await Future.delayed(const Duration(milliseconds: 700));

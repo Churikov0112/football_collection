@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
-import 'package:rxdart/subjects.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 import 'widgets/select_language.dart';
@@ -25,49 +29,59 @@ class SettingsScreen extends StatelessWidget {
 
         return Scaffold(
           // backgroundColor: AppColors.darkBackgroundSecondary,
-          body: Stack(
-            children: [
-              Column(
+          body: BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: getIt.get(),
+            builder: (context, settingsState) {
+              return Stack(
                 children: [
-                  Translator(
-                    termin: AppGlossary.settings,
-                    builder: (value) => TransparentAppbar(
-                      title: value,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  LanguageSettingsTile(),
-                  const SizedBox(height: 20),
-                  StreamBuilder<bool>(
-                    stream: presenter.enableVibrationOnPackOpeningStream$,
-                    builder: (context, enableVibrationOnPackOpeningSnapshot) {
-                      return SwitchListTile(
+                  Column(
+                    children: [
+                      Translator(
+                        termin: AppGlossary.settings,
+                        builder: (value) => TransparentAppbar(
+                          title: value,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      LanguageSettingsTile(),
+                      const SizedBox(height: 20),
+                      SwitchListTile(
                         title: Translator(
-                          termin: AppGlossary.settingsVibrationOnPackOpening,
+                          termin: AppGlossary.settingsEnableVibration,
                           builder: (value) => Text(value),
                         ),
-                        value: enableVibrationOnPackOpeningSnapshot.data ?? false,
+                        value: settingsState.enableVibration,
                         onChanged: (val) {
-                          presenter.toggleEnableVibrationOnPackOpening(val);
+                          presenter.toggleEnableVibration(val);
                         },
-                      );
-                    },
+                      ),
+                      SwitchListTile(
+                        title: Translator(
+                          termin: AppGlossary.settingsEnableConfetti,
+                          builder: (value) => Text(value),
+                        ),
+                        value: settingsState.enableConfetti,
+                        onChanged: (val) {
+                          presenter.toggleEnableConfetti(val);
+                        },
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: mq.padding.bottom,
+                    right: 0,
+                    left: 0,
+                    child: StreamBuilder<bool>(
+                      stream: presenter.isBannerAlreadyCreatedStream$,
+                      builder: (context, isBannerAlreadyCreatedSnapshot) {
+                        if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
+                        return AdWidget(bannerAd: presenter.banner);
+                      },
+                    ),
                   ),
                 ],
-              ),
-              Positioned(
-                bottom: mq.padding.bottom,
-                right: 0,
-                left: 0,
-                child: StreamBuilder<bool>(
-                  stream: presenter.isBannerAlreadyCreatedStream$,
-                  builder: (context, isBannerAlreadyCreatedSnapshot) {
-                    if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                    return AdWidget(bannerAd: presenter.banner);
-                  },
-                ),
-              ),
-            ],
+              );
+            },
           ),
         );
       }),
