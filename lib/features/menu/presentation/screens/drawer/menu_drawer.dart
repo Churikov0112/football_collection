@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
@@ -47,28 +46,28 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder: (context) {
-                  return EnterCheatCodeScreen();
-                },
-              );
-            },
-            leading: Icon(
-              Icons.keyboard,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.cheatCodes,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+          // ListTile(
+          //   onTap: () {
+          //     showModalBottomSheet(
+          //       context: context,
+          //       isScrollControlled: true,
+          //       builder: (context) {
+          //         return EnterCheatCodeScreen();
+          //       },
+          //     );
+          //   },
+          //   leading: Icon(
+          //     Icons.keyboard,
+          //     color: Colors.white,
+          //   ),
+          //   title: Translator(
+          //     termin: AppGlossary.cheatCodes,
+          //     builder: (value) => Text(
+          //       value,
+          //       style: TextStyle(color: Colors.white),
+          //     ),
+          //   ),
+          // ),
           ListTile(
             onTap: () {
               context.push(RoutePaths.settings);
