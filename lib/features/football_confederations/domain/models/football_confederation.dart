@@ -210,7 +210,6 @@ FootballConfederations footballConfederationFromCountryName(String countryName) 
     case 'South Korea':
     case 'Iran':
     case 'Saudi Arabia':
-    case 'Australia':
     case 'United Arab Emirates':
     case 'China':
     case 'Iraq':
@@ -300,6 +299,7 @@ FootballConfederations footballConfederationFromCountryName(String countryName) 
       return FootballConfederations.concacaf;
 
     // OFC (Океания)
+    case 'Australia':
     case 'New Zealand':
     case 'Fiji':
     case 'Papua New Guinea':
