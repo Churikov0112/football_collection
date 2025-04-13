@@ -33,6 +33,8 @@ class FootballPlayerCard extends StatefulWidget {
     this.height = packHeight,
     this.width = packWidth,
     this.enableFlip = false,
+    this.onSell,
+    this.onShare,
     super.key,
   });
 
@@ -40,6 +42,8 @@ class FootballPlayerCard extends StatefulWidget {
   final int count;
   final bool? hideTransferValue;
   final bool enableFlip;
+  final VoidCallback? onSell;
+  final VoidCallback? onShare;
 
   final double height;
   final double width;
@@ -117,6 +121,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                   );
 
                   if (whatToDo == _WhatToDoWithDuplicate.qr && mounted) {
+                    widget.onShare?.call();
                     try {
                       await FirebaseAnalytics.instance.logEvent(
                         name: "player_to_qr",
@@ -144,6 +149,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                     );
                   }
                   if (whatToDo == _WhatToDoWithDuplicate.sell && mounted) {
+                    widget.onSell?.call();
                     try {
                       await FirebaseAnalytics.instance.logEvent(
                         name: "player_sell",

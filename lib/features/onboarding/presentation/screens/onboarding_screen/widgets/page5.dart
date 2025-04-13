@@ -20,7 +20,7 @@ class _OnboardingPage5 extends StatelessWidget {
               SizedBox(height: mq.padding.top),
               const Spacer(),
               Translator(
-                termin: AppGlossary.onboardingShareCardsWithFriends,
+                termin: AppGlossary.onboardingShareCardsWithFriendsOrSell,
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
@@ -32,7 +32,7 @@ class _OnboardingPage5 extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Translator(
-                termin: AppGlossary.onboardingShareCardsWithFriendsDescription,
+                termin: AppGlossary.onboardingShareCardsWithFriendsOrSellDescription,
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
@@ -43,11 +43,21 @@ class _OnboardingPage5 extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              FootballPlayerCard(
-                player: players[0],
-                count: 2,
-                enableFlip: true,
-              ),
+              StreamBuilder<int>(
+                  stream: presenter.playersDuplicatesStream,
+                  builder: (context, playersDuplicatesSnapshot) {
+                    return FootballPlayerCard(
+                      player: players[0],
+                      count: playersDuplicatesSnapshot.data ?? 1,
+                      enableFlip: true,
+                      onSell: () {
+                        presenter.playersDuplicatesSubject.add(1);
+                      },
+                      onShare: () {
+                        presenter.playersDuplicatesSubject.add(1);
+                      },
+                    );
+                  }),
               const Spacer(),
               SizedBox(
                 width: mq.size.width,

@@ -19,6 +19,9 @@ class OnboardingScreenPresenter extends StatefulWidget {
 class OnboardingScreenPresenterState extends State<OnboardingScreenPresenter> {
   final PageController onboardingController = PageController();
 
+  final BehaviorSubject<int> playersDuplicatesSubject = BehaviorSubject.seeded(2);
+  Stream<int> get playersDuplicatesStream => playersDuplicatesSubject.stream;
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +35,12 @@ class OnboardingScreenPresenterState extends State<OnboardingScreenPresenter> {
   void endOnboarding() {
     getIt.get<FirstLaunchBloc>().add(FirstLaunchEventSet(isFirstLaunch: false));
     context.go(RoutePaths.footballConfederations);
+  }
+
+  @override
+  void dispose() {
+    playersDuplicatesSubject.close();
+    super.dispose();
   }
 
   @override

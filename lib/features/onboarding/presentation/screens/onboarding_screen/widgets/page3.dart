@@ -10,6 +10,8 @@ class _OnboardingPage3 extends StatelessWidget {
       builder: (context, randomFootballPlayersState) {
         final players = randomFootballPlayersState.players ?? [];
         if (players.isEmpty) return Center(child: CircularProgressIndicator());
+        players.removeLast();
+        players.insert(0, players.first);
 
         return Padding(
           padding: const EdgeInsets.all(16),

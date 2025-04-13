@@ -240,8 +240,8 @@ enum AppGlossary {
   onboardingCardsAreSaved,
   onboardingTapOnCardToSeeInfo,
   next,
-  onboardingShareCardsWithFriends,
-  onboardingShareCardsWithFriendsDescription,
+  onboardingShareCardsWithFriendsOrSell,
+  onboardingShareCardsWithFriendsOrSellDescription,
   onboardingStartCollectioning,
   settingsVibrationOnPackOpening,
   ourWebsite,
@@ -1099,48 +1099,48 @@ const dictionary = {
     Languages.korean: '다음',
     Languages.italian: 'Successivo',
   },
-  AppGlossary.onboardingShareCardsWithFriends: {
-    Languages.english: 'Share  cards with friends!',
-    Languages.russian: 'Поделитесь карточками с друзьями!',
-    Languages.spanish: '¡Comparte tarjetas con tus amigos!',
-    Languages.portuguese: 'Compartilhe cartas com seus amigos!',
-    Languages.turkish: 'Arkadaşlarınızla kartları paylaşın!',
-    Languages.french: 'Partagez des cartes avec vos amis !',
-    Languages.chinese: '与朋友分享卡片！',
-    Languages.arabic: 'شارك البطاقات مع أصدقائك!',
-    Languages.japanese: '友達とカードを共有しましょう！',
-    Languages.hindi: 'दोस्तों के साथ कार्ड साझा करें!',
-    Languages.bengal: 'বন্ধুদের সাথে কার্ড শেয়ার করুন!',
-    Languages.german: 'Teile Karten mit Freunden!',
-    Languages.korean: '친구들과 카드를 공유하세요!',
-    Languages.italian: 'Condividi le carte con i tuoi amici!',
+  AppGlossary.onboardingShareCardsWithFriendsOrSell: {
+    Languages.english: 'Share  cards with friends or sell!',
+    Languages.russian: 'Поделитесь карточками с друзьями или продайте!',
+    Languages.spanish: '¡Comparte tarjetas con amigos o vende!',
+    Languages.portuguese: 'Compartilhe cartas com amigos ou venda!',
+    Languages.turkish: 'Arkadaşlarınızla veya satın alın!',
+    Languages.french: 'Partagez des cartes avec vos amis ou vendez-les !',
+    Languages.chinese: '与朋友分享卡片或出售！',
+    Languages.arabic: 'شارك البطاقات مع أصدقائك أو اشتريها!',
+    Languages.japanese: '友達とカードを共有するか、売却する！',
+    Languages.hindi: 'दोस्तों के साथ कार्ड साझा करें या बेचें!',
+    Languages.bengal: 'বন্ধুদের সাথে কার্ড শেয়ার করুন বা বিক্রি করুন!',
+    Languages.german: 'Teile Karten mit Ihren Freunden oder verkaufen!',
+    Languages.korean: '친구들과 카드를 공유하거나 판매하세요!',
+    Languages.italian: 'Condividi le carte con i tuoi amici o vendile!',
   },
-  AppGlossary.onboardingShareCardsWithFriendsDescription: {
+  AppGlossary.onboardingShareCardsWithFriendsOrSellDescription: {
     Languages.english:
-        'Sometimes you can find a card that you already have. You can share it with your friends. Just tap on count label.',
+        'Sometimes you can find a card that you already have. You can share it with your friends or sell. Just tap on count label.',
     Languages.russian:
-        'Иногда вы можете найти карточку, которую уже имеете. Вы можете поделиться ею со своими друзьями. Просто нажмите на метку количества.',
+        'Иногда вы можете найти карточку, которую уже имеете. Вы можете поделиться ею со своими друзьями или продать. Просто нажмите на метку количества.',
     Languages.spanish:
-        'A veces puedes encontrar una tarjeta que ya tienes. Puedes compartirla con tus amigos. Simplemente toca la etiqueta de recuento.',
+        'A veces puedes encontrar una tarjeta que ya tienes. Puedes compartirla con tus amigos o vendérsela. Simplemente toca en la etiqueta de recuento.',
     Languages.portuguese:
-        'Às vezes você pode encontrar uma carta que você já tem. Você pode compartilhar com seus amigos. Basta tocar na etiqueta de contagem.',
+        'Às vezes você pode encontrar uma carta que você já tem. Você pode compartilhar com seus amigos ou vendê-la. Basta tocar na etiqueta de contagem.',
     Languages.turkish:
-        'Bazen zaten sahip olduğunuz bir kart bulabilirsiniz. Arkadaşlarınızla paylaşabilirsiniz. Sadece sayı etiketine dokunun.',
+        'Bazen zaten sahip olduğunuz bir kart bulabilirsiniz. Arkadaşlarınızla paylaşabilir veya satabilirsiniz. Sadece sayı etiketine dokunun.',
     Languages.french:
-        'Parfois, vous pouvez trouver une carte que vous avez déjà. Vous pouvez la partager avec vos amis. Cliquez simplement sur l\'étiquette de compte.',
-    Languages.chinese: '有时您可以找到一张已经拥有的卡片。您可以与朋友分享它。只需点击计数标签。',
+        'Parfois, vous pouvez trouver une carte que vous avez déjà. Vous pouvez la partager avec vos amis ou la vendre. Cliquez simplement sur l\'étiquette de comptage.',
+    Languages.chinese: '有时您可能会找到一张您已经拥有的卡片。您可以与朋友分享或出售它。只需点击计数标签。',
     Languages.arabic:
-        'أحيانًا يمكنك العثور على بطاقة قمت بالفعل بها. يمكنك مشاركتها مع أصدقائك. فقط اضغط على تسمية العد.',
-    Languages.japanese: 'すでに持っているカードを見つけることができます。友達とカードを共有しましょう。カウントラベルをタップするだけです。',
+        'أحيانًا يمكنك العثور على بطاقة قمت بالحصول عليها مسبقًا. يمكنك مشاركتها مع أصدقائك أو إيجارها. فقط اضغط على علامة العد.',
+    Languages.japanese: '時々、すでに持っているカードを見つけることができます。友達と共有したり、売却したりできます。カウントラベルをタップしてください。',
     Languages.hindi:
-        'कभी-कभी आप एक कार्ड पा सकते हैं जिसे आप पहले से ही हैं। आप इसे अपने दोस्तों के साथ साझा कर सकते हैं। बस काउंट लेबल पर टैप करें।',
+        'कभी-कभी आप एक कार्ड पा सकते हैं जिसे आप पहले से ही हैं। आप इसे अपने दोस्तों के साथ साझा कर सकते हैं या बेच सकते हैं। बस गिनती लेबल पर टैप करें।',
     Languages.bengal:
-        'কখনও কখনও আপনি একটি কার্ড পাবেন যা আপনি ইতিমধ্যে আছেন। আপনি এটি আপনার বন্ধুদের সাথে ভাগ করতে পারেন। শুধু গণনা লেবেলে ট্যাপ করুন।',
+        'কখনোই আপনি একটি কার্ড পাওয়া যায় যা আপনি ইতিমধ্যে আপণ আছে। আপনি এটি আপনার বন্ধুদের সাথে ভাগ করতে পারেন বা বিক্রি করতে পারেন। শুধু গণনা লেবেলে ট্যাপ করুন।',
     Languages.german:
-        'Manchmal können Sie eine Karte finden, die Sie bereits haben. Sie können sie mit Ihren Freunden teilen. Tippen Sie einfach auf die Zähl-Label.',
-    Languages.korean: '이미 보유한 카드를 찾을 수 있습니다. 친구들과 카드를 공유하세요. 숫자 레이블을 탭하기만 하면 됩니다.',
+        'Manchmal können Sie eine Karte finden, die Sie bereits haben. Sie können sie mit Ihren Freunden teilen oder verkaufen. Tippen Sie einfach auf die Anzahl-Bezeichnung.',
+    Languages.korean: '때로는 이미 보유 중인 카드를 찾을 수 있습니다. 친구들과 공유하거나 판매할 수 있습니다. 단순히 수량 레이블을 탭하세요.',
     Languages.italian:
-        'A volte puoi trovare una carta che hai già. Puoi condividerla con i tuoi amici. Basta toccare l\'etichetta del conteggio.',
+        'A volte puoi trovare una carta che hai già. Puoi condividerla con i tuoi amici o vendere. Basta toccare l\'etichetta di conteggio.',
   },
   AppGlossary.onboardingStartCollectioning: {
     Languages.english: 'Start collecting',
