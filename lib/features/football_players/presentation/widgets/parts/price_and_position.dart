@@ -28,7 +28,7 @@ class _PriceAndPosition extends StatelessWidget {
               text: footballPlayerPositionToShort(player.position!)!,
               backgroundColor: positionBackgroundColor,
               textColor: positionBackgroundColor != null ? Colors.white : null,
-              borderColor: positionBackgroundColor,
+              borderColor: positionBackgroundColor != null ? Colors.white : null, // positionBackgroundColor,
             ),
         ],
       ),
