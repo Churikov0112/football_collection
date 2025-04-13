@@ -27,13 +27,13 @@ class _PlayerCardBackWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (parseCustomDate(player.birthDate) != null)
-                _RoundedWhiteContainer(text: parseCustomDate(player.birthDate)!),
+                _RoundedContainer(text: parseCustomDate(player.birthDate)!),
               if (player.foot != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("foot:  ", style: TextStyle(color: Colors.black)),
-                    _RoundedWhiteContainer(text: player.foot!),
+                    _RoundedContainer(text: player.foot!),
                   ],
                 ),
               if (player.height != null)
@@ -41,7 +41,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("height:  ", style: TextStyle(color: Colors.black)),
-                    _RoundedWhiteContainer(text: player.height!),
+                    _RoundedContainer(text: player.height!),
                   ],
                 ),
               if (player.currentMarketValue != null)
@@ -49,7 +49,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("current:  ", style: TextStyle(color: Colors.black)),
-                    _RoundedWhiteContainer(text: beautifyTransferValue(player.currentMarketValue!)),
+                    _RoundedContainer(text: beautifyTransferValue(player.currentMarketValue!)),
                   ],
                 ),
               if (player.currentMarketValue != null)
@@ -57,10 +57,10 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("prime:  ", style: TextStyle(color: Colors.black)),
-                    _RoundedWhiteContainer(text: beautifyTransferValue(player.maxMarketValue!)),
+                    _RoundedContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],
                 ),
-              if (player.currentClub != null) _RoundedWhiteContainer(text: player.currentClub!.toUpperCase()),
+              if (player.currentClub != null) _RoundedContainer(text: player.currentClub!.toUpperCase()),
             ],
           ),
         ),

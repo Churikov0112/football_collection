@@ -21,7 +21,7 @@ part 'parts/back_widget.dart';
 part 'parts/flag.dart';
 part 'parts/player_image.dart';
 part 'parts/player_qr_bs.dart';
-part 'parts/price.dart';
+part 'parts/price_and_position.dart';
 part 'parts/rounded_white_container.dart';
 part 'parts/what_to_do_with_duplicate_bs.dart';
 
@@ -72,7 +72,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
               children: [
                 _PlayerImage(player: widget.player, count: widget.count),
                 _Flag(player: widget.player),
-                _Price(player: widget.player, hideTransferValue: widget.hideTransferValue),
+                _PriceAndPosition(player: widget.player, hideTransferValue: widget.hideTransferValue),
               ],
             ),
           ),

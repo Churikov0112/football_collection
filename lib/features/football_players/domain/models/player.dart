@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
 class FootballPlayerModel extends CardModel {
@@ -66,4 +67,72 @@ class FootballPlayerModel extends CardModel {
 
   @override
   List<Object?> get props => [cardId, playerId];
+}
+
+String? footballPlayerPositionToShort(String? position) {
+  if (position == null) return null;
+  switch (position) {
+    case "Goalkeeper":
+      return "GK";
+    case "Centre-Back":
+      return "CB";
+    case "Left-Back":
+      return "LB";
+    case "Right-Back":
+      return "RB";
+    case "Defensive Midfield":
+      return "DM";
+    case "Central Midfield":
+      return "CM";
+    case "Attacking Midfield":
+      return "AM";
+    case "Left Midfield":
+      return "LM";
+    case "Right Midfield":
+      return "RM";
+    case "Left Winger":
+      return "LW";
+    case "Right Winger":
+      return "RW";
+    case "Centre-Forward":
+      return "CF";
+    case "Second Striker":
+      return "SS";
+    default:
+      return null;
+  }
+}
+
+Color? footballPlayerPositionToColor(String? position) {
+  if (position == null) return null;
+  switch (position) {
+    case "Goalkeeper":
+      return Colors.orange;
+    case "Centre-Back":
+      return Colors.blue;
+    case "Left-Back":
+      return Colors.blue;
+    case "Right-Back":
+      return Colors.blue;
+    case "Defensive Midfield":
+      return Colors.green;
+    case "Central Midfield":
+      return Colors.green;
+    case "Attacking Midfield":
+      return Colors.green;
+    case "Left Midfield":
+      return Colors.green;
+    case "Right Midfield":
+      return Colors.green;
+    case "Left Winger":
+      return Colors.red;
+    case "Right Winger":
+      return Colors.red;
+    case "Centre-Forward":
+      return Colors.red;
+    case "Second Striker":
+      return Colors.red;
+    default:
+      return null;
+  }
 }
