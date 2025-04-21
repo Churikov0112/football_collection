@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
@@ -6,9 +8,7 @@ import 'package:football_collection/features/onboarding/presentation/screens/onb
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/countries/domain/models/country.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
-import '../../features/football_confederations/domain/models/football_confederation.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';
@@ -17,7 +17,7 @@ import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class RoutePaths {
-  static const onboarding = '/onboarding';
+  static const home = '/';
 
   static const footballConfederations = '/footballConfederations';
   static const footballCountries = '/footballCountries';
@@ -80,16 +80,11 @@ class FootballCollectionRouter {
       initialLocation: initialRoute,
       routes: [
         GoRoute(
-          path: RoutePaths.footballPlayersAlbum,
-          builder: (context, state) => FootballPlayersAlbumScreen(
-            country: state.extra as CountryModel,
-          ),
-        ),
-        GoRoute(
-          path: RoutePaths.footballPlayersPacks,
-          builder: (context, state) => FootballPlayersPacksScreen(
-            args: state.extra as FootballPlayersPacksScreenArgs,
-          ),
+          path: RoutePaths.home,
+          builder: (context, state) {
+            final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
+            return isFirstLaunch ? const OnboardingScreen() : const FootballConfederationsScreen();
+          },
         ),
         GoRoute(
           path: RoutePaths.footballConfederations,
@@ -97,10 +92,17 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.footballCountries,
-          builder: (context, state) => FootballCountriesScreen(
-            confederation: state.extra as FootballConfederations,
-          ),
+          builder: (context, state) => FootballCountriesScreen(),
         ),
+        GoRoute(
+          path: RoutePaths.footballPlayersAlbum,
+          builder: (context, state) => FootballPlayersAlbumScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballPlayersPacks,
+          builder: (context, state) => FootballPlayersPacksScreen(),
+        ),
+
         GoRoute(
           path: RoutePaths.miniGames,
           builder: (context, state) => MiniGamesScreen(),
@@ -120,10 +122,6 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.settings,
           builder: (context, state) => SettingsScreen(),
-        ),
-        GoRoute(
-          path: RoutePaths.onboarding,
-          builder: (context, state) => OnboardingScreen(),
         ),
 
         // GoRoute(

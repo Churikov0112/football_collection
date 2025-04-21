@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/firebase_options.dart';
 import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
@@ -94,48 +93,18 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   Future<void> initializeApp() async {
     await configureDependencies();
     await getIt.allReady();
-
-    setState(() {});
-
-    // final authBloc = getIt.get<AuthBloc>();
-    // final authProcessingBloc = getIt.get<AuthProcessingBloc>();
-
-    // bool isLogged = false;
-
-    // if (authBloc.state is AuthStateAuthorized) {
-    //   final session = (authBloc.state as AuthStateAuthorized).session;
-
-    //   // if (session.expireAt.isBefore(DateTime.now()) || session.expireAt.difference(DateTime.now()).abs().inDays < 3) {
-    //   authProcessingBloc.add(AuthProcessingEventSessionRefresh(refreshToken: session.refreshToken));
-
-    //   final state = await authProcessingBloc.stream.firstWhere((element) {
-    //     return element is AuthProcessingStateSessionRefreshedSuccessfully ||
-    //         element is AuthProcessingStateSessionRefreshFailed;
-    //   });
-
-    //   if (state is AuthProcessingStateSessionRefreshedSuccessfully) {
-    //     authBloc.add(AuthEventSetSession(state.session));
-    //     isLogged = true;
-    //   } else {
-    //     authBloc.add(const AuthEventReset());
-    //   }
-    // }
-
-    // TODO remove after auth done
     isLogged = true;
-    final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
+    isInitialized = true;
+    setState(() {});
+    _router = FootballCollectionRouter(RoutePaths.home);
 
-    setState(() {
-      isInitialized = true;
-    });
-
-    _router = FootballCollectionRouter(
-      isFirstLaunch ? RoutePaths.onboarding : RoutePaths.footballConfederations,
-    );
-
-    MobileAds.setUserConsent(true);
-    MobileAds.setAgeRestrictedUser(true);
-    MobileAds.initialize();
+    try {
+      MobileAds.setUserConsent(true);
+      MobileAds.setAgeRestrictedUser(true);
+      MobileAds.initialize();
+    } catch (e) {
+      LogService.error(e.toString(), e);
+    }
 
     try {
       await Future.delayed(const Duration(milliseconds: 330), () {

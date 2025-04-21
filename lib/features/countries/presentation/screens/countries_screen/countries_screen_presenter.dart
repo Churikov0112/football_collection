@@ -32,6 +32,12 @@ class FootballCountriesScreenPresenterState extends State<FootballCountriesScree
   }
 
   @override
+  void dispose() {
+    getIt.get<SelectedConfederationBloc>().add(SelectedConfederationEventReset());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return widget.child;
   }

@@ -32,6 +32,12 @@ class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbu
   }
 
   @override
+  void dispose() {
+    getIt.get<SelectedCountryBloc>().add(SelectedCountryEventReset());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return widget.child;
   }

@@ -65,7 +65,7 @@ class FootballPlayersRepository extends CardsRepository {
     CountryModel? country,
   }) async {
     final List<PackModel> packs = [
-      if (confederation == null && country != null) ...[
+      if (country != null)
         PackModel(
           title: country.name,
           price: 100,
@@ -73,23 +73,14 @@ class FootballPlayersRepository extends CardsRepository {
           imageAssetPath: "assets/raster/packs/pack-general.png",
           glbAssetPath: "assets/3d/pack-general.glb",
         ),
+      if (confederation != null && confederation != FootballConfederations.unknown)
         PackModel(
-          title: country.confederation.name,
+          title: confederation.name,
           price: 5,
-          cards: await getRandomCards(confederation: country.confederation),
-          imageAssetPath: "assets/raster/packs/pack-${country.confederation.name}.png",
-          glbAssetPath: "assets/3d/pack-${country.confederation.name}.glb",
+          cards: await getRandomCards(confederation: confederation),
+          imageAssetPath: "assets/raster/packs/pack-${confederation.name}.png",
+          glbAssetPath: "assets/3d/pack-${confederation.name}.glb",
         ),
-      ],
-      if (confederation != null && country == null)
-        if (confederation != FootballConfederations.unknown)
-          PackModel(
-            title: confederation.name,
-            price: 5,
-            cards: await getRandomCards(confederation: confederation),
-            imageAssetPath: "assets/raster/packs/pack-${confederation.name}.png",
-            glbAssetPath: "assets/3d/pack-${confederation.name}.glb",
-          ),
       PackModel(
         title: "World tour",
         price: 0,

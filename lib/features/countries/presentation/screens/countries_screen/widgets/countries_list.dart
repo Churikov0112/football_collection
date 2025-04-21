@@ -67,7 +67,10 @@ class _CountryTile extends StatelessWidget {
             final totalCount = isLoading ? 0 : snapshot.data?.totalCount ?? 0;
 
             return GestureDetector(
-              onTap: () => context.push(RoutePaths.footballPlayersAlbum, extra: country),
+              onTap: () {
+                getIt.get<SelectedCountryBloc>().add(SelectedCountryEventSelect(country: country));
+                context.push(RoutePaths.footballPlayersAlbum);
+              },
               child: SquareProgressIndicator(
                 value: progress,
                 width: 100,

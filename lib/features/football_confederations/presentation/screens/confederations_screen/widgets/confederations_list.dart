@@ -70,7 +70,12 @@ class _RegionTile extends StatelessWidget {
             final totalCount = isLoading ? 0 : snapshot.data?.totalCount ?? 0;
 
             return GestureDetector(
-              onTap: () => context.push(RoutePaths.footballCountries, extra: confederation),
+              onTap: () {
+                getIt
+                    .get<SelectedConfederationBloc>()
+                    .add(SelectedConfederationEventSelect(confederation: confederation));
+                context.push(RoutePaths.footballCountries);
+              },
               child: SquareProgressIndicator(
                 value: progress,
                 width: 100,
