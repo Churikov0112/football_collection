@@ -36,3 +36,36 @@ class _RoundedContainer extends StatelessWidget {
     );
   }
 }
+
+class _FootRoundedContainer extends StatelessWidget {
+  const _FootRoundedContainer({
+    required this.text,
+  });
+
+  final String text;
+
+  AppGlossary? _footTermin(String? text) {
+    if (text == null) return null;
+    switch (text) {
+      case "left":
+        return AppGlossary.footLeft;
+      case "right":
+        return AppGlossary.footRight;
+      case "both":
+        return AppGlossary.footBoth;
+      default:
+        return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final termin = _footTermin(text);
+    if (termin == null) return const SizedBox.shrink();
+
+    return Translator(
+      termin: termin,
+      builder: (value) => _RoundedContainer(text: value),
+    );
+  }
+}

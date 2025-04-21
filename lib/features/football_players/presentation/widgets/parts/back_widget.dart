@@ -32,15 +32,27 @@ class _PlayerCardBackWidget extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("foot:  ", style: TextStyle(color: Colors.black)),
-                    _RoundedContainer(text: player.foot!),
+                    Translator(
+                      termin: AppGlossary.foot,
+                      builder: (value) => Text(
+                        "$value:  ",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    _FootRoundedContainer(text: player.foot!),
                   ],
                 ),
               if (player.height != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("height:  ", style: TextStyle(color: Colors.black)),
+                    Translator(
+                      termin: AppGlossary.height,
+                      builder: (value) => Text(
+                        "$value:  ",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                     _RoundedContainer(text: player.height!),
                   ],
                 ),
@@ -48,7 +60,13 @@ class _PlayerCardBackWidget extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("current:  ", style: TextStyle(color: Colors.black)),
+                    Translator(
+                      termin: AppGlossary.currentValue,
+                      builder: (value) => Text(
+                        "$value:  ",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                     _RoundedContainer(text: beautifyTransferValue(player.currentMarketValue!)),
                   ],
                 ),
@@ -56,7 +74,13 @@ class _PlayerCardBackWidget extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("prime:  ", style: TextStyle(color: Colors.black)),
+                    Translator(
+                      termin: AppGlossary.primeValue,
+                      builder: (value) => Text(
+                        "$value:  ",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                     _RoundedContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],
                 ),
