@@ -11,7 +11,7 @@ class _PriceAndPosition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final positionBackgroundColor = footballPlayerPositionToColor(player.position!);
+    final positionBackgroundColor = footballPlayerPositionToColor(player.position);
 
     return Positioned(
       bottom: 5,

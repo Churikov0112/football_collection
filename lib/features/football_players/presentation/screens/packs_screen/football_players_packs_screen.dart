@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

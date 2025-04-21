@@ -1,7 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
 
+import '../../../../../countries/domain/models/country.dart';
 import '../football_players_packs_screen.dart';
 
 class PacksPageView extends StatelessWidget {
@@ -16,27 +17,32 @@ class PacksPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final presenter = FootballPlayersPacksScreenPresenter.of(context);
 
     return Visibility(
       visible: !state.unpacking,
-      child: SizedBox(
-        height: packHeight + 100,
-        child: PageView.builder(
-          itemCount: packs.length,
-          controller: presenter.packsPageController,
-          onPageChanged: (index) {
+      child: CarouselSlider(
+        carouselController: presenter.packsCarouselController,
+
+        options: CarouselOptions(
+          initialPage: presenter.selectedPackIndexSubject.value,
+          height: 400.0,
+          viewportFraction: (packWidth / size.width) + 0.1,
+          onPageChanged: (index, reason) {
             presenter.setSelectedPackIndex(index);
           },
-          itemBuilder: (context, index) {
-            final pack = packs[index];
-            return GestureDetector(
+        ),
+        items: [
+          for (int i = 0; i < packs.length; i++)
+            GestureDetector(
               onTap: () {
-                if (!state.unpacking && !state.packsHiding && !state.isWaitingConfirm) {
-                  if (packs[index].price == 0) {
+                final selectedPackIndex = presenter.selectedPackIndexSubject.value;
+                if (!state.unpacking && !state.packsHiding && !state.isWaitingConfirm && i == selectedPackIndex) {
+                  if (packs[i].price == 0) {
                     presenter.openPack();
                   } else {
-                    presenter.requestBuyPackConfirm(packs[index]);
+                    presenter.requestBuyPackConfirm(packs[i]);
                   }
                 }
               },
@@ -54,7 +60,7 @@ class PacksPageView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           child: Text(
-                            pack.price > 0 ? "${pack.price} 🏆" : "Free",
+                            packs[i].price > 0 ? "${packs[i].price} 🏆" : "Free",
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -62,7 +68,7 @@ class PacksPageView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (pack.imageAssetPath == "assets/raster/packs/pack-general.png") ...[
+                      if (packs[i].imageAssetPath == "assets/raster/packs/pack-general.png") ...[
                         const SizedBox(height: 8),
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: packWidth),
@@ -74,7 +80,7 @@ class PacksPageView extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               child: Text(
-                                "${emojiFlagByCountryName(pack.title) ?? ""} ${pack.title}",
+                                "${emojiFlagByCountryName(packs[i].title) ?? ""} ${packs[i].title}",
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 style: TextStyle(
@@ -91,16 +97,94 @@ class PacksPageView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Image.asset(
-                    pack.imageAssetPath,
+                    packs[i].imageAssetPath,
                     height: packHeight,
                     width: packWidth,
                     fit: BoxFit.fill,
                   ),
                 ],
               ),
-            );
-          },
-        ),
+            ),
+        ],
+        // PageView.builder(
+        //   itemCount: packs.length,
+        //   controller: presenter.packsPageController,
+        //   onPageChanged: (index) {
+        //     presenter.setSelectedPackIndex(index);
+        //   },
+        //   itemBuilder: (context, index) {
+        //     final pack = packs[index];
+        //     return GestureDetector(
+        //       onTap: () {
+        //         if (!state.unpacking && !state.packsHiding && !state.isWaitingConfirm) {
+        //           if (packs[index].price == 0) {
+        //             presenter.openPack();
+        //           } else {
+        //             presenter.requestBuyPackConfirm(packs[index]);
+        //           }
+        //         }
+        //       },
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.end,
+        //         children: [
+        //           Column(
+        //             mainAxisAlignment: MainAxisAlignment.end,
+        //             children: [
+        //               DecoratedBox(
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.black45,
+        //                   borderRadius: BorderRadius.circular(16),
+        //                 ),
+        //                 child: Padding(
+        //                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        //                   child: Text(
+        //                     pack.price > 0 ? "${pack.price} 🏆" : "Free",
+        //                     style: TextStyle(
+        //                       fontSize: 20,
+        //                       color: Colors.white,
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ),
+        //               if (pack.imageAssetPath == "assets/raster/packs/pack-general.png") ...[
+        //                 const SizedBox(height: 8),
+        //                 ConstrainedBox(
+        //                   constraints: BoxConstraints(maxWidth: packWidth),
+        //                   child: DecoratedBox(
+        //                     decoration: BoxDecoration(
+        //                       color: Colors.black45,
+        //                       borderRadius: BorderRadius.circular(16),
+        //                     ),
+        //                     child: Padding(
+        //                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        //                       child: Text(
+        //                         "${emojiFlagByCountryName(pack.title) ?? ""} ${pack.title}",
+        //                         textAlign: TextAlign.center,
+        //                         maxLines: 2,
+        //                         style: TextStyle(
+        //                           fontSize: 20,
+        //                           fontWeight: FontWeight.bold,
+        //                           color: Colors.white,
+        //                         ),
+        //                       ),
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ],
+        //           ),
+        //           const SizedBox(height: 8),
+        //           Image.asset(
+        //             pack.imageAssetPath,
+        //             height: packHeight,
+        //             width: packWidth,
+        //             fit: BoxFit.fill,
+        //           ),
+        //         ],
+        //       ),
+        //     );
+        //   },
+        // ),
       ),
     );
   }

@@ -27,11 +27,11 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   late Animation<double> _hidePacksAnimation;
 
   O3DController? o3dController;
-  late PageController packsPageController;
+  late CarouselSliderController packsCarouselController;
 
 // нужно для показа 3d модели пака
-  final BehaviorSubject<int> _selectedPackIndexSubject = BehaviorSubject.seeded(0);
-  Stream<int> get selectedPackIndexStream$ => _selectedPackIndexSubject.stream;
+  final BehaviorSubject<int> selectedPackIndexSubject = BehaviorSubject.seeded(0);
+  Stream<int> get selectedPackIndexStream$ => selectedPackIndexSubject.stream;
 
 // нужно для показа 3d модели пака
   final BehaviorSubject<bool> _show3dObjectSubject = BehaviorSubject.seeded(false);
@@ -85,7 +85,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
 
   Future<void> setSelectedPackIndex(int index) async {
     o3dController = O3DController();
-    _selectedPackIndexSubject.add(index);
+    selectedPackIndexSubject.add(index);
     _show3dObjectSubject.add(false);
     await Future.delayed(const Duration(milliseconds: 100)); // TODO это безопасно?
     _show3dObjectSubject.add(true);
@@ -98,7 +98,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
         parameters: {
           if (widget.args.country != null) "country": widget.args.country!.name,
           if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
-          "pack_index": _selectedPackIndexSubject.value,
+          "pack_index": selectedPackIndexSubject.value,
         },
       );
     } catch (e) {
@@ -186,8 +186,8 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
       listener: (context, footballPlayersPacksState) {
         if (footballPlayersPacksState is FootballPlayersPacksStateLoadSucceeded) {
           // final packs = stickerpacksState.packs ?? [];
-          setSelectedPackIndex(_selectedPackIndexSubject.value);
-          packsPageController = PageController(viewportFraction: 0.6, initialPage: _selectedPackIndexSubject.value);
+          setSelectedPackIndex(selectedPackIndexSubject.value);
+          packsCarouselController = CarouselSliderController();
         }
       },
       child: widget.child,
