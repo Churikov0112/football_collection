@@ -50,6 +50,23 @@ class _MiniGamesList extends StatelessWidget {
               context.push(RoutePaths.footballMiniGameGuessWhoIsMoreExpensive);
             },
           ),
+          _MiniGameTile(
+            title: AppGlossary.guessNationalTeam,
+            color: Colors.red,
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {
+                    "mini_game": "guess_national_team",
+                  },
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessNationalTeam);
+            },
+          ),
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",

@@ -30,6 +30,7 @@ class FootballPlayerCard extends StatefulWidget {
     required this.player,
     required this.count,
     this.hideTransferValue,
+    this.hideNationalTeam = false,
     this.height = packHeight,
     this.width = packWidth,
     this.enableFlip = false,
@@ -42,6 +43,7 @@ class FootballPlayerCard extends StatefulWidget {
   final FootballPlayerModel player;
   final int count;
   final bool? hideTransferValue;
+  final bool hideNationalTeam;
   final bool enableFlip;
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
@@ -77,7 +79,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
             child: Stack(
               children: [
                 _PlayerImage(player: widget.player, count: widget.count),
-                _Flag(player: widget.player),
+                _Flag(player: widget.player, hideNationalTeam: widget.hideNationalTeam),
                 _PriceAndPosition(player: widget.player, hideTransferValue: widget.hideTransferValue),
               ],
             ),

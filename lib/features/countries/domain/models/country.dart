@@ -24,7 +24,7 @@ class CountryModel extends Equatable {
   List<Object?> get props => [id];
 }
 
-String? emojiFlagByCountryName(String countryName) {
+String? emojiFlagByCountryName(String? countryName) {
   // Определяем конфедерацию на основе названия страны
   switch (countryName) {
     // UEFA (Европа)

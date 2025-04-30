@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';
 import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by_qr_screen.dart';
 
@@ -28,6 +29,7 @@ class RoutePaths {
   static const miniGames = '/miniGames';
   static const footballMiniGameGuessTransferValue = '/footballMiniGameGuessTransferValue';
   static const footballMiniGameGuessWhoIsMoreExpensive = '/footballMiniGameGuessWhoIsMoreExpensive';
+  static const footballMiniGameGuessNationalTeam = '/footballMiniGameGuessNationalTeam';
 
   static const getCardByQr = '/getCardByQr';
   static const settings = '/settings';
@@ -114,6 +116,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessWhoIsMoreExpensive,
           builder: (context, state) => GuessWhichFootballPlayerIsMoreExpensiveScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessNationalTeam,
+          builder: (context, state) => GuessNationalTeamScreen(),
         ),
         GoRoute(
           path: RoutePaths.getCardByQr,
