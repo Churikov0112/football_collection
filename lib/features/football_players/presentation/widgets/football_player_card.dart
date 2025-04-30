@@ -35,6 +35,7 @@ class FootballPlayerCard extends StatefulWidget {
     this.enableFlip = false,
     this.onSell,
     this.onShare,
+    this.onSellAll,
     super.key,
   });
 
@@ -43,6 +44,7 @@ class FootballPlayerCard extends StatefulWidget {
   final bool? hideTransferValue;
   final bool enableFlip;
   final VoidCallback? onSell;
+  final VoidCallback? onSellAll;
   final VoidCallback? onShare;
 
   final double height;
@@ -168,6 +170,37 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                     getIt.get<SavedCardsBloc>().add(SavedCardsEventRemove(cardId: widget.player.cardId));
                     getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 1));
                     ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} + 1 🏆", seconds: 2);
+                  }
+
+                  if (whatToDo == _WhatToDoWithDuplicate.sellAll) {
+                    final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
+                    final savedCardsIdsSingle = <String>[];
+                    final duplicates = <String>[];
+                    for (final savedCardId in savedCardsIds) {
+                      if (!savedCardsIdsSingle.contains(savedCardId)) {
+                        savedCardsIdsSingle.add(savedCardId);
+                      } else {
+                        duplicates.add(savedCardId);
+                      }
+                    }
+                    try {
+                      await FirebaseAnalytics.instance.logEvent(
+                        name: "player_sellAll",
+                        parameters: {
+                          "saved_cards_ids_length": savedCardsIds.length,
+                          "duplicates_length": duplicates.length,
+                        },
+                      );
+                    } catch (e) {
+                      LogService.error(e.toString(), e);
+                    }
+                    getIt.get<SavedCardsBloc>().add(SavedCardsEventRemoveAll(cardIds: duplicates));
+                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: duplicates.length));
+                    ToastService.showToast(
+                      title: "${AppGlossary.balanceIncreased.translate()} + ${duplicates.length} 🏆",
+                      seconds: 2,
+                    );
+                    widget.onSellAll?.call();
                   }
                 },
                 child: Container(

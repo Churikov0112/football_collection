@@ -62,10 +62,10 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i47.FootballConfederationsRepository>(
       () => _i47.FootballConfederationsRepository());
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
-  gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i150.SelectedConfederationBloc>(
       () => _i150.SelectedConfederationBloc());
   gh.singleton<_i782.SelectedCountryBloc>(() => _i782.SelectedCountryBloc());
+  gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i873.AllFootballPlayersBloc>(() => _i873.AllFootballPlayersBloc(
       repository: gh<_i1036.FootballPlayersRepository>()));
   gh.singleton<_i91.FootballConfederationCountriesBloc>(() =>

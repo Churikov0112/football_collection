@@ -12,6 +12,7 @@ class SavedCardsBloc extends HydratedBloc<SavedCardsEvent, SavedCardsState> {
         SavedCardsEventAdd() => _add(event, emitter),
         SavedCardsEventAddAll() => _addAll(event, emitter),
         SavedCardsEventRemove() => _remove(event, emitter),
+        SavedCardsEventRemoveAll() => _removeAll(event, emitter),
       },
     );
   }
@@ -40,6 +41,20 @@ class SavedCardsBloc extends HydratedBloc<SavedCardsEvent, SavedCardsState> {
     try {
       final savedCardsIdsCopy = <String>[...(state.savedCardsIds ?? [])];
       savedCardsIdsCopy.remove(event.cardId);
+      emit(SavedCardsStateLoadSucceeded(savedCardsIdsCopy));
+    } catch (e) {
+      emit(SavedCardsStateFailed(message: e.toString()));
+    }
+  }
+
+  Future<void> _removeAll(SavedCardsEventRemoveAll event, Emitter emit) async {
+    try {
+      final savedCardsIdsCopy = <String>[...(state.savedCardsIds ?? [])];
+      for (final cardId in event.cardIds) {
+        if (savedCardsIdsCopy.contains(cardId)) {
+          savedCardsIdsCopy.remove(cardId);
+        }
+      }
       emit(SavedCardsStateLoadSucceeded(savedCardsIdsCopy));
     } catch (e) {
       emit(SavedCardsStateFailed(message: e.toString()));
