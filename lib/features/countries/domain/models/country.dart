@@ -450,7 +450,7 @@ String? emojiFlagByCountryName(String countryName) {
     case 'French Guiana':
       return '🇬🇫';
     case 'Montserrat':
-      return '🇲🇵';
+      return '🇲🇸';
     case 'Turks and Caicos Islands':
       return '🇹🇨';
 
