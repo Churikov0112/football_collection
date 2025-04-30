@@ -26,8 +26,9 @@ class PacksPageView extends StatelessWidget {
         carouselController: presenter.packsCarouselController,
 
         options: CarouselOptions(
+          // enlargeCenterPage: true,
           initialPage: presenter.selectedPackIndexSubject.value,
-          height: 400.0,
+          height: 450.0,
           viewportFraction: (packWidth / size.width) + 0.1,
           onPageChanged: (index, reason) {
             presenter.setSelectedPackIndex(index);
