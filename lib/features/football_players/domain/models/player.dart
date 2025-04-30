@@ -98,6 +98,8 @@ String? footballPlayerPositionToShort(String? position) {
       return "CF";
     case "Second Striker":
       return "SS";
+    case "Striker":
+      return "ST";
     default:
       return null;
   }
@@ -131,6 +133,8 @@ Color? footballPlayerPositionToColor(String? position) {
     case "Centre-Forward":
       return Colors.red;
     case "Second Striker":
+      return Colors.red;
+    case "Striker":
       return Colors.red;
     default:
       return null;

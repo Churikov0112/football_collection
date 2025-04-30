@@ -12,6 +12,7 @@ class _PriceAndPosition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final positionBackgroundColor = footballPlayerPositionToColor(player.position);
+    final shortPosition = footballPlayerPositionToShort(player.position) ?? player.position;
 
     return Positioned(
       bottom: 5,
@@ -23,9 +24,9 @@ class _PriceAndPosition extends StatelessWidget {
             _RoundedContainer(
               text: hideTransferValue! ? "?" : beautifyTransferValue(player.currentMarketValue!),
             ),
-          if (player.position != null)
+          if (shortPosition != null)
             _RoundedContainer(
-              text: footballPlayerPositionToShort(player.position!)!,
+              text: shortPosition,
               backgroundColor: positionBackgroundColor,
               textColor: positionBackgroundColor != null ? Colors.white : null,
               borderColor: positionBackgroundColor != null ? Colors.white : null, // positionBackgroundColor,
