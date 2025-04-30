@@ -70,6 +70,8 @@ class GetCardByQrScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
+                    const Spacer(),
+                    const Spacer(),
                   ],
                 ),
                 Positioned(

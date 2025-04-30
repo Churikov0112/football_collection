@@ -28,9 +28,9 @@ class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter>
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      loadBannerAd();
-    });
+    // SchedulerBinding.instance.addPostFrameCallback((_) {
+    //   loadBannerAd();
+    // });
   }
 
   @override

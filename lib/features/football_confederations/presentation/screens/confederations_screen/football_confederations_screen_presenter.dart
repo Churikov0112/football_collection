@@ -22,7 +22,7 @@ class FootballConfederationsScreenPresenterState extends State<FootballConfedera
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      loadBannerAd();
+      // loadBannerAd();
       getIt.get<AllCountriesBloc>().add(AllCountriesEventGet());
       getIt.get<AllFootballPlayersBloc>().add(AllFootballPlayersEventLoad());
       getIt.get<FootballConfederationsBloc>().add(FootballConfederationsEventGet());

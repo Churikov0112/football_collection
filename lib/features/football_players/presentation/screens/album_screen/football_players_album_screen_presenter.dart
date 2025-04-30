@@ -24,7 +24,7 @@ class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbu
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      loadBannerAd();
+      // loadBannerAd();
       // getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad());
       // getIt.get<SavedCardsBloc>().add(SavedCardsEventLoad());
       getIt.get<CountryFootballPlayersBloc>().add(CountryFootballPlayersEventGet(countryId: widget.country.id));

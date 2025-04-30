@@ -11,7 +11,6 @@ import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -74,7 +73,7 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              if (isBannerAlreadyCreatedSnapshot.data == true) AdWidget(bannerAd: presenter.banner),
+                              // if (isBannerAlreadyCreatedSnapshot.data == true) AdWidget(bannerAd: presenter.banner),
                             ],
                           );
                         },

@@ -17,13 +17,13 @@ class SettingsScreenPresenter extends StatefulWidget {
 }
 
 class SettingsScreenPresenterState extends State<SettingsScreenPresenter> with SettingsYandexAdsBannerMixin {
-  @override
-  void initState() {
-    super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      loadBannerAd();
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+  //     loadBannerAd();
+  //   });
+  // }
 
   void toggleEnableVibration(bool enabled) {
     if (enabled) unawaited(HapticFeedback.lightImpact());

@@ -65,7 +65,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
 
     SchedulerBinding.instance.addPostFrameCallback(
       (_) async {
-        loadBannerAd();
+        // loadBannerAd();
         createRewardedAdLoader();
 
         try {

@@ -24,7 +24,7 @@ class FootballCountriesScreenPresenterState extends State<FootballCountriesScree
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      loadBannerAd();
+      // loadBannerAd();
       getIt
           .get<FootballConfederationCountriesBloc>()
           .add(FootballConfederationCountriesEventGet(confederation: widget.confederation));

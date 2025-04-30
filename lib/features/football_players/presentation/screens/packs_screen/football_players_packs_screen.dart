@@ -23,7 +23,6 @@ import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:o3d/o3d.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
@@ -68,7 +67,6 @@ class FootballPlayersPacksScreen extends StatelessWidget {
           builder: (context, selectedCountryState) {
             final confederation = selectedConfederationState.confederation;
             final country = selectedCountryState.country;
-            // if (confederation == null && country == null) return const SizedBox.shrink();
 
             return BlocProvider(
               create: (context) => FootballPlayersPacksBloc(getIt.get()),
@@ -79,30 +77,8 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                     final presenter = FootballPlayersPacksScreenPresenter.of(context);
 
                     return Scaffold(
-                      // extendBodyBehindAppBar: true,
-                      // appBar: AppBar(
-                      //   backgroundColor: Colors.black54,
-                      //   foregroundColor: Colors.white,
-                      //   title: Row(
-                      //     children: [
-                      //       const Text("Open Pack"),
-                      //       const Spacer(),
-                      //       const BalanceWidget(),
-                      //     ],
-                      //   ),
-                      // ),
                       body: DecoratedBox(
                         decoration: BoxDecoration(),
-                        // decoration: BoxDecoration(
-                        //   image: DecorationImage(
-                        //     image: AssetImage("assets/raster/background/background.jpg"),
-                        //     fit: BoxFit.cover,
-                        //     colorFilter: ColorFilter.mode(
-                        //       Colors.black.withOpacity(0.3),
-                        //       BlendMode.darken,
-                        //     ),
-                        //   ),
-                        // ),
                         child: StreamBuilder<OpenPackCombinedState>(
                           stream: CombineLatestStream.combine5(
                             presenter.selectedPackIndexStream$,
@@ -140,7 +116,7 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                                       builder: (context, child) {
                                         final value = presenter._hidePacksAnimation.value;
                                         return Positioned(
-                                          bottom: -mq.size.height * value + mq.padding.bottom + 120,
+                                          bottom: -mq.size.height * value + mq.padding.bottom + 16,
                                           left: 0,
                                           right: 0,
                                           child: PacksPageView(state: state, packs: packs),
@@ -161,20 +137,20 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                                           );
                                         },
                                       ),
-                                    Positioned(
-                                      bottom: mq.padding.bottom,
-                                      right: 0,
-                                      left: 0,
-                                      child: StreamBuilder<bool>(
-                                        stream: presenter.isBannerAlreadyCreatedStream$,
-                                        builder: (context, isBannerAlreadyCreatedSnapshot) {
-                                          if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox();
-                                          return AdWidget(
-                                            bannerAd: presenter.banner,
-                                          );
-                                        },
-                                      ),
-                                    ),
+                                    // Positioned(
+                                    //   bottom: mq.padding.bottom,
+                                    //   right: 0,
+                                    //   left: 0,
+                                    //   child: StreamBuilder<bool>(
+                                    //     stream: presenter.isBannerAlreadyCreatedStream$,
+                                    //     builder: (context, isBannerAlreadyCreatedSnapshot) {
+                                    //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox();
+                                    //       return AdWidget(
+                                    //         bannerAd: presenter.banner,
+                                    //       );
+                                    //     },
+                                    //   ),
+                                    // ),
                                   ],
                                 );
                               },
