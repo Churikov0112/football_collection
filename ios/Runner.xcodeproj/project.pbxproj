@@ -201,7 +201,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				C8C71A8AC4E7163304F26CDD /* [CP] Copy Pods Resources */,
-				CB0F29C00F21E96C0090B58E /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
+				D4E4CBFEC011386448602410 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
 			);
 			buildRules = (
 			);
@@ -366,7 +366,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CB0F29C00F21E96C0090B58E /* FlutterFire: "flutterfire upload-crashlytics-symbols" */ = {
+		D4E4CBFEC011386448602410 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

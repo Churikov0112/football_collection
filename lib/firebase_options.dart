@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCYJB_It0Pa6yEe-S6-DfvganqyMQF_Pfo',
-    appId: '1:590271846043:android:dc3bb93b3890c7b791583e',
+    appId: '1:590271846043:android:6678b7948c2e129991583e',
     messagingSenderId: '590271846043',
     projectId: 'football-collection-c7c28',
     storageBucket: 'football-collection-c7c28.firebasestorage.app',
@@ -65,11 +65,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAEiVOBHzCABUeaEsWfq42sf74O_X_rbsI',
-    appId: '1:590271846043:ios:26226391de864b4b91583e',
+    appId: '1:590271846043:ios:bedd8c2413757c8d91583e',
     messagingSenderId: '590271846043',
     projectId: 'football-collection-c7c28',
     storageBucket: 'football-collection-c7c28.firebasestorage.app',
-    iosBundleId: 'com.dosbrosdev.footballCollection',
+    iosBundleId: 'com.dosbrosdev.football.Collection',
   );
 
 }

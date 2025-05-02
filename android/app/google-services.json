@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:590271846043:android:dc3bb93b3890c7b791583e",
+        "mobilesdk_app_id": "1:590271846043:android:6678b7948c2e129991583e",
         "android_client_info": {
-          "package_name": "com.dosbrosdev.football_collection"
+          "package_name": "com.nineone.football_collection_2025"
         }
       },
       "oauth_client": [],

@@ -138,7 +138,7 @@ class FirebaseStaticMethods {
       importance: Importance.max,
     );
 
-    final bitmap = (await rootBundle.load('assets/raster/icon.png')).buffer.asUint8List();
+    final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
@@ -222,7 +222,7 @@ class FirebaseStaticMethods {
     required String body,
     Map<dynamic, dynamic>? data,
   }) async {
-    final bitmap = (await rootBundle.load('assets/raster/icon.png')).buffer.asUint8List();
+    final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
 
     await flutterLocalNotificationsPlugin.show(
       Random().nextInt(999999),
