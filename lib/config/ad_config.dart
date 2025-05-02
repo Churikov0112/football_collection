@@ -28,31 +28,31 @@ class _AdConfiguration {
   });
 }
 
-// final _googlePlayAdConfig = _AdConfiguration(
-//   openPackRewardedAd: "R-M-15007934-1",
-//   openPackBottomBanner: 'R-M-15007934-2',
-//   playersAlbumBottomBanner: "R-M-15007934-3",
-//   countriesBottomBanner: "R-M-15007934-4",
-//   confederationsBottomBanner: "R-M-15007934-5",
-//   settingsBottomBanner: "R-M-15007934-6",
-//   miniGamesBottomBanner: "R-M-15007934-7",
-//   miniGame1BottomBanner: "R-M-15007934-8",
-//   miniGame2BottomBanner: "R-M-15007934-9",
-//   scanQrCodeBottomBanner: "R-M-15007934-10",
-// );
-
 final _googlePlayAdConfig = _AdConfiguration(
-  openPackRewardedAd: 'demo-rewarded-yandex',
-  openPackBottomBanner: "demo-banner-yandex",
-  playersAlbumBottomBanner: "demo-banner-yandex",
-  countriesBottomBanner: "demo-banner-yandex",
-  confederationsBottomBanner: "demo-banner-yandex",
-  settingsBottomBanner: "demo-banner-yandex",
-  miniGamesBottomBanner: "demo-banner-yandex",
-  miniGame1BottomBanner: "demo-banner-yandex",
-  miniGame2BottomBanner: "demo-banner-yandex",
-  scanQrCodeBottomBanner: "demo-banner-yandex",
+  openPackRewardedAd: "R-M-15007934-1",
+  openPackBottomBanner: 'R-M-15007934-2',
+  playersAlbumBottomBanner: "R-M-15007934-3",
+  countriesBottomBanner: "R-M-15007934-4",
+  confederationsBottomBanner: "R-M-15007934-5",
+  settingsBottomBanner: "R-M-15007934-6",
+  miniGamesBottomBanner: "R-M-15007934-7",
+  miniGame1BottomBanner: "R-M-15007934-8",
+  miniGame2BottomBanner: "R-M-15007934-9",
+  scanQrCodeBottomBanner: "R-M-15007934-10",
 );
+
+// final _googlePlayAdConfig = _AdConfiguration(
+//   openPackRewardedAd: 'demo-rewarded-yandex',
+//   openPackBottomBanner: "demo-banner-yandex",
+//   playersAlbumBottomBanner: "demo-banner-yandex",
+//   countriesBottomBanner: "demo-banner-yandex",
+//   confederationsBottomBanner: "demo-banner-yandex",
+//   settingsBottomBanner: "demo-banner-yandex",
+//   miniGamesBottomBanner: "demo-banner-yandex",
+//   miniGame1BottomBanner: "demo-banner-yandex",
+//   miniGame2BottomBanner: "demo-banner-yandex",
+//   scanQrCodeBottomBanner: "demo-banner-yandex",
+// );
 
 // final _ruStoreAdConfig = _AdConfiguration(
 //   openPackAd: "R-M-9326097-3",
