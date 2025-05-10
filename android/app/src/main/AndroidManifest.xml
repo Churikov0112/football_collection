@@ -4,7 +4,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="Football Collection"
+        android:label="Football Collection 2025"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

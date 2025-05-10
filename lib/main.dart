@@ -163,7 +163,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                 child: MaterialApp.router(
                   theme: ThemeData.dark().copyWith(colorScheme: ColorScheme.dark(primary: Colors.deepOrange)),
                   routerConfig: _router.router,
-                  title: 'Football Pack Collection',
+                  title: 'Football Collection 2025',
                   color: Colors.black,
                   debugShowCheckedModeBanner: false,
                   locale: languageState.language.locale,
