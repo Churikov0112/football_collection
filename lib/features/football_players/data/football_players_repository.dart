@@ -124,6 +124,7 @@ class FootballPlayersRepository extends CardsRepository {
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
     bool? topCountries,
+    bool unique = true,
   }) async {
     await _ensureInitialized();
     final result = <FootballPlayerModel>[];
@@ -135,6 +136,7 @@ class FootballPlayersRepository extends CardsRepository {
         minCurrentTransferValue: minCurrentTransferValue,
         topCountries: topCountries,
       );
+      if (unique && result.contains(player)) continue;
       result.add(player);
     }
     return result;

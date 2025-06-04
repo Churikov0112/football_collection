@@ -1,0 +1,112 @@
+import 'dart:math';
+
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/football_players/domain/models/player.dart';
+import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
+
+import '../../../../../ui_kit/widgets/background_image/background_image.dart';
+import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../../../football_players/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
+import '../../../../football_players/presentation/widgets/football_player_card.dart';
+import '../../blocs/balance_bloc/balance_bloc.dart';
+import 'widgets/yandex_ads_banner_mixin.dart';
+
+part 'guess_player_screen_presenter.dart';
+part 'widgets/guess_options.dart';
+
+class GuessPlayerScreen extends StatelessWidget {
+  const GuessPlayerScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // final mq = MediaQuery.of(context);
+
+    return BlocProvider(
+      create: (context) => RandomFootballPlayersBloc(getIt.get()),
+      child: GuessPlayerScreenPresenter(
+        child: Builder(
+          builder: (context) {
+            final presenter = GuessPlayerScreenPresenter.of(context);
+
+            return Scaffold(
+              body: Stack(
+                children: [
+                  BackgroundImage(),
+                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                    builder: (context, randomPlayersState) {
+                      final allPlayers = randomPlayersState.players ?? [];
+                      final correctPlayer = allPlayers.firstOrNull;
+
+                      if (correctPlayer == null) return Align(child: const CircularProgressIndicator());
+
+                      final options = [...allPlayers];
+                      options.shuffle();
+
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          StreamBuilder<FootballPlayerModel?>(
+                            stream: presenter.selectedOptionStream$,
+                            builder: (context, selectedOptionSnapshot) {
+                              final showResult = selectedOptionSnapshot.data != null;
+                              return Align(
+                                child: FootballPlayerCard(
+                                  player: correctPlayer,
+                                  count: 1,
+                                  hideTransferValue: false,
+                                  hideName: !showResult,
+                                  enableFlip: true,
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: correctPlayer,
+                          ),
+                          const SizedBox(height: 20),
+
+                          StreamBuilder<bool>(
+                            stream: presenter.isBannerAlreadyCreatedStream$,
+                            builder: (context, isBannerAlreadyCreatedSnapshot) {
+                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
+                              return AdWidget(bannerAd: presenter.banner);
+                            },
+                          ),
+                          // SizedBox(height: mq.padding.bottom + 50),
+                        ],
+                      );
+                    },
+                  ),
+                  Translator(
+                    termin: AppGlossary.guessPlayer,
+                    builder: (value) => TransparentAppbar(title: value),
+                  ),
+                  // Translator(
+                  //   termin: AppGlossary.guessTransferValue,
+                  //   builder: (value) => TransparentAppbar(title: value),
+                  // ),
+                  // Positioned(
+                  //   bottom: mq.padding.bottom,
+                  //   right: 0,
+                  //   left: 0,
+                  //   child:
+                  // ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

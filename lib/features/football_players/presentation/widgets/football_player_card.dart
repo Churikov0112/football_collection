@@ -31,6 +31,7 @@ class FootballPlayerCard extends StatefulWidget {
     required this.count,
     this.hideTransferValue,
     this.hideNationalTeam = false,
+    this.hideName = false,
     this.height = packHeight,
     this.width = packWidth,
     this.enableFlip = false,
@@ -44,6 +45,7 @@ class FootballPlayerCard extends StatefulWidget {
   final int count;
   final bool? hideTransferValue;
   final bool hideNationalTeam;
+  final bool hideName;
   final bool enableFlip;
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
@@ -86,7 +88,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
           ),
           const SizedBox(height: 5),
           Text(
-            widget.player.name.toUpperCase(),
+            widget.hideName ? "?" : widget.player.name.toUpperCase(),
             maxLines: 2,
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),

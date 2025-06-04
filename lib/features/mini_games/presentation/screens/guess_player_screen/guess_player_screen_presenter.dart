@@ -1,50 +1,52 @@
-part of 'guess_national_team_screen.dart';
+part of 'guess_player_screen.dart';
 
 const _kDefaultRewardValue = 1;
 
-class GuessNationalTeamScreenPresenter extends StatefulWidget {
-  static GuessNationalTeamScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<GuessNationalTeamScreenPresenterState>()!;
+class GuessPlayerScreenPresenter extends StatefulWidget {
+  static GuessPlayerScreenPresenterState of(BuildContext context) {
+    return context.findAncestorStateOfType<GuessPlayerScreenPresenterState>()!;
   }
 
   final Widget child;
 
-  const GuessNationalTeamScreenPresenter({
+  const GuessPlayerScreenPresenter({
     required this.child,
     super.key,
   });
 
   @override
-  State<GuessNationalTeamScreenPresenter> createState() => GuessNationalTeamScreenPresenterState();
+  State<GuessPlayerScreenPresenter> createState() => GuessPlayerScreenPresenterState();
 }
 
-class GuessNationalTeamScreenPresenterState extends State<GuessNationalTeamScreenPresenter>
+class GuessPlayerScreenPresenterState extends State<GuessPlayerScreenPresenter>
     with GuessPlayerCountryYandexAdsBannerMixin {
   int winstrick = 0;
   final Random random = Random();
 
-  final BehaviorSubject<CountryModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
-  Stream<CountryModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
+  final BehaviorSubject<FootballPlayerModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
+  Stream<FootballPlayerModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
 
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       loadBannerAd();
-      loadRandomPlayer();
+      loadRandomPlayers();
     });
   }
 
-  void loadRandomPlayer() {
+  void loadRandomPlayers() {
     if (mounted) {
       _selectedOptionSubject.add(null);
-      context.read<RandomFootballPlayersBloc>().add(RandomFootballPlayersEventGet(count: 1));
+      context
+          .read<RandomFootballPlayersBloc>()
+          .add(RandomFootballPlayersEventGet(count: 4, minPrimeTransferValue: 10000000));
     }
   }
 
   Future<void> showResult({
-    required CountryModel selectedAnswer,
-    required CountryModel rightAnswer,
+    required FootballPlayerModel selectedAnswer,
+    required FootballPlayerModel rightAnswer,
   }) async {
     _selectedOptionSubject.add(selectedAnswer);
     if (selectedAnswer == rightAnswer) {
@@ -65,7 +67,7 @@ class GuessNationalTeamScreenPresenterState extends State<GuessNationalTeamScree
       winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));
-    loadRandomPlayer();
+    loadRandomPlayers();
   }
 
   @override

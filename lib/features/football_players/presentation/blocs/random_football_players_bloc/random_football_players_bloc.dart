@@ -26,6 +26,7 @@ class RandomFootballPlayersBloc extends Bloc<RandomFootballPlayersEvent, RandomF
       final players = await _repository.getRandomCards(
         count: event.count,
         minPrimeTransferValue: event.minPrimeTransferValue,
+        unique: event.unique,
       );
       emit(RandomFootballPlayersStateLoadSucceeded(players));
     } on Object catch (_) {

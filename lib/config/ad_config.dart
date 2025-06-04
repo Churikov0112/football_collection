@@ -13,6 +13,8 @@ class _AdConfiguration {
   final String miniGame1BottomBanner;
   final String miniGame2BottomBanner;
   final String scanQrCodeBottomBanner;
+  final String miniGame3BottomBanner;
+  final String miniGame4BottomBanner;
 
   _AdConfiguration({
     required this.openPackRewardedAd,
@@ -25,6 +27,8 @@ class _AdConfiguration {
     required this.miniGame1BottomBanner,
     required this.miniGame2BottomBanner,
     required this.scanQrCodeBottomBanner,
+    required this.miniGame3BottomBanner,
+    required this.miniGame4BottomBanner,
   });
 }
 
@@ -39,6 +43,8 @@ final _googlePlayAdConfig = _AdConfiguration(
   miniGame1BottomBanner: "R-M-15007934-8",
   miniGame2BottomBanner: "R-M-15007934-9",
   scanQrCodeBottomBanner: "R-M-15007934-10",
+  miniGame3BottomBanner: "R-M-15007934-11",
+  miniGame4BottomBanner: "R-M-15007934-12",
 );
 
 // final _googlePlayAdConfig = _AdConfiguration(

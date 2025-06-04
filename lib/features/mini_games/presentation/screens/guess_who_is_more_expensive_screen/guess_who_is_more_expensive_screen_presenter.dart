@@ -39,10 +39,12 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreenPresenterState
   }
 
   void loadRandomPlayers() {
-    _selectedOptionSubject.add(null);
-    context
-        .read<RandomFootballPlayersBloc>()
-        .add(RandomFootballPlayersEventGet(count: 2, minPrimeTransferValue: 25000000));
+    if (mounted) {
+      _selectedOptionSubject.add(null);
+      context
+          .read<RandomFootballPlayersBloc>()
+          .add(RandomFootballPlayersEventGet(count: 2, minPrimeTransferValue: 25000000));
+    }
   }
 
   // Future<void> showResult({
