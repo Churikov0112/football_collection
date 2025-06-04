@@ -22,8 +22,8 @@ class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
     try {
       final previousLanguage = state.language;
       try {
-        FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
-        FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
+        await FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
+        await FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
       } catch (e) {
         LogService.error(e.toString(), e);
       }
