@@ -91,14 +91,16 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _show3dObjectSubject.add(true);
   }
 
-  Future<void> openPack() async {
+  Future<void> openPack(PackModel pack) async {
     try {
+      final packTitle = pack.title.toLowerCase().replaceAll(" ", "_");
       await FirebaseAnalytics.instance.logEvent(
         name: "pack_opened",
         parameters: {
           if (widget.args.country != null) "country": widget.args.country!.name,
           if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
           "pack_index": selectedPackIndexSubject.value,
+          "pack_title": packTitle,
         },
       );
     } catch (e) {
@@ -152,7 +154,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     if (balanceState is BalanceStateFailed) {
       ToastService.showErrorToast(title: balanceState.message);
     } else if (balanceState is BalanceStateReady) {
-      await openPack();
+      await openPack(pack);
     }
   }
 

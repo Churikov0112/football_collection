@@ -41,7 +41,7 @@ class PacksPageView extends StatelessWidget {
                 final selectedPackIndex = presenter.selectedPackIndexSubject.value;
                 if (!state.unpacking && !state.packsHiding && !state.isWaitingConfirm && i == selectedPackIndex) {
                   if (packs[i].price == 0) {
-                    presenter.openPack();
+                    presenter.openPack(packs[i]);
                   } else {
                     presenter.requestBuyPackConfirm(packs[i]);
                   }
