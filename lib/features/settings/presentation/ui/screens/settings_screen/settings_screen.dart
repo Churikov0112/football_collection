@@ -11,7 +11,6 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 
 import 'widgets/select_language.dart';
-import 'widgets/yandex_ads_banner_mixin.dart';
 
 part 'settings_screen_presenter.dart';
 
@@ -65,6 +64,7 @@ class SettingsScreen extends StatelessWidget {
                           presenter.toggleEnableConfetti(val);
                         },
                       ),
+                      ListTile(title: Text("v. 1.0.5+12")),
                     ],
                   ),
                   // Positioned(

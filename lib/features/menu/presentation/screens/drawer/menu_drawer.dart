@@ -11,96 +11,115 @@ class MenuDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.black.withAlpha(175),
-      child: ListView(
-        children: [
-          const SizedBox(height: 50),
-          ListTile(
-            onTap: () {
-              context.push(RoutePaths.miniGames);
-            },
-            leading: Icon(
-              Icons.gamepad,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.miniGames,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
+      child: SafeArea(
+        child: ListView(
+          children: [
+            const SizedBox(height: 50),
+            ListTile(
+              onTap: () {
+                context.push(RoutePaths.miniGames);
+              },
+              leading: Icon(
+                Icons.gamepad,
+                color: Colors.white,
+              ),
+              title: Translator(
+                termin: AppGlossary.miniGames,
+                builder: (value) => Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          ListTile(
-            onTap: () {
-              context.push(RoutePaths.getCardByQr);
-            },
-            leading: Icon(
-              Icons.qr_code_2,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.scanQr,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
+            ListTile(
+              onTap: () {
+                context.push(RoutePaths.getCardByQr);
+              },
+              leading: Icon(
+                Icons.qr_code_2,
+                color: Colors.white,
+              ),
+              title: Translator(
+                termin: AppGlossary.scanQr,
+                builder: (value) => Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          // ListTile(
-          //   onTap: () {
-          //     showModalBottomSheet(
-          //       context: context,
-          //       isScrollControlled: true,
-          //       builder: (context) {
-          //         return EnterCheatCodeScreen();
-          //       },
-          //     );
-          //   },
-          //   leading: Icon(
-          //     Icons.keyboard,
-          //     color: Colors.white,
-          //   ),
-          //   title: Translator(
-          //     termin: AppGlossary.cheatCodes,
-          //     builder: (value) => Text(
-          //       value,
-          //       style: TextStyle(color: Colors.white),
-          //     ),
-          //   ),
-          // ),
-          ListTile(
-            onTap: () {
-              context.push(RoutePaths.settings);
-            },
-            leading: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.settings,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
+            // ListTile(
+            //   onTap: () {
+            //     showModalBottomSheet(
+            //       context: context,
+            //       isScrollControlled: true,
+            //       builder: (context) {
+            //         return EnterCheatCodeScreen();
+            //       },
+            //     );
+            //   },
+            //   leading: Icon(
+            //     Icons.keyboard,
+            //     color: Colors.white,
+            //   ),
+            //   title: Translator(
+            //     termin: AppGlossary.cheatCodes,
+            //     builder: (value) => Text(
+            //       value,
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //   ),
+            // ),
+            ListTile(
+              onTap: () {
+                context.push(RoutePaths.settings);
+              },
+              leading: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              title: Translator(
+                termin: AppGlossary.settings,
+                builder: (value) => Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          ListTile(
-            onTap: () async {
-              await openInBrowser("https://football-collection.tilda.ws");
-            },
-            leading: Icon(
-              Icons.language,
-              color: Colors.white,
-            ),
-            title: Translator(
-              termin: AppGlossary.ourWebsite,
-              builder: (value) => Text(
-                value,
-                style: TextStyle(color: Colors.white),
+            ListTile(),
+            ListTile(
+              onTap: () async {
+                await openInBrowser("https://football-collection.tilda.ws");
+              },
+              leading: Icon(
+                Icons.language,
+                color: Colors.white,
+              ),
+              title: Translator(
+                termin: AppGlossary.ourWebsite,
+                builder: (value) => Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-        ],
+            ListTile(
+              onTap: () async {
+                await openInBrowser("https://t.me/dosbrosdev");
+              },
+              leading: Icon(
+                Icons.telegram,
+                color: Colors.white,
+              ),
+              title: Translator(
+                termin: AppGlossary.ourTelegram,
+                builder: (value) => Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -18,8 +18,7 @@ class FootballPlayersAlbumScreenPresenter extends StatefulWidget {
   State<FootballPlayersAlbumScreenPresenter> createState() => FootballPlayersAlbumScreenPresenterState();
 }
 
-class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbumScreenPresenter>
-    with FootballPlayersAlbumYandexAdsBannerMixin {
+class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbumScreenPresenter> {
   @override
   void initState() {
     super.initState();

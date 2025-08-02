@@ -16,8 +16,7 @@ class GetCardByQrScreenPresenter extends StatefulWidget {
   State<GetCardByQrScreenPresenter> createState() => GetCardByQrScreenPresenterState();
 }
 
-class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter>
-    with WidgetsBindingObserver, GetCardByQrYandexAdsBannerMixin {
+class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter> with WidgetsBindingObserver {
   StreamSubscription<Object?>? _subscription;
 
   MobileScannerController mobileScannerController = MobileScannerController(

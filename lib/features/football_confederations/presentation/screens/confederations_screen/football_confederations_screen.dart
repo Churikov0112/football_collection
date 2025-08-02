@@ -5,7 +5,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
-import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/widgets/yandex_ads_banner_mixin.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
@@ -34,7 +33,8 @@ class FootballConfederationsScreen extends StatelessWidget {
     return FootballConfederationsScreenPresenter(
       child: Builder(
         builder: (context) {
-          final presenter = FootballConfederationsScreenPresenter.of(context);
+          // final presenter = FootballConfederationsScreenPresenter.of(context);
+
           return Scaffold(
             drawer: MenuDrawer(),
             body: Stack(
@@ -66,26 +66,13 @@ class FootballConfederationsScreen extends StatelessWidget {
                   bottom: mq.padding.bottom,
                   right: 0,
                   left: 0,
-                  child: StreamBuilder<bool>(
-                    stream: presenter.isBannerAlreadyCreatedStream$,
-                    builder: (context, isBannerAlreadyCreatedSnapshot) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: OpenPacksScreenButton(
-                              onPressed: () {
-                                context.push(RoutePaths.footballPlayersPacks);
-                              },
-                            ),
-                          ),
-                          // if (isBannerAlreadyCreatedSnapshot.data == true)
-                          //   AdWidget(
-                          //     bannerAd: presenter.banner,
-                          //   ),
-                        ],
-                      );
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: OpenPacksScreenButton(
+                      onPressed: () {
+                        context.push(RoutePaths.footballPlayersPacks);
+                      },
+                    ),
                   ),
                 ),
               ],

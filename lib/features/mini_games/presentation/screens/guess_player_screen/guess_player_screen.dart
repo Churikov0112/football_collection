@@ -27,7 +27,7 @@ class GuessPlayerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
+    final mq = MediaQuery.of(context);
 
     return BlocProvider(
       create: (context) => RandomFootballPlayersBloc(getIt.get()),
@@ -53,6 +53,7 @@ class GuessPlayerScreen extends StatelessWidget {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          const Spacer(),
                           StreamBuilder<FootballPlayerModel?>(
                             stream: presenter.selectedOptionStream$,
                             builder: (context, selectedOptionSnapshot) {
@@ -74,15 +75,14 @@ class GuessPlayerScreen extends StatelessWidget {
                             rightAnswer: correctPlayer,
                           ),
                           const SizedBox(height: 20),
-
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
                             builder: (context, isBannerAlreadyCreatedSnapshot) {
-                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                              return AdWidget(bannerAd: presenter.banner);
+                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
                             },
                           ),
-                          // SizedBox(height: mq.padding.bottom + 50),
+                          SizedBox(height: mq.padding.bottom),
                         ],
                       );
                     },
@@ -91,16 +91,6 @@ class GuessPlayerScreen extends StatelessWidget {
                     termin: AppGlossary.guessPlayer,
                     builder: (value) => TransparentAppbar(title: value),
                   ),
-                  // Translator(
-                  //   termin: AppGlossary.guessTransferValue,
-                  //   builder: (value) => TransparentAppbar(title: value),
-                  // ),
-                  // Positioned(
-                  //   bottom: mq.padding.bottom,
-                  //   right: 0,
-                  //   left: 0,
-                  //   child:
-                  // ),
                 ],
               ),
             );

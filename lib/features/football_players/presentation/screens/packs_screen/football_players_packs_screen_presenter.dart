@@ -19,10 +19,7 @@ class FootballPlayersPacksScreenPresenter extends StatefulWidget {
 }
 
 class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPacksScreenPresenter>
-    with
-        TickerProviderStateMixin,
-        FootballPlayersPacksYandexAdsBannerMixin,
-        FootballPlayersPacksYandexAdsRewardedMixin {
+    with TickerProviderStateMixin, FootballPlayersPacksYandexAdsRewardedMixin {
   late AnimationController _hidePacksAnimationController;
   late Animation<double> _hidePacksAnimation;
 

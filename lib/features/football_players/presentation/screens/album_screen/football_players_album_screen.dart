@@ -19,7 +19,6 @@ import '../../../../countries/presentation/blocs/selected_country_bloc/selected_
 import '../../../domain/models/player.dart';
 import '../../blocs/country_football_players_bloc/country_football_players_bloc.dart';
 import '../../widgets/football_player_card.dart';
-import 'widgets/yandex_ads_banner_mixin.dart';
 
 part 'football_players_album_screen_presenter.dart';
 part 'widgets/album_widget.dart';
@@ -44,7 +43,7 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
           country: country,
           child: Builder(
             builder: (context) {
-              final presenter = FootballPlayersAlbumScreenPresenter.of(context);
+              // final presenter = FootballPlayersAlbumScreenPresenter.of(context);
 
               return Scaffold(
                 body: Stack(
@@ -60,23 +59,13 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
                       bottom: mq.padding.bottom,
                       right: 0,
                       left: 0,
-                      child: StreamBuilder<bool>(
-                        stream: presenter.isBannerAlreadyCreatedStream$,
-                        builder: (context, isBannerAlreadyCreatedSnapshot) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: OpenPacksScreenButton(
-                                  onPressed: () {
-                                    context.push(RoutePaths.footballPlayersPacks);
-                                  },
-                                ),
-                              ),
-                              // if (isBannerAlreadyCreatedSnapshot.data == true) AdWidget(bannerAd: presenter.banner),
-                            ],
-                          );
-                        },
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: OpenPacksScreenButton(
+                          onPressed: () {
+                            context.push(RoutePaths.footballPlayersPacks);
+                          },
+                        ),
                       ),
                     ),
                   ],

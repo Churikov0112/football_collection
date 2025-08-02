@@ -16,7 +16,7 @@ class SettingsScreenPresenter extends StatefulWidget {
   State<SettingsScreenPresenter> createState() => SettingsScreenPresenterState();
 }
 
-class SettingsScreenPresenterState extends State<SettingsScreenPresenter> with SettingsYandexAdsBannerMixin {
+class SettingsScreenPresenterState extends State<SettingsScreenPresenter> {
   // @override
   // void initState() {
   //   super.initState();

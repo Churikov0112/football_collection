@@ -36,7 +36,6 @@ import 'widgets/confirm_buy_pack_bs.dart';
 import 'widgets/not_enoght_money_bs.dart';
 import 'widgets/pack_3d_model.dart';
 import 'widgets/packs_page_view.dart';
-import 'widgets/yandex_ads_banner_mixin.dart';
 
 part 'football_players_packs_screen_presenter.dart';
 part 'widgets/player_cards_swiper.dart';

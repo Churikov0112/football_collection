@@ -16,8 +16,7 @@ class FootballConfederationsScreenPresenter extends StatefulWidget {
   State<FootballConfederationsScreenPresenter> createState() => FootballConfederationsScreenPresenterState();
 }
 
-class FootballConfederationsScreenPresenterState extends State<FootballConfederationsScreenPresenter>
-    with FootballConfederationsYandexAdsBannerMixin {
+class FootballConfederationsScreenPresenterState extends State<FootballConfederationsScreenPresenter> {
   @override
   void initState() {
     super.initState();

@@ -56,7 +56,7 @@ class NotEnoghtMoneyBottomSheet extends StatelessWidget {
                             Icon(Icons.games),
                             const SizedBox(height: 16),
                             Text(
-                              "${AppGlossary.playMiniGames.translate()}\n${AppGlossary.free.translate()}",
+                              AppGlossary.playMiniGames.translate(),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 16),

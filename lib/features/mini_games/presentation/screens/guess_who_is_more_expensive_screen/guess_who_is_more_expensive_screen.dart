@@ -57,6 +57,8 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(height: mq.padding.top + 16),
+                              const Spacer(),
+                              const Spacer(),
                               Row(
                                 children: [
                                   SizedBox(width: 8),
@@ -113,7 +115,16 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: mq.padding.bottom + 20),
+                              const Spacer(),
+                              const SizedBox(height: 20),
+                              StreamBuilder<bool>(
+                                stream: presenter.isBannerAlreadyCreatedStream$,
+                                builder: (context, isBannerAlreadyCreatedSnapshot) {
+                                  if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                                  return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                                },
+                              ),
+                              SizedBox(height: mq.padding.bottom),
                             ],
                           ),
                         );
@@ -124,18 +135,6 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                 Translator(
                   termin: AppGlossary.whoCostsMore,
                   builder: (value) => TransparentAppbar(title: value),
-                ),
-                Positioned(
-                  bottom: mq.padding.bottom,
-                  right: 0,
-                  left: 0,
-                  child: StreamBuilder<bool>(
-                    stream: presenter.isBannerAlreadyCreatedStream$,
-                    builder: (context, isBannerAlreadyCreatedSnapshot) {
-                      if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                      return AdWidget(bannerAd: presenter.banner);
-                    },
-                  ),
                 ),
               ],
             ),

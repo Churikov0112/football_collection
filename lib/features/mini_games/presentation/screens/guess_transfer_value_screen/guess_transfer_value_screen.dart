@@ -58,6 +58,8 @@ class GuessTransferValueScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            const Spacer(),
+                            const Spacer(),
                             StreamBuilder<String?>(
                                 stream: presenter.selectedOptionStream$,
                                 builder: (context, selectedOptionSnapshot) {
@@ -74,6 +76,16 @@ class GuessTransferValueScreen extends StatelessWidget {
                               options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
                               rightAnswer: beautifyTransferValue(currentMarketValue),
                             ),
+                            const Spacer(),
+                            const SizedBox(height: 20),
+                            StreamBuilder<bool>(
+                              stream: presenter.isBannerAlreadyCreatedStream$,
+                              builder: (context, isBannerAlreadyCreatedSnapshot) {
+                                if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                                return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              },
+                            ),
+                            SizedBox(height: mq.padding.bottom),
                           ],
                         ),
                       );
@@ -83,18 +95,18 @@ class GuessTransferValueScreen extends StatelessWidget {
                     termin: AppGlossary.guessTransferValue,
                     builder: (value) => TransparentAppbar(title: value),
                   ),
-                  Positioned(
-                    bottom: mq.padding.bottom,
-                    right: 0,
-                    left: 0,
-                    child: StreamBuilder<bool>(
-                      stream: presenter.isBannerAlreadyCreatedStream$,
-                      builder: (context, isBannerAlreadyCreatedSnapshot) {
-                        if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                        return AdWidget(bannerAd: presenter.banner);
-                      },
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: mq.padding.bottom,
+                  //   right: 0,
+                  //   left: 0,
+                  //   child: StreamBuilder<bool>(
+                  //     stream: presenter.isBannerAlreadyCreatedStream$,
+                  //     builder: (context, isBannerAlreadyCreatedSnapshot) {
+                  //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                  //       return AdWidget(bannerAd: presenter.banner);
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ),
             );
