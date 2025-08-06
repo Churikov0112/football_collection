@@ -46,8 +46,9 @@ class GuessNationalTeamScreen extends StatelessWidget {
                       final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
                       final playerCountry = allCountries.firstWhereOrNull((e) => e.id == player?.countryId);
 
-                      if (player == null || playerCountry == null)
+                      if (player == null || playerCountry == null) {
                         return Align(child: const CircularProgressIndicator());
+                      }
 
                       final options = <CountryModel>[];
                       options.add(playerCountry);
