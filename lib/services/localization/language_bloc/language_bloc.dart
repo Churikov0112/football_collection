@@ -19,18 +19,14 @@ class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
   }
 
   Future<void> _set(LanguageBlocEventSet event, Emitter<LanguageState> emit) async {
-    try {
-      final previousLanguage = state.language;
-      try {
-        await FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
-        await FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
-      } catch (e) {
-        LogService.error(e.toString(), e);
-      }
+    final previousLanguage = state.language;
+    emit(LanguageState(language: event.language));
 
-      emit(LanguageState(language: event.language));
+    try {
+      await FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
+      await FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
     } catch (e) {
-      emit(LanguageState(language: event.language));
+      LogService.error(e.toString(), e);
     }
   }
 

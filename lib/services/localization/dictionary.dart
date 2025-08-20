@@ -15,6 +15,7 @@ enum Languages {
   bengal,
   german,
   korean,
+  vietnamese,
 }
 
 extension LanguagesExtension on Languages {
@@ -48,6 +49,8 @@ extension LanguagesExtension on Languages {
         return 'ko-KR';
       case Languages.italian:
         return 'it-IT';
+      case Languages.vietnamese:
+        return 'vi-VN';
     }
   }
 
@@ -81,6 +84,8 @@ extension LanguagesExtension on Languages {
         return const Locale('ko', 'KR');
       case Languages.italian:
         return const Locale('it', 'IT');
+      case Languages.vietnamese:
+        return const Locale('vi', 'VN');
     }
   }
 
@@ -114,6 +119,8 @@ extension LanguagesExtension on Languages {
         return '한국어';
       case Languages.italian:
         return 'Italiano';
+      case Languages.vietnamese:
+        return 'Tiếng Việt';
     }
   }
 
@@ -147,6 +154,8 @@ extension LanguagesExtension on Languages {
         return 'Korean';
       case Languages.italian:
         return 'Italian';
+      case Languages.vietnamese:
+        return 'Vietnamese';
     }
   }
 
@@ -180,6 +189,8 @@ extension LanguagesExtension on Languages {
         return '🇰🇷';
       case Languages.italian:
         return '🇮🇹';
+      case Languages.vietnamese:
+        return '🇻🇳';
     }
   }
 }
@@ -278,6 +289,7 @@ const dictionary = {
     Languages.german: 'Sprache',
     Languages.korean: '언어',
     Languages.italian: 'Lingua',
+    Languages.vietnamese: 'Ngôn ngữ',
   },
   AppGlossary.search: {
     Languages.english: 'Search',
@@ -294,6 +306,7 @@ const dictionary = {
     Languages.german: 'Suche',
     Languages.korean: '검색',
     Languages.italian: 'Ricerca',
+    Languages.vietnamese: 'Tìm kiếm',
   },
   AppGlossary.settings: {
     Languages.english: 'Settings',
@@ -310,6 +323,7 @@ const dictionary = {
     Languages.german: 'Einstellungen',
     Languages.korean: '설정',
     Languages.italian: 'Impostazioni',
+    Languages.vietnamese: 'Cài đặt',
   },
   AppGlossary.miniGames: {
     Languages.english: 'Mini Games',
@@ -326,6 +340,7 @@ const dictionary = {
     Languages.german: 'Mini-Spiele',
     Languages.korean: '미니게임',
     Languages.italian: 'Mini-giochi',
+    Languages.vietnamese: 'Mini trò chơi',
   },
   AppGlossary.openPack: {
     Languages.english: 'Open pack',
@@ -342,6 +357,7 @@ const dictionary = {
     Languages.german: 'Paket öffnen',
     Languages.korean: '팩 열기',
     Languages.italian: 'Apri il pacchetto',
+    Languages.vietnamese: 'Mở gói',
   },
   AppGlossary.scanQr: {
     Languages.english: 'Scan QR',
@@ -358,6 +374,7 @@ const dictionary = {
     Languages.german: 'QR-Code scannen',
     Languages.korean: 'QR 코드 스캔',
     Languages.italian: 'Scansione QR',
+    Languages.vietnamese: 'Quét mã QR',
   },
   AppGlossary.cheatCodes: {
     Languages.english: 'Cheat codes',
@@ -374,6 +391,7 @@ const dictionary = {
     Languages.german: 'Cheat-Codes',
     Languages.korean: '치트 코드',
     Languages.italian: 'Codici truccati',
+    Languages.vietnamese: 'Mã gian lận',
   },
   AppGlossary.cheatCodeActivated: {
     Languages.english: 'Cheat code activated',
@@ -390,6 +408,7 @@ const dictionary = {
     Languages.german: 'Cheat-Code aktiviert',
     Languages.korean: '치트 코드가 활성화되었습니다',
     Languages.italian: 'Codice truccato trovato',
+    Languages.vietnamese: 'Cheat mã kích hoạt',
   },
   AppGlossary.cheatCodeNotFound: {
     Languages.english: 'Cheat code not found',
@@ -406,6 +425,7 @@ const dictionary = {
     Languages.german: 'Cheat-Code nicht gefunden',
     Languages.korean: '치트 코드를 찾을 수 없습니다',
     Languages.italian: 'Codice truccato non trovato',
+    Languages.vietnamese: 'Cheat mã không tìm thấy',
   },
   AppGlossary.about: {
     Languages.english: 'About',
@@ -422,6 +442,7 @@ const dictionary = {
     Languages.german: 'Über',
     Languages.korean: '앱에 대해',
     Languages.italian: 'Informazioni',
+    Languages.vietnamese: 'Về ứng dụng',
   },
   AppGlossary.webVersion: {
     Languages.english: 'Web version',
@@ -438,6 +459,7 @@ const dictionary = {
     Languages.german: 'Web-Version',
     Languages.korean: '웹 버전',
     Languages.italian: 'Versione Web',
+    Languages.vietnamese: 'Phien ban web',
   },
   AppGlossary.cheatCodeHere: {
     Languages.english: 'Cheat code here',
@@ -454,6 +476,7 @@ const dictionary = {
     Languages.german: 'Cheat-Code hier',
     Languages.korean: '치트 코드 여기',
     Languages.italian: 'Codice truccato qui',
+    Languages.vietnamese: 'Cheat mã ở đây',
   },
   AppGlossary.continents: {
     Languages.english: 'Continents',
@@ -470,6 +493,7 @@ const dictionary = {
     Languages.german: 'Kontinente',
     Languages.korean: '대륙',
     Languages.italian: 'Continenti',
+    Languages.vietnamese: 'Châu lục',
   },
   AppGlossary.europe: {
     Languages.english: 'Europe',
@@ -486,6 +510,7 @@ const dictionary = {
     Languages.german: 'Europa',
     Languages.korean: '유럽',
     Languages.italian: 'Europa',
+    Languages.vietnamese: 'Châu Âu',
   },
   AppGlossary.africa: {
     Languages.english: 'Africa',
@@ -502,6 +527,7 @@ const dictionary = {
     Languages.german: 'Afrika',
     Languages.korean: '아프리카',
     Languages.italian: 'Africa',
+    Languages.vietnamese: 'Châu phi',
   },
   AppGlossary.asia: {
     Languages.english: 'Asia',
@@ -518,6 +544,7 @@ const dictionary = {
     Languages.german: 'Asien',
     Languages.korean: '아시아',
     Languages.italian: 'Asia',
+    Languages.vietnamese: 'Châu á',
   },
   AppGlossary.northAmerica: {
     Languages.english: 'North America',
@@ -534,6 +561,7 @@ const dictionary = {
     Languages.german: 'Nordamerika',
     Languages.korean: '북아메리카',
     Languages.italian: 'America del Nord',
+    Languages.vietnamese: 'Bắc Mỹ',
   },
   AppGlossary.southAmerica: {
     Languages.english: 'South America',
@@ -550,6 +578,7 @@ const dictionary = {
     Languages.german: 'Südamerika',
     Languages.korean: '남아메리카',
     Languages.italian: 'America del Sud',
+    Languages.vietnamese: 'Nam Mỹ',
   },
   AppGlossary.oceania: {
     Languages.english: 'Oceania',
@@ -566,6 +595,7 @@ const dictionary = {
     Languages.german: 'Ozeanien',
     Languages.korean: '오세아니아',
     Languages.italian: 'Oceania',
+    Languages.vietnamese: 'Châu đại dương',
   },
   AppGlossary.free: {
     Languages.english: 'Free',
@@ -582,6 +612,7 @@ const dictionary = {
     Languages.german: 'Kostenlos',
     Languages.korean: '무료',
     Languages.italian: 'Gratuito',
+    Languages.vietnamese: 'Miễn phí',
   },
   AppGlossary.confirmToBuyPackFor: {
     Languages.english: 'Confirm to buy pack for',
@@ -598,6 +629,7 @@ const dictionary = {
     Languages.german: 'Bestätigen Sie den Kauf des Pakets für',
     Languages.korean: '팩을 구매하려면',
     Languages.italian: 'Conferma acquisto pacchetto per',
+    Languages.vietnamese: 'Xác nhận việc mua gói cho',
   },
   AppGlossary.confirm: {
     Languages.english: 'Confirm',
@@ -614,6 +646,7 @@ const dictionary = {
     Languages.german: 'Bestätigen',
     Languages.korean: '확인',
     Languages.italian: 'Conferma',
+    Languages.vietnamese: 'Xác nhận',
   },
   AppGlossary.cancel: {
     Languages.english: 'Cancel',
@@ -630,6 +663,7 @@ const dictionary = {
     Languages.german: 'Stornieren',
     Languages.korean: '취소',
     Languages.italian: 'Annulla',
+    Languages.vietnamese: 'Huỷ bỏ',
   },
   AppGlossary.youHaveNotEnoughMoneyToBuyPack: {
     Languages.english: 'You have not enough 🏆 to buy pack',
@@ -646,6 +680,7 @@ const dictionary = {
     Languages.german: 'Sie haben nicht genug 🏆, um das Paket zu kaufen',
     Languages.korean: '팩을 구매하려면 더 많은 🏆가 필요합니다',
     Languages.italian: 'Non hai abbastanza 🏆 per acquistare il pacchetto',
+    Languages.vietnamese: 'Bạn không có đủ 🏆 để mua một gói.',
   },
   AppGlossary.playMiniGames: {
     Languages.english: 'Play mini games',
@@ -662,6 +697,7 @@ const dictionary = {
     Languages.german: 'Mini-Spiele spielen',
     Languages.korean: '미니 게임 플레이',
     Languages.italian: 'Gioca ai mini giochi',
+    Languages.vietnamese: 'Chơi trò chơi mini',
   },
   AppGlossary.watchAd: {
     Languages.english: 'Watch ad',
@@ -678,6 +714,7 @@ const dictionary = {
     Languages.german: 'Zuschauen',
     Languages.korean: '광고 보기',
     Languages.italian: 'Guarda l\'annuncio',
+    Languages.vietnamese: 'Xem quảng cáo',
   },
   AppGlossary.guessTransferValue: {
     Languages.english: 'Guess transfer value',
@@ -694,6 +731,7 @@ const dictionary = {
     Languages.german: 'Übertragungswert erraten',
     Languages.korean: '전송 가치 추측',
     Languages.italian: 'Indovina il valore di trasferimento',
+    Languages.vietnamese: 'Đoán giá',
   },
   AppGlossary.guessNationalTeam: {
     Languages.english: 'Guess national team',
@@ -710,6 +748,7 @@ const dictionary = {
     Languages.german: 'Nationalmannschaft erraten',
     Languages.korean: '국가대표팀 추측',
     Languages.italian: 'Indovina la squadra nazionale',
+    Languages.vietnamese: 'Đoán đội tuyển quốc gia',
   },
   AppGlossary.guessPlayer: {
     Languages.english: 'Guess player',
@@ -726,6 +765,7 @@ const dictionary = {
     Languages.german: 'Spieler erraten',
     Languages.korean: '선수 추측',
     Languages.italian: 'Indovina il giocatore',
+    Languages.vietnamese: 'Đoán người chơi',
   },
   AppGlossary.selectCountry: {
     Languages.english: 'Select country',
@@ -742,6 +782,7 @@ const dictionary = {
     Languages.german: 'Land auswählen',
     Languages.korean: '국가 선택',
     Languages.italian: 'Seleziona il paese',
+    Languages.vietnamese: 'Chọn một quốc gia',
   },
   AppGlossary.tapHereToGuessNationalTeam: {
     Languages.english: 'Tap here to guess national team',
@@ -758,6 +799,7 @@ const dictionary = {
     Languages.german: 'Klicken Sie hier, um die Nationalmannschaft zu erraten',
     Languages.korean: '국가대표팀을 추측하려면 여기를 탭하세요',
     Languages.italian: 'Clicca qui per indovinare la squadra nazionale',
+    Languages.vietnamese: 'Bấm vào đây để đoán đội tuyển quốc gia',
   },
   AppGlossary.whoCostsMore: {
     Languages.english: 'Who costs more',
@@ -774,6 +816,7 @@ const dictionary = {
     Languages.german: 'Wer ist teurer',
     Languages.korean: '누가 더 비쌉니까',
     Languages.italian: 'Chi costa di più',
+    Languages.vietnamese: 'Ai đắt hơn',
   },
   AppGlossary.guessWhichPlayerIsMoreExpensive: {
     Languages.english: 'Guess which player is more expensive',
@@ -790,6 +833,7 @@ const dictionary = {
     Languages.german: 'Erraten, wer teurer ist',
     Languages.korean: '누가 더 비쌉니까',
     Languages.italian: 'Indovina quale giocatore costa di più',
+    Languages.vietnamese: 'Đoán xem ai đắt hơn',
   },
   AppGlossary.left: {
     Languages.english: 'Left',
@@ -806,6 +850,7 @@ const dictionary = {
     Languages.german: 'Links',
     Languages.korean: '왼쪽',
     Languages.italian: 'A sinistra',
+    Languages.vietnamese: 'Trái',
   },
   AppGlossary.right: {
     Languages.english: 'Right',
@@ -822,6 +867,7 @@ const dictionary = {
     Languages.german: 'Rechts',
     Languages.korean: '오른쪽',
     Languages.italian: 'A destra',
+    Languages.vietnamese: 'Phái',
   },
   AppGlossary.equal: {
     Languages.english: 'Equal',
@@ -838,6 +884,7 @@ const dictionary = {
     Languages.german: 'Gleich',
     Languages.korean: '동등한',
     Languages.italian: 'Uguale',
+    Languages.vietnamese: 'Giống hệt nhau',
   },
   AppGlossary.incorrect: {
     Languages.english: 'Incorrect',
@@ -854,6 +901,7 @@ const dictionary = {
     Languages.german: 'Falsch',
     Languages.korean: '잘못된',
     Languages.italian: 'Errato',
+    Languages.vietnamese: 'Sai',
   },
   AppGlossary.tryAgain: {
     Languages.english: 'Try again',
@@ -870,6 +918,7 @@ const dictionary = {
     Languages.german: 'Versuchen Sie es erneut',
     Languages.korean: '다시 시도하세요',
     Languages.italian: 'Riprova',
+    Languages.vietnamese: 'Thử lại',
   },
   AppGlossary.correct: {
     Languages.english: 'Correct',
@@ -886,6 +935,7 @@ const dictionary = {
     Languages.german: 'Richtig',
     Languages.korean: '올바른',
     Languages.italian: 'Corretto',
+    Languages.vietnamese: 'Đúng',
   },
   AppGlossary.rewarded: {
     Languages.english: 'Rewarded',
@@ -902,6 +952,7 @@ const dictionary = {
     Languages.german: 'Belohnung',
     Languages.korean: '보상',
     Languages.italian: 'Riconoscimento',
+    Languages.vietnamese: 'Phần thưởng',
   },
   AppGlossary.winstrick: {
     Languages.english: 'Winstrick',
@@ -918,6 +969,7 @@ const dictionary = {
     Languages.german: 'Siegesserie',
     Languages.korean: '승리 시리즈',
     Languages.italian: 'Vincita',
+    Languages.vietnamese: 'Một loạt các chiến thắng',
   },
   AppGlossary.balanceIncreased: {
     Languages.english: 'Balance increased',
@@ -934,6 +986,7 @@ const dictionary = {
     Languages.german: 'Balance erhöht',
     Languages.korean: '잔액 증가',
     Languages.italian: 'Saldo aumentato',
+    Languages.vietnamese: 'Cân bằng tăng lên',
   },
   AppGlossary.balanceDecreased: {
     Languages.english: 'Balance decreased',
@@ -950,6 +1003,7 @@ const dictionary = {
     Languages.german: 'Balance verringert',
     Languages.korean: '잔액 감소',
     Languages.italian: 'Saldo ridotto',
+    Languages.vietnamese: 'Số dư giảm',
   },
   // AppGlossary.convertDuplicateToQr: {
   //   Languages.english: 'Convert duplicate to QR code for your friend? Duplicate will be deleted from your collection',
@@ -984,6 +1038,7 @@ const dictionary = {
     Languages.german: 'Was mit dem Duplikat der Karte zu tun ist?',
     Languages.korean: '카드 중복에 대해 무엇을 해야 합니까?',
     Languages.italian: 'Cosa fare con il duplicato della carta?',
+    Languages.vietnamese: 'Tôi nên làm gì với thẻ trùng lặp?',
   },
   AppGlossary.shareViaQr: {
     Languages.english: 'Share via QR',
@@ -1000,6 +1055,7 @@ const dictionary = {
     Languages.german: 'Über QR teilen',
     Languages.korean: 'QR을 통해 공유',
     Languages.italian: 'Condividi tramite QR',
+    Languages.vietnamese: 'Gửi QUA QR',
   },
   AppGlossary.sell: {
     Languages.english: "Sell",
@@ -1016,6 +1072,7 @@ const dictionary = {
     Languages.german: "Verkaufen",
     Languages.korean: "판매",
     Languages.italian: "Vendi",
+    Languages.vietnamese: "Bán một",
   },
   AppGlossary.sellAllDuplicates: {
     Languages.english: "Sell all duplicates",
@@ -1032,6 +1089,7 @@ const dictionary = {
     Languages.german: "Alle Duplikate verkaufen",
     Languages.korean: "모든 중복 판매",
     Languages.italian: "Vendi tutti i duplicati",
+    Languages.vietnamese: "Bán tất cả các bản sao",
   },
   AppGlossary.openQrScannerOnSecondDevice: {
     Languages.english: 'Open QR scanner on second device from side menu and scan code',
@@ -1048,6 +1106,7 @@ const dictionary = {
     Languages.german: 'Öffnen Sie den QR-Scanner auf dem zweiten Gerät aus der Seitenleiste und scannen Sie den Code',
     Languages.korean: '측면 메뉴에서 두 번째 장치에서 QR 스캐너를 열고 코드를 스캔하십시오',
     Languages.italian: 'Apri lo scanner QR sul secondo dispositivo dalla barra laterale e scansiona il codice',
+    Languages.vietnamese: 'Mở MÁY quét QR trên thiết bị thứ hai từ menu bên và quét mã',
   },
   AppGlossary.scanYourFriendQrToGetPlayer: {
     Languages.english: 'Scan your friend\'s QR to get player',
@@ -1064,6 +1123,7 @@ const dictionary = {
     Languages.german: 'Scannen Sie den QR-Code Ihres Freundes, um den Spieler zu erhalten',
     Languages.korean: '친구의 QR을 스캔하여 플레이어를 얻으십시오',
     Languages.italian: 'Scansiona il codice QR del tuo amico per ottenere il giocatore',
+    Languages.vietnamese: 'Quét mã QR của bạn bè để lấy trình phát',
   },
   AppGlossary.onboardingWelcome: {
     Languages.english: 'Welcome to Football Collection!',
@@ -1080,6 +1140,7 @@ const dictionary = {
     Languages.german: 'Willkommen bei Football Collection!',
     Languages.korean: 'Football Collection에 오신 것을 환영합니다!',
     Languages.italian: 'Benvenuto in Football Collection!',
+    Languages.vietnamese: 'Chào mừng Bạn Đến Với Bộ Sưu tập Bóng đá!',
   },
   AppGlossary.onboardingWhoWeAre: {
     Languages.english:
@@ -1107,6 +1168,8 @@ const dictionary = {
     Languages.korean: '우리는 축구를 사랑하는 형제이며, 우리는 모든 축구 팬들이 무료로 자신의 축구 카드를 수집할 수 있도록 여기에 있습니다. 카드는 팩으로 나뉩니다.',
     Languages.italian:
         'Siamo due fratelli che amano il calcio e siamo qui per aiutare tutti gli appassionati di calcio a raccogliere le loro carte di calcio preferite gratuitamente. Le carte sono divise in pacchetti.',
+    Languages.vietnamese:
+        "Chúng tôi là hai anh em yêu bóng đá, và chúng tôi ở đây để giúp tất cả người hâm mộ bóng đá thu thập thẻ bóng đá yêu thích của họ miễn phí. Các thẻ được chia thành các gói."
   },
   AppGlossary.onboardingPressPacksButton: {
     Languages.english: 'Press the button below to go to the packs page.',
@@ -1123,6 +1186,7 @@ const dictionary = {
     Languages.german: 'Klicken Sie auf die Schaltfläche unten, um zur Paketseite zu gelangen.',
     Languages.korean: '아래의 버튼을 눌러 팩 페이지로 이동하세요.',
     Languages.italian: 'Clicca sul pulsante qui sotto per andare alla pagina dei pacchetti.',
+    Languages.vietnamese: "Nhấp vào nút bên dưới để chuyển đến trang mở gói."
   },
   AppGlossary.onboardingSwipeCardsToSave: {
     Languages.english: 'Swipe cards to save!',
@@ -1139,6 +1203,7 @@ const dictionary = {
     Languages.german: 'Schieben Sie die Karten, um sie zu speichern!',
     Languages.korean: '카드를 스와이프하여 저장하세요!',
     Languages.italian: 'Scorri le carte per salvarle!',
+    Languages.vietnamese: "Vuốt thẻ để lưu nó!"
   },
   AppGlossary.onboardingEverySwipedCardWillBeSavedYouCanSwipeAnyDirection: {
     Languages.english: 'Every card you swipe will be saved in your collection. You can swipe in any direction.',
@@ -1161,6 +1226,8 @@ const dictionary = {
         'Jedes Karte, die Sie schieben, wird in Ihrer Sammlung gespeichert. Sie können in jede Richtung schieben.',
     Languages.korean: '스와이프한 모든 카드는 컬렉션에 저장됩니다. 어떤 방향으로든 스와이프할 수 있습니다.',
     Languages.italian: 'Ogni carta che scuoti verrà salvata nella tua raccolta. Puoi scuotere in qualsiasi direzione.',
+    Languages.vietnamese:
+        'Mỗi thẻ bạn vuốt sẽ được lưu trong bộ sưu tập của bạn. Bạn có thể vuốt theo bất kỳ hướng nào.',
   },
   AppGlossary.onboardingCardsAreSaved: {
     Languages.english: 'Now cards are saved in your collection!',
@@ -1177,6 +1244,7 @@ const dictionary = {
     Languages.german: 'Jetzt werden die Karten in Ihrer Sammlung gespeichert!',
     Languages.korean: '이제 카드가 컬렉션에 저장되었습니다!',
     Languages.italian: 'Ora le carte sono salvate nella tua raccolta!',
+    Languages.vietnamese: "Bây giờ các thẻ được lưu trong bộ sưu tập của bạn!",
   },
   AppGlossary.onboardingTapOnCardToSeeInfo: {
     Languages.english: 'Tap on a card to see more information about it.',
@@ -1193,6 +1261,7 @@ const dictionary = {
     Languages.german: 'Tippen Sie auf eine Karte, um mehr über sie zu erfahren.',
     Languages.korean: '카드를 탭하여 자세한 정보를 확인하세요.',
     Languages.italian: 'Tocca su una carta per vedere ulteriori informazioni su di essa.',
+    Languages.vietnamese: 'Nhấp vào thẻ để tìm hiểu thêm về nó.',
   },
   AppGlossary.next: {
     Languages.english: 'Next',
@@ -1209,6 +1278,7 @@ const dictionary = {
     Languages.german: 'Nächster',
     Languages.korean: '다음',
     Languages.italian: 'Successivo',
+    Languages.vietnamese: 'Hơn nữa',
   },
   AppGlossary.onboardingShareCardsWithFriendsOrSell: {
     Languages.english: 'Share  cards with friends or sell!',
@@ -1225,6 +1295,7 @@ const dictionary = {
     Languages.german: 'Teile Karten mit Ihren Freunden oder verkaufen!',
     Languages.korean: '친구들과 카드를 공유하거나 판매하세요!',
     Languages.italian: 'Condividi le carte con i tuoi amici o vendile!',
+    Languages.vietnamese: 'Chia sẻ thẻ với bạn bè của bạn hoặc bán chúng!',
   },
   AppGlossary.onboardingShareCardsWithFriendsOrSellDescription: {
     Languages.english:
@@ -1252,6 +1323,8 @@ const dictionary = {
     Languages.korean: '때로는 이미 보유 중인 카드를 찾을 수 있습니다. 친구들과 공유하거나 판매할 수 있습니다. 단순히 수량 레이블을 탭하세요.',
     Languages.italian:
         'A volte puoi trovare una carta che hai già. Puoi condividerla con i tuoi amici o vendere. Basta toccare l\'etichetta di conteggio.',
+    Languages.vietnamese:
+        "Đôi khi bạn có thể tìm thấy một thẻ mà bạn đã có. Bạn có thể chia sẻ nó với bạn bè của bạn hoặc bán nó. Chỉ cần nhấp vào nhãn số lượng.",
   },
   AppGlossary.onboardingStartCollectioning: {
     Languages.english: 'Start collecting',
@@ -1268,6 +1341,7 @@ const dictionary = {
     Languages.german: 'Beginne zu sammeln',
     Languages.korean: '수집 시작',
     Languages.italian: 'Inizia a raccogliere',
+    Languages.vietnamese: 'Bắt đầu thu thập',
   },
   AppGlossary.onboardingTapOnPackToOpenIt: {
     Languages.english: 'Tap on the pack to open it.',
@@ -1284,6 +1358,7 @@ const dictionary = {
     Languages.german: 'Klicken Sie auf das Paket, um es zu öffnen.',
     Languages.korean: '팩을 탭하여 열 수 있습니다.',
     Languages.italian: 'Tocca sul pacchetto per aprirlo.',
+    Languages.vietnamese: 'Nhấp vào gói để mở nó.',
   },
   AppGlossary.onboardingOpenPacks: {
     Languages.english: 'Open packs!',
@@ -1300,6 +1375,7 @@ const dictionary = {
     Languages.german: 'Packungen öffnen!',
     Languages.korean: '팩을 열어!',
     Languages.italian: 'Apri i pacchetti!',
+    Languages.vietnamese: 'Mở gói!',
   },
   AppGlossary.settingsEnableVibration: {
     Languages.english: 'Vibration',
@@ -1316,6 +1392,7 @@ const dictionary = {
     Languages.german: 'Vibration',
     Languages.korean: '진동',
     Languages.italian: 'Vibrazione',
+    Languages.vietnamese: 'Rung động',
   },
   AppGlossary.settingsEnableConfetti: {
     Languages.english: 'Confetti',
@@ -1332,6 +1409,7 @@ const dictionary = {
     Languages.german: 'Konfetti',
     Languages.korean: '콘페티',
     Languages.italian: 'Confetti',
+    Languages.vietnamese: 'Hoa giấy',
   },
   AppGlossary.ourWebsite: {
     Languages.english: 'Our website',
@@ -1348,6 +1426,7 @@ const dictionary = {
     Languages.german: 'Unsere Website',
     Languages.korean: '우리 웹사이트',
     Languages.italian: 'Il nostro sito web',
+    Languages.vietnamese: 'Trang web',
   },
   AppGlossary.ourTelegram: {
     Languages.english: 'Our Telegram',
@@ -1364,6 +1443,7 @@ const dictionary = {
     Languages.german: 'Unser Telegram',
     Languages.korean: '우리 Telegram',
     Languages.italian: 'Il nostro Telegram',
+    Languages.vietnamese: 'Telegram',
   },
   AppGlossary.foot: {
     Languages.english: 'foot',
@@ -1380,6 +1460,7 @@ const dictionary = {
     Languages.german: 'Fuß',
     Languages.korean: '발',
     Languages.italian: 'piede',
+    Languages.vietnamese: 'chân',
   },
   AppGlossary.footLeft: {
     Languages.english: 'left',
@@ -1396,6 +1477,7 @@ const dictionary = {
     Languages.german: 'links',
     Languages.korean: '왼쪽',
     Languages.italian: 'sinistra',
+    Languages.vietnamese: 'Chân trái',
   },
   AppGlossary.footRight: {
     Languages.english: 'right',
@@ -1412,6 +1494,7 @@ const dictionary = {
     Languages.german: 'rechts',
     Languages.korean: '오른쪽',
     Languages.italian: 'destra',
+    Languages.vietnamese: 'Chân phải',
   },
   AppGlossary.footBoth: {
     Languages.english: 'both',
@@ -1428,6 +1511,7 @@ const dictionary = {
     Languages.german: 'beide',
     Languages.korean: '둘 다',
     Languages.italian: 'entrambi',
+    Languages.vietnamese: 'cả hai',
   },
   AppGlossary.height: {
     Languages.english: 'height',
@@ -1444,6 +1528,7 @@ const dictionary = {
     Languages.german: 'Höhe',
     Languages.korean: '키',
     Languages.italian: 'altezza',
+    Languages.vietnamese: 'chiều cao',
   },
   AppGlossary.primeValue: {
     Languages.english: 'prime',
@@ -1460,6 +1545,7 @@ const dictionary = {
     Languages.german: 'Primzahl',
     Languages.korean: '소수',
     Languages.italian: 'primo',
+    Languages.vietnamese: 'nguyên tố',
   },
   AppGlossary.currentValue: {
     Languages.english: 'current',
@@ -1476,5 +1562,6 @@ const dictionary = {
     Languages.german: 'aktuell',
     Languages.korean: '현재',
     Languages.italian: 'corrente',
+    Languages.vietnamese: 'hiện tại',
   },
 };

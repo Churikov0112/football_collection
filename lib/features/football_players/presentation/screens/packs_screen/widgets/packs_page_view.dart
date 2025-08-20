@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
+import 'package:football_collection/services/localization/translator.dart';
 
 import '../../../../../countries/domain/models/country.dart';
 import '../football_players_packs_screen.dart';
@@ -60,11 +61,14 @@ class PacksPageView extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          child: Text(
-                            packs[i].price > 0 ? "${packs[i].price} 🏆" : "Free",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
+                          child: Translator(
+                            termin: AppGlossary.free,
+                            builder: (value) => Text(
+                              packs[i].price > 0 ? "${packs[i].price} 🏆" : value,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
