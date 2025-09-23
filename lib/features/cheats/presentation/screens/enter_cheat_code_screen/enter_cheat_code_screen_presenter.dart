@@ -50,16 +50,24 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
         return;
       }
     }
-    // // TODO remove
-    // if (cheatCode.contains("BALANCE ")) {
-    //   final balanceString = cheatCode.replaceAll("BALANCE ", "");
-    //   final valueToAdd = int.tryParse(balanceString);
-    //   if (valueToAdd is int && valueToAdd > 0) {
-    //     getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: valueToAdd));
-    //     ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
-    //     return;
-    //   }
-    // }
+    // TODO remove
+    if (cheatCode.contains("BALANCE ")) {
+      final balanceString = cheatCode.replaceAll("BALANCE ", "");
+      final valueToAdd = int.tryParse(balanceString);
+      if (valueToAdd is int && valueToAdd > 0) {
+        getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: valueToAdd));
+        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
+        return;
+      }
+    }
+    if (cheatCode == "ALL") {
+      final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
+      if (allPlayers.isNotEmpty) {
+        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allPlayers.map((e) => e.cardId).toList()));
+        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
+        return;
+      }
+    }
     ToastService.showErrorToast(title: AppGlossary.cheatCodeNotFound.translate(), seconds: 2);
   }
 
