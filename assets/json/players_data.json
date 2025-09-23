@@ -559,6 +559,19 @@
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/182913-1681462009.jpg?lm=1"
     },
     {
+        "id": "122153",
+        "team_id": "3377",
+        "name": "Paul Pogba",
+        "position": "Central Midfield",
+        "birth_date": "Mar 15, 1993 (32)",
+        "height": "1,91 m",
+        "foot": "both",
+        "current_club": "AS Monaco",
+        "current_market_value": 5000000,
+        "max_market_value": 100000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/122153-1730124602.jpg?lm=1"
+    },
+    {
         "id": "708265",
         "team_id": "3377",
         "name": "Bradley Barcola",
@@ -713,6 +726,19 @@
         "current_market_value": 30000000,
         "max_market_value": 30000000,
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/935245-1731168094.jpg?lm=1"
+    },
+    {
+        "id": "25557",
+        "team_id": "3375",
+        "name": "Sergio Ramos",
+        "position": "Centre-Back",
+        "birth_date": "Mar 30, 1986 (39)",
+        "height": "1,84 m",
+        "foot": "right",
+        "current_club": "CF Monterrey",
+        "current_market_value": 1000000,
+        "max_market_value": 50000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/25557-1694502812.jpg?lm=1"
     },
     {
         "id": "618341",
@@ -1272,6 +1298,19 @@
         "current_market_value": 40000000,
         "max_market_value": 60000000,
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/971570-1723665994.jpg?lm=1"
+    },
+    {
+        "id": "68290",
+        "team_id": "3439",
+        "name": "Neymar",
+        "position": "Attacking Midfield",
+        "birth_date": "Feb 5, 1992 (33)",
+        "height": "1,75 m",
+        "foot": "right",
+        "current_club": "Santos FC",
+        "current_market_value": 11000000,
+        "max_market_value": 180000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/68290-1692601435.jpg?lm=1"
     },
     {
         "id": "357153",
@@ -2483,6 +2522,19 @@
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/849520-1724827267.jpg?lm=1"
     },
     {
+        "id": "28003",
+        "team_id": "3437",
+        "name": "Lionel Messi",
+        "position": "Right Winger",
+        "birth_date": "Jun 24, 1987 (38)",
+        "height": "1,70 m",
+        "foot": "left",
+        "current_club": "Inter Miami CF",
+        "current_market_value": 18000000,
+        "max_market_value": 180000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/28003-1740766555.jpg?lm=1"
+    },
+    {
         "id": "195778",
         "team_id": "3262",
         "name": "Alexander Nübel",
@@ -2715,6 +2767,19 @@
         "current_market_value": 40000000,
         "max_market_value": 40000000,
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/496094-1712859708.jpg?lm=1"
+    },
+    {
+        "id": "35207",
+        "team_id": "3262",
+        "name": "Marco Reus",
+        "position": "Attacking Midfield",
+        "birth_date": "May 31, 1989 (36)",
+        "height": "1,80 m",
+        "foot": "right",
+        "current_club": "Bor. Dortmund",
+        "current_market_value": 2000000,
+        "max_market_value": 50000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/35207-1740776651.jpg?lm=1"
     },
     {
         "id": "192565",
@@ -14312,6 +14377,20 @@
         "max_market_value": 16000000,
         "image_url": "https://img.a.transfermarkt.technology/portrait/big/48067-1726165311.png?lm=1"
     },
+    {
+        "id": "532676",
+        "team_id": "3448",
+        "name": "Konstantin Tyukavin",
+        "position": "Centre-Forward",
+        "birth_date": "Jun 22, 2002 (23)",
+        "height": "1,80 m",
+        "foot": "right",
+        "current_club": "Dynamo Moscow",
+        "current_market_value": 16000000,
+        "max_market_value": 16000000,
+        "image_url": "https://img.a.transfermarkt.technology/portrait/big/532676-1721727990.png?lm=1"
+    },
+    
     {
         "id": "643259",
         "team_id": "3581",
