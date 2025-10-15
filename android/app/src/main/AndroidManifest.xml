@@ -3,7 +3,7 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <!-- <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/> -->
     <application
-        android:label="FC 26 England Edition"
+        android:label="Football Collection 2025"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
