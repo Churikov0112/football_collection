@@ -32,7 +32,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
+    storageDirectory: kIsWeb
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path),
   );
 
   try {
@@ -60,10 +62,7 @@ Future<void> main() async {
   }
 
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.black,
-      statusBarColor: Colors.black,
-    ),
+    SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.black),
   );
 
   await SystemChrome.setPreferredOrientations([
@@ -180,9 +179,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                             behavior: DisableBlueGlowBehavior(),
                             child: AnnotatedRegion(
                               value: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                              child: MediaQuery.withNoTextScaling(
-                                child: child,
-                              ),
+                              child: MediaQuery.withNoTextScaling(child: child),
                             ),
                           );
                   },
