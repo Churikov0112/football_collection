@@ -16,10 +16,13 @@ class _SquadRating extends StatelessWidget {
           stream: presenter.startingSquad$,
           builder: (context, startingSquadSnapshot) {
             final ratings =
-                startingSquadSnapshot.data?.map((e) => e.$2?.card.sfData.ratings?.overall ?? 0).toList() ?? [];
+                startingSquadSnapshot.data
+                    ?.map((e) => FootballPlayerStatsCalculator.calculateStats(e.$2!.card))
+                    .toList() ??
+                [];
             int overall = 0;
             for (var i = 0; i < ratings.length; i++) {
-              overall += ratings[i];
+              overall += ratings[i].rating.round();
             }
 
             double chemistry = 0;
@@ -47,18 +50,11 @@ class _SquadRating extends StatelessWidget {
                           termin: AppGlossary.rating,
                           builder: (value) => Text(
                             value,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
+                            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
                           ),
                         ),
                         const SizedBox(width: 8),
-                        RatingTag(
-                          value: overall,
-                          color: ratingColor(overall ~/ 11),
-                        ),
+                        RatingTag(value: overall, color: ratingColor(overall ~/ 11)),
                       ],
                     ),
                   ),
@@ -77,11 +73,7 @@ class _SquadRating extends StatelessWidget {
                           termin: AppGlossary.chemistry,
                           builder: (value) => Text(
                             value,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
+                            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
                           ),
                         ),
                         const SizedBox(width: 8),

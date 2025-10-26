@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -24,6 +25,8 @@ import '../features/countries/presentation/blocs/selected_confederation_bloc/sel
     as _i150;
 import '../features/countries/presentation/blocs/selected_country_bloc/selected_country_bloc.dart'
     as _i782;
+import '../features/draft/presentation/blocs/draft_tournament_bloc/draft_tournament_bloc.dart'
+    as _i1008;
 import '../features/football_confederations/domain/repos/football_confederations_repository.dart'
     as _i47;
 import '../features/football_confederations/presentation/blocs/football_confederations_bloc/football_confederations_bloc.dart'
@@ -48,36 +51,51 @@ _i174.GetIt $initGetIt(
   String? environment,
   _i526.EnvironmentFilter? environmentFilter,
 }) {
-  final gh = _i526.GetItHelper(
-    getIt,
-    environment,
-    environmentFilter,
-  );
+  final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
   gh.singleton<_i809.SettingsBloc>(() => _i809.SettingsBloc());
   gh.singleton<_i367.SavedCardsBloc>(() => _i367.SavedCardsBloc());
   gh.singleton<_i717.FirstLaunchBloc>(() => _i717.FirstLaunchBloc());
   gh.singleton<_i1036.FootballPlayersRepository>(
-      () => _i1036.FootballPlayersRepository());
+    () => _i1036.FootballPlayersRepository(),
+  );
   gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i47.FootballConfederationsRepository>(
-      () => _i47.FootballConfederationsRepository());
+    () => _i47.FootballConfederationsRepository(),
+  );
   gh.singleton<_i71.CountriesRepository>(() => _i71.CountriesRepository());
   gh.singleton<_i150.SelectedConfederationBloc>(
-      () => _i150.SelectedConfederationBloc());
+    () => _i150.SelectedConfederationBloc(),
+  );
   gh.singleton<_i782.SelectedCountryBloc>(() => _i782.SelectedCountryBloc());
   gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
-  gh.singleton<_i873.AllFootballPlayersBloc>(() => _i873.AllFootballPlayersBloc(
-      repository: gh<_i1036.FootballPlayersRepository>()));
-  gh.singleton<_i91.FootballConfederationCountriesBloc>(() =>
-      _i91.FootballConfederationCountriesBloc(gh<_i71.CountriesRepository>()));
-  gh.singleton<_i878.FootballConfederationsBloc>(() =>
-      _i878.FootballConfederationsBloc(
-          gh<_i47.FootballConfederationsRepository>()));
+  gh.singleton<_i873.AllFootballPlayersBloc>(
+    () => _i873.AllFootballPlayersBloc(
+      repository: gh<_i1036.FootballPlayersRepository>(),
+    ),
+  );
+  gh.singleton<_i91.FootballConfederationCountriesBloc>(
+    () =>
+        _i91.FootballConfederationCountriesBloc(gh<_i71.CountriesRepository>()),
+  );
+  gh.singleton<_i878.FootballConfederationsBloc>(
+    () => _i878.FootballConfederationsBloc(
+      gh<_i47.FootballConfederationsRepository>(),
+    ),
+  );
+  gh.singleton<_i1008.DraftTournamentBloc>(
+    () => _i1008.DraftTournamentBloc(gh<_i1036.FootballPlayersRepository>()),
+  );
   gh.singleton<_i245.AllCountriesBloc>(
-      () => _i245.AllCountriesBloc(gh<_i1036.FootballPlayersRepository>()));
-  gh.singleton<_i110.CountryFootballPlayersBloc>(() =>
-      _i110.CountryFootballPlayersBloc(gh<_i1036.FootballPlayersRepository>()));
-  gh.singleton<_i785.FootballPlayersPacksBloc>(() =>
-      _i785.FootballPlayersPacksBloc(gh<_i1036.FootballPlayersRepository>()));
+    () => _i245.AllCountriesBloc(gh<_i1036.FootballPlayersRepository>()),
+  );
+  gh.singleton<_i110.CountryFootballPlayersBloc>(
+    () => _i110.CountryFootballPlayersBloc(
+      gh<_i1036.FootballPlayersRepository>(),
+    ),
+  );
+  gh.singleton<_i785.FootballPlayersPacksBloc>(
+    () =>
+        _i785.FootballPlayersPacksBloc(gh<_i1036.FootballPlayersRepository>()),
+  );
   return getIt;
 }

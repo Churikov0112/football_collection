@@ -10,6 +10,9 @@ import 'package:football_collection/features/settings/presentation/ui/screens/se
 import 'package:go_router/go_router.dart';
 
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
+import '../../features/draft/presentation/ui/screens/draft_match_screen/draft_match_screen.dart';
+import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.dart';
+import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
@@ -32,6 +35,10 @@ class RoutePaths {
   static const footballMiniGameGuessWhoIsMoreExpensive = '/footballMiniGameGuessWhoIsMoreExpensive';
   static const footballMiniGameGuessNationalTeam = '/footballMiniGameGuessNationalTeam';
   static const footballMiniGameGuessPlayer = '/footballMiniGameGuessPlayer';
+
+  static const draft = '/draft';
+  static const draftTournamentStage = '/draftTournamentStage';
+  static const draftMatch = '/draftMatch';
 
   static const getCardByQr = '/getCardByQr';
   static const settings = '/settings';
@@ -65,14 +72,8 @@ class FootballCollectionRouter {
           position: Tween<Offset>(
             begin: const Offset(0.25, 0),
             end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutQuart,
-          )),
-          child: FadeTransition(
-            opacity: animation,
-            child: child,
-          ),
+          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutQuart)),
+          child: FadeTransition(opacity: animation, child: child),
         );
       },
     );
@@ -94,23 +95,11 @@ class FootballCollectionRouter {
           path: RoutePaths.footballConfederations,
           builder: (context, state) => const FootballConfederationsScreen(),
         ),
-        GoRoute(
-          path: RoutePaths.footballCountries,
-          builder: (context, state) => FootballCountriesScreen(),
-        ),
-        GoRoute(
-          path: RoutePaths.footballPlayersAlbum,
-          builder: (context, state) => FootballPlayersAlbumScreen(),
-        ),
-        GoRoute(
-          path: RoutePaths.footballPlayersPacks,
-          builder: (context, state) => FootballPlayersPacksScreen(),
-        ),
+        GoRoute(path: RoutePaths.footballCountries, builder: (context, state) => FootballCountriesScreen()),
+        GoRoute(path: RoutePaths.footballPlayersAlbum, builder: (context, state) => FootballPlayersAlbumScreen()),
+        GoRoute(path: RoutePaths.footballPlayersPacks, builder: (context, state) => FootballPlayersPacksScreen()),
 
-        GoRoute(
-          path: RoutePaths.miniGames,
-          builder: (context, state) => MiniGamesScreen(),
-        ),
+        GoRoute(path: RoutePaths.miniGames, builder: (context, state) => MiniGamesScreen()),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessTransferValue,
           builder: (context, state) => GuessTransferValueScreen(),
@@ -123,18 +112,15 @@ class FootballCollectionRouter {
           path: RoutePaths.footballMiniGameGuessNationalTeam,
           builder: (context, state) => GuessNationalTeamScreen(),
         ),
+        GoRoute(path: RoutePaths.footballMiniGameGuessPlayer, builder: (context, state) => GuessPlayerScreen()),
+        GoRoute(path: RoutePaths.draft, builder: (context, state) => const DraftScreen()),
+        GoRoute(path: RoutePaths.draftTournamentStage, builder: (context, state) => const DraftTournamentStageScreen()),
         GoRoute(
-          path: RoutePaths.footballMiniGameGuessPlayer,
-          builder: (context, state) => GuessPlayerScreen(),
+          path: RoutePaths.draftMatch,
+          builder: (context, state) => DraftMatchScreen(args: state.extra as DraftMatchScreenArguments),
         ),
-        GoRoute(
-          path: RoutePaths.getCardByQr,
-          builder: (context, state) => GetCardByQrScreen(),
-        ),
-        GoRoute(
-          path: RoutePaths.settings,
-          builder: (context, state) => SettingsScreen(),
-        ),
+        GoRoute(path: RoutePaths.getCardByQr, builder: (context, state) => GetCardByQrScreen()),
+        GoRoute(path: RoutePaths.settings, builder: (context, state) => SettingsScreen()),
 
         // GoRoute(
         //   path: RoutePaths.main,

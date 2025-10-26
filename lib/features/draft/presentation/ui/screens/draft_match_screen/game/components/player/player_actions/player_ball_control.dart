@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 
-import '../../../../../../../../../football_players/domain/models/position.dart';
+import '../../../../../../../../domain/models/position.dart';
 import '../../../match_game.dart';
 import '../../goal_component.dart';
 import '../player_component.dart';

@@ -77,10 +77,7 @@ class GuessNationalTeamScreen extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(
-                            options: options,
-                            rightAnswer: playerCountry,
-                          ),
+                          _GuessOptions(options: options, rightAnswer: playerCountry),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
@@ -95,7 +92,7 @@ class GuessNationalTeamScreen extends StatelessWidget {
                     },
                   ),
                   Translator(
-                    termin: AppGlossary.guessNationalTeam,
+                    termin: AppGlossary.guessPlayerTeam,
                     builder: (value) => TransparentAppbar(title: value),
                   ),
                 ],

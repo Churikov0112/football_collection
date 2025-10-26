@@ -30,3 +30,24 @@ class _PlayerImage extends StatelessWidget {
     );
   }
 }
+
+class FootballPlayerImage extends StatelessWidget {
+  const FootballPlayerImage({required this.player, required this.size, required this.isFake, super.key});
+
+  final FootballPlayerCardModel player;
+  final double size;
+  final bool isFake;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      player.imageAssetPath,
+      // isFake ? "assets/raster/other/player_0.png" : player.imageAssetPath,
+      height: size,
+      width: size,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) =>
+          Image.asset("assets/raster/other/player_0.png", height: size, width: size, fit: BoxFit.cover),
+    );
+  }
+}

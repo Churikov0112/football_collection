@@ -20,6 +20,16 @@ class FootballPlayerStats {
     required this.dribbling,
     required this.goalkeeper,
   });
+
+  double get rating {
+    double best = 0;
+    for (final stat in [maxSpeed, lowPass, shoots, defence, dribbling, goalkeeper]) {
+      if (stat > best) {
+        best = stat;
+      }
+    }
+    return best;
+  }
 }
 
 class FootballPlayerStatsCalculator {
@@ -56,12 +66,10 @@ class FootballPlayerStatsCalculator {
   }
 
   static int _calculateAge(String? birthDate) {
-    if (birthDate == null) return 25;
-
-    final parsedDate = parseCustomDate(birthDate);
-    if (parsedDate == null) return 25;
-
     try {
+      if (birthDate == null) return 25;
+      final parsedDate = parseCustomDate(birthDate);
+      if (parsedDate == null) return 25;
       final dateParts = parsedDate.split('.');
       final birth = DateTime(int.parse(dateParts[2]), int.parse(dateParts[1]), int.parse(dateParts[0]));
       final now = DateTime.now();

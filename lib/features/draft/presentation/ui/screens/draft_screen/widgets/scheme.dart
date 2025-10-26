@@ -7,11 +7,7 @@ class PositionConnection {
   final FootballPlayerPositionOnField to;
   final double chemistry;
 
-  PositionConnection({
-    required this.from,
-    required this.to,
-    required this.chemistry,
-  });
+  PositionConnection({required this.from, required this.to, required this.chemistry});
 }
 
 class _Scheme extends StatelessWidget {
@@ -133,9 +129,7 @@ class _Scheme extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            Image.asset(
-                              "assets/raster/field/field_goal_top.jpg",
-                            ),
+                            Image.asset("assets/raster/field/field_goal_top.jpg"),
                             Expanded(
                               child: Image.asset(
                                 "assets/raster/field/field_space_top.jpg",
@@ -143,9 +137,7 @@ class _Scheme extends StatelessWidget {
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            Image.asset(
-                              "assets/raster/field/field_center.jpg",
-                            ),
+                            Image.asset("assets/raster/field/field_center.jpg"),
                             Expanded(
                               child: Image.asset(
                                 "assets/raster/field/field_space_bottom.jpg",
@@ -153,9 +145,7 @@ class _Scheme extends StatelessWidget {
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            Image.asset(
-                              "assets/raster/field/field_goal_bottom.jpg",
-                            ),
+                            Image.asset("assets/raster/field/field_goal_bottom.jpg"),
                           ],
                         ),
 
@@ -245,12 +235,7 @@ class _ConnectionPainter extends CustomPainter {
   final Color color;
   final double lineWidth;
 
-  _ConnectionPainter({
-    required this.from,
-    required this.to,
-    required this.color,
-    required this.lineWidth,
-  });
+  _ConnectionPainter({required this.from, required this.to, required this.color, required this.lineWidth});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -273,12 +258,7 @@ class _PositionOnField extends StatelessWidget {
 
   final Color color;
 
-  const _PositionOnField({
-    required this.pof,
-    required this.height,
-    required this.width,
-    required this.color,
-  });
+  const _PositionOnField({required this.pof, required this.height, required this.width, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -297,30 +277,30 @@ class _PositionOnField extends StatelessWidget {
             return StreamBuilder(
               stream: presenter.selectedPlayer$,
               builder: (context, selectedPlayerSnapshot) {
-                final selectedPlayerId = selectedPlayerSnapshot.data?.$2?.card.id;
-                final isSelected = selectedPlayerId == player?.card.id;
+                final selectedPlayerId = selectedPlayerSnapshot.data?.$2?.card.playerId;
+                final isSelected = selectedPlayerId == player?.card.playerId;
 
                 return GestureDetector(
                   onTap: () {
                     if (presenter._draftPageSubject.value == 1) {
                       if (player != null) {
                         if (!isSelected && selectedPlayerId != null) {
-                          presenter.swapPlayersOnField(player.card.id, selectedPlayerId);
+                          presenter.swapPlayersOnField(player.card.playerId, selectedPlayerId);
                         } else {
-                          presenter.selectPlayer(player.card.id);
+                          presenter.selectPlayer(player.card.playerId);
                         }
                       } else {
                         presenter.openPlayerSelector(pof);
                       }
                     } else if (presenter._draftPageSubject.value == 2 && player != null) {
-                      presenter.selectCaptain(player.card.id);
+                      presenter.selectCaptain(player.card.playerId);
                     }
                   },
                   child: player != null
                       ? StreamBuilder(
                           stream: presenter.captainId$,
                           builder: (context, captainIdSnapshot) {
-                            final isCaptain = captainIdSnapshot.data == player.card.id;
+                            final isCaptain = captainIdSnapshot.data == player.card.playerId;
 
                             return DecoratedBox(
                               decoration: BoxDecoration(

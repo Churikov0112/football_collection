@@ -110,15 +110,18 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
       } else {
         // Добавляем игроков основной позиции + ближайшие похожие позиции
         filteredPlayers = savedPlayers.where((player) {
-          final weight = PositionWeights.getWeight(abstractPosition, player.position);
+          final weight = PositionWeights.getWeight(
+            abstractPosition,
+            FootballPlayerAbstractPosition.fromString(player.position),
+          );
           return weight > 0.7; // Берем только достаточно близкие позиции
         }).toList();
       }
 
       // Сортируем по рейтингу (по убыванию)
       filteredPlayers.sort((a, b) {
-        final ratingA = a.sfData.ratings?.overall ?? 0;
-        final ratingB = b.sfData.ratings?.overall ?? 0;
+        final ratingA = FootballPlayerStatsCalculator.calculateStats(a).rating;
+        final ratingB = FootballPlayerStatsCalculator.calculateStats(b).rating;
         return ratingB.compareTo(ratingA);
       });
 
@@ -171,7 +174,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
   }
 
   void selectPlayer(String? playerId) {
-    if (_selectedPlayerSubject.value?.$2?.card.id == playerId) {
+    if (_selectedPlayerSubject.value?.$2?.card.playerId == playerId) {
       _selectedPlayerSubject.add(null);
       return;
     }
@@ -278,13 +281,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
 
           if (fromPlayer != null && toPlayer != null) {
             final chemistry = _playersChemistry(fromPlayer, toPlayer);
-            connections.add(
-              PositionConnection(
-                from: fromPof,
-                to: toPof,
-                chemistry: chemistry,
-              ),
-            );
+            connections.add(PositionConnection(from: fromPof, to: toPof, chemistry: chemistry));
           }
         }
       }
@@ -314,32 +311,29 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
   }
 
   double _playersChemistry(FootballPlayerGameModel player1, FootballPlayerGameModel player2) {
-    final allCompetitions = getIt.get<AllFootballCompetitionsBloc>().state.allCompetitions;
-    final String? player1CompetitionId = allCompetitions
-        ?.firstWhereOrNull((c) => c.teamsIds.contains(player1.card.teamId))
-        ?.id;
-    final String? player2CompetitionId = allCompetitions
-        ?.firstWhereOrNull((c) => c.teamsIds.contains(player2.card.teamId))
-        ?.id;
+    final allCoounries = getIt.get<AllCountriesBloc>().state.countries;
+
+    final player1CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player1.card.countryId)?.name ?? '';
+    final FootballConfederations player1Confederation = footballConfederationFromCountryName(player1CountryName);
+
+    final player2CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player2.card.countryId)?.name ?? '';
+    final FootballConfederations player2Confederation = footballConfederationFromCountryName(player2CountryName);
 
     double chemistry = 0.0;
 
-    // Одна национальность - средний бонус
-    if (player1.card.nationality?.any((country) => player2.card.tmData?.nationality?.contains(country) ?? false) ==
-            true ||
-        player2.card.nationality?.any((country) => player1.card.tmData?.nationality?.contains(country) ?? false) ==
-            true) {
+    // Одна конфедерация - средний бонус
+    if (player1Confederation == player2Confederation) {
       chemistry += 0.5;
     }
 
-    // Одна команда - самый сильный бонус
-    if (player1.card.teamId == player2.card.teamId) {
+    // Одна сборная - самый сильный бонус
+    if (player1.card.countryId == player2.card.countryId) {
       chemistry += 0.65;
     }
 
-    // Один турнир - слабый бонус
-    if (player1CompetitionId == player2CompetitionId) {
-      chemistry += 0.2;
+    // Одна команда - самый сильный бонус
+    if (player1.card.currentClub == player2.card.currentClub) {
+      chemistry += 0.65;
     }
 
     return chemistry.clamp(0.0, 1.0);
@@ -361,12 +355,8 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
       scheme: scheme,
       players: startingSquad
           .mapIndexed(
-            (index, tuple) => FootballPlayerInTeamGameModel(
-              teamId: "user",
-              number: index + 1,
-              pof: tuple.$1,
-              data: tuple.$2!,
-            ),
+            (index, tuple) =>
+                FootballPlayerInTeamGameModel(teamId: "user", number: index + 1, pof: tuple.$1, data: tuple.$2!),
           )
           .toList(),
       captainId: captainId,

@@ -1,24 +1,20 @@
 import 'package:collection/collection.dart';
-import 'package:fc_26_england/di/di.dart';
-import 'package:fc_26_england/features/football_players/presentation/widgets/football_player_card.dart';
-import 'package:fc_26_england/features/mini_games/domain/models/draft_tournament_match.dart';
-import 'package:fc_26_england/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
-import 'package:fc_26_england/ui_kit/widgets/glass_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../services/navigation/go_router/navigation.dart';
-import '../../../../../mini_games/domain/models/draft_tournament.dart';
+import '../../../../../../di/di.dart';
+import '../../../../../../services/navigation/navigation.dart';
+import '../../../../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
+import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../domain/models/draft_tournament_match.dart';
 import '../../../blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
 import '../draft_match_screen/draft_match_screen.dart';
 
 part 'draft_tournament_stage_screen_presenter.dart';
 
 class DraftTournamentStageScreen extends StatelessWidget {
-  const DraftTournamentStageScreen({
-    super.key,
-  });
+  const DraftTournamentStageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +26,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
         canPop: false,
         child: Scaffold(
           body: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.black54,
-            ),
+            decoration: const BoxDecoration(color: Colors.black54),
             child: BlocBuilder<DraftTournamentBloc, DraftTournamentState>(
               bloc: getIt.get(),
               builder: (context, draftTournamentState) {
@@ -52,10 +46,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                 return Stack(
                   children: [
                     Positioned.fill(
-                      child: Image.asset(
-                        "assets/raster/field/football_field_topview.jpg",
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset("assets/raster/field/football_field_topview.jpg", fit: BoxFit.cover),
                     ),
                     Column(
                       children: [
@@ -98,18 +89,15 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                                         ),
                                         const SizedBox(height: 24),
-                                        TeamLogoWidget.fromColors(
-                                          size: 32,
-                                          fillColor: userTeam.color,
-                                          borderColor: Colors.white,
-                                          centerColor: Colors.white,
+                                        Container(
+                                          width: 32,
+                                          height: 32,
+                                          decoration: BoxDecoration(shape: BoxShape.circle, color: userTeam.color),
                                         ),
+
                                         const SizedBox(height: 24),
                                         Padding(
                                           padding: const EdgeInsets.all(8),
@@ -122,7 +110,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                                   children: [
                                                     Flexible(
                                                       child: Text(
-                                                        player.data.card.sfData.name,
+                                                        player.data.card.name,
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
                                                         style: const TextStyle(
@@ -131,7 +119,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                                         ),
                                                       ),
                                                     ),
-                                                    if (userTeam.captainId == player.data.card.id) ...[
+                                                    if (userTeam.captainId == player.data.card.playerId) ...[
                                                       const SizedBox(width: 8),
                                                       const Text(
                                                         "C",
@@ -169,13 +157,14 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                                         ),
                                         const SizedBox(height: 24),
-                                        TeamLogoWidget.fromTeamId(teamId: opponentTeam.id, size: 32),
+                                        Container(
+                                          width: 32,
+                                          height: 32,
+                                          decoration: BoxDecoration(shape: BoxShape.circle, color: opponentTeam.color),
+                                        ),
                                         const SizedBox(height: 24),
 
                                         Padding(
@@ -188,7 +177,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                                   mainAxisSize: MainAxisSize.max,
                                                   mainAxisAlignment: MainAxisAlignment.end,
                                                   children: [
-                                                    if (opponentTeam.captainId == player.data.card.id) ...[
+                                                    if (opponentTeam.captainId == player.data.card.playerId) ...[
                                                       const Text(
                                                         "C",
                                                         style: TextStyle(
@@ -201,7 +190,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                                     ],
                                                     Flexible(
                                                       child: Text(
-                                                        player.data.card.sfData.name,
+                                                        player.data.card.name,
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
                                                         style: const TextStyle(

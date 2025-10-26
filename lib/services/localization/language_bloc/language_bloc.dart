@@ -1,9 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:football_collection/services/firebase/firebase_methods.dart';
-import 'package:football_collection/services/localization/dictionary.dart';
-import 'package:football_collection/services/log/log_service.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../firebase/firebase_methods.dart';
+import '../../log/log_service.dart';
+import '../dictionary.dart';
 
 part 'language_event.dart';
 part 'language_state.dart';

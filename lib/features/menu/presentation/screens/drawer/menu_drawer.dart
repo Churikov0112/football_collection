@@ -1,8 +1,18 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../services/log/log_service.dart';
+import '../../../../../services/toast/toast_service.dart';
+import '../../../../cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
+import '../../../../draft/presentation/ui/screens/draft_description_screen/draft_description_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
@@ -19,70 +29,71 @@ class MenuDrawer extends StatelessWidget {
               onTap: () {
                 context.push(RoutePaths.miniGames);
               },
-              leading: Icon(
-                Icons.gamepad,
-                color: Colors.white,
-              ),
+              leading: Icon(Icons.gamepad, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.miniGames,
-                builder: (value) => Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
+            ),
+            BlocBuilder<SavedCardsBloc, SavedCardsState>(
+              bloc: getIt.get(),
+              builder: (context, savedCardsState) {
+                final savedCardsIds = savedCardsState.savedCardsIds ?? [];
+                return ListTile(
+                  onTap: () {
+                    if (savedCardsIds.length < 100) {
+                      ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
+                      return;
+                    }
+                    try {
+                      FirebaseAnalytics.instance.logEvent(name: "draft_opened");
+                    } catch (e) {
+                      LogService.error(e.toString(), e);
+                    }
+                    BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
+                  },
+                  leading: Icon(Icons.gamepad, color: Colors.white),
+                  title: Translator(
+                    termin: AppGlossary.draft,
+                    builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                  ),
+                );
+              },
             ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.getCardByQr);
               },
-              leading: Icon(
-                Icons.qr_code_2,
-                color: Colors.white,
-              ),
+              leading: Icon(Icons.qr_code_2, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.scanQr,
-                builder: (value) => Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
-            // ListTile(
-            //   onTap: () {
-            //     showModalBottomSheet(
-            //       context: context,
-            //       isScrollControlled: true,
-            //       builder: (context) {
-            //         return EnterCheatCodeScreen();
-            //       },
-            //     );
-            //   },
-            //   leading: Icon(
-            //     Icons.keyboard,
-            //     color: Colors.white,
-            //   ),
-            //   title: Translator(
-            //     termin: AppGlossary.cheatCodes,
-            //     builder: (value) => Text(
-            //       value,
-            //       style: TextStyle(color: Colors.white),
-            //     ),
-            //   ),
-            // ),
+            ListTile(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return EnterCheatCodeScreen();
+                  },
+                );
+              },
+              leading: Icon(Icons.keyboard, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.cheatCodes,
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+              ),
+            ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.settings);
               },
-              leading: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
+              leading: Icon(Icons.settings, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.settings,
-                builder: (value) => Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(),
@@ -90,32 +101,20 @@ class MenuDrawer extends StatelessWidget {
               onTap: () async {
                 await openInBrowser("https://football-collection.tilda.ws");
               },
-              leading: Icon(
-                Icons.language,
-                color: Colors.white,
-              ),
+              leading: Icon(Icons.language, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.ourWebsite,
-                builder: (value) => Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(
               onTap: () async {
                 await openInBrowser("https://t.me/dosbrosdev");
               },
-              leading: Icon(
-                Icons.telegram,
-                color: Colors.white,
-              ),
+              leading: Icon(Icons.telegram, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.ourTelegram,
-                builder: (value) => Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(

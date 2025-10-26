@@ -2,7 +2,7 @@
 
 import 'dart:math';
 
-import '../../../../../../../../../football_players/domain/models/position.dart';
+import '../../../../../../../../domain/models/position.dart';
 import '../../goal_component.dart';
 import '../player_component.dart';
 import '../player_state.dart';

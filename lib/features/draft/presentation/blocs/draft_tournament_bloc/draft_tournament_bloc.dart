@@ -75,14 +75,14 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
           // Функция для поиска лучшего кандидата с определенным условием
           FootballPlayerCardModel? findBestCandidate(bool Function(FootballPlayerCardModel) condition) {
             FootballPlayerCardModel? candidate;
-            int bestRating = -1;
+            double bestRating = -1;
 
             for (final player in teamPlayers) {
               if (usedPlayers.contains(player)) {
                 continue;
               }
               if (condition(player)) {
-                final rating = player.sfData.ratings?.overall ?? 0;
+                final rating = FootballPlayerStatsCalculator.calculateStats(player).rating;
                 if (rating > bestRating) {
                   bestRating = rating;
                   candidate = player;
@@ -132,7 +132,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         for (var i = 0; i < startingSquad.entries.length; i++) {
           final pof = startingSquad.entries.toList()[i].key;
           final pc = startingSquad.entries.toList()[i].value;
-          final ratings = pc.sfData.ratings;
+          final stats = FootballPlayerStatsCalculator.calculateStats(pc);
 
           final player = FootballPlayerInTeamGameModel(
             teamId: team.id,
@@ -141,14 +141,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
             data: FootballPlayerGameModel(
               id: "${team.id}_${pc.playerId}", // TODO ADD TEAM PREFIX
               card: pc,
-              stats: FootballPlayerStats(
-                maxSpeed: ratings?.sprintSpeed.toDouble() ?? 0.0,
-                lowPass: ratings?.shotPassing.toDouble() ?? 0.0,
-                shoots: ratings?.shotPower.toDouble() ?? 0.0,
-                defence: ratings?.defensiveAwareness.toDouble() ?? 0.0,
-                dribbling: ratings?.dribbling.toDouble() ?? 0.0,
-                goalkeeper: ratings?.gkReflexes.toDouble() ?? 0.0,
-              ),
+              stats: stats,
             ),
           );
 
@@ -162,7 +155,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
             id: team.id,
             name: team.name,
             scheme: scheme,
-            color: teamPaletteById(team.id)?.firstOrNull ?? Colors.black,
+            color: shirtColorByCountryName(team.name) ?? Colors.white,
             players: players,
             captainId: captainId,
           ),

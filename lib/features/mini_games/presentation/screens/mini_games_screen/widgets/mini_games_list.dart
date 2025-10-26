@@ -23,9 +23,7 @@ class _MiniGamesList extends StatelessWidget {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {
-                    "mini_game": "guess_transfer_value",
-                  },
+                  parameters: {"mini_game": "guess_transfer_value"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
@@ -40,9 +38,7 @@ class _MiniGamesList extends StatelessWidget {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {
-                    "mini_game": "who_is_more_expensive",
-                  },
+                  parameters: {"mini_game": "who_is_more_expensive"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
@@ -51,15 +47,13 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
-            title: AppGlossary.guessNationalTeam,
+            title: AppGlossary.guessPlayerTeam,
             color: Colors.red,
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {
-                    "mini_game": "guess_national_team",
-                  },
+                  parameters: {"mini_game": "guess_national_team"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
@@ -74,9 +68,7 @@ class _MiniGamesList extends StatelessWidget {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {
-                    "mini_game": "guess_player",
-                  },
+                  parameters: {"mini_game": "guess_player"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
@@ -101,11 +93,7 @@ class _MiniGamesList extends StatelessWidget {
 }
 
 class _MiniGameTile extends StatelessWidget {
-  const _MiniGameTile({
-    required this.title,
-    required this.color,
-    required this.onTap,
-  });
+  const _MiniGameTile({required this.title, required this.color, required this.onTap});
 
   final AppGlossary title;
   final Color color;
@@ -132,10 +120,7 @@ class _MiniGameTile extends StatelessWidget {
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ],

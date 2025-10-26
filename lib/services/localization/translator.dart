@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:football_collection/di/di.dart';
-import 'package:football_collection/services/localization/dictionary.dart';
 
-import 'language_bloc/language_bloc.dart';
+import '../../di/di.dart';
+import 'translator.dart';
 
 export 'dictionary.dart';
 export 'language_bloc/language_bloc.dart';

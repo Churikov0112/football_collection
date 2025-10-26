@@ -6,8 +6,8 @@ import 'package:flame/game.dart';
 import 'package:flame_camera_tools/flame_camera_tools.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../football_players/domain/models/position.dart';
 import '../../../../../domain/models/player.dart';
+import '../../../../../domain/models/position.dart';
 import '../../../../../domain/models/schemes.dart';
 import '../../../../../domain/models/team.dart';
 import 'components/ball_component.dart';
@@ -48,11 +48,7 @@ class MatchGame extends FlameGame {
 
   final Function(int teamAscore, int teamBscore) onMatchFinished;
 
-  MatchGame({
-    required this.teamA,
-    required this.teamB,
-    required this.onMatchFinished,
-  });
+  MatchGame({required this.teamA, required this.teamB, required this.onMatchFinished});
 
   @override
   Future<void> onLoad() async {
@@ -93,20 +89,11 @@ class MatchGame extends FlameGame {
       ..style = PaintingStyle.fill;
 
     // 1. Бордюр вокруг поля
-    world.add(
-      RectangleComponent(
-        size: fieldSize,
-        paint: borderPaint,
-      ),
-    );
+    world.add(RectangleComponent(size: fieldSize, paint: borderPaint));
 
     // 2. Центральная линия
     world.add(
-      RectangleComponent(
-        position: Vector2(fieldSize.x / 2 - 1, 0),
-        size: Vector2(2, fieldSize.y),
-        paint: fillPaint,
-      ),
+      RectangleComponent(position: Vector2(fieldSize.x / 2 - 1, 0), size: Vector2(2, fieldSize.y), paint: fillPaint),
     );
 
     // 3. Центральный круг
@@ -223,11 +210,7 @@ class MatchGame extends FlameGame {
 
   void _setupCamera() {
     camera.smoothFollow(ball, stiffness: 0.85);
-    camera.viewport.add(
-      ScoreComponent(
-        getScore: () => '${teamA.name}  |$teamAscore : $teamBscore|  ${teamB.name}',
-      ),
-    );
+    camera.viewport.add(ScoreComponent(getScore: () => '${teamA.name}  |$teamAscore : $teamBscore|  ${teamB.name}'));
     camera.viewport.add(TimeComponent(getTime: () => "${elapsedTime.toStringAsFixed(0)}'"));
   }
 

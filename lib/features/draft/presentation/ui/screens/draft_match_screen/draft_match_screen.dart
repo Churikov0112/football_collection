@@ -1,15 +1,15 @@
-import 'package:fc_26_england/di/di.dart';
-import 'package:fc_26_england/features/draft/presentation/blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
-import 'package:fc_26_england/features/mini_games/domain/models/draft_tournament.dart';
-import 'package:fc_26_england/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
-import 'package:fc_26_england/services/localization/translator.dart';
-import 'package:fc_26_england/services/toast/toast_service.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' show Scaffold, showDialog, Colors, OutlinedButton, Dialog;
 import 'package:flutter/widgets.dart';
+import 'package:football_collection/services/localization/translator.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../di/di.dart';
+import '../../../../../../services/toast/toast_service.dart';
+import '../../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+import '../../../../domain/models/draft_tournament.dart';
 import '../../../../domain/models/team.dart';
+import '../../../blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
 import 'game/match_game.dart';
 
 part 'draft_match_screen_presenter.dart';
@@ -18,17 +18,11 @@ class DraftMatchScreenArguments {
   final FootballTeamGameModel userTeam;
   final FootballTeamGameModel oppponentTeam;
 
-  const DraftMatchScreenArguments({
-    required this.userTeam,
-    required this.oppponentTeam,
-  });
+  const DraftMatchScreenArguments({required this.userTeam, required this.oppponentTeam});
 }
 
 class DraftMatchScreen extends StatelessWidget {
-  const DraftMatchScreen({
-    required this.args,
-    super.key,
-  });
+  const DraftMatchScreen({required this.args, super.key});
 
   final DraftMatchScreenArguments args;
 
@@ -85,10 +79,7 @@ class DraftMatchScreen extends StatelessWidget {
                                             context.pop();
                                           }
                                         },
-                                        child: const Text(
-                                          "+ 400 🏆",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                                        child: const Text("+ 400 🏆", style: TextStyle(color: Colors.white)),
                                       )
                                     : matchWon
                                     ? OutlinedButton(

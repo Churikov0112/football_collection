@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 
-import '../../../../../../../../../football_players/domain/models/position.dart';
+import '../../../../../../../../domain/models/position.dart';
 import '../../../match_game.dart';
 import '../player_component.dart';
 import '../player_state.dart';

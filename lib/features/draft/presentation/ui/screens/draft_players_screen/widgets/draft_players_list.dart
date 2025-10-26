@@ -55,16 +55,18 @@ class _DraftPlayersList extends StatelessWidget {
 
     final draftPlayers = presenter.widget.args.draftPlayers;
     final playersIdsToExclude = presenter.widget.args.playersIdsToExclude;
-    final draftPlayersAfterExclude = draftPlayers.where((p) => !playersIdsToExclude.contains(p.id)).toList();
-    draftPlayersAfterExclude.sort(
-      (p1, p2) => (p2.sfData.ratings?.overall ?? 0).compareTo(p1.sfData.ratings?.overall ?? 0),
-    );
+    final draftPlayersAfterExclude = draftPlayers.where((p) => !playersIdsToExclude.contains(p.playerId)).toList();
+    draftPlayersAfterExclude.sort((p1, p2) {
+      final p1Rating = FootballPlayerStatsCalculator.calculateStats(p1).rating;
+      final p2Rating = FootballPlayerStatsCalculator.calculateStats(p2).rating;
+      return p2Rating.compareTo(p1Rating);
+    });
 
     if (draftPlayersAfterExclude.isEmpty) {
       return const Center(child: Text('Нет сохраненных игроков'));
     }
 
-    return SuperListView.separated(
+    return ListView.separated(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.all(8),
       itemCount: draftPlayersAfterExclude.length,
@@ -106,14 +108,10 @@ class _FootballPlayerCard extends StatelessWidget {
             isActive: player.position != null,
             onPressed: () {
               final stats = FootballPlayerStatsCalculator.calculateStats(player);
-              final playerGameModel = FootballPlayerGameModel(id: player.id, card: player, stats: stats);
+              final playerGameModel = FootballPlayerGameModel(id: player.playerId, card: player, stats: stats);
               context.pop(playerGameModel);
             },
-            child: DraftFootballPlayerCardWidget(
-              player: player,
-              height: playerPhotoHeight,
-              width: playerPhotoWidth,
-            ),
+            child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight, width: playerPhotoWidth),
           ),
         ),
         // Column(
@@ -225,10 +223,7 @@ class _FootballPlayerCard extends StatelessWidget {
         TouchableScale(
           isActive: player.position != null,
           onPressed: () {
-            BottomSheetController.showBottomSheet(
-              context,
-              (context) => FootballPlayerScreen(player: player),
-            );
+            BottomSheetController.showBottomSheet(context, (context) => FootballPlayerScreen(player: player));
           },
           child: SizedBox(
             width: playerPhotoWidth,
@@ -239,11 +234,7 @@ class _FootballPlayerCard extends StatelessWidget {
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8),
-                child: Icon(
-                  Icons.info_outline,
-                  size: 20,
-                  color: Colors.white60,
-                ),
+                child: Icon(Icons.info_outline, size: 20, color: Colors.white60),
               ),
             ),
           ),
@@ -273,8 +264,9 @@ List<FootballPlayerCardModel> sortPlayers(
   // Кэшируем вычисления весов позиций
   final positionWeightsCache = <FootballPlayerAbstractPosition, double>{};
   for (final player in players) {
-    if (player.position != null) {
-      positionWeightsCache[player.position!] ??= PositionWeights.getWeight(targetPosition, player.position);
+    final position = FootballPlayerAbstractPosition.fromString(player.position);
+    if (position != null) {
+      positionWeightsCache[position] ??= PositionWeights.getWeight(targetPosition, position);
     }
   }
 
