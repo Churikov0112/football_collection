@@ -8,11 +8,7 @@ class FootballPlayersPacksScreenPresenter extends StatefulWidget {
   final Widget child;
   final FootballPlayersPacksScreenArgs args;
 
-  const FootballPlayersPacksScreenPresenter({
-    required this.args,
-    required this.child,
-    super.key,
-  });
+  const FootballPlayersPacksScreenPresenter({required this.args, required this.child, super.key});
 
   @override
   State<FootballPlayersPacksScreenPresenter> createState() => FootballPlayersPacksScreenPresenterState();
@@ -26,58 +22,54 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   O3DController? o3dController;
   late CarouselSliderController packsCarouselController;
 
-// нужно для показа 3d модели пака
+  // нужно для показа 3d модели пака
   final BehaviorSubject<int> selectedPackIndexSubject = BehaviorSubject.seeded(0);
   Stream<int> get selectedPackIndexStream$ => selectedPackIndexSubject.stream;
 
-// нужно для показа 3d модели пака
+  // нужно для показа 3d модели пака
   final BehaviorSubject<bool> _show3dObjectSubject = BehaviorSubject.seeded(false);
   Stream<bool> get show3dObjectStream$ => _show3dObjectSubject.stream;
 
-// нужно для предотвращения повторного нажатия на пак
+  // нужно для предотвращения повторного нажатия на пак
   final BehaviorSubject<bool> _isWaitingConfirmSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isWaitingConfirmStream$ => _isWaitingConfirmSubject.stream;
 
-// нужно для предотвращения повторного нажатия на пак
+  // нужно для предотвращения повторного нажатия на пак
   final BehaviorSubject<bool> _isHidePacksAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isHidePacksAnimationPlayingStream$ => _isHidePacksAnimationPlayingSubject.stream;
 
-// нужно для показа карточек игроков
+  // нужно для показа карточек игроков
   final BehaviorSubject<bool> _isUnpackingAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isUnpackingAnimationPlayingStream$ => _isUnpackingAnimationPlayingSubject.stream;
 
   @override
   void initState() {
     super.initState();
-    _hidePacksAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
+    _hidePacksAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _hidePacksAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _hidePacksAnimationController, curve: Curves.linear));
+    context.read<FootballPlayersPacksBloc>().add(
+      FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation),
     );
-    _hidePacksAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _hidePacksAnimationController, curve: Curves.linear),
-    );
-    context
-        .read<FootballPlayersPacksBloc>()
-        .add(FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
 
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) async {
-        // loadBannerAd();
-        createRewardedAdLoader();
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      // loadBannerAd();
+      createRewardedAdLoader();
 
-        try {
-          await FirebaseAnalytics.instance.logEvent(
-            name: "open_packs_screen",
-            parameters: {
-              if (widget.args.country != null) "country": widget.args.country!.name,
-              if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
-            },
-          );
-        } catch (e) {
-          LogService.error(e.toString(), e);
-        }
-      },
-    );
+      try {
+        await FirebaseAnalytics.instance.logEvent(
+          name: "open_packs_screen",
+          parameters: {
+            if (widget.args.country != null) "country": widget.args.country!.name,
+            if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
+          },
+        );
+      } catch (e) {
+        LogService.error(e.toString(), e);
+      }
+    });
   }
 
   Future<void> setSelectedPackIndex(int index) async {
@@ -129,10 +121,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     if (!isEnoughtMoney) {
       await showModalBottomSheet<bool>(
         context: context,
-        builder: (context) => NotEnoghtMoneyBottomSheet(
-          pack: pack,
-          presenter: this,
-        ),
+        builder: (context) => NotEnoghtMoneyBottomSheet(pack: pack, presenter: this),
       );
       _isWaitingConfirmSubject.add(false);
       return;
@@ -144,10 +133,9 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isWaitingConfirmSubject.add(false);
     if (confirmed != true) return;
     getIt.get<BalanceBloc>().add(BalanceEventDecrease(amount: pack.price));
-    final balanceState = await getIt
-        .get<BalanceBloc>()
-        .stream
-        .firstWhere((state) => state is BalanceStateReady || state is BalanceStateFailed);
+    final balanceState = await getIt.get<BalanceBloc>().stream.firstWhere(
+      (state) => state is BalanceStateReady || state is BalanceStateFailed,
+    );
     if (balanceState is BalanceStateFailed) {
       ToastService.showErrorToast(title: balanceState.message);
     } else if (balanceState is BalanceStateReady) {
@@ -156,14 +144,14 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   }
 
   void getNewPacks() {
-    context
-        .read<FootballPlayersPacksBloc>()
-        .add(FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation));
+    context.read<FootballPlayersPacksBloc>().add(
+      FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation),
+    );
     _isHidePacksAnimationPlayingSubject.add(false);
     _isUnpackingAnimationPlayingSubject.add(false);
   }
 
-  void savePlayer(FootballPlayerModel player) {
+  void savePlayer(FootballPlayerCardModel player) {
     getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: player.cardId));
   }
 

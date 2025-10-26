@@ -9,10 +9,7 @@ class GuessPlayerScreenPresenter extends StatefulWidget {
 
   final Widget child;
 
-  const GuessPlayerScreenPresenter({
-    required this.child,
-    super.key,
-  });
+  const GuessPlayerScreenPresenter({required this.child, super.key});
 
   @override
   State<GuessPlayerScreenPresenter> createState() => GuessPlayerScreenPresenterState();
@@ -23,8 +20,8 @@ class GuessPlayerScreenPresenterState extends State<GuessPlayerScreenPresenter>
   int winstrick = 0;
   final Random random = Random();
 
-  final BehaviorSubject<FootballPlayerModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
-  Stream<FootballPlayerModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
+  final BehaviorSubject<FootballPlayerCardModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
+  Stream<FootballPlayerCardModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
 
   @override
   void initState() {
@@ -38,15 +35,15 @@ class GuessPlayerScreenPresenterState extends State<GuessPlayerScreenPresenter>
   void loadRandomPlayers() {
     if (mounted) {
       _selectedOptionSubject.add(null);
-      context
-          .read<RandomFootballPlayersBloc>()
-          .add(RandomFootballPlayersEventGet(count: 4, minPrimeTransferValue: 10000000));
+      context.read<RandomFootballPlayersBloc>().add(
+        RandomFootballPlayersEventGet(count: 4, minPrimeTransferValue: 10000000),
+      );
     }
   }
 
   Future<void> showResult({
-    required FootballPlayerModel selectedAnswer,
-    required FootballPlayerModel rightAnswer,
+    required FootballPlayerCardModel selectedAnswer,
+    required FootballPlayerCardModel rightAnswer,
   }) async {
     _selectedOptionSubject.add(selectedAnswer);
     if (selectedAnswer == rightAnswer) {
@@ -59,11 +56,7 @@ class GuessPlayerScreenPresenterState extends State<GuessPlayerScreenPresenter>
       );
       winstrick++;
     } else {
-      ToastService.showErrorToast(
-        title: AppGlossary.incorrect.translate(),
-        subtitle: ":(",
-        seconds: 2,
-      );
+      ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
       winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));

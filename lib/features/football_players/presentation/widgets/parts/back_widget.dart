@@ -1,22 +1,16 @@
 part of '../football_player_card.dart';
 
 class _PlayerCardBackWidget extends StatelessWidget {
-  const _PlayerCardBackWidget({
-    required this.height,
-    required this.width,
-    required this.player,
-  });
+  const _PlayerCardBackWidget({required this.height, required this.width, required this.player});
 
   final double height;
   final double width;
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
+      decoration: BoxDecoration(color: Colors.white),
       child: SizedBox(
         height: height,
         width: width,
@@ -34,10 +28,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   children: [
                     Translator(
                       termin: AppGlossary.foot,
-                      builder: (value) => Text(
-                        "$value:  ",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                      builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
                     _FootRoundedContainer(text: player.foot!),
                   ],
@@ -48,10 +39,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   children: [
                     Translator(
                       termin: AppGlossary.height,
-                      builder: (value) => Text(
-                        "$value:  ",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                      builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
                     _RoundedContainer(text: player.height!),
                   ],
@@ -62,10 +50,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   children: [
                     Translator(
                       termin: AppGlossary.currentValue,
-                      builder: (value) => Text(
-                        "$value:  ",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                      builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
                     _RoundedContainer(text: beautifyTransferValue(player.currentMarketValue!)),
                   ],
@@ -76,10 +61,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                   children: [
                     Translator(
                       termin: AppGlossary.primeValue,
-                      builder: (value) => Text(
-                        "$value:  ",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                      builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
                     _RoundedContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],

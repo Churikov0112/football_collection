@@ -1,12 +1,9 @@
 part of '../football_player_card.dart';
 
 class _PriceAndPosition extends StatelessWidget {
-  const _PriceAndPosition({
-    required this.player,
-    required this.hideTransferValue,
-  });
+  const _PriceAndPosition({required this.player, required this.hideTransferValue});
 
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
   final bool? hideTransferValue;
 
   @override
@@ -21,9 +18,7 @@ class _PriceAndPosition extends StatelessWidget {
         spacing: 4,
         children: [
           if (player.currentMarketValue != null && hideTransferValue != null)
-            _RoundedContainer(
-              text: hideTransferValue! ? "?" : beautifyTransferValue(player.currentMarketValue!),
-            ),
+            _RoundedContainer(text: hideTransferValue! ? "?" : beautifyTransferValue(player.currentMarketValue!)),
           if (shortPosition != null)
             _RoundedContainer(
               text: shortPosition,

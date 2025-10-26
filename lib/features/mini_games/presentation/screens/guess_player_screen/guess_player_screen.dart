@@ -54,7 +54,7 @@ class GuessPlayerScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Spacer(),
-                          StreamBuilder<FootballPlayerModel?>(
+                          StreamBuilder<FootballPlayerCardModel?>(
                             stream: presenter.selectedOptionStream$,
                             builder: (context, selectedOptionSnapshot) {
                               final showResult = selectedOptionSnapshot.data != null;
@@ -70,10 +70,7 @@ class GuessPlayerScreen extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(
-                            options: options,
-                            rightAnswer: correctPlayer,
-                          ),
+                          _GuessOptions(options: options, rightAnswer: correctPlayer),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,

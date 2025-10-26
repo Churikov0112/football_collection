@@ -7,10 +7,7 @@ class EnterCheatCodeScreenPresenter extends StatefulWidget {
 
   final Widget child;
 
-  const EnterCheatCodeScreenPresenter({
-    required this.child,
-    super.key,
-  });
+  const EnterCheatCodeScreenPresenter({required this.child, super.key});
 
   @override
   State<EnterCheatCodeScreenPresenter> createState() => EnterCheatCodeScreenPresenterState();
@@ -23,12 +20,7 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
     final cheatCode = cheatCodeTextEditingController.value.text;
 
     try {
-      FirebaseAnalytics.instance.logEvent(
-        name: "cheat_code_entered",
-        parameters: {
-          "cheat_code": cheatCode,
-        },
-      );
+      FirebaseAnalytics.instance.logEvent(name: "cheat_code_entered", parameters: {"cheat_code": cheatCode});
     } catch (e) {
       LogService.error(e.toString(), e);
     }
@@ -38,7 +30,7 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
     if (cheatCode.contains("CLUB ")) {
       final club = cheatCode.replaceAll("CLUB ", "");
       final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
-      final List<FootballPlayerModel> clubPlayers = [];
+      final List<FootballPlayerCardModel> clubPlayers = [];
       for (final player in allPlayers) {
         if (player.currentClub == club) {
           clubPlayers.add(player);

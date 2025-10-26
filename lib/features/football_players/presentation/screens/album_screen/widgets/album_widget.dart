@@ -1,12 +1,9 @@
 part of '../football_players_album_screen.dart';
 
 class _FootballPlayerAlbumWidget extends StatelessWidget {
-  const _FootballPlayerAlbumWidget({
-    required this.player,
-    required this.country,
-  });
+  const _FootballPlayerAlbumWidget({required this.player, required this.country});
 
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
   final CountryModel country;
 
   @override
@@ -23,25 +20,13 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
             Text(
               player.name,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white54,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white54),
             ),
-            Icon(
-              Icons.person,
-              size: 64,
-              color: Colors.white54,
-            ),
+            Icon(Icons.person, size: 64, color: Colors.white54),
             Text(
               player.position ?? "?",
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white54,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white54),
             ),
           ],
         ),
@@ -56,11 +41,7 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
           final isPlayerSaved = savedCardsState.savedCardsIds?.contains(player.cardId) ?? false;
           final count = savedCardsState.savedCardsIds?.where((id) => id == player.cardId).length ?? 1;
           if (isPlayerSaved) {
-            return FootballPlayerCard(
-              player: player,
-              count: count,
-              enableFlip: true,
-            );
+            return FootballPlayerCard(player: player, count: count, enableFlip: true);
           }
         }
         return absentWIdget;

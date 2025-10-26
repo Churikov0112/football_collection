@@ -5,7 +5,7 @@
 //     required this.players,
 //   });
 
-//   final List<FootballPlayerModel> players;
+//   final List<FootballPlayerCardModel> players;
 
 //   @override
 //   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 part of 'country_football_players_bloc.dart';
 
 sealed class CountryFootballPlayersState {
-  List<FootballPlayerModel>? get players {
+  List<FootballPlayerCardModel>? get players {
     return switch (this) {
       CountryFootballPlayersStateLoadSucceeded() => (this as CountryFootballPlayersStateLoadSucceeded)._players,
       _ => null,
@@ -25,13 +25,10 @@ final class CountryFootballPlayersStatePending extends CountryFootballPlayersSta
 }
 
 final class CountryFootballPlayersStateLoadSucceeded extends CountryFootballPlayersState {
-  final List<FootballPlayerModel> _players;
+  final List<FootballPlayerCardModel> _players;
   final CountryModel _country;
 
-  CountryFootballPlayersStateLoadSucceeded(
-    this._players,
-    this._country,
-  );
+  CountryFootballPlayersStateLoadSucceeded(this._players, this._country);
 }
 
 final class CountryFootballPlayersStateFailed extends CountryFootballPlayersState {

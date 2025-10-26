@@ -13,14 +13,14 @@ import '../domain/models/player.dart';
 
 @singleton
 class FootballPlayersRepository extends CardsRepository {
-  List<FootballPlayerModel> allPlayersCache = [];
+  List<FootballPlayerCardModel> allPlayersCache = [];
   List<CountryModel> allTeamsCache = [];
   final Random _random = Random();
 
-  List<FootballPlayerModel> _parsePlayers(List<dynamic> data) {
-    List<FootballPlayerModel> players = [];
+  List<FootballPlayerCardModel> _parsePlayers(List<dynamic> data) {
+    List<FootballPlayerCardModel> players = [];
     for (var item in data) {
-      players.add(FootballPlayerModel.fromJson(item));
+      players.add(FootballPlayerCardModel.fromJson(item));
     }
     return players;
   }
@@ -47,7 +47,7 @@ class FootballPlayersRepository extends CardsRepository {
   }
 
   @override
-  Future<List<FootballPlayerModel>> cardsGet([String? countryId]) async {
+  Future<List<FootballPlayerCardModel>> cardsGet([String? countryId]) async {
     await _ensureInitialized();
     if (countryId == null) return [...allPlayersCache];
     return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
@@ -60,10 +60,7 @@ class FootballPlayersRepository extends CardsRepository {
   }
 
   @override
-  Future<List<PackModel>> packsGet({
-    FootballConfederations? confederation,
-    CountryModel? country,
-  }) async {
+  Future<List<PackModel>> packsGet({FootballConfederations? confederation, CountryModel? country}) async {
     final List<PackModel> packs = [
       if (country != null)
         PackModel(
@@ -117,7 +114,7 @@ class FootballPlayersRepository extends CardsRepository {
   }
 
   @override
-  Future<List<FootballPlayerModel>> getRandomCards({
+  Future<List<FootballPlayerCardModel>> getRandomCards({
     int count = 5,
     CountryModel? country,
     FootballConfederations? confederation,
@@ -127,7 +124,7 @@ class FootballPlayersRepository extends CardsRepository {
     bool unique = false,
   }) async {
     await _ensureInitialized();
-    final result = <FootballPlayerModel>[];
+    final result = <FootballPlayerCardModel>[];
     while (result.length < count) {
       final player = await _getRandomCard(
         country: country,
@@ -142,7 +139,7 @@ class FootballPlayersRepository extends CardsRepository {
     return result;
   }
 
-  Future<FootballPlayerModel> _getRandomCard({
+  Future<FootballPlayerCardModel> _getRandomCard({
     CountryModel? country,
     FootballConfederations? confederation,
     bool? topCountries,

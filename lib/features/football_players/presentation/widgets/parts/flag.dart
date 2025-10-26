@@ -1,12 +1,9 @@
 part of '../football_player_card.dart';
 
 class _Flag extends StatelessWidget {
-  const _Flag({
-    required this.player,
-    required this.hideNationalTeam,
-  });
+  const _Flag({required this.player, required this.hideNationalTeam});
 
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
   final bool hideNationalTeam;
 
   @override
@@ -27,16 +24,9 @@ class _Flag extends StatelessWidget {
             child: hideNationalTeam
                 ? SizedBox.square(
                     dimension: 32,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Text("?"),
-                    ),
+                    child: CircleAvatar(backgroundColor: Colors.white, child: Text("?")),
                   )
-                : Image.asset(
-                    'assets/raster/team_flags/${player.countryId}.png',
-                    height: 32,
-                    width: 32,
-                  ),
+                : Image.asset('assets/raster/team_flags/${player.countryId}.png', height: 32, width: 32),
           ),
         ),
       ),

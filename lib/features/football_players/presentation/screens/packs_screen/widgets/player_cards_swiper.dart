@@ -3,9 +3,7 @@ part of '../football_players_packs_screen.dart';
 class _PlayerCardsSwiper extends StatefulWidget {
   final List<CardModel> cards;
 
-  const _PlayerCardsSwiper({
-    required this.cards,
-  });
+  const _PlayerCardsSwiper({required this.cards});
 
   @override
   State<_PlayerCardsSwiper> createState() => _PlayerCardsSwiperState();
@@ -17,13 +15,13 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        final firstPlayer = (widget.cards.firstOrNull as FootballPlayerModel?);
+        final firstPlayer = (widget.cards.firstOrNull as FootballPlayerCardModel?);
         if (firstPlayer != null) checkConfetti(firstPlayer);
       }
     });
   }
 
-  Future<void> checkConfetti(FootballPlayerModel player) async {
+  Future<void> checkConfetti(FootballPlayerCardModel player) async {
     final settings = getIt.get<SettingsBloc>().state;
     if (!settings.enableConfetti) return;
     final needConfetti = (player.maxMarketValue ?? 0) >= 50000000;
@@ -49,16 +47,12 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       backCardOffset: Offset(20, 20),
       cardsCount: widget.cards.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
-        final player = widget.cards[index] as FootballPlayerModel;
-        return FootballPlayerCard(
-          player: player,
-          count: 1,
-          hideTransferValue: false,
-        );
+        final player = widget.cards[index] as FootballPlayerCardModel;
+        return FootballPlayerCard(player: player, count: 1, hideTransferValue: false);
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
-        final prevPlayer = widget.cards[previousIndex] as FootballPlayerModel;
-        final currentPlayer = currentIndex != null ? widget.cards[currentIndex] as FootballPlayerModel : null;
+        final prevPlayer = widget.cards[previousIndex] as FootballPlayerCardModel;
+        final currentPlayer = currentIndex != null ? widget.cards[currentIndex] as FootballPlayerCardModel : null;
         presenter.savePlayer(prevPlayer);
         if (currentPlayer != null) unawaited(checkConfetti(currentPlayer));
         return true;

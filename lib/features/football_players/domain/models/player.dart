@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
-class FootballPlayerModel extends CardModel {
+class FootballPlayerCardModel extends CardModel {
   final String playerId;
   final String countryId;
   final String name;
@@ -13,7 +13,7 @@ class FootballPlayerModel extends CardModel {
   final int? currentMarketValue;
   final int? maxMarketValue;
 
-  const FootballPlayerModel({
+  const FootballPlayerCardModel({
     required super.cardId,
     required super.imageUrl,
     required super.imageAssetPath,
@@ -29,8 +29,8 @@ class FootballPlayerModel extends CardModel {
     required this.maxMarketValue,
   });
 
-  factory FootballPlayerModel.fromJson(Map<dynamic, dynamic> json) {
-    return FootballPlayerModel(
+  factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {
+    return FootballPlayerCardModel(
       cardId: "football_player-${json['id']}",
       imageAssetPath: "assets/raster/player_faces/${json['id']}.jpg",
       imageUrl: json['image_url'],

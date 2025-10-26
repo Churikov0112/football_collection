@@ -41,7 +41,7 @@ class FootballPlayerCard extends StatefulWidget {
     super.key,
   });
 
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
   final int count;
   final bool? hideTransferValue;
   final bool hideNationalTeam;
@@ -107,11 +107,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
             child: FlipCard(
               controller: flipCardController,
               rotateSide: RotateSide.right,
-              backWidget: _PlayerCardBackWidget(
-                height: widget.height,
-                width: widget.width,
-                player: widget.player,
-              ),
+              backWidget: _PlayerCardBackWidget(height: widget.height, width: widget.width, player: widget.player),
               frontWidget: card,
             ),
           ),
@@ -207,11 +203,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                     widget.onSellAll?.call();
                   }
                 },
-                child: Container(
-                  height: 64,
-                  width: 64,
-                  color: Colors.transparent,
-                ),
+                child: Container(height: 64, width: 64, color: Colors.transparent),
               ),
             ),
         ],

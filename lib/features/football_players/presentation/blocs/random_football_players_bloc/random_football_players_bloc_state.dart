@@ -1,7 +1,7 @@
 part of 'random_football_players_bloc.dart';
 
 sealed class RandomFootballPlayersState {
-  List<FootballPlayerModel>? get players {
+  List<FootballPlayerCardModel>? get players {
     return switch (this) {
       RandomFootballPlayersStateLoadSucceeded() => (this as RandomFootballPlayersStateLoadSucceeded)._players,
       _ => null,
@@ -18,7 +18,7 @@ final class RandomFootballPlayersStatePending extends RandomFootballPlayersState
 }
 
 final class RandomFootballPlayersStateLoadSucceeded extends RandomFootballPlayersState {
-  final List<FootballPlayerModel> _players;
+  final List<FootballPlayerCardModel> _players;
   RandomFootballPlayersStateLoadSucceeded(this._players);
 }
 

@@ -14,7 +14,7 @@
 //       builder: (context, allPlayersState) {
 //         if (allPlayersState.allPlayers?.isNotEmpty == true) {
 //           final allPlayers = allPlayersState.allPlayers ?? [];
-//           Map<String, List<FootballPlayerModel>> teamPages = {};
+//           Map<String, List<FootballPlayerCardModel>> teamPages = {};
 //           for (var i = 0; i < allPlayers.length; i++) {
 //             teamPages[allPlayers[i].countryName] = [...teamPages[allPlayers[i].countryName] ?? [], allPlayers[i]];
 //           }

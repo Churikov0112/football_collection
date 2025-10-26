@@ -1,11 +1,9 @@
 part of '../football_player_card.dart';
 
 class _PlayerQrBottomSheet extends StatelessWidget {
-  const _PlayerQrBottomSheet({
-    required this.player,
-  });
+  const _PlayerQrBottomSheet({required this.player});
 
-  final FootballPlayerModel player;
+  final FootballPlayerCardModel player;
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +18,12 @@ class _PlayerQrBottomSheet extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(color: Colors.white),
-              child: QrImageView(
-                data: player.cardId,
-                version: QrVersions.auto,
-                size: mq.size.width / 2,
-              ),
+              child: QrImageView(data: player.cardId, version: QrVersions.auto, size: mq.size.width / 2),
             ),
             const SizedBox(height: 32),
             SizedBox(
               width: mq.size.width * 0.7,
-              child: Text(
-                AppGlossary.openQrScannerOnSecondDevice.translate(),
-                textAlign: TextAlign.center,
-              ),
+              child: Text(AppGlossary.openQrScannerOnSecondDevice.translate(), textAlign: TextAlign.center),
             ),
           ],
         ),
