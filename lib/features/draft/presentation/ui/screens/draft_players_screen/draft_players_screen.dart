@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_collection/features/draft/domain/models/ratings.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/draft/domain/models/stats.dart';
+import 'package:football_collection/features/draft/domain/models/ratings.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:go_router/go_router.dart';
 
