@@ -120,8 +120,8 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
 
       // Сортируем по рейтингу (по убыванию)
       filteredPlayers.sort((a, b) {
-        final ratingA = FootballPlayerStatsCalculator.calculateStats(a).rating;
-        final ratingB = FootballPlayerStatsCalculator.calculateStats(b).rating;
+        final ratingA = ratings[a.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(a).rating;
+        final ratingB = ratings[b.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(b).rating;
         return ratingB.compareTo(ratingA);
       });
 

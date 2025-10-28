@@ -57,8 +57,10 @@ class _DraftPlayersList extends StatelessWidget {
     final playersIdsToExclude = presenter.widget.args.playersIdsToExclude;
     final draftPlayersAfterExclude = draftPlayers.where((p) => !playersIdsToExclude.contains(p.playerId)).toList();
     draftPlayersAfterExclude.sort((p1, p2) {
-      final p1Rating = FootballPlayerStatsCalculator.calculateStats(p1).rating;
-      final p2Rating = FootballPlayerStatsCalculator.calculateStats(p2).rating;
+      final p1Rating =
+          ratings[p1.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(p1).rating;
+      final p2Rating =
+          ratings[p2.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(p2).rating;
       return p2Rating.compareTo(p1Rating);
     });
 
@@ -107,8 +109,15 @@ class _FootballPlayerCard extends StatelessWidget {
           child: TouchableScale(
             isActive: player.position != null,
             onPressed: () {
-              final stats = FootballPlayerStatsCalculator.calculateStats(player);
-              final playerGameModel = FootballPlayerGameModel(id: player.playerId, card: player, stats: stats);
+              final stats = ratings[player.playerId]; // FootballPlayerStatsCalculator.calculateStats(player);
+              if (stats == null) {
+                return;
+              }
+              final playerGameModel = FootballPlayerGameModel(
+                id: player.playerId,
+                card: player,
+                stats: FootballPlayerStats.fromJson(stats),
+              );
               context.pop(playerGameModel);
             },
             child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight, width: playerPhotoWidth),

@@ -15,6 +15,7 @@ import '../../../domain/models/draft_tournament_match.dart';
 import '../../../domain/models/draft_tournament_round.dart';
 import '../../../domain/models/player.dart';
 import '../../../domain/models/position_weights.dart';
+import '../../../domain/models/ratings.dart';
 import '../../../domain/models/schemes.dart';
 import '../../../domain/models/stats.dart';
 import '../../../domain/models/team.dart';
@@ -82,7 +83,9 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
                 continue;
               }
               if (condition(player)) {
-                final rating = FootballPlayerStatsCalculator.calculateStats(player).rating;
+                final rating =
+                    ratings[player.playerId]?["overall"] ??
+                    60; // FootballPlayerStatsCalculator.calculateStats(player).rating;
                 if (rating > bestRating) {
                   bestRating = rating;
                   candidate = player;
@@ -132,7 +135,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         for (var i = 0; i < startingSquad.entries.length; i++) {
           final pof = startingSquad.entries.toList()[i].key;
           final pc = startingSquad.entries.toList()[i].value;
-          final stats = FootballPlayerStatsCalculator.calculateStats(pc);
+          final stats = ratings[pc.playerId]; // FootballPlayerStatsCalculator.calculateStats(pc);
 
           final player = FootballPlayerInTeamGameModel(
             teamId: team.id,
@@ -141,7 +144,14 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
             data: FootballPlayerGameModel(
               id: "${team.id}_${pc.playerId}", // TODO ADD TEAM PREFIX
               card: pc,
-              stats: stats,
+              stats: FootballPlayerStats(
+                maxSpeed: stats?["maxSpeed"] ?? 0,
+                lowPass: stats?["lowPass"] ?? 0,
+                shoots: stats?["shoots"] ?? 0,
+                defence: stats?["defence"] ?? 0,
+                dribbling: stats?["dribbling"] ?? 0,
+                goalkeeper: stats?["goalkeeper"] ?? 0,
+              ),
             ),
           );
 

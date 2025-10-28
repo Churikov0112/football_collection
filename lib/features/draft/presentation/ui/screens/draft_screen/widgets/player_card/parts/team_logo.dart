@@ -1,14 +1,13 @@
 part of '../draft_football_player_card.dart';
 
 class _TeamLogoWidget extends StatelessWidget {
-  const _TeamLogoWidget({required this.teamId, required this.size});
+  const _TeamLogoWidget({required this.currentClub, required this.size});
 
-  final String teamId;
+  final String currentClub;
   final double size;
 
   @override
   Widget build(BuildContext context) {
-    final emoji = emojiFlagByCountryName(teamId);
-    return Text(emoji ?? teamId, style: TextStyle(fontSize: size));
+    return AutoSizeText(currentClub, maxLines: 1, overflow: TextOverflow.ellipsis);
   }
 }

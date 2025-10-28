@@ -8,25 +8,25 @@ class _SofifaRatings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ratings = FootballPlayerStatsCalculator.calculateStats(player);
+    final stats = ratings[player.playerId]; // FootballPlayerStatsCalculator.calculateStats(player);
 
-    if (ratings == null || hide) {
+    if (stats == null || hide) {
       return const SizedBox.shrink();
     }
 
     return Column(
       spacing: 16,
       children: [
-        _RatingsBlock(title: null, values: {"Overall": ratings.rating.round()}),
+        _RatingsBlock(title: null, values: {"Overall": stats["overall"]?.round() ?? 0}),
         _RatingsBlock(
           title: "Ratings",
           values: {
-            "Defence": ratings.defence.round(),
-            "Dribbling": ratings.dribbling.round(),
-            "Goalkeeper": ratings.goalkeeper.round(),
-            "Low Pass": ratings.lowPass.round(),
-            "Max Speed": ratings.maxSpeed.round(),
-            "Shoots": ratings.shoots.round(),
+            "Defence": stats["defence"]?.round() ?? 0,
+            "Dribbling": stats["dribbling"]?.round() ?? 0,
+            "Goalkeeper": stats["goalkeeper"]?.round() ?? 0,
+            "Low Pass": stats["lowPass"]?.round() ?? 0,
+            "Max Speed": stats["maxSpeed"]?.round() ?? 0,
+            "Shoots": stats["shoots"]?.round() ?? 0,
           },
         ),
       ],
