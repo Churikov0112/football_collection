@@ -100,7 +100,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     for (final abstractPosition in FootballPlayerAbstractPosition.values) {
       // Фильтруем игроков по позиции (основная позиция должна совпадать)
       final positionPlayers = savedPlayers.where((player) {
-        return player.position == abstractPosition;
+        return player.position == abstractPosition.originalName;
       }).toList();
 
       // Если игроков нужной позиции мало, добавляем похожие позиции
@@ -323,17 +323,17 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
 
     // Одна конфедерация - средний бонус
     if (player1Confederation == player2Confederation) {
-      chemistry += 0.5;
+      chemistry += 0.2;
     }
 
     // Одна сборная - самый сильный бонус
     if (player1.card.countryId == player2.card.countryId) {
-      chemistry += 0.65;
+      chemistry += 0.5;
     }
 
     // Одна команда - самый сильный бонус
     if (player1.card.currentClub == player2.card.currentClub) {
-      chemistry += 0.65;
+      chemistry += 0.5;
     }
 
     return chemistry.clamp(0.0, 1.0);

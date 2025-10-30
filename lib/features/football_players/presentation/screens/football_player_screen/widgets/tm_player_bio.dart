@@ -4,6 +4,7 @@ class _TmPlayerBio extends StatelessWidget {
   const _TmPlayerBio({
     required this.player,
     this.hideAge = false,
+    this.hideClub = false,
     this.hideFoot = false,
     this.hideHeight = false,
     this.hidePosition = false,
@@ -16,6 +17,7 @@ class _TmPlayerBio extends StatelessWidget {
   final FootballPlayerCardModel player;
 
   final bool hideAge;
+  final bool hideClub;
   final bool hideFoot;
   final bool hideHeight;
   final bool hidePosition;
@@ -83,6 +85,14 @@ class _TmPlayerBio extends StatelessWidget {
               title: value,
               value: hidePrimeTransferValue ? '?' : beautifyTransferValue(player.maxMarketValue!),
             ),
+          ),
+          const _Separator(),
+        ],
+
+        if (player.currentClub != null) ...[
+          Translator(
+            termin: AppGlossary.club,
+            builder: (value) => _BioTile(title: value, value: hideClub ? '?' : player.currentClub!),
           ),
           const _Separator(),
         ],

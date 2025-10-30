@@ -7,10 +7,7 @@ class OnboardingScreenPresenter extends StatefulWidget {
 
   final Widget child;
 
-  const OnboardingScreenPresenter({
-    required this.child,
-    super.key,
-  });
+  const OnboardingScreenPresenter({required this.child, super.key});
 
   @override
   State<OnboardingScreenPresenter> createState() => OnboardingScreenPresenterState();
@@ -26,15 +23,15 @@ class OnboardingScreenPresenterState extends State<OnboardingScreenPresenter> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<RandomFootballPlayersBloc>()
-          .add(RandomFootballPlayersEventGet(count: 5, minPrimeTransferValue: 50000000));
+      context.read<RandomFootballPlayersBloc>().add(
+        RandomFootballPlayersEventGet(count: 5, minPrimeTransferValue: 50000000),
+      );
     });
   }
 
   void endOnboarding() {
     getIt.get<FirstLaunchBloc>().add(FirstLaunchEventSet(isFirstLaunch: false));
-    context.go(RoutePaths.footballConfederations);
+    context.go(RoutePaths.home);
   }
 
   @override

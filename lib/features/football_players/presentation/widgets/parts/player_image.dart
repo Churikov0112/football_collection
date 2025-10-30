@@ -43,7 +43,6 @@ class FootballPlayerImage extends StatelessWidget {
     return Image.asset(
       player.imageAssetPath,
       // isFake ? "assets/raster/other/player_0.png" : player.imageAssetPath,
-      height: size,
       width: size,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) =>

@@ -179,7 +179,9 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                             behavior: DisableBlueGlowBehavior(),
                             child: AnnotatedRegion(
                               value: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                              child: MediaQuery.withNoTextScaling(child: child),
+                              child: MediaQuery.withNoTextScaling(
+                                child: SafeArea(top: false, bottom: true, child: child),
+                              ),
                             ),
                           );
                   },

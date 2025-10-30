@@ -24,6 +24,7 @@ class FootballPlayerScreen extends StatelessWidget {
     required this.player,
 
     this.hideAge = false,
+    this.hideClub = false,
     this.hideFoot = false,
     this.hideName = false,
     this.hideTeam = false,
@@ -43,6 +44,7 @@ class FootballPlayerScreen extends StatelessWidget {
   final FootballPlayerCardModel player;
 
   final bool hideAge;
+  final bool hideClub;
   final bool hideFoot;
   final bool hideName;
   final bool hideTeam;
@@ -95,14 +97,14 @@ class FootballPlayerScreen extends StatelessWidget {
                             topRight: Radius.circular(20),
                           ),
                         ),
-                        child: FootballPlayerImage(player: player, size: mq.size.width * 0.4, isFake: hidePhoto),
+                        child: FootballPlayerImage(player: player, size: mq.size.width * 0.3, isFake: hidePhoto),
                       ),
                       IconButton(onPressed: context.pop, icon: const Icon(Icons.close)),
                     ],
                   ),
 
                   SizedBox(
-                    width: mq.size.width * 0.4,
+                    width: mq.size.width * 0.3,
                     child: _Name(isFake: false, name: player.name, hide: hideName),
                   ),
                   const SizedBox(height: 16),
@@ -110,6 +112,7 @@ class FootballPlayerScreen extends StatelessWidget {
                   _TmPlayerBio(
                     player: player,
                     hideAge: hideAge,
+                    hideClub: hideClub,
                     hideFoot: hideFoot,
                     hideHeight: hideHeight,
                     hidePosition: hidePosition,

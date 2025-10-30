@@ -81,10 +81,10 @@ class _Scheme extends StatelessWidget {
       return Colors.green; // Отличная химия
     }
     if (chemistry >= 0.65) {
-      return Colors.orange;
+      return Colors.yellow; // Средняя химия
     }
     if (chemistry >= 0.5) {
-      return Colors.yellow; // Средняя химия
+      return Colors.orange;
     }
     if (chemistry >= 0.2) {
       return Colors.red; // Слабая химия

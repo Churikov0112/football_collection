@@ -43,20 +43,25 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
       final allPlayers = await _repository.cardsGet();
       final allTeams = await _repository.countriesGet();
 
-      // 8 матчей (16 команд без повторов). 15 случайных команд, 1 команда пользователя
       final random = Random();
+      final gameTeams = <FootballTeamGameModel>[];
 
-      final tournamentTeams = <CountryModel>[];
-
-      while (tournamentTeams.length < 15) {
-        final team = allTeams[random.nextInt(allTeams.length)];
-        if (!tournamentTeams.contains(team)) {
-          tournamentTeams.add(team);
+      // Собираем ВСЕ команды, у которых достаточно игроков
+      final eligibleTeams = <CountryModel>[];
+      for (final team in allTeams) {
+        final teamPlayers = allPlayers.where((p) => p.countryId == team.id).toList();
+        if (teamPlayers.length >= 11) {
+          eligibleTeams.add(team);
         }
       }
 
-      final gameTeams = <FootballTeamGameModel>[];
-      for (final team in tournamentTeams) {
+      // Перемешиваем список eligibleTeams
+      eligibleTeams.shuffle(random);
+
+      // Формируем составы для команд, пока не наберем 15 валидных команд
+      for (final team in eligibleTeams) {
+        if (gameTeams.length >= 15) break; // Уже набрали достаточно команд
+
         final teamPlayers = allPlayers.where((p) => p.countryId == team.id).toList();
 
         // random scheme
@@ -67,7 +72,6 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
             .toList();
 
         final startingSquad = <FootballPlayerPositionOnField, FootballPlayerCardModel>{};
-
         final usedPlayers = <FootballPlayerCardModel>{};
 
         for (final pof in horizontalPofs) {
@@ -83,9 +87,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
                 continue;
               }
               if (condition(player)) {
-                final rating =
-                    ratings[player.playerId]?["overall"] ??
-                    60; // FootballPlayerStatsCalculator.calculateStats(player).rating;
+                final rating = ratings[player.playerId]?["overall"] ?? 60;
                 if (rating > bestRating) {
                   bestRating = rating;
                   candidate = player;
@@ -126,23 +128,23 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
           }
         }
 
-        // if (startingSquad.length < 11) {
-        //   // TODO в некоторых командах оказывается меньше 11 игроков
-        //   LogService.error("Not enough players", startingSquad.length);
-        // }
+        // Если набралось меньше 11 игроков, пропускаем команду
+        if (startingSquad.length < 11) {
+          continue; // Пропускаем эту команду
+        }
 
         final players = <FootballPlayerInTeamGameModel>[];
         for (var i = 0; i < startingSquad.entries.length; i++) {
           final pof = startingSquad.entries.toList()[i].key;
           final pc = startingSquad.entries.toList()[i].value;
-          final stats = ratings[pc.playerId]; // FootballPlayerStatsCalculator.calculateStats(pc);
+          final stats = ratings[pc.playerId];
 
           final player = FootballPlayerInTeamGameModel(
             teamId: team.id,
             number: horizontalPofs.indexOf(pof) + 1,
             pof: pof,
             data: FootballPlayerGameModel(
-              id: "${team.id}_${pc.playerId}", // TODO ADD TEAM PREFIX
+              id: "${team.id}_${pc.playerId}",
               card: pc,
               stats: FootballPlayerStats(
                 maxSpeed: stats?["maxSpeed"] ?? 0,
@@ -172,6 +174,16 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         );
       }
 
+      // Проверяем, что набралось достаточно команд для турнира
+      if (gameTeams.length < 15) {
+        LogService.error("Not enough valid teams for tournament", gameTeams.length);
+        // Здесь можно добавить обработку ошибки
+        return;
+      }
+
+      // Берем первые 15 команд (они уже перемешаны)
+      final tournamentTeams = gameTeams.take(15).toList();
+
       final draftTournament = DraftTournamentModel(
         name: "Draft Tournament",
         allRounds: [
@@ -179,7 +191,10 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
             stage: DraftTournamentStage.roundOf16,
             matches: [
               for (int i = 0; i < 8; i++)
-                DraftTournamentMatchModel(teamA: gameTeams[i], teamB: i < 7 ? gameTeams[i] : event.userTeam),
+                DraftTournamentMatchModel(
+                  teamA: tournamentTeams[i],
+                  teamB: i < 7 ? tournamentTeams[i + 8] : event.userTeam,
+                ),
             ],
           ),
           DraftTournamentRoundModel(
@@ -224,13 +239,77 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         )
         .toList();
 
-    // TODO: calculate matches not random
-    final calculatedMatches = matchesToCalculate.map((match) {
-      final teamAScore = random.nextInt(5);
-      int teamBScore = 0;
-      do {
-        teamBScore = random.nextInt(5);
-      } while (teamBScore == teamAScore);
+    // Функция для расчета силы команды
+    double calculateTeamStrength(FootballTeamGameModel? team) {
+      if (team == null) return 0.0;
+
+      double totalRating = 0.0;
+      int playerCount = 0;
+
+      for (final player in team.players) {
+        final stats = ratings[player.data.card.playerId];
+        final overallRating = stats?["overall"] ?? 60.0;
+        totalRating += overallRating;
+        playerCount++;
+      }
+
+      return playerCount > 0 ? totalRating / playerCount : 0.0;
+    }
+
+    // Функция для расчета результата матча
+    DraftTournamentMatchModel calculateMatchResult(DraftTournamentMatchModel match) {
+      final teamAStrength = calculateTeamStrength(match.teamA);
+      final teamBStrength = calculateTeamStrength(match.teamB);
+
+      // Базовый расчет силы с учетом случайного фактора (от -10% до +10%)
+      final randomFactor = 0.9 + random.nextDouble() * 0.2;
+      final teamAFinalStrength = teamAStrength * randomFactor;
+      final teamBFinalStrength = teamBStrength * (1.0 + (1.0 - randomFactor)); // Противоположный фактор для баланса
+
+      // Разница в силе команд
+      final strengthDifference = (teamAFinalStrength - teamBFinalStrength) / 10.0;
+
+      // Базовое количество голов рассчитывается на основе средней силы команд
+      final averageStrength = (teamAFinalStrength + teamBFinalStrength) / 2;
+      final baseGoals = (averageStrength - 60) / 10; // Чем выше средний рейтинг, тем больше голов
+
+      // Расчет голов с учетом разницы в силе
+      int teamAScore, teamBScore;
+
+      if (strengthDifference.abs() < 0.5) {
+        // Близкие по силе команды
+        final goals = (baseGoals + random.nextDouble() * 2).clamp(0, 5).round();
+        if (random.nextBool()) {
+          teamAScore = goals;
+          teamBScore = (goals - 1 + random.nextInt(2)).clamp(0, 5);
+        } else {
+          teamBScore = goals;
+          teamAScore = (goals - 1 + random.nextInt(2)).clamp(0, 5);
+        }
+      } else if (strengthDifference > 0) {
+        // Команда A сильнее
+        final advantage = strengthDifference.clamp(0, 3);
+        teamAScore = (baseGoals + advantage + random.nextDouble() * 2).clamp(0, 5).round();
+        teamBScore = (baseGoals - advantage + random.nextDouble() * 2).clamp(0, teamAScore - 1).clamp(0, 5).round();
+      } else {
+        // Команда B сильнее
+        final advantage = (-strengthDifference).clamp(0, 3);
+        teamBScore = (baseGoals + advantage + random.nextDouble() * 2).clamp(0, 5).round();
+        teamAScore = (baseGoals - advantage + random.nextDouble() * 2).clamp(0, teamBScore - 1).clamp(0, 5).round();
+      }
+
+      // Гарантируем, что счет не будет одинаковым
+      if (teamAScore == teamBScore) {
+        if (teamAScore < 5) {
+          if (teamAFinalStrength > teamBFinalStrength) {
+            teamAScore++;
+          } else {
+            teamBScore++;
+          }
+        } else {
+          teamAScore--;
+        }
+      }
 
       return DraftTournamentMatchModel(
         teamA: match.teamA,
@@ -238,15 +317,21 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         teamAScore: teamAScore,
         teamBScore: teamBScore,
       );
-    }).toList();
+    }
+
+    // Рассчитываем оставшиеся матчи
+    final calculatedMatches = matchesToCalculate.map(calculateMatchResult).toList();
 
     final nextStageTeams = [];
 
+    // Обрабатываем сыгранный матч
     if ((event.playedMatch.teamAScore ?? 0) > (event.playedMatch.teamBScore ?? 0)) {
       nextStageTeams.add(event.playedMatch.teamA);
     } else if ((event.playedMatch.teamAScore ?? 0) < (event.playedMatch.teamBScore ?? 0)) {
       nextStageTeams.add(event.playedMatch.teamB);
     }
+
+    // Обрабатываем рассчитанные матчи
     for (final match in calculatedMatches) {
       if ((match.teamAScore ?? 0) > (match.teamBScore ?? 0)) {
         nextStageTeams.add(match.teamA);
@@ -258,7 +343,9 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
     final nextStageMatches = <DraftTournamentMatchModel>[];
 
     for (int i = 0; i < nextStageTeams.length; i = i + 2) {
-      nextStageMatches.add(DraftTournamentMatchModel(teamA: nextStageTeams[i], teamB: nextStageTeams[i + 1]));
+      if (i + 1 < nextStageTeams.length) {
+        nextStageMatches.add(DraftTournamentMatchModel(teamA: nextStageTeams[i], teamB: nextStageTeams[i + 1]));
+      }
     }
 
     final nextStage = DraftTournamentStage.values[stage.index + 1];
@@ -283,8 +370,6 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
         nextStage,
       ),
     );
-
-    // TODO TEST THIS SHIT
   }
 
   Future<void> _reset(DraftTournamentEventReset event, Emitter<DraftTournamentState> emit) async {

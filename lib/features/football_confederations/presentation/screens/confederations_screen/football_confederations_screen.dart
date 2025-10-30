@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
@@ -60,7 +59,7 @@ class FootballConfederationsScreen extends StatelessWidget {
                 ),
                 Translator(
                   termin: AppGlossary.continents,
-                  builder: (value) => TransparentAppbar(title: value, showDrawer: true),
+                  builder: (value) => TransparentAppbar(title: value),
                 ),
                 Positioned(
                   bottom: mq.padding.bottom,

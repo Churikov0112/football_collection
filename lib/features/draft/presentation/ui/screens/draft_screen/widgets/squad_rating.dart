@@ -15,16 +15,10 @@ class _SquadRating extends StatelessWidget {
         return StreamBuilder(
           stream: presenter.startingSquad$,
           builder: (context, startingSquadSnapshot) {
-            final stats =
-                startingSquadSnapshot.data
-                    ?.map(
-                      (e) => ratings[e.$2!.card.playerId] ?? 0,
-                    ) // FootballPlayerStatsCalculator.calculateStats(e.$2!.card))
-                    .toList() ??
-                [];
+            final stats = startingSquadSnapshot.data?.map((e) => ratings[e.$2!.card.playerId]).toList() ?? [];
             int overall = 0;
-            for (var i = 0; i < ratings.length; i++) {
-              overall += stats[i].rating.round();
+            for (var i = 0; i < stats.length; i++) {
+              overall += stats[i]?["overall"]?.round() ?? 0;
             }
 
             double chemistry = 0;

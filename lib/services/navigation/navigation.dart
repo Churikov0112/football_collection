@@ -15,6 +15,7 @@ import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.d
 import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
+import '../../features/home/home_screen/home_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';
 import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by_qr_screen.dart';
@@ -88,7 +89,7 @@ class FootballCollectionRouter {
           path: RoutePaths.home,
           builder: (context, state) {
             final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
-            return isFirstLaunch ? const OnboardingScreen() : const FootballConfederationsScreen();
+            return isFirstLaunch ? const OnboardingScreen() : const HomeScreen();
           },
         ),
         GoRoute(
@@ -122,10 +123,7 @@ class FootballCollectionRouter {
         GoRoute(path: RoutePaths.getCardByQr, builder: (context, state) => GetCardByQrScreen()),
         GoRoute(path: RoutePaths.settings, builder: (context, state) => SettingsScreen()),
 
-        // GoRoute(
-        //   path: RoutePaths.main,
-        //   builder: (context, state) => const MainScreen(),
-        // ),
+        GoRoute(path: RoutePaths.home, builder: (context, state) => const HomeScreen()),
         // GoRoute(
         //   path: RoutePaths.map,
         //   builder: (context, state) => const MapScreen(),

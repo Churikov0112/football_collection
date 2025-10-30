@@ -75,7 +75,7 @@ class _DraftPlayersList extends StatelessWidget {
       separatorBuilder: (context, index) => const SizedBox(width: 8),
       itemBuilder: (context, index) {
         final player = draftPlayersAfterExclude[index];
-        return _FootballPlayerCard(player: player);
+        return _DraftFootballPlayerListTile(player: player);
       },
     );
     //           },
@@ -87,8 +87,8 @@ class _DraftPlayersList extends StatelessWidget {
   }
 }
 
-class _FootballPlayerCard extends StatelessWidget {
-  const _FootballPlayerCard({required this.player});
+class _DraftFootballPlayerListTile extends StatelessWidget {
+  const _DraftFootballPlayerListTile({required this.player});
 
   final FootballPlayerCardModel player;
 
@@ -103,25 +103,21 @@ class _FootballPlayerCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: playerPhotoWidth,
-          height: playerPhotoHeight,
-          child: TouchableScale(
-            isActive: player.position != null,
-            onPressed: () {
-              final stats = ratings[player.playerId]; // FootballPlayerStatsCalculator.calculateStats(player);
-              if (stats == null) {
-                return;
-              }
-              final playerGameModel = FootballPlayerGameModel(
-                id: player.playerId,
-                card: player,
-                stats: FootballPlayerStats.fromJson(stats),
-              );
-              context.pop(playerGameModel);
-            },
-            child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight, width: playerPhotoWidth),
-          ),
+        TouchableScale(
+          isActive: player.position != null,
+          onPressed: () {
+            final stats = ratings[player.playerId]; // FootballPlayerStatsCalculator.calculateStats(player);
+            if (stats == null) {
+              return;
+            }
+            final playerGameModel = FootballPlayerGameModel(
+              id: player.playerId,
+              card: player,
+              stats: FootballPlayerStats.fromJson(stats),
+            );
+            context.pop(playerGameModel);
+          },
+          child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight + 60, width: playerPhotoWidth),
         ),
         // Column(
         //   crossAxisAlignment: CrossAxisAlignment.start,

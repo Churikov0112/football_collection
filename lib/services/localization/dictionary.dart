@@ -196,6 +196,7 @@ extension LanguagesExtension on Languages {
 }
 
 enum AppGlossary {
+  club,
   menu,
   competitions,
   search,
@@ -367,6 +368,23 @@ const dictionary = {
     Languages.korean: '언어',
     Languages.italian: 'Lingua',
     Languages.vietnamese: 'Ngôn ngữ',
+  },
+  AppGlossary.club: {
+    Languages.english: 'Club',
+    Languages.russian: 'Клуб',
+    Languages.spanish: 'Club',
+    Languages.portuguese: 'Clube',
+    Languages.turkish: 'Klub',
+    Languages.french: 'Club',
+    Languages.chinese: '俱乐部',
+    Languages.arabic: 'النادي',
+    Languages.japanese: 'クラブ',
+    Languages.hindi: 'क्लब',
+    Languages.bengal: 'ক্লাব',
+    Languages.german: 'Klub',
+    Languages.korean: '클럽',
+    Languages.italian: 'Club',
+    Languages.vietnamese: 'Clubb',
   },
   AppGlossary.menu: {
     Languages.english: 'Menu',
