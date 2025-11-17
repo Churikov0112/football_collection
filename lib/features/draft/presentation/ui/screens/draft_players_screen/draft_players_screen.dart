@@ -32,10 +32,11 @@ class DraftPlayersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     // const playerPhotoAspectRatio = 4 / 3; // height / width
-    final playerPhotoHeight = 300;
+    // final double playerPhotoHeight = 300;
     // final playerPhotoWidth = playerPhotoHeight * playerPhotoAspectRatio;
 
     // final playerPhotoHeight = playerPhotoWidth * playerPhotoAspectRatio;
+    final mq = MediaQuery.of(context);
 
     return DraftPlayersScreenPresenter(
       args: args,
@@ -44,7 +45,10 @@ class DraftPlayersScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [SizedBox(height: playerPhotoHeight + 40, child: const _DraftPlayersList())],
+            children: [
+              SizedBox(height: mq.size.height * 0.35, child: const _DraftPlayersList()),
+              SizedBox(height: mq.padding.bottom),
+            ],
           ),
         ),
       ),

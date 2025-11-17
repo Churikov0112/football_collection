@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
@@ -24,6 +22,8 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class RoutePaths {
   static const home = '/';
+
+  static const onboarding = '/onboarding';
 
   static const footballConfederations = '/footballConfederations';
   static const footballCountries = '/footballCountries';
@@ -85,13 +85,8 @@ class FootballCollectionRouter {
       navigatorKey: rootNavigatorKey,
       initialLocation: initialRoute,
       routes: [
-        GoRoute(
-          path: RoutePaths.home,
-          builder: (context, state) {
-            final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
-            return isFirstLaunch ? const OnboardingScreen() : const HomeScreen();
-          },
-        ),
+        GoRoute(path: RoutePaths.home, builder: (context, state) => const HomeScreen()),
+        GoRoute(path: RoutePaths.onboarding, builder: (context, state) => const OnboardingScreen()),
         GoRoute(
           path: RoutePaths.footballConfederations,
           builder: (context, state) => const FootballConfederationsScreen(),

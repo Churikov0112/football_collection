@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/firebase_options.dart';
 import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
@@ -95,7 +96,9 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
     isLogged = true;
     isInitialized = true;
     setState(() {});
-    _router = FootballCollectionRouter(RoutePaths.home);
+    final isFirstLaunch = getIt.get<FirstLaunchBloc>().state.isFirstLaunch ?? true;
+
+    _router = FootballCollectionRouter(isFirstLaunch ? RoutePaths.onboarding : RoutePaths.home);
 
     try {
       MobileAds.setUserConsent(true);

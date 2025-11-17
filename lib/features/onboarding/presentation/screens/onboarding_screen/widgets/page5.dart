@@ -24,10 +24,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(height: 20),
@@ -36,10 +33,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                 ),
               ),
               const Spacer(),
@@ -66,9 +60,7 @@ class _OnboardingPage5 extends StatelessWidget {
               SizedBox(
                 width: mq.size.width,
                 child: FilledButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.deepOrange),
-                  ),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.deepOrange)),
                   onPressed: presenter.endOnboarding,
                   child: Translator(
                     termin: AppGlossary.onboardingStartCollectioning,
