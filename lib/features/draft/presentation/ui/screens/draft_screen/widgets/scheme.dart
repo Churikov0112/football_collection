@@ -148,7 +148,6 @@ class _Scheme extends StatelessWidget {
                             Image.asset("assets/raster/field/field_goal_bottom.jpg"),
                           ],
                         ),
-
                         StreamBuilder(
                           stream: presenter.draftPage$,
                           builder: (context, draftPageSnapshot) {
@@ -311,7 +310,7 @@ class _PositionOnField extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(2),
-                                child: DraftFootballPlayerCardWidget(
+                                child: SmallDraftFootballPlayerCardWidget(
                                   player: player.card,
                                   height: isCaptain ? height + 2 : height,
                                   width: isCaptain ? width + 2 : width,

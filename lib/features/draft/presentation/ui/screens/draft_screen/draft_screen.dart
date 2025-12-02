@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/draft/domain/models/ratings.dart';
+import 'package:football_collection/features/draft/presentation/ui/screens/draft_screen/widgets/small_player_card/small_draft_football_player_card.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:go_router/go_router.dart';
