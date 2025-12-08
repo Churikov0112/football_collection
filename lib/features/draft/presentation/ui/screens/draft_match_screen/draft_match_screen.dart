@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' show Scaffold, showDialog, Colors, OutlinedButton, Dialog;
 import 'package:flutter/widgets.dart';
@@ -22,11 +24,16 @@ class DraftMatchScreenArguments {
   const DraftMatchScreenArguments({required this.userTeam, required this.oppponentTeam});
 }
 
-class DraftMatchScreen extends StatelessWidget {
+class DraftMatchScreen extends StatefulWidget {
   const DraftMatchScreen({required this.args, super.key});
 
   final DraftMatchScreenArguments args;
 
+  @override
+  State<DraftMatchScreen> createState() => _DraftMatchScreenState();
+}
+
+class _DraftMatchScreenState extends State<DraftMatchScreen> {
   @override
   Widget build(BuildContext context) {
     return DraftMatchScreenPresenter(
@@ -35,10 +42,10 @@ class DraftMatchScreen extends StatelessWidget {
         child: Scaffold(
           body: GameWidget.controlled(
             gameFactory: () => MatchGame(
-              teamA: args.userTeam,
-              teamB: args.oppponentTeam,
+              teamA: widget.args.userTeam,
+              teamB: widget.args.oppponentTeam,
               onScored: (teamAscore, teamBscore, scoredPlayer, elapsedTime) async {
-                if (scoredPlayer?.teamId == args.userTeam.id) {
+                if (scoredPlayer?.teamId == widget.args.userTeam.id) {
                   Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
                 }
 
@@ -71,7 +78,6 @@ class DraftMatchScreen extends StatelessWidget {
                 await showDialog(
                   context: context,
                   barrierDismissible: false,
-
                   builder: (context) {
                     return Dialog(
                       child: Padding(
@@ -96,24 +102,14 @@ class DraftMatchScreen extends StatelessWidget {
                                 isFinal && matchWon
                                     ? OutlinedButton(
                                         onPressed: () {
-                                          getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 400));
-                                          ToastService.showToast(
-                                            title: AppGlossary.rewarded.translate(),
-                                            subtitle: "${AppGlossary.rewarded.translate()} 400 🏆",
-                                            seconds: 2,
-                                          );
-                                          getIt.get<DraftTournamentBloc>().add(DraftTournamentEventReset());
-                                          while (context.canPop()) {
-                                            context.pop();
-                                          }
+                                          context.pop();
                                         },
                                         child: const Text("+ 400 🏆", style: TextStyle(color: Colors.white)),
                                       )
                                     : matchWon
                                     ? OutlinedButton(
                                         onPressed: () {
-                                          // context.pop((teamAscore, teamBscore)); // dialog
-                                          context.pop((teamAscore, teamBscore)); // match screen
+                                          context.pop();
                                         },
                                         child: Text(
                                           AppGlossary.nextMatch.translate(),
@@ -122,10 +118,7 @@ class DraftMatchScreen extends StatelessWidget {
                                       )
                                     : OutlinedButton(
                                         onPressed: () {
-                                          getIt.get<DraftTournamentBloc>().add(DraftTournamentEventReset());
-                                          while (context.canPop()) {
-                                            context.pop();
-                                          }
+                                          context.pop();
                                         },
                                         child: Text(
                                           AppGlossary.exitDraft.translate(),
@@ -140,7 +133,27 @@ class DraftMatchScreen extends StatelessWidget {
                     );
                   },
                 );
-                context.pop<(int, int)>((teamAscore, teamBscore));
+                if (mounted) {
+                  if (isFinal && matchWon) {
+                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 400));
+                    ToastService.showToast(
+                      title: AppGlossary.rewarded.translate(),
+                      subtitle: "${AppGlossary.rewarded.translate()} 400 🏆",
+                      seconds: 2,
+                    );
+                    getIt.get<DraftTournamentBloc>().add(DraftTournamentEventReset());
+                    while (context.canPop()) {
+                      context.pop();
+                    }
+                  } else if (matchWon) {
+                    context.pop((teamAscore, teamBscore)); // match screen
+                  } else {
+                    getIt.get<DraftTournamentBloc>().add(DraftTournamentEventReset());
+                    while (context.canPop()) {
+                      context.pop();
+                    }
+                  }
+                }
               },
             ),
           ),
