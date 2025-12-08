@@ -46,9 +46,12 @@ class MatchGame extends FlameGame {
   @override
   Vector2 get size => fieldSize;
 
+  final Function(int teamAscore, int teamBscore, FootballPlayerInTeamGameModel? scoredPlayer, int? elapsedTime)
+  onScored;
+
   final Function(int teamAscore, int teamBscore) onMatchFinished;
 
-  MatchGame({required this.teamA, required this.teamB, required this.onMatchFinished});
+  MatchGame({required this.teamA, required this.teamB, required this.onMatchFinished, required this.onScored});
 
   @override
   Future<void> onLoad() async {
@@ -397,13 +400,13 @@ class MatchGame extends FlameGame {
   // Goal management
   void _checkGoals() {
     if (leftGoal.isGoal(ball.position)) {
-      _handleGoal(isTeamOnLeftSide(teamA.id) ? teamB.id : teamA.id);
+      _handleGoal(isTeamOnLeftSide(teamA.id) ? teamB.id : teamA.id, ball.lastTouchedBy);
     } else if (rightGoal.isGoal(ball.position)) {
-      _handleGoal(isTeamOnLeftSide(teamA.id) ? teamA.id : teamB.id);
+      _handleGoal(isTeamOnLeftSide(teamA.id) ? teamA.id : teamB.id, ball.lastTouchedBy);
     }
   }
 
-  void _handleGoal(String scoringTeamId) {
+  void _handleGoal(String scoringTeamId, PlayerComponent? scoredPlayer) {
     print('⚽️ GOAL for Team $scoringTeamId!');
 
     if (scoringTeamId == teamA.id) {
@@ -411,6 +414,8 @@ class MatchGame extends FlameGame {
     } else {
       teamBscore++;
     }
+
+    onScored(teamAscore, teamBscore, scoredPlayer?.pit, elapsedTime.ceil());
 
     resetAfterGoal(scoringTeamId: scoringTeamId);
   }

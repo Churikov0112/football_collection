@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' show Scaffold, showDialog, Colors, OutlinedButton, Dialog;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,6 +37,33 @@ class DraftMatchScreen extends StatelessWidget {
             gameFactory: () => MatchGame(
               teamA: args.userTeam,
               teamB: args.oppponentTeam,
+              onScored: (teamAscore, teamBscore, scoredPlayer, elapsedTime) async {
+                if (scoredPlayer?.teamId == args.userTeam.id) {
+                  Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
+                }
+
+                await showDialog(
+                  context: context,
+                  barrierDismissible: true,
+
+                  builder: (context) {
+                    return Dialog(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("GOAL!", style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+                            const SizedBox(height: 8),
+                            if (scoredPlayer?.data.card.name != null)
+                              Text("${scoredPlayer!.data.card.name}, $elapsedTime'"),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ).timeout(Duration(seconds: 3), onTimeout: context.pop);
+              },
               onMatchFinished: (teamAscore, teamBscore) async {
                 final matchWon = teamAscore > teamBscore;
                 final isFinal = getIt.get<DraftTournamentBloc>().state.stage == DraftTournamentStage.$final;
