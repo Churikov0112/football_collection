@@ -7,7 +7,7 @@ class ScoreComponent extends TextComponent {
   ScoreComponent({required this.getScore})
     : super(
         anchor: Anchor.topLeft,
-        position: Vector2(10, 30),
+        position: Vector2(10, 50),
         textRenderer: TextPaint(
           style: const TextStyle(
             color: Colors.white,

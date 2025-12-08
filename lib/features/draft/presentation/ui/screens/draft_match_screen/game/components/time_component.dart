@@ -7,7 +7,7 @@ class TimeComponent extends TextComponent {
   TimeComponent({required this.getTime})
     : super(
         anchor: Anchor.topLeft,
-        position: Vector2(10, 60),
+        position: Vector2(10, 80),
         textRenderer: TextPaint(
           style: const TextStyle(
             color: Colors.white,
