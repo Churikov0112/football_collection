@@ -1,18 +1,10 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
-import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../services/log/log_service.dart';
-import '../../../../../services/toast/toast_service.dart';
 import '../../../../cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
-import '../../../../draft/presentation/ui/screens/draft_description_screen/draft_description_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
@@ -35,31 +27,31 @@ class MenuDrawer extends StatelessWidget {
                 builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
-            BlocBuilder<SavedCardsBloc, SavedCardsState>(
-              bloc: getIt.get(),
-              builder: (context, savedCardsState) {
-                final savedCardsIds = savedCardsState.savedCardsIds ?? [];
-                return ListTile(
-                  onTap: () {
-                    if (savedCardsIds.length < 100) {
-                      ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
-                      return;
-                    }
-                    try {
-                      FirebaseAnalytics.instance.logEvent(name: "draft_opened");
-                    } catch (e) {
-                      LogService.error(e.toString(), e);
-                    }
-                    BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
-                  },
-                  leading: Icon(Icons.gamepad, color: Colors.white),
-                  title: Translator(
-                    termin: AppGlossary.draft,
-                    builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
-                  ),
-                );
-              },
-            ),
+            // BlocBuilder<SavedCardsBloc, SavedCardsState>(
+            //   bloc: getIt.get(),
+            //   builder: (context, savedCardsState) {
+            //     final savedCardsIds = savedCardsState.savedCardsIds ?? [];
+            //     return ListTile(
+            //       onTap: () {
+            //         if (savedCardsIds.length < 100) {
+            //           ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
+            //           return;
+            //         }
+            //         try {
+            //           FirebaseAnalytics.instance.logEvent(name: "draft_opened");
+            //         } catch (e) {
+            //           LogService.error(e.toString(), e);
+            //         }
+            //         BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
+            //       },
+            //       leading: Icon(Icons.gamepad, color: Colors.white),
+            //       title: Translator(
+            //         termin: AppGlossary.draft,
+            //         builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+            //       ),
+            //     );
+            //   },
+            // ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.getCardByQr);
