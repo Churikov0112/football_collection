@@ -22,69 +22,68 @@ class SettingsScreen extends StatelessWidget {
     // final mq = MediaQuery.of(context);
 
     return SettingsScreenPresenter(
-      child: Builder(builder: (context) {
-        final presenter = SettingsScreenPresenter.of(context);
+      child: Builder(
+        builder: (context) {
+          final presenter = SettingsScreenPresenter.of(context);
 
-        return Scaffold(
-          // backgroundColor: AppColors.darkBackgroundSecondary,
-          body: BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: getIt.get(),
-            builder: (context, settingsState) {
-              return Stack(
-                children: [
-                  Column(
-                    children: [
-                      Translator(
-                        termin: AppGlossary.settings,
-                        builder: (value) => TransparentAppbar(
-                          title: value,
-                          showBalance: false,
+          return Scaffold(
+            // backgroundColor: AppColors.darkBackgroundSecondary,
+            body: BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: getIt.get(),
+              builder: (context, settingsState) {
+                return Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Translator(
+                          termin: AppGlossary.settings,
+                          builder: (value) => TransparentAppbar(title: value, showBalance: false),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      LanguageSettingsTile(),
-                      const SizedBox(height: 20),
-                      SwitchListTile(
-                        title: Translator(
-                          termin: AppGlossary.settingsEnableVibration,
-                          builder: (value) => Text(value),
+                        const SizedBox(height: 20),
+                        LanguageSettingsTile(),
+                        const SizedBox(height: 20),
+                        SwitchListTile(
+                          title: Translator(
+                            termin: AppGlossary.settingsEnableVibration,
+                            builder: (value) => Text(value),
+                          ),
+                          value: settingsState.enableVibration,
+                          onChanged: (val) {
+                            presenter.toggleEnableVibration(val);
+                          },
                         ),
-                        value: settingsState.enableVibration,
-                        onChanged: (val) {
-                          presenter.toggleEnableVibration(val);
-                        },
-                      ),
-                      SwitchListTile(
-                        title: Translator(
-                          termin: AppGlossary.settingsEnableConfetti,
-                          builder: (value) => Text(value),
+                        SwitchListTile(
+                          title: Translator(
+                            termin: AppGlossary.settingsEnableConfetti,
+                            builder: (value) => Text(value),
+                          ),
+                          value: settingsState.enableConfetti,
+                          onChanged: (val) {
+                            presenter.toggleEnableConfetti(val);
+                          },
                         ),
-                        value: settingsState.enableConfetti,
-                        onChanged: (val) {
-                          presenter.toggleEnableConfetti(val);
-                        },
-                      ),
-                      ListTile(title: Text("v. 1.0.5+12")),
-                    ],
-                  ),
-                  // Positioned(
-                  //   bottom: mq.padding.bottom,
-                  //   right: 0,
-                  //   left: 0,
-                  //   child: StreamBuilder<bool>(
-                  //     stream: presenter.isBannerAlreadyCreatedStream$,
-                  //     builder: (context, isBannerAlreadyCreatedSnapshot) {
-                  //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                  //       return AdWidget(bannerAd: presenter.banner);
-                  //     },
-                  //   ),
-                  // ),
-                ],
-              );
-            },
-          ),
-        );
-      }),
+                        ListTile(title: Text("v. 1.0.5+12")), // CHANGE VERSION
+                      ],
+                    ),
+                    // Positioned(
+                    //   bottom: mq.padding.bottom,
+                    //   right: 0,
+                    //   left: 0,
+                    //   child: StreamBuilder<bool>(
+                    //     stream: presenter.isBannerAlreadyCreatedStream$,
+                    //     builder: (context, isBannerAlreadyCreatedSnapshot) {
+                    //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
+                    //       return AdWidget(bannerAd: presenter.banner);
+                    //     },
+                    //   ),
+                    // ),
+                  ],
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
