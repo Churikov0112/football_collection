@@ -128,6 +128,7 @@ class _Scheme extends StatelessWidget {
                     Stack(
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Image.asset("assets/raster/field/field_goal_top.jpg"),
                             Expanded(

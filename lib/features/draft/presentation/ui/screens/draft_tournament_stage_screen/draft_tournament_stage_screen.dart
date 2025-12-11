@@ -7,7 +7,6 @@ import '../../../../../../di/di.dart';
 import '../../../../../../services/navigation/navigation.dart';
 import '../../../../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
-import '../../../../domain/models/draft_tournament_match.dart';
 import '../../../blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
 import '../draft_match_screen/draft_match_screen.dart';
 
@@ -225,26 +224,13 @@ class DraftTournamentStageScreen extends StatelessWidget {
                                 return;
                               }
 
-                              final score = await context.push<(int, int)>(
+                              await context.push(
                                 RoutePaths.draftMatch,
                                 extra: DraftMatchScreenArguments(
                                   userTeam: userTeam, // teamA
                                   oppponentTeam: opponentTeam, // teamB
                                 ),
                               );
-
-                              getIt.get<DraftTournamentBloc>().add(
-                                DraftTournamentEventNextMatch(
-                                  playedMatch: DraftTournamentMatchModel(
-                                    teamA: userTeam,
-                                    teamB: opponentTeam,
-                                    teamAScore: score?.$1,
-                                    teamBScore: score?.$2,
-                                  ),
-                                ),
-                              );
-
-                              print("userTeam: ${score?.$1.toString()}, opponentTeam: ${score?.$2.toString()}");
                             },
                           ),
                         ),

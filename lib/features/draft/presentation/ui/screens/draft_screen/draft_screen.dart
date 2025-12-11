@@ -27,7 +27,6 @@ import '../../../../domain/models/schemes_connections.dart';
 import '../../../../domain/models/team.dart';
 import '../../../blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
 import '../draft_players_screen/draft_players_screen.dart';
-import 'widgets/player_card/draft_football_player_card.dart';
 import 'widgets/player_card/parts/rating_tag.dart';
 
 part 'draft_screen_presenter.dart';
