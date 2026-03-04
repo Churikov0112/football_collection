@@ -23,16 +23,12 @@ class FirestoreService {
           (doc) => LeaderboardEntry(
             country: (doc.data()['country'] as String?) ?? 'Unknown',
             totalCards: (doc.data()['totalCards'] as num?)?.toInt() ?? 0,
-            openingsCount: (doc.data()['openingsCount'] as num?)?.toInt() ?? 0,
           ),
         )
         .toList();
   }
 
-  Future<void> submitPackOpened({
-    required String country,
-    required int cardsReceivedFromPack,
-  }) async {
+  Future<void> submitPackOpened({required String country, required int cardsReceivedFromPack}) async {
     final normalizedCountry = country.trim();
     if (normalizedCountry.isEmpty) return;
 
@@ -40,10 +36,7 @@ class FirestoreService {
 
     await docRef.set({
       'country': normalizedCountry,
-      'countryLowercase': normalizedCountry.toLowerCase(),
       'totalCards': FieldValue.increment(cardsReceivedFromPack),
-      'openingsCount': FieldValue.increment(1),
-      'updatedAt': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
   }
 
