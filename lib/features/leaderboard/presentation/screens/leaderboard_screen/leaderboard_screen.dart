@@ -4,6 +4,7 @@ import 'package:football_collection/features/countries/domain/models/country.dar
 import 'package:football_collection/features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
+import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 
@@ -112,12 +113,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             children: [
                               LayoutBuilder(
                                 builder: (context, constraints) {
-                                  return DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(color: Colors.white),
-                                    ),
+                                  return FrostedGlassContainer(
+                                    blupColor: Colors.black45,
+                                    borderRadius: BorderRadius.circular(16),
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: ConstrainedBox(
@@ -131,6 +129,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                           headingTextStyle: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
+                                          ),
+                                          border: TableBorder(
+                                            horizontalInside: BorderSide(color: Colors.white12, width: 1),
+                                            verticalInside: BorderSide(color: Colors.white54, width: 1),
                                           ),
                                           columns: [
                                             DataColumn(
