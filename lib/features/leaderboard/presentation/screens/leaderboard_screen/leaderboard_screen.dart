@@ -93,8 +93,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: mq.padding.top + 80),
                         if (selectedCountryName != null) ...[
-                          SizedBox(height: mq.padding.top + 80),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Translator(
@@ -105,8 +105,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 16),
                         ],
-                        const SizedBox(height: 16),
                         Expanded(
                           child: ListView(
                             padding: EdgeInsets.only(left: 16, right: 16, bottom: mq.padding.bottom + 100),
