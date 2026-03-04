@@ -31,8 +31,9 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Translator(
                 termin: AppGlossary.selectCountry,
@@ -42,24 +43,12 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
                 ),
               ),
               const SizedBox(height: 12),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.white12,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Translator(
-                  termin: AppGlossary.search,
-                  builder: (value) => TextField(
-                    controller: _searchController,
-                    onChanged: (value) => setState(() => _query = value.trim().toLowerCase()),
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: const Icon(Icons.search, color: Colors.white70),
-                      hintText: value,
-                      hintStyle: const TextStyle(color: Colors.white54),
-                    ),
-                  ),
+              Translator(
+                termin: AppGlossary.search,
+                builder: (value) => TextField(
+                  controller: _searchController,
+                  onChanged: (value) => setState(() => _query = value.trim().toLowerCase()),
+                  decoration: InputDecoration(prefixIcon: const Icon(Icons.search, color: Colors.white70)),
                 ),
               ),
               const SizedBox(height: 12),
@@ -67,14 +56,15 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
                 child: BlocBuilder<AllCountriesBloc, AllCountriesState>(
                   bloc: getIt.get<AllCountriesBloc>(),
                   builder: (context, state) {
-                    final countries = (state.countries ?? <CountryModel>[])
-                        .where((country) => country.name.toLowerCase().contains(_query))
-                        .toList()
-                      ..sort((a, b) => a.name.compareTo(b.name));
+                    final countries =
+                        (state.countries ?? <CountryModel>[])
+                            .where((country) => country.name.toLowerCase().contains(_query))
+                            .toList()
+                          ..sort((a, b) => a.name.compareTo(b.name));
 
                     return ListView.separated(
                       itemCount: countries.length,
-                      separatorBuilder: (_, __) => const Divider(color: Colors.white12, height: 1),
+                      separatorBuilder: (_, _) => const Divider(color: Colors.white12, height: 1),
                       itemBuilder: (context, index) {
                         final country = countries[index];
                         return ListTile(

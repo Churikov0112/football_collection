@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/features/countries/domain/models/country.dart';
 import 'package:football_collection/features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -82,42 +83,106 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
 
                 final entries = leaderboardState.entries ?? const [];
 
-                return ListView(
-                  padding: const EdgeInsets.fromLTRB(16, 100, 16, 24),
-                  children: [
-                    const SizedBox(height: 50),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.black45,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.white54),
-                      ),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: DataTable(
-                          headingRowColor: WidgetStateProperty.all(Colors.white12),
-                          dataTextStyle: const TextStyle(color: Colors.white),
-                          headingTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                          columns: [
-                            DataColumn(label: Text('#')),
-                            DataColumn(label: Text(AppGlossary.nationality.translate())),
-                            DataColumn(label: Text(AppGlossary.cardsReceived.translate())),
-                          ],
-                          rows: [
-                            for (int i = 0; i < entries.length; i++)
-                              DataRow(
-                                cells: [
-                                  DataCell(Text('${i + 1}')),
-                                  DataCell(Text(entries[i].country)),
-                                  DataCell(Text(entries[i].totalCards.toString())),
-                                ],
+                return BlocBuilder<LeaderboardCountryBloc, LeaderboardCountryState>(
+                  bloc: getIt.get<LeaderboardCountryBloc>(),
+                  builder: (context, selectedCountryState) {
+                    final selectedCountryName = selectedCountryState.countryName;
+                    final selectedCountryFlag = emojiFlagByCountryName(selectedCountryName) ?? '';
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (selectedCountryName != null) ...[
+                          SizedBox(height: mq.padding.top + 80),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Translator(
+                              termin: AppGlossary.yourTeam,
+                              builder: (value) => Text(
+                                '$value - $selectedCountryName $selectedCountryFlag',
+                                style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
                               ),
-                          ],
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: 16),
+                        Expanded(
+                          child: ListView(
+                            padding: EdgeInsets.only(left: 16, right: 16, bottom: mq.padding.bottom + 100),
+                            children: [
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black45,
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(color: Colors.white),
+                                    ),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                                        child: DataTable(
+                                          dividerThickness: 0,
+                                          horizontalMargin: 10,
+                                          columnSpacing: 12,
+                                          headingRowColor: WidgetStateProperty.all(Colors.white12),
+                                          dataTextStyle: const TextStyle(color: Colors.white),
+                                          headingTextStyle: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          columns: [
+                                            DataColumn(
+                                              label: const Center(child: Text('#')),
+                                              columnWidth: const IntrinsicColumnWidth(),
+                                            ),
+                                            DataColumn(
+                                              label: Text(AppGlossary.nationality.translate()),
+                                              columnWidth: const FlexColumnWidth(),
+                                            ),
+                                            DataColumn(
+                                              label: Text(AppGlossary.cardsReceived.translate()),
+                                              columnWidth: const IntrinsicColumnWidth(),
+                                              numeric: true,
+                                            ),
+                                          ],
+                                          rows: [
+                                            for (int i = 0; i < entries.length; i++)
+                                              DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    Center(
+                                                      child: Text(switch (i) {
+                                                        0 => '🥇',
+                                                        1 => '🥈',
+                                                        2 => '🥉',
+                                                        _ => '${i + 1}',
+                                                      }, maxLines: 1),
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${emojiFlagByCountryName(entries[i].country) ?? ''}  ${entries[i].country}',
+                                                    ),
+                                                  ),
+                                                  DataCell(Text(entries[i].totalCards.toString())),
+                                                ],
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
+                        SizedBox(height: mq.padding.bottom),
+                      ],
+                    );
+                  },
                 );
               },
             ),
@@ -130,7 +195,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               bloc: getIt.get<LeaderboardCountryBloc>(),
               builder: (context, selectedCountryState) {
                 if (selectedCountryState.countryName != null) {
-                  return const SizedBox.shrink();
+                  return Translator(
+                    termin: AppGlossary.changeTeam,
+                    builder: (value) => GlassButton(onPressed: _openCountryPicker, text: value),
+                  );
                 }
 
                 return Translator(
