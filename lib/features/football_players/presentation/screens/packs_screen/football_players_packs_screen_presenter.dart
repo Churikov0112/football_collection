@@ -81,6 +81,11 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   }
 
   Future<void> openPack(PackModel pack) async {
+    final participantCountry = getIt.get<LeaderboardCountryBloc>().state.countryName;
+    final alreadySavedCards = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
+    final newCardsFromPack =
+        (pack.cards ?? const <CardModel>[]).where((card) => !alreadySavedCards.contains(card.cardId)).length;
+
     try {
       final packTitle = pack.title.toLowerCase().replaceAll(" ", "_");
       await FirebaseAnalytics.instance.logEvent(
@@ -95,6 +100,18 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     } catch (e) {
       LogService.error(e.toString(), e);
     }
+
+    if (participantCountry != null) {
+      try {
+        await getIt.get<FirestoreService>().submitPackOpened(
+          country: participantCountry,
+          cardsReceivedFromPack: newCardsFromPack,
+        );
+      } catch (e) {
+        LogService.error(e.toString(), e);
+      }
+    }
+
     final settings = getIt.get<SettingsBloc>().state;
     try {
       _isHidePacksAnimationPlayingSubject.add(true);

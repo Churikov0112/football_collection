@@ -5,6 +5,7 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:football_collection/features/onboarding/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
+import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
@@ -43,6 +44,7 @@ class RoutePaths {
 
   static const getCardByQr = '/getCardByQr';
   static const settings = '/settings';
+  static const leaderboard = '/leaderboard';
 
   // static const main = '/main';
   // static const auth = '/auth';
@@ -117,6 +119,7 @@ class FootballCollectionRouter {
         ),
         GoRoute(path: RoutePaths.getCardByQr, builder: (context, state) => GetCardByQrScreen()),
         GoRoute(path: RoutePaths.settings, builder: (context, state) => SettingsScreen()),
+        GoRoute(path: RoutePaths.leaderboard, builder: (context, state) => const LeaderboardScreen()),
 
         GoRoute(path: RoutePaths.home, builder: (context, state) => const HomeScreen()),
         // GoRoute(

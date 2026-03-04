@@ -41,8 +41,13 @@ import '../features/football_players/presentation/blocs/country_football_players
     as _i110;
 import '../features/football_players/presentation/blocs/football_players_packs_bloc/football_players_packs_bloc.dart'
     as _i785;
+import '../features/leaderboard/presentation/blocs/leaderboard_bloc/leaderboard_bloc.dart'
+    as _i1022;
+import '../features/leaderboard/presentation/blocs/leaderboard_country_bloc/leaderboard_country_bloc.dart'
+    as _i149;
 import '../features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart'
     as _i550;
+import '../services/firebase/firestore_service.dart' as _i939;
 import '../services/localization/language_bloc/language_bloc.dart' as _i381;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -58,6 +63,9 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i1036.FootballPlayersRepository>(
     () => _i1036.FootballPlayersRepository(),
   );
+  gh.singleton<_i149.LeaderboardCountryBloc>(
+    () => _i149.LeaderboardCountryBloc(),
+  );
   gh.singleton<_i550.BalanceBloc>(() => _i550.BalanceBloc());
   gh.singleton<_i47.FootballConfederationsRepository>(
     () => _i47.FootballConfederationsRepository(),
@@ -67,6 +75,7 @@ _i174.GetIt $initGetIt(
     () => _i150.SelectedConfederationBloc(),
   );
   gh.singleton<_i782.SelectedCountryBloc>(() => _i782.SelectedCountryBloc());
+  gh.singleton<_i939.FirestoreService>(() => _i939.FirestoreService());
   gh.singleton<_i381.LanguageBloc>(() => _i381.LanguageBloc());
   gh.singleton<_i873.AllFootballPlayersBloc>(
     () => _i873.AllFootballPlayersBloc(
@@ -81,6 +90,9 @@ _i174.GetIt $initGetIt(
     () => _i878.FootballConfederationsBloc(
       gh<_i47.FootballConfederationsRepository>(),
     ),
+  );
+  gh.singleton<_i1022.LeaderboardBloc>(
+    () => _i1022.LeaderboardBloc(gh<_i939.FirestoreService>()),
   );
   gh.singleton<_i1008.DraftTournamentBloc>(
     () => _i1008.DraftTournamentBloc(gh<_i1036.FootballPlayersRepository>()),

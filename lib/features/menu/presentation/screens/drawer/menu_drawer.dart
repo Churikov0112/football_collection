@@ -27,6 +27,16 @@ class MenuDrawer extends StatelessWidget {
                 builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
+            ListTile(
+              onTap: () {
+                context.push(RoutePaths.leaderboard);
+              },
+              leading: Icon(Icons.leaderboard, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.rating,
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+              ),
+            ),
             // BlocBuilder<SavedCardsBloc, SavedCardsState>(
             //   bloc: getIt.get(),
             //   builder: (context, savedCardsState) {
