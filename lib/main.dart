@@ -62,8 +62,9 @@ Future<void> main() async {
     LogService.error(e.toString(), e);
   }
 
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.black),
+    SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent, statusBarColor: Colors.black),
   );
 
   await SystemChrome.setPreferredOrientations([
@@ -167,7 +168,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                   routerConfig: _router.router,
                   title: 'Football Collection 2025',
                   color: Colors.black,
-                  debugShowCheckedModeBanner: false,
+                  debugShowCheckedModeBanner: true,
                   locale: languageState.language.locale,
                   localizationsDelegates: const [
                     GlobalMaterialLocalizations.delegate,

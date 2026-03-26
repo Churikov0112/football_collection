@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/mini_games/presentation/widgets/balance_widget/balance_widget.dart';
+import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import 'package:go_router/go_router.dart';
 
 class TransparentAppbar extends StatelessWidget {
@@ -21,17 +22,10 @@ class TransparentAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: backgroundColor?.withAlpha(200) ?? Colors.black54,
-      ),
+    return FrostedGlassContainer(
+      blupColor: backgroundColor?.withOpacity(0.26) ?? Colors.black26,
       child: Padding(
-        padding: EdgeInsets.only(
-          top: mq.padding.top + 8,
-          right: 8,
-          left: 8,
-          bottom: 8,
-        ),
+        padding: EdgeInsets.only(top: mq.padding.top + 8, right: 8, left: 8, bottom: 8),
         child: Row(
           children: [
             if (showDrawer)
@@ -39,18 +33,12 @@ class TransparentAppbar extends StatelessWidget {
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
                 },
-                icon: Icon(
-                  Icons.menu,
-                  color: foregroundColor ?? Colors.white,
-                ),
+                icon: Icon(Icons.menu, color: foregroundColor ?? Colors.white),
               )
             else
               IconButton(
                 onPressed: () => context.pop(),
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: foregroundColor ?? Colors.white,
-                ),
+                icon: Icon(Icons.arrow_back, color: foregroundColor ?? Colors.white),
               ),
             const SizedBox(width: 8),
             Expanded(
@@ -58,19 +46,10 @@ class TransparentAppbar extends StatelessWidget {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                  color: foregroundColor ?? Colors.white,
-                ),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: foregroundColor ?? Colors.white),
               ),
             ),
-            if (showBalance) ...[
-              const SizedBox(width: 16),
-              BalanceWidget(
-                textColor: foregroundColor ?? Colors.white,
-              ),
-            ],
+            if (showBalance) ...[const SizedBox(width: 16), BalanceWidget(textColor: foregroundColor ?? Colors.white)],
           ],
         ),
       ),
