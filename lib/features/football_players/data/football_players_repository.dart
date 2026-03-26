@@ -23,6 +23,14 @@ class FootballPlayersRepository extends CardsRepository {
 
   final Random _random = Random();
 
+  bool _indicesBuilt = false;
+  final Map<String, FootballConfederations> _confederationByTeamId = {};
+  final Map<String, List<FootballPlayerCardModel>> _playersByTeamId = {};
+  final Map<FootballConfederations, List<FootballPlayerCardModel>> _playersByConfederation = {};
+  final Set<String> _top25TeamIds = <String>{};
+  final Map<String, int> _playerMaxMarketValueById = {};
+  final Map<String, int> _playerCurrentMarketValueById = {};
+
   List<FootballPlayerCardModel> _parsePlayers(List<dynamic> data) {
     List<FootballPlayerCardModel> players = [];
     for (var item in data) {
@@ -95,13 +103,69 @@ class FootballPlayersRepository extends CardsRepository {
     } catch (e) {
       debugPrint(e.toString());
     }
+
+    _buildIndexesIfNeeded();
+  }
+
+  void _buildIndexesIfNeeded() {
+    if (_indicesBuilt) {
+      final hasMarketValues = allMarketValuesCache.isNotEmpty;
+      final marketValuesIndexed = _playerMaxMarketValueById.isNotEmpty || _playerCurrentMarketValueById.isNotEmpty;
+      if (!hasMarketValues || marketValuesIndexed) return;
+      _indicesBuilt = false;
+    }
+    if (allPlayersCache.isEmpty || allTeamsCache.isEmpty) return;
+
+    _confederationByTeamId
+      ..clear()
+      ..addEntries(allTeamsCache.map((team) => MapEntry(team.id, team.confederation)));
+
+    _top25TeamIds
+      ..clear()
+      ..addAll(allTeamsCache.take(25).map((team) => team.id));
+
+    _playersByTeamId.clear();
+    _playersByConfederation.clear();
+    for (final player in allPlayersCache) {
+      final teamId = player.teamId;
+      if (teamId != null) {
+        _playersByTeamId.putIfAbsent(teamId, () => <FootballPlayerCardModel>[]).add(player);
+        final confederation = _confederationByTeamId[teamId];
+        if (confederation != null) {
+          _playersByConfederation.putIfAbsent(confederation, () => <FootballPlayerCardModel>[]).add(player);
+        }
+      }
+    }
+
+    _playerMaxMarketValueById.clear();
+    _playerCurrentMarketValueById.clear();
+    for (final mv in allMarketValuesCache) {
+      final history = mv.marketValue?.marketValueHistory ?? const <MarketValueHistoryModel>[];
+      int? max;
+      for (final mvHistoryItem in history) {
+        final value = mvHistoryItem.marketValue;
+        if (value != null && (max == null || value > max)) {
+          max = value;
+        }
+      }
+      if (max != null) _playerMaxMarketValueById[mv.id] = max;
+
+      final current = mv.marketValue?.marketValue;
+      if (current != null) _playerCurrentMarketValueById[mv.id] = current;
+    }
+
+    _indicesBuilt = true;
   }
 
   @override
   Future<List<FootballPlayerCardModel>> cardsGet([String? countryId]) async {
     await _ensureInitialized();
-    if (countryId == null) return [...allPlayersCache];
-    return [...allPlayersCache].where((player) => player.teamId == countryId).toList();
+    if (countryId == null) return List<FootballPlayerCardModel>.from(allPlayersCache);
+    final cached = _playersByTeamId[countryId];
+    if (cached != null) return List<FootballPlayerCardModel>.from(cached);
+    return List<FootballPlayerCardModel>.from(
+      allPlayersCache.where((player) => player.teamId == countryId),
+    );
   }
 
   Future<List<FootballNationalTeamModel>> countriesGet([List<String>? countryIds]) async {
@@ -175,22 +239,35 @@ class FootballPlayersRepository extends CardsRepository {
     bool unique = false,
   }) async {
     await _ensureInitialized();
+    final candidates = _filterPlayers(
+      country: country,
+      confederation: confederation,
+      minPrimeTransferValue: minPrimeTransferValue,
+      minCurrentTransferValue: minCurrentTransferValue,
+      topCountries: topCountries,
+    );
+
+    if (candidates.isEmpty) {
+      throw StateError('No players found for the requested filters');
+    }
+
+    if (unique) {
+      if (count >= candidates.length) return List<FootballPlayerCardModel>.from(candidates);
+      final shuffled = List<FootballPlayerCardModel>.from(candidates);
+      shuffled.shuffle(_random);
+      return shuffled.take(count).toList();
+    }
+
     final result = <FootballPlayerCardModel>[];
-    while (result.length < count) {
-      final player = await _getRandomCard(
-        country: country,
-        confederation: confederation,
-        minPrimeTransferValue: minPrimeTransferValue,
-        minCurrentTransferValue: minCurrentTransferValue,
-        topCountries: topCountries,
-      );
-      if (unique && result.contains(player)) continue;
-      result.add(player);
+    for (var i = 0; i < count; i++) {
+      result.add(candidates[_random.nextInt(candidates.length)]);
     }
     return result;
   }
 
   int? playerMaxMarketValue(String id) {
+    _buildIndexesIfNeeded();
+    if (_playerMaxMarketValueById.isNotEmpty) return _playerMaxMarketValueById[id];
     final mv = allMarketValuesCache.firstWhereOrNull((mv) => mv.id == id);
 
     int? max;
@@ -204,52 +281,43 @@ class FootballPlayersRepository extends CardsRepository {
   }
 
   int? playerCurrentMarketValue(String id) {
+    _buildIndexesIfNeeded();
+    if (_playerCurrentMarketValueById.isNotEmpty) return _playerCurrentMarketValueById[id];
     final mv = allMarketValuesCache.firstWhereOrNull((mv) => mv.id == id);
     return mv?.marketValue?.marketValue;
   }
 
-  Future<FootballPlayerCardModel> _getRandomCard({
+  List<FootballPlayerCardModel> _filterPlayers({
     FootballNationalTeamModel? country,
     FootballConfederations? confederation,
     bool? topCountries,
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
-  }) async {
-    try {
-      final playersSublist = allPlayersCache.where((player) {
-        if (country != null) {
-          if (player.teamId != country.id) return false;
-        }
-        if (confederation != null) {
-          final playerCountryName = allTeamsCache.firstWhere((team) => team.id == player.teamId).name;
-          if (confederation != footballConfederationFromCountryName(playerCountryName)) return false;
-        }
-        if (minPrimeTransferValue != null || minCurrentTransferValue != null) {
-          if (minPrimeTransferValue != null && playerMaxMarketValue(player.playerId) == null) {
-            return false;
-          }
-          if (minCurrentTransferValue != null && playerCurrentMarketValue(player.playerId) == null) {
-            return false;
-          }
-          if (minPrimeTransferValue != null && playerMaxMarketValue(player.playerId)! < minPrimeTransferValue) {
-            return false;
-          }
-          if (minCurrentTransferValue != null && playerCurrentMarketValue(player.playerId)! < minCurrentTransferValue) {
-            return false;
-          }
-        }
-        if (topCountries == true) {
-          final top25Countries = allTeamsCache.sublist(0, 25);
-          if (!top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.teamId))) return false;
-        }
-        return true;
-      }).toList();
-
-      final index = _random.nextInt(playersSublist.length);
-      return playersSublist[index];
-    } catch (e) {
-      debugPrint(e.toString());
-      rethrow;
+  }) {
+    Iterable<FootballPlayerCardModel> source = allPlayersCache;
+    if (country != null) {
+      source = _playersByTeamId[country.id] ?? const <FootballPlayerCardModel>[];
+    } else if (confederation != null) {
+      source = _playersByConfederation[confederation] ?? const <FootballPlayerCardModel>[];
     }
+
+    if (source.isEmpty) return const <FootballPlayerCardModel>[];
+
+    return source.where((player) {
+      if (topCountries == true && !_top25TeamIds.contains(player.teamId)) {
+        return false;
+      }
+
+      if (minPrimeTransferValue != null) {
+        final value = _playerMaxMarketValueById[player.playerId];
+        if (value == null || value < minPrimeTransferValue) return false;
+      }
+      if (minCurrentTransferValue != null) {
+        final value = _playerCurrentMarketValueById[player.playerId];
+        if (value == null || value < minCurrentTransferValue) return false;
+      }
+
+      return true;
+    }).toList();
   }
 }

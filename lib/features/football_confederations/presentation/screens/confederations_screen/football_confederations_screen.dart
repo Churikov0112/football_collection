@@ -14,10 +14,12 @@ import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../../../football_players/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../../../football_players/domain/models/player.dart';
 import '../../../../football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../../../menu/presentation/screens/drawer/menu_drawer.dart';
 import '../../blocs/football_confederations_bloc/football_confederations_bloc.dart';
 import 'widgets/open_packs_screen_button.dart';
+import '../../../../countries/domain/models/national_team.dart';
 
 part 'football_confederations_screen_presenter.dart';
 part 'widgets/confederations_list.dart';
