@@ -30,7 +30,7 @@ class _TmPlayerBio extends StatelessWidget {
   Widget build(BuildContext context) {
     final tmData = player;
     final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
-    final countryName = allCountries.firstWhereOrNull((c) => c.id == tmData.countryId)?.name ?? '?';
+    final countryName = allCountries.firstWhereOrNull((c) => c.id == tmData.teamId)?.name ?? '?';
 
     return Column(
       spacing: 8,
@@ -89,15 +89,15 @@ class _TmPlayerBio extends StatelessWidget {
           const _Separator(),
         ],
 
-        if (player.currentClub != null) ...[
+        if (player.clubName != null) ...[
           Translator(
             termin: AppGlossary.club,
-            builder: (value) => _BioTile(title: value, value: hideClub ? '?' : player.currentClub!),
+            builder: (value) => _BioTile(title: value, value: hideClub ? '?' : player.clubName!),
           ),
           const _Separator(),
         ],
 
-        if (tmData.countryId.isNotEmpty == true)
+        if (tmData.teamId?.isNotEmpty == true)
           Translator(
             termin: AppGlossary.nationality,
             builder: (value) => _BioTile(

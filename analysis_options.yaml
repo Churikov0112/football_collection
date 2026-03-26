@@ -21,6 +21,7 @@ analyzer:
     - "**graphql_api**"
     - "**.config.dart"
     - bricks/**
+    - assets/**
 
 linter:
   # The lint rules applied to this project can be customized in the

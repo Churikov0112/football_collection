@@ -4,7 +4,7 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
   const _FootballPlayerAlbumWidget({required this.player, required this.country});
 
   final FootballPlayerCardModel player;
-  final CountryModel country;
+  final FootballNationalTeamModel country;
 
   @override
   Widget build(BuildContext context) {

@@ -9,10 +9,7 @@ class GuessNationalTeamScreenPresenter extends StatefulWidget {
 
   final Widget child;
 
-  const GuessNationalTeamScreenPresenter({
-    required this.child,
-    super.key,
-  });
+  const GuessNationalTeamScreenPresenter({required this.child, super.key});
 
   @override
   State<GuessNationalTeamScreenPresenter> createState() => GuessNationalTeamScreenPresenterState();
@@ -23,8 +20,8 @@ class GuessNationalTeamScreenPresenterState extends State<GuessNationalTeamScree
   int winstrick = 0;
   final Random random = Random();
 
-  final BehaviorSubject<CountryModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
-  Stream<CountryModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
+  final BehaviorSubject<FootballNationalTeamModel?> _selectedOptionSubject = BehaviorSubject.seeded(null);
+  Stream<FootballNationalTeamModel?> get selectedOptionStream$ => _selectedOptionSubject.stream;
 
   @override
   void initState() {
@@ -43,8 +40,8 @@ class GuessNationalTeamScreenPresenterState extends State<GuessNationalTeamScree
   }
 
   Future<void> showResult({
-    required CountryModel selectedAnswer,
-    required CountryModel rightAnswer,
+    required FootballNationalTeamModel selectedAnswer,
+    required FootballNationalTeamModel rightAnswer,
   }) async {
     _selectedOptionSubject.add(selectedAnswer);
     if (selectedAnswer == rightAnswer) {
@@ -57,11 +54,7 @@ class GuessNationalTeamScreenPresenterState extends State<GuessNationalTeamScree
       );
       winstrick++;
     } else {
-      ToastService.showErrorToast(
-        title: AppGlossary.incorrect.translate(),
-        subtitle: ":(",
-        seconds: 2,
-      );
+      ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
       winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));

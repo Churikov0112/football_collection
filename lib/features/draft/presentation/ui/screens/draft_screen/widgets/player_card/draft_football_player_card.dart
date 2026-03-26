@@ -7,7 +7,7 @@ import 'package:football_collection/features/draft/domain/models/ratings.dart';
 import 'package:football_collection/features/draft/domain/models/role.dart';
 
 import '../../../../../../../abstract/presentation/blocs/utils/ratings.dart';
-import '../../../../../../../countries/domain/models/country.dart';
+import '../../../../../../../countries/domain/models/national_team.dart';
 import '../../../../../../../football_players/domain/models/player.dart';
 import '../../../../../../../football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../../../../../domain/models/position.dart';
@@ -41,7 +41,7 @@ class DraftFootballPlayerCardWidget extends StatelessWidget {
     final rating =
         ratings[player.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(player).rating;
     final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
-    final playerCountryName = allCountries.firstWhere((c) => c.id == player.countryId).name;
+    final playerCountryName = allCountries.firstWhere((c) => c.id == player.teamId).name;
     final emojiFlag = emojiFlagByCountryName(playerCountryName);
 
     final card = ClipRRect(
@@ -204,11 +204,11 @@ class DraftFootballPlayerCardWidget extends StatelessWidget {
                       //       ],
                       //     ),
                       //   ),
-                      if (player.currentClub != null)
+                      if (player.clubName != null)
                         Align(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [_TeamLogoWidget(currentClub: player.currentClub!, size: width)],
+                            children: [_TeamLogoWidget(currentClub: player.clubName!, size: width)],
                           ),
                         ),
                       Align(

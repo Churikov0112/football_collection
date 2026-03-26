@@ -313,10 +313,10 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
   double _playersChemistry(FootballPlayerGameModel player1, FootballPlayerGameModel player2) {
     final allCoounries = getIt.get<AllCountriesBloc>().state.countries;
 
-    final player1CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player1.card.countryId)?.name ?? '';
+    final player1CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player1.card.teamId)?.name ?? '';
     final FootballConfederations player1Confederation = footballConfederationFromCountryName(player1CountryName);
 
-    final player2CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player2.card.countryId)?.name ?? '';
+    final player2CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player2.card.teamId)?.name ?? '';
     final FootballConfederations player2Confederation = footballConfederationFromCountryName(player2CountryName);
 
     double chemistry = 0.0;
@@ -327,12 +327,12 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     }
 
     // Одна сборная - самый сильный бонус
-    if (player1.card.countryId == player2.card.countryId) {
+    if (player1.card.teamId == player2.card.teamId) {
       chemistry += 0.5;
     }
 
     // Одна команда - самый сильный бонус
-    if (player1.card.currentClub == player2.card.currentClub) {
+    if (player1.card.clubId == player2.card.clubId) {
       chemistry += 0.5;
     }
 

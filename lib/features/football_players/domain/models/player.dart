@@ -1,72 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
+import '../../../../di/di.dart';
+import '../../data/football_players_repository.dart';
+
 class FootballPlayerCardModel extends CardModel {
   final String playerId;
-  final String countryId;
   final String name;
+  final String? teamId;
+  final String? teamName;
+  final String? clubId;
+  final String? clubName;
   final String? position;
+  final String? number;
   final String? birthDate;
   final String? height;
   final String? foot;
-  final String? currentClub;
-  final int? currentMarketValue;
-  final int? maxMarketValue;
 
   const FootballPlayerCardModel({
     required super.cardId,
-    required super.imageUrl,
     required super.imageAssetPath,
     required this.playerId,
-    required this.countryId,
     required this.name,
     required this.position,
     required this.birthDate,
     required this.height,
     required this.foot,
-    required this.currentClub,
-    required this.currentMarketValue,
-    required this.maxMarketValue,
+
+    required this.number,
+    required this.clubId,
+    required this.teamId,
+    required this.teamName,
+    required this.clubName,
   });
 
   factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {
     return FootballPlayerCardModel(
       cardId: "football_player-${json['id']}",
       imageAssetPath: "assets/raster/player_faces/${json['id']}.jpg",
-      imageUrl: json['image_url'],
       playerId: json['id'],
-      countryId: json['team_id'],
       name: json['name'],
       position: json['position'],
       birthDate: json['birth_date'],
       height: json['height'],
       foot: json['foot'],
-      currentClub: json['current_club'],
-      currentMarketValue: json['current_market_value'],
-      maxMarketValue: json['max_market_value'],
+      number: json['number'],
+      clubId: json['club_id'],
+      teamId: json['team_id'],
+      teamName: json['team_name'],
+      clubName: json['club_name'],
     );
   }
 
   Map<dynamic, dynamic> toJson() {
     return {
-      'cardId': cardId,
-      'player_id': playerId,
-      'image_asset_path': imageAssetPath,
-      'team_id': countryId,
+      'id': playerId,
       'name': name,
       'position': position,
       'birth_date': birthDate,
       'height': height,
       'foot': foot,
-      'current_club': currentClub,
-      'current_market_value': currentMarketValue,
-      'max_market_value': maxMarketValue,
-      'image_url': imageUrl,
+      'number': number,
+      'club_id': clubId,
+      'team_id': teamId,
+      'team_name': teamName,
+      'club_name': clubName,
     };
   }
 
   @override
   List<Object?> get props => [cardId, playerId];
+}
+
+extension FootballPlayerCardModelExtension on FootballPlayerCardModel {
+  int? get maxMarketValue {
+    return getIt.get<FootballPlayersRepository>().playerMaxMarketValue(playerId);
+  }
+
+  int? get currentMarketValue {
+    return getIt.get<FootballPlayersRepository>().playerCurrentMarketValue(playerId);
+  }
 }
 
 String? footballPlayerPositionToShort(String? position) {

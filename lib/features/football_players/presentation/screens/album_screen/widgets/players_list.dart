@@ -1,16 +1,18 @@
 part of '../football_players_album_screen.dart';
 
 class _FootballPlayersList extends StatelessWidget {
-  const _FootballPlayersList();
+  const _FootballPlayersList({required this.country});
+
+  final FootballNationalTeamModel country;
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
-    return BlocBuilder<CountryFootballPlayersBloc, CountryFootballPlayersState>(
+    return BlocBuilder<AllFootballPlayersBloc, AllFootballPlayersState>(
       bloc: getIt.get(),
-      builder: (context, countryPlayersState) {
-        final players = countryPlayersState.players ?? [];
+      builder: (context, allFootballPlayersState) {
+        final players = (allFootballPlayersState.allPlayers ?? []).where((p) => p.teamId == country.id).toList();
 
         return Expanded(
           child: GridView.builder(
@@ -23,10 +25,7 @@ class _FootballPlayersList extends StatelessWidget {
             padding: EdgeInsets.only(top: mq.padding.top + 75, left: 10, right: 10, bottom: 250),
             itemCount: players.length,
             itemBuilder: (context, index) {
-              return _FootballPlayerAlbumWidget(
-                player: players[index],
-                country: countryPlayersState.country!,
-              );
+              return _FootballPlayerAlbumWidget(player: players[index], country: country);
             },
           ),
         );

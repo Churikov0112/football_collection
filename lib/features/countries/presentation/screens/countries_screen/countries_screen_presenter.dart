@@ -6,36 +6,14 @@ class FootballCountriesScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
-  final FootballConfederations confederation;
 
-  const FootballCountriesScreenPresenter({
-    required this.confederation,
-    required this.child,
-    super.key,
-  });
+  const FootballCountriesScreenPresenter({required this.child, super.key});
 
   @override
   State<FootballCountriesScreenPresenter> createState() => FootballCountriesScreenPresenterState();
 }
 
 class FootballCountriesScreenPresenterState extends State<FootballCountriesScreenPresenter> {
-  @override
-  void initState() {
-    super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      // loadBannerAd();
-      getIt
-          .get<FootballConfederationCountriesBloc>()
-          .add(FootballConfederationCountriesEventGet(confederation: widget.confederation));
-    });
-  }
-
-  @override
-  void dispose() {
-    getIt.get<SelectedConfederationBloc>().add(SelectedConfederationEventReset());
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return widget.child;

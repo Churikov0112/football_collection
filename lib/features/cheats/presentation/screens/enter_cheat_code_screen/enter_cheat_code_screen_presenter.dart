@@ -32,7 +32,7 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
       final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
       final List<FootballPlayerCardModel> clubPlayers = [];
       for (final player in allPlayers) {
-        if (player.currentClub == club) {
+        if (player.clubName == club) {
           clubPlayers.add(player);
         }
       }

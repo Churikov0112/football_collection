@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';

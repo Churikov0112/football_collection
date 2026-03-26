@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/draft/domain/models/position.dart';
 import 'package:football_collection/features/football_players/data/football_players_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -47,9 +47,9 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
       final gameTeams = <FootballTeamGameModel>[];
 
       // Собираем ВСЕ команды, у которых достаточно игроков
-      final eligibleTeams = <CountryModel>[];
+      final eligibleTeams = <FootballNationalTeamModel>[];
       for (final team in allTeams) {
-        final teamPlayers = allPlayers.where((p) => p.countryId == team.id).toList();
+        final teamPlayers = allPlayers.where((p) => p.teamId == team.id).toList();
         if (teamPlayers.length >= 11) {
           eligibleTeams.add(team);
         }
@@ -62,7 +62,7 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
       for (final team in eligibleTeams) {
         if (gameTeams.length >= 15) break; // Уже набрали достаточно команд
 
-        final teamPlayers = allPlayers.where((p) => p.countryId == team.id).toList();
+        final teamPlayers = allPlayers.where((p) => p.teamId == team.id).toList();
 
         // random scheme
         final scheme = FootballSchemes.vertical.keys.toList()[random.nextInt(FootballSchemes.vertical.length)];

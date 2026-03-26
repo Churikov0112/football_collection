@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
@@ -44,13 +44,13 @@ class GuessNationalTeamScreen extends StatelessWidget {
                     builder: (context, randomPlayersState) {
                       final player = randomPlayersState.players?.firstOrNull;
                       final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
-                      final playerCountry = allCountries.firstWhereOrNull((e) => e.id == player?.countryId);
+                      final playerCountry = allCountries.firstWhereOrNull((e) => e.id == player?.teamId);
 
                       if (player == null || playerCountry == null) {
                         return Align(child: const CircularProgressIndicator());
                       }
 
-                      final options = <CountryModel>[];
+                      final options = <FootballNationalTeamModel>[];
                       options.add(playerCountry);
                       while (options.length < 4) {
                         final randomCountry = allCountries[presenter.random.nextInt(allCountries.length)];
@@ -62,7 +62,7 @@ class GuessNationalTeamScreen extends StatelessWidget {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          StreamBuilder<CountryModel?>(
+                          StreamBuilder<FootballNationalTeamModel?>(
                             stream: presenter.selectedOptionStream$,
                             builder: (context, selectedOptionSnapshot) {
                               final showResult = selectedOptionSnapshot.data != null;

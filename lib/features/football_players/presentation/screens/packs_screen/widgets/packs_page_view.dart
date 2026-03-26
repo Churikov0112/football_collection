@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/services/localization/translator.dart';
 
-import '../../../../../countries/domain/models/country.dart';
+import '../../../../../countries/domain/models/national_team.dart';
 import '../football_players_packs_screen.dart';
 
 class PacksPageView extends StatelessWidget {
-  const PacksPageView({
-    required this.packs,
-    required this.state,
-    super.key,
-  });
+  const PacksPageView({required this.packs, required this.state, super.key});
 
   final List<PackModel> packs;
   final OpenPackCombinedState state;
@@ -55,20 +51,14 @@ class PacksPageView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.black45,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(16)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           child: Translator(
                             termin: AppGlossary.free,
                             builder: (value) => Text(
                               packs[i].price > 0 ? "${packs[i].price} 🏆" : value,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
+                              style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
                         ),
@@ -78,21 +68,14 @@ class PacksPageView extends StatelessWidget {
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: packWidth),
                           child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.black45,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
+                            decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(16)),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               child: Text(
                                 "${emojiFlagByCountryName(packs[i].title) ?? ""} ${packs[i].title}",
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                             ),
                           ),
@@ -101,12 +84,7 @@ class PacksPageView extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Image.asset(
-                    packs[i].imageAssetPath,
-                    height: packHeight,
-                    width: packWidth,
-                    fit: BoxFit.fill,
-                  ),
+                  Image.asset(packs[i].imageAssetPath, height: packHeight, width: packWidth, fit: BoxFit.fill),
                 ],
               ),
             ),

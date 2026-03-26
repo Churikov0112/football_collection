@@ -6,36 +6,14 @@ class FootballPlayersAlbumScreenPresenter extends StatefulWidget {
   }
 
   final Widget child;
-  final CountryModel country;
 
-  const FootballPlayersAlbumScreenPresenter({
-    required this.country,
-    required this.child,
-    super.key,
-  });
+  const FootballPlayersAlbumScreenPresenter({required this.child, super.key});
 
   @override
   State<FootballPlayersAlbumScreenPresenter> createState() => FootballPlayersAlbumScreenPresenterState();
 }
 
 class FootballPlayersAlbumScreenPresenterState extends State<FootballPlayersAlbumScreenPresenter> {
-  @override
-  void initState() {
-    super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      // loadBannerAd();
-      // getIt.get<AllPlayersBloc>().add(AllPlayersEventLoad());
-      // getIt.get<SavedCardsBloc>().add(SavedCardsEventLoad());
-      getIt.get<CountryFootballPlayersBloc>().add(CountryFootballPlayersEventGet(countryId: widget.country.id));
-    });
-  }
-
-  @override
-  void dispose() {
-    getIt.get<SelectedCountryBloc>().add(SelectedCountryEventReset());
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return widget.child;

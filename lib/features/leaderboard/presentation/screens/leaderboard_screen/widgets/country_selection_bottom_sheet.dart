@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../di/di.dart';
-import '../../../../../../features/countries/domain/models/country.dart';
 import '../../../../../../features/football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../../../../../services/localization/translator.dart';
+import '../../../../../countries/domain/models/national_team.dart';
 
 class CountrySelectionBottomSheet extends StatefulWidget {
   const CountrySelectionBottomSheet({super.key});
@@ -57,7 +57,7 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
                   bloc: getIt.get<AllCountriesBloc>(),
                   builder: (context, state) {
                     final countries =
-                        (state.countries ?? <CountryModel>[])
+                        (state.countries ?? <FootballNationalTeamModel>[])
                             .where((country) => country.name.toLowerCase().contains(_query))
                             .toList()
                           ..sort((a, b) => a.name.compareTo(b.name));

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../data/football_players_repository.dart';
@@ -18,10 +18,7 @@ class AllCountriesBloc extends Bloc<AllCountriesEvent, AllCountriesState> {
     );
   }
 
-  Future<void> _get(
-    AllCountriesEventGet event,
-    Emitter<AllCountriesState> emit,
-  ) async {
+  Future<void> _get(AllCountriesEventGet event, Emitter<AllCountriesState> emit) async {
     try {
       emit(AllCountriesStatePending());
       final countries = await _repository.countriesGet();

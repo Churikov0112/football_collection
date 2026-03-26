@@ -1,16 +1,18 @@
 part of '../countries_screen.dart';
 
 class _CountriesList extends StatelessWidget {
-  const _CountriesList();
+  const _CountriesList({required this.confederation});
+
+  final FootballConfederations confederation;
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
-    return BlocBuilder<FootballConfederationCountriesBloc, FootballConfederationCountriesState>(
+    return BlocBuilder<AllCountriesBloc, AllCountriesState>(
       bloc: getIt.get(),
-      builder: (context, countriesState) {
-        final countries = countriesState.countries ?? [];
+      builder: (context, allCountriesState) {
+        final countries = (allCountriesState.countries ?? []).where((c) => c.confederation == confederation).toList();
 
         return Expanded(
           child: GridView.builder(
@@ -23,9 +25,7 @@ class _CountriesList extends StatelessWidget {
             padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 250),
             itemCount: countries.length,
             itemBuilder: (context, index) {
-              return _CountryTile(
-                country: countries[index],
-              );
+              return _CountryTile(country: countries[index]);
             },
           ),
         );
@@ -35,16 +35,14 @@ class _CountriesList extends StatelessWidget {
 }
 
 class _CountryTile extends StatelessWidget {
-  const _CountryTile({
-    required this.country,
-  });
+  const _CountryTile({required this.country});
 
-  final CountryModel country;
+  final FootballNationalTeamModel country;
 
   Future<({double progress, int savedCount, int totalCount})> _calculateProgress(List<String> savedCardsIds) async {
     await Future.delayed(Duration.zero); // Даем возможность обновить UI
     final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
-    final countryPlayers = allPlayers.where((player) => player.countryId == country.id).toList();
+    final countryPlayers = allPlayers.where((player) => player.teamId == country.id).toList();
     final savedCount = countryPlayers.where((player) => savedCardsIds.contains(player.cardId)).length;
     final totalCount = countryPlayers.length;
     final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;
@@ -68,8 +66,7 @@ class _CountryTile extends StatelessWidget {
 
             return GestureDetector(
               onTap: () {
-                getIt.get<SelectedCountryBloc>().add(SelectedCountryEventSelect(country: country));
-                context.push(RoutePaths.footballPlayersAlbum);
+                context.push(RoutePaths.footballPlayersAlbum, extra: country);
               },
               child: SquareProgressIndicator(
                 value: progress,
@@ -96,10 +93,7 @@ class _CountryTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Align(
-                          child: Text(
-                            emojiFlagByCountryName(country.name) ?? "🏴‍☠️",
-                            style: TextStyle(fontSize: 32),
-                          ),
+                          child: Text(emojiFlagByCountryName(country.name) ?? "🏴‍☠️", style: TextStyle(fontSize: 32)),
                         ),
                         Align(
                           child: AutoSizeText(
@@ -115,10 +109,7 @@ class _CountryTile extends StatelessWidget {
                           child: Text(
                             isLoading ? "" : "$savedCount / $totalCount",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ],

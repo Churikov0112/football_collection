@@ -14,7 +14,7 @@ import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_players/presentation/screens/packs_screen/widgets/yandex_ads_rewarded_mixin.dart';
 import 'package:football_collection/features/leaderboard/presentation/blocs/leaderboard_country_bloc/leaderboard_country_bloc.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
@@ -28,8 +28,6 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
-import '../../../../countries/presentation/blocs/selected_confederation_bloc/selected_confederation_bloc.dart';
-import '../../../../countries/presentation/blocs/selected_country_bloc/selected_country_bloc.dart';
 import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart';
@@ -46,127 +44,113 @@ const packHeight = 300.0;
 const packWidth = 200.0;
 
 class FootballPlayersPacksScreenArgs {
-  final CountryModel? country;
+  final FootballNationalTeamModel? country;
   final FootballConfederations? confederation;
   const FootballPlayersPacksScreenArgs({this.country, this.confederation});
 }
 
 class FootballPlayersPacksScreen extends StatelessWidget {
-  const FootballPlayersPacksScreen({
-    super.key,
-  });
+  const FootballPlayersPacksScreen({required this.args, super.key});
+
+  final FootballPlayersPacksScreenArgs args;
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
-    return BlocBuilder<SelectedConfederationBloc, SelectedConfederationState>(
-      bloc: getIt.get(),
-      builder: (context, selectedConfederationState) {
-        return BlocBuilder<SelectedCountryBloc, SelectedCountryState>(
-          bloc: getIt.get(),
-          builder: (context, selectedCountryState) {
-            final confederation = selectedConfederationState.confederation;
-            final country = selectedCountryState.country;
+    return BlocProvider(
+      create: (context) => FootballPlayersPacksBloc(getIt.get()),
+      child: FootballPlayersPacksScreenPresenter(
+        args: args,
+        child: Builder(
+          builder: (context) {
+            final presenter = FootballPlayersPacksScreenPresenter.of(context);
 
-            return BlocProvider(
-              create: (context) => FootballPlayersPacksBloc(getIt.get()),
-              child: FootballPlayersPacksScreenPresenter(
-                args: FootballPlayersPacksScreenArgs(confederation: confederation, country: country),
-                child: Builder(
-                  builder: (context) {
-                    final presenter = FootballPlayersPacksScreenPresenter.of(context);
+            return Scaffold(
+              body: DecoratedBox(
+                decoration: BoxDecoration(),
+                child: StreamBuilder<OpenPackCombinedState>(
+                  stream: CombineLatestStream.combine5(
+                    presenter.selectedPackIndexStream$,
+                    presenter.show3dObjectStream$,
+                    presenter.isWaitingConfirmStream$,
+                    presenter.isUnpackingAnimationPlayingStream$,
+                    presenter.isHidePacksAnimationPlayingStream$,
+                    (selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding) =>
+                        OpenPackCombinedState(selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding),
+                  ),
+                  builder: (context, snapshot) {
+                    final state = snapshot.data ?? OpenPackCombinedState(0, false, false, false, false);
 
-                    return Scaffold(
-                      body: DecoratedBox(
-                        decoration: BoxDecoration(),
-                        child: StreamBuilder<OpenPackCombinedState>(
-                          stream: CombineLatestStream.combine5(
-                            presenter.selectedPackIndexStream$,
-                            presenter.show3dObjectStream$,
-                            presenter.isWaitingConfirmStream$,
-                            presenter.isUnpackingAnimationPlayingStream$,
-                            presenter.isHidePacksAnimationPlayingStream$,
-                            (selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding) =>
-                                OpenPackCombinedState(
-                                    selectedPackIndex, show3dObject, waitingConfirm, unpacking, packsHiding),
-                          ),
-                          builder: (context, snapshot) {
-                            final state = snapshot.data ?? OpenPackCombinedState(0, false, false, false, false);
+                    return BlocBuilder<FootballPlayersPacksBloc, FootballPlayersPacksState>(
+                      builder: (context, stickerpackState) {
+                        final packs = stickerpackState.packs ?? [];
+                        if (packs.isEmpty) return const Center(child: CircularProgressIndicator());
+                        final selectedPack = packs[state.selectedPackIndex];
 
-                            return BlocBuilder<FootballPlayersPacksBloc, FootballPlayersPacksState>(
-                              builder: (context, stickerpackState) {
-                                final packs = stickerpackState.packs ?? [];
-                                if (packs.isEmpty) return const Center(child: CircularProgressIndicator());
-                                final selectedPack = packs[state.selectedPackIndex];
-
-                                return Stack(
-                                  children: [
-                                    BackgroundImage(),
-                                    Positioned(
-                                      top: 0,
-                                      left: 0,
-                                      right: 0,
-                                      child: Translator(
-                                        termin: AppGlossary.openPack,
-                                        builder: (value) => TransparentAppbar(title: value),
-                                      ),
-                                    ),
-                                    AnimatedBuilder(
-                                      animation: presenter._hidePacksAnimation,
-                                      builder: (context, child) {
-                                        final value = presenter._hidePacksAnimation.value;
-                                        return Positioned(
-                                          bottom: -mq.size.height * value + mq.padding.bottom + 16,
-                                          left: 0,
-                                          right: 0,
-                                          child: PacksPageView(state: state, packs: packs),
-                                        );
-                                      },
-                                    ),
-                                    if (state.unpacking) _PlayerCardsSwiper(cards: selectedPack.cards!),
-                                    if (state.show3dObject)
-                                      AnimatedBuilder(
-                                        animation: presenter._hidePacksAnimation,
-                                        builder: (context, child) {
-                                          final value = presenter._hidePacksAnimation.value;
-                                          return Positioned(
-                                            left: 0,
-                                            right: 0,
-                                            bottom: -2 * packHeight + (2 * packHeight) * value,
-                                            child: Pack3dModel(selectedPack: selectedPack),
-                                          );
-                                        },
-                                      ),
-                                    // Positioned(
-                                    //   bottom: mq.padding.bottom,
-                                    //   right: 0,
-                                    //   left: 0,
-                                    //   child: StreamBuilder<bool>(
-                                    //     stream: presenter.isBannerAlreadyCreatedStream$,
-                                    //     builder: (context, isBannerAlreadyCreatedSnapshot) {
-                                    //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox();
-                                    //       return AdWidget(
-                                    //         bannerAd: presenter.banner,
-                                    //       );
-                                    //     },
-                                    //   ),
-                                    // ),
-                                  ],
+                        return Stack(
+                          children: [
+                            BackgroundImage(),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              child: Translator(
+                                termin: AppGlossary.openPack,
+                                builder: (value) => TransparentAppbar(title: value),
+                              ),
+                            ),
+                            AnimatedBuilder(
+                              animation: presenter._hidePacksAnimation,
+                              builder: (context, child) {
+                                final value = presenter._hidePacksAnimation.value;
+                                return Positioned(
+                                  bottom: -mq.size.height * value + mq.padding.bottom + 16,
+                                  left: 0,
+                                  right: 0,
+                                  child: PacksPageView(state: state, packs: packs),
                                 );
                               },
-                            );
-                          },
-                        ),
-                      ),
+                            ),
+                            if (state.unpacking) _PlayerCardsSwiper(cards: selectedPack.cards!),
+                            if (state.show3dObject)
+                              AnimatedBuilder(
+                                animation: presenter._hidePacksAnimation,
+                                builder: (context, child) {
+                                  final value = presenter._hidePacksAnimation.value;
+                                  return Positioned(
+                                    left: 0,
+                                    right: 0,
+                                    bottom: -2 * packHeight + (2 * packHeight) * value,
+                                    child: Pack3dModel(selectedPack: selectedPack),
+                                  );
+                                },
+                              ),
+                            // Positioned(
+                            //   bottom: mq.padding.bottom,
+                            //   right: 0,
+                            //   left: 0,
+                            //   child: StreamBuilder<bool>(
+                            //     stream: presenter.isBannerAlreadyCreatedStream$,
+                            //     builder: (context, isBannerAlreadyCreatedSnapshot) {
+                            //       if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox();
+                            //       return AdWidget(
+                            //         bannerAd: presenter.banner,
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
+                          ],
+                        );
+                      },
                     );
                   },
                 ),
               ),
             );
           },
-        );
-      },
+        ),
+      ),
     );
   }
 }

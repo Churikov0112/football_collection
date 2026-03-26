@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
+import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:football_collection/features/onboarding/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
-import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/countries/domain/models/national_team.dart';
 import '../../features/countries/presentation/screens/countries_screen/countries_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_match_screen/draft_match_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
+import '../../features/football_confederations/domain/models/football_confederation.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/home/home_screen/home_screen.dart';
@@ -93,9 +95,18 @@ class FootballCollectionRouter {
           path: RoutePaths.footballConfederations,
           builder: (context, state) => const FootballConfederationsScreen(),
         ),
-        GoRoute(path: RoutePaths.footballCountries, builder: (context, state) => FootballCountriesScreen()),
-        GoRoute(path: RoutePaths.footballPlayersAlbum, builder: (context, state) => FootballPlayersAlbumScreen()),
-        GoRoute(path: RoutePaths.footballPlayersPacks, builder: (context, state) => FootballPlayersPacksScreen()),
+        GoRoute(
+          path: RoutePaths.footballCountries,
+          builder: (context, state) => FootballCountriesScreen(confederation: state.extra as FootballConfederations),
+        ),
+        GoRoute(
+          path: RoutePaths.footballPlayersAlbum,
+          builder: (context, state) => FootballPlayersAlbumScreen(country: state.extra as FootballNationalTeamModel),
+        ),
+        GoRoute(
+          path: RoutePaths.footballPlayersPacks,
+          builder: (context, state) => FootballPlayersPacksScreen(args: state.extra as FootballPlayersPacksScreenArgs),
+        ),
 
         GoRoute(path: RoutePaths.miniGames, builder: (context, state) => MiniGamesScreen()),
         GoRoute(

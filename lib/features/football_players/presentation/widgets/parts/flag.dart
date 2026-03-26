@@ -26,7 +26,7 @@ class _Flag extends StatelessWidget {
                     dimension: 32,
                     child: CircleAvatar(backgroundColor: Colors.white, child: Text("?")),
                   )
-                : Image.asset('assets/raster/team_flags/${player.countryId}.png', height: 32, width: 32),
+                : Image.asset('assets/raster/team_flags/${player.teamId}.jpg', height: 32, width: 32),
           ),
         ),
       ),

@@ -23,9 +23,7 @@ class _RegionsList extends StatelessWidget {
             padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 250),
             itemCount: confederations.length,
             itemBuilder: (context, index) {
-              return _RegionTile(
-                confederation: confederations[index],
-              );
+              return _RegionTile(confederation: confederations[index]);
             },
           ),
         );
@@ -35,9 +33,7 @@ class _RegionsList extends StatelessWidget {
 }
 
 class _RegionTile extends StatelessWidget {
-  const _RegionTile({
-    required this.confederation,
-  });
+  const _RegionTile({required this.confederation});
 
   final FootballConfederations confederation;
 
@@ -46,8 +42,9 @@ class _RegionTile extends StatelessWidget {
     final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
     final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
     final confederationCountries = allCountries.where((c) => c.confederation == confederation).toList();
-    final confederationPlayers =
-        allPlayers.where((player) => confederationCountries.any((cc) => cc.id == player.countryId)).toList();
+    final confederationPlayers = allPlayers
+        .where((player) => confederationCountries.any((cc) => cc.id == player.teamId))
+        .toList();
     final savedCount = confederationPlayers.where((player) => savedCardsIds.contains(player.cardId)).length;
     final totalCount = confederationPlayers.length;
     final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;
@@ -71,10 +68,7 @@ class _RegionTile extends StatelessWidget {
 
             return GestureDetector(
               onTap: () {
-                getIt
-                    .get<SelectedConfederationBloc>()
-                    .add(SelectedConfederationEventSelect(confederation: confederation));
-                context.push(RoutePaths.footballCountries);
+                context.push(RoutePaths.footballCountries, extra: confederation);
               },
               child: SquareProgressIndicator(
                 value: progress,
@@ -106,10 +100,7 @@ class _RegionTile extends StatelessWidget {
                             builder: (value) => Text(
                               value,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
+                              style: const TextStyle(color: Colors.white, fontSize: 24),
                             ),
                           ),
                         ),
@@ -117,10 +108,7 @@ class _RegionTile extends StatelessWidget {
                           child: Text(
                             isLoading || totalCount == 0 ? "" : "$savedCount / $totalCount",
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                            style: const TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ],

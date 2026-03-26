@@ -66,7 +66,7 @@ class _PlayerCardBackWidget extends StatelessWidget {
                     _RoundedContainer(text: beautifyTransferValue(player.maxMarketValue!)),
                   ],
                 ),
-              if (player.currentClub != null) _RoundedContainer(text: player.currentClub!.toUpperCase()),
+              if (player.clubName != null) _RoundedContainer(text: player.clubName!.toUpperCase()),
             ],
           ),
         ),

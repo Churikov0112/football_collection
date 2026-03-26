@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/features/abstract/domain/repos/cards_repository.dart';
-import 'package:football_collection/features/countries/domain/models/country.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
+import 'package:football_collection/features/football_players/domain/models/club.dart';
+import 'package:football_collection/features/football_players/domain/models/market_value.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../football_confederations/domain/models/football_confederation.dart';
@@ -14,7 +17,10 @@ import '../domain/models/player.dart';
 @singleton
 class FootballPlayersRepository extends CardsRepository {
   List<FootballPlayerCardModel> allPlayersCache = [];
-  List<CountryModel> allTeamsCache = [];
+  List<FootballNationalTeamModel> allTeamsCache = [];
+  List<FootballPlayerMarketValueModel> allMarketValuesCache = [];
+  List<FootballClubModel> allClubsCache = [];
+
   final Random _random = Random();
 
   List<FootballPlayerCardModel> _parsePlayers(List<dynamic> data) {
@@ -25,24 +31,69 @@ class FootballPlayersRepository extends CardsRepository {
     return players;
   }
 
-  List<CountryModel> _parseTeams(List<dynamic> data) {
-    List<CountryModel> countries = [];
+  List<FootballNationalTeamModel> _parseTeams(List<dynamic> data) {
+    List<FootballNationalTeamModel> countries = [];
     for (var item in data) {
-      countries.add(CountryModel.fromJson(item));
+      countries.add(FootballNationalTeamModel.fromJson(item));
     }
     return countries;
   }
 
-  Future<void> _ensureInitialized() async {
-    if (allTeamsCache.isEmpty) {
-      String jsonString = await rootBundle.loadString('assets/json/teams_data.json');
-      List<dynamic> data = jsonDecode(jsonString);
-      allTeamsCache = await compute(_parseTeams, data);
+  List<FootballPlayerMarketValueModel> _parseMarketValues(List<dynamic> data) {
+    List<FootballPlayerMarketValueModel> marketValues = [];
+    for (var item in data) {
+      marketValues.add(FootballPlayerMarketValueModel.fromJson(item));
     }
-    if (allPlayersCache.isEmpty) {
-      String jsonString = await rootBundle.loadString('assets/json/players_data.json');
-      List<dynamic> data = jsonDecode(jsonString);
-      allPlayersCache = await compute(_parsePlayers, data);
+    return marketValues;
+  }
+
+  List<FootballClubModel> _parseClubs(List<dynamic> data) {
+    List<FootballClubModel> clubs = [];
+    for (var item in data) {
+      clubs.add(FootballClubModel.fromJson(item));
+    }
+    return clubs;
+  }
+
+  Future<void> _ensureInitialized() async {
+    try {
+      if (allTeamsCache.isEmpty) {
+        String jsonString = await rootBundle.loadString('assets/json/teams_data.json');
+        List<dynamic> data = jsonDecode(jsonString);
+        allTeamsCache = await compute(_parseTeams, data);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    try {
+      if (allPlayersCache.isEmpty) {
+        String jsonString = await rootBundle.loadString('assets/json/players_data.json');
+        List<dynamic> data = jsonDecode(jsonString);
+        allPlayersCache = await compute(_parsePlayers, data);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    try {
+      if (allMarketValuesCache.isEmpty) {
+        String jsonString = await rootBundle.loadString('assets/json/market_values_data.json');
+        List<dynamic> data = jsonDecode(jsonString);
+        allMarketValuesCache = await compute(_parseMarketValues, data);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    try {
+      if (allClubsCache.isEmpty) {
+        String jsonString = await rootBundle.loadString('assets/json/clubs_data.json');
+        List<dynamic> data = jsonDecode(jsonString);
+        allClubsCache = await compute(_parseClubs, data);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
@@ -50,17 +101,17 @@ class FootballPlayersRepository extends CardsRepository {
   Future<List<FootballPlayerCardModel>> cardsGet([String? countryId]) async {
     await _ensureInitialized();
     if (countryId == null) return [...allPlayersCache];
-    return [...allPlayersCache].where((player) => player.countryId == countryId).toList();
+    return [...allPlayersCache].where((player) => player.teamId == countryId).toList();
   }
 
-  Future<List<CountryModel>> countriesGet([List<String>? countryIds]) async {
+  Future<List<FootballNationalTeamModel>> countriesGet([List<String>? countryIds]) async {
     await _ensureInitialized();
     if (countryIds == null) return [...allTeamsCache];
     return [...allTeamsCache].where((country) => countryIds.contains(country.id)).toList();
   }
 
   @override
-  Future<List<PackModel>> packsGet({FootballConfederations? confederation, CountryModel? country}) async {
+  Future<List<PackModel>> packsGet({FootballConfederations? confederation, FootballNationalTeamModel? country}) async {
     final List<PackModel> packs = [
       if (country != null)
         PackModel(
@@ -116,7 +167,7 @@ class FootballPlayersRepository extends CardsRepository {
   @override
   Future<List<FootballPlayerCardModel>> getRandomCards({
     int count = 5,
-    CountryModel? country,
+    FootballNationalTeamModel? country,
     FootballConfederations? confederation,
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
@@ -139,35 +190,66 @@ class FootballPlayersRepository extends CardsRepository {
     return result;
   }
 
+  int? playerMaxMarketValue(String id) {
+    final mv = allMarketValuesCache.firstWhereOrNull((mv) => mv.id == id);
+
+    int? max;
+    for (final mvHistoryItem in mv?.marketValue?.marketValueHistory ?? <MarketValueHistoryModel>[]) {
+      if ((mvHistoryItem.marketValue ?? 0) > (max ?? 0)) {
+        max = mvHistoryItem.marketValue;
+      }
+    }
+
+    return max;
+  }
+
+  int? playerCurrentMarketValue(String id) {
+    final mv = allMarketValuesCache.firstWhereOrNull((mv) => mv.id == id);
+    return mv?.marketValue?.marketValue;
+  }
+
   Future<FootballPlayerCardModel> _getRandomCard({
-    CountryModel? country,
+    FootballNationalTeamModel? country,
     FootballConfederations? confederation,
     bool? topCountries,
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
   }) async {
-    final playersSublist = allPlayersCache.where((player) {
-      if (country != null) {
-        if (player.countryId != country.id) return false;
-      }
-      if (confederation != null) {
-        final playerCountryName = allTeamsCache.firstWhere((team) => team.id == player.countryId).name;
-        if (confederation != footballConfederationFromCountryName(playerCountryName)) return false;
-      }
-      if (minPrimeTransferValue != null || minCurrentTransferValue != null) {
-        if (minPrimeTransferValue != null && player.maxMarketValue == null) return false;
-        if (minCurrentTransferValue != null && player.currentMarketValue == null) return false;
-        if (minPrimeTransferValue != null && player.maxMarketValue! < minPrimeTransferValue) return false;
-        if (minCurrentTransferValue != null && player.currentMarketValue! < minCurrentTransferValue) return false;
-      }
-      if (topCountries == true) {
-        final top25Countries = allTeamsCache.sublist(0, 25);
-        if (!top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.countryId))) return false;
-      }
-      return true;
-    }).toList();
+    try {
+      final playersSublist = allPlayersCache.where((player) {
+        if (country != null) {
+          if (player.teamId != country.id) return false;
+        }
+        if (confederation != null) {
+          final playerCountryName = allTeamsCache.firstWhere((team) => team.id == player.teamId).name;
+          if (confederation != footballConfederationFromCountryName(playerCountryName)) return false;
+        }
+        if (minPrimeTransferValue != null || minCurrentTransferValue != null) {
+          if (minPrimeTransferValue != null && playerMaxMarketValue(player.playerId) == null) {
+            return false;
+          }
+          if (minCurrentTransferValue != null && playerCurrentMarketValue(player.playerId) == null) {
+            return false;
+          }
+          if (minPrimeTransferValue != null && playerMaxMarketValue(player.playerId)! < minPrimeTransferValue) {
+            return false;
+          }
+          if (minCurrentTransferValue != null && playerCurrentMarketValue(player.playerId)! < minCurrentTransferValue) {
+            return false;
+          }
+        }
+        if (topCountries == true) {
+          final top25Countries = allTeamsCache.sublist(0, 25);
+          if (!top25Countries.contains(allTeamsCache.firstWhere((team) => team.id == player.teamId))) return false;
+        }
+        return true;
+      }).toList();
 
-    final index = _random.nextInt(playersSublist.length);
-    return playersSublist[index];
+      final index = _random.nextInt(playersSublist.length);
+      return playersSublist[index];
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
   }
 }

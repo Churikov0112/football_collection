@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 
-enum FootballConfederations {
-  caf,
-  concacaf,
-  ofc,
-  uefa,
-  afc,
-  conmebol,
-  unknown,
-}
+enum FootballConfederations { caf, concacaf, ofc, uefa, afc, conmebol, unknown }
 
 extension ConfederationExtension on FootballConfederations {
   String toJson() => name.toUpperCase();
@@ -257,6 +249,7 @@ FootballConfederations footballConfederationFromCountryName(String countryName) 
       return FootballConfederations.afc;
 
     // CONCACAF (Северная и Центральная Америка, Карибы)
+    case 'Anguilla':
     case 'United States':
     case 'Mexico':
     case 'Canada':

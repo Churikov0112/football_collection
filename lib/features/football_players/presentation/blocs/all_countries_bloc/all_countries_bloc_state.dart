@@ -1,7 +1,7 @@
 part of 'all_countries_bloc.dart';
 
 sealed class AllCountriesState {
-  List<CountryModel>? get countries {
+  List<FootballNationalTeamModel>? get countries {
     return switch (this) {
       AllCountriesStateLoadSucceeded() => (this as AllCountriesStateLoadSucceeded)._countries,
       _ => null,
@@ -18,7 +18,7 @@ final class AllCountriesStatePending extends AllCountriesState {
 }
 
 final class AllCountriesStateLoadSucceeded extends AllCountriesState {
-  final List<CountryModel> _countries;
+  final List<FootballNationalTeamModel> _countries;
   AllCountriesStateLoadSucceeded(this._countries);
 }
 

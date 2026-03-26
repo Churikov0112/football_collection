@@ -1,19 +1,16 @@
 part of '../guess_national_team_screen.dart';
 
 class _GuessOptions extends StatelessWidget {
-  const _GuessOptions({
-    required this.rightAnswer,
-    required this.options,
-  });
+  const _GuessOptions({required this.rightAnswer, required this.options});
 
-  final List<CountryModel> options;
-  final CountryModel rightAnswer;
+  final List<FootballNationalTeamModel> options;
+  final FootballNationalTeamModel rightAnswer;
 
   @override
   Widget build(BuildContext context) {
     final presenter = GuessNationalTeamScreenPresenter.of(context);
 
-    return StreamBuilder<CountryModel?>(
+    return StreamBuilder<FootballNationalTeamModel?>(
       stream: presenter.selectedOptionStream$,
       builder: (context, selectedOptionSnapshot) {
         final selectedOption = selectedOptionSnapshot.data;
@@ -24,11 +21,7 @@ class _GuessOptions extends StatelessWidget {
             spacing: 8,
             children: [
               for (final option in options) ...[
-                _Option(
-                  option: option,
-                  selectedOption: selectedOption,
-                  rightAnswer: rightAnswer,
-                ),
+                _Option(option: option, selectedOption: selectedOption, rightAnswer: rightAnswer),
               ],
               // if (selectedOption != null && !guessed) ...[
               //   const SizedBox(height: 16),
@@ -61,15 +54,11 @@ class _GuessOptions extends StatelessWidget {
 }
 
 class _Option extends StatelessWidget {
-  const _Option({
-    required this.option,
-    required this.selectedOption,
-    required this.rightAnswer,
-  });
+  const _Option({required this.option, required this.selectedOption, required this.rightAnswer});
 
-  final CountryModel option;
-  final CountryModel rightAnswer;
-  final CountryModel? selectedOption;
+  final FootballNationalTeamModel option;
+  final FootballNationalTeamModel rightAnswer;
+  final FootballNationalTeamModel? selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +75,14 @@ class _Option extends StatelessWidget {
         decoration: BoxDecoration(
           color: selectedOption != null
               ? guessed
-                  ? selectedOption == option
-                      ? Colors.green
-                      : Colors.black54
-                  : selectedOption == option
-                      ? Colors.red
-                      : option == rightAnswer
+                    ? selectedOption == option
                           ? Colors.green
                           : Colors.black54
+                    : selectedOption == option
+                    ? Colors.red
+                    : option == rightAnswer
+                    ? Colors.green
+                    : Colors.black54
               : Colors.black54,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
@@ -104,9 +93,7 @@ class _Option extends StatelessWidget {
               "${emojiFlagByCountryName(option.name) ?? ""}  ${option.name}",
               maxLines: 2,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-              ),
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ),

@@ -129,8 +129,8 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                         name: "player_to_qr",
                         parameters: {
                           "player_id": widget.player.playerId,
-                          "player_country_id": widget.player.countryId,
-                          "player_club": widget.player.currentClub ?? "no_data",
+                          "player_country_id": widget.player.teamId.toString(),
+                          "player_club": widget.player.clubName ?? "no_data",
                           "player_position": widget.player.position ?? "no_data",
                           "current_current_market_value": widget.player.currentMarketValue ?? "no_data",
                           "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
@@ -157,8 +157,8 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
                         name: "player_sell",
                         parameters: {
                           "player_id": widget.player.playerId,
-                          "player_country_id": widget.player.countryId,
-                          "player_club": widget.player.currentClub ?? "no_data",
+                          "player_country_id": widget.player.teamId.toString(),
+                          "player_club": widget.player.clubName ?? "no_data",
                           "player_position": widget.player.position ?? "no_data",
                           "current_current_market_value": widget.player.currentMarketValue ?? "no_data",
                           "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
