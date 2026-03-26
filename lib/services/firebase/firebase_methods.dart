@@ -145,9 +145,7 @@ class FirebaseStaticMethods {
         ?.createNotificationChannel(channel);
 
     await flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/launcher_icon'),
-      ),
+      settings: const InitializationSettings(android: AndroidInitializationSettings('@mipmap/launcher_icon')),
       onDidReceiveNotificationResponse: _onMessageTapAndroid,
       onDidReceiveBackgroundNotificationResponse: _onMessageTapAndroid,
     );
@@ -158,10 +156,10 @@ class FirebaseStaticMethods {
 
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
+          id: notification.hashCode,
+          title: notification.title,
+          body: notification.body,
+          notificationDetails: NotificationDetails(
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
@@ -187,34 +185,30 @@ class FirebaseStaticMethods {
     );
   }
 
-  static Future<void> sendNotification(
-    String token,
-    String title,
-    String body,
-  ) async {
-// ПРимер запроса через Postman
-//     {
-//     "message":{
-//         "android": {
-//             "priority": "HIGH"
-//         },
-//         "data": {
-//                 "body": "Нажмите, чтобы его просмотреть",
-//                 "title": "У вас есть парковочное разрешение",
-//                 "click_action": "FLUTTER_NOTIFICATION_CLICK",
-//                 "status": "done",
-//                 "screen": "/benefits_and_season_tickets"
-//             },
-//         "notification": {
-//                 "body": "Нажмите, чтобы его просмотреть",
-//                 "title": "У вас есть парковочное разрешение"
-//                 // "android_channel_id": "dbfood",
-//                 // "sound": "default"
-//             },
-//         "token": "dS0I7PalTHmFNofvcTMQFg:APA91bHeGqDRs8OZkkQJj8sXR6v2lOUuwTSvsjAEoihuzEtp7VpFxRLe0OE37S-kPyP4wtVj6pjuskAlbEz2_T6frAoNgkZxvRe2HSn4izUZ2cCS-mNtqtasv8eQgqpYO-WuqvwCdUOo"
-//         // "token": "daSwARjVTxu48dH1OfGGt0:APA91bEQS3b3gdjaUB83uSpbioJ907TaXEFp4ZGeGSAecsx1muEe31ae-libn4qf63f-QN1se3aN-NL_5USh_-nY5T9fV4DYNSVhifsOTE0RWzF0NRmzncdf8IH0S7pPe2jCoOixzJn9"
-//     }
-// }
+  static Future<void> sendNotification(String token, String title, String body) async {
+    // ПРимер запроса через Postman
+    //     {
+    //     "message":{
+    //         "android": {
+    //             "priority": "HIGH"
+    //         },
+    //         "data": {
+    //                 "body": "Нажмите, чтобы его просмотреть",
+    //                 "title": "У вас есть парковочное разрешение",
+    //                 "click_action": "FLUTTER_NOTIFICATION_CLICK",
+    //                 "status": "done",
+    //                 "screen": "/benefits_and_season_tickets"
+    //             },
+    //         "notification": {
+    //                 "body": "Нажмите, чтобы его просмотреть",
+    //                 "title": "У вас есть парковочное разрешение"
+    //                 // "android_channel_id": "dbfood",
+    //                 // "sound": "default"
+    //             },
+    //         "token": "dS0I7PalTHmFNofvcTMQFg:APA91bHeGqDRs8OZkkQJj8sXR6v2lOUuwTSvsjAEoihuzEtp7VpFxRLe0OE37S-kPyP4wtVj6pjuskAlbEz2_T6frAoNgkZxvRe2HSn4izUZ2cCS-mNtqtasv8eQgqpYO-WuqvwCdUOo"
+    //         // "token": "daSwARjVTxu48dH1OfGGt0:APA91bEQS3b3gdjaUB83uSpbioJ907TaXEFp4ZGeGSAecsx1muEe31ae-libn4qf63f-QN1se3aN-NL_5USh_-nY5T9fV4DYNSVhifsOTE0RWzF0NRmzncdf8IH0S7pPe2jCoOixzJn9"
+    //     }
+    // }
   }
 
   static Future<void> showLocalNotification({
@@ -225,10 +219,10 @@ class FirebaseStaticMethods {
     final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
 
     await flutterLocalNotificationsPlugin.show(
-      Random().nextInt(999999),
-      title,
-      body,
-      NotificationDetails(
+      id: Random().nextInt(999999),
+      title: title,
+      body: body,
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           "football_collection",
           "football_collection",

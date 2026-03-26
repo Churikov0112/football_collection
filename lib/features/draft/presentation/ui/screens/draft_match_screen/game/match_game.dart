@@ -212,7 +212,7 @@ class MatchGame extends FlameGame {
   }
 
   void _setupCamera() {
-    camera.smoothFollow(ball, stiffness: 0.85);
+    camera.chase(ball, stiffness: 0.85);
     camera.viewport.add(ScoreComponent(getScore: () => '${teamA.name}  |$teamAscore : $teamBscore|  ${teamB.name}'));
     camera.viewport.add(TimeComponent(getTime: () => "${elapsedTime.toStringAsFixed(0)}'"));
   }

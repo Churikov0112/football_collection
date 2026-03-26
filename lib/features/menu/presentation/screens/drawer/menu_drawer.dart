@@ -4,6 +4,8 @@ import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
+
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
 
@@ -70,22 +72,22 @@ class MenuDrawer extends StatelessWidget {
                 builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
               ),
             ),
-            // ListTile(
-            //   onTap: () {
-            //     showModalBottomSheet(
-            //       context: context,
-            //       isScrollControlled: true,
-            //       builder: (context) {
-            //         return EnterCheatCodeScreen();
-            //       },
-            //     );
-            //   },
-            //   leading: Icon(Icons.keyboard, color: Colors.white),
-            //   title: Translator(
-            //     termin: AppGlossary.cheatCodes,
-            //     builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
-            //   ),
-            // ),
+            ListTile(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return EnterCheatCodeScreen();
+                  },
+                );
+              },
+              leading: Icon(Icons.keyboard, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.cheatCodes,
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+              ),
+            ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.settings);

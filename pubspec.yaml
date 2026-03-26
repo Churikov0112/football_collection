@@ -41,40 +41,39 @@ dependencies:
     sdk: flutter
 
   # DI
-  get_it: 8.2.0
-  injectable: 2.5.1
+  get_it: 9.2.1
+  injectable: 2.7.1+4
 
   # BLoC
   flutter_bloc: 9.1.1
-  bloc: 9.0.0
+  bloc: 9.2.0
   freezed_annotation: 3.1.0
-  hydrated_bloc: 10.1.1
+  hydrated_bloc: 11.0.0
   path_provider: 2.1.5
   bloc_concurrency: 0.3.0
 
   # Backend
-  equatable: 2.0.7
-  json_annotation: 4.9.0
+  equatable: 2.0.8
+  json_annotation: 4.11.0
   collection: 1.19.1
 
   # Navigation
-  go_router: 16.2.1
+  go_router: 17.1.0
 
   #UI
   toastification: 3.0.3
   cached_network_image: 3.4.1
-  flutter_image: 4.1.11
-  flutter_card_swiper: 7.0.2
+  flutter_card_swiper: 7.2.0
   square_progress_indicator: 0.0.8
   o3d: 3.1.3
   auto_size_text: 3.0.0
   flutter_flip_card: 0.0.6
-  mobile_scanner: 7.0.1
+  mobile_scanner: 7.2.0
   qr_flutter: 4.1.0
   modal_bottom_sheet: 3.0.0
   flutter_confetti: 0.5.1
-  carousel_slider: 5.1.1
-  skeletonizer: 2.1.0+1
+  carousel_slider: 5.1.2
+  skeletonizer: 2.1.3
   # flutter_gallery_3d: 1.1.1
   # gif: 2.3.0
   # flutter_vap2: 2.0.1
@@ -84,22 +83,21 @@ dependencies:
   rxdart: 0.28.0
   throttling: 2.0.1
   url_launcher: 6.3.2
-  logger: 2.6.1
+  logger: 2.7.0
 
-  firebase_analytics: 12.0.1
-  firebase_core: 4.1.0
-  firebase_messaging: 16.0.1
+  firebase_analytics: 12.2.0
+  firebase_core: 4.6.0
+  firebase_messaging: 16.1.3
   firebase_crashlytics: 5.0.1
-  cloud_firestore: 6.0.1
-  flutter_local_notifications: 19.4.1
+  cloud_firestore: 6.2.0
+  flutter_local_notifications: 21.0.0
 
-  yandex_mobileads:
-    7.14.0
+  yandex_mobileads: 7.18.0
 
-    # mini games
-  flame: 1.30.1
-  flame_camera_tools: 4.0.1
-  fl_chart: 1.1.0
+  # mini games
+  flame: 1.36.0
+  flame_camera_tools: 5.0.2
+  fl_chart: 1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -113,10 +111,10 @@ dev_dependencies:
   flutter_lints: 6.0.0
 
   # Code generation
-  build_runner: 2.7.1
-  json_serializable: 6.11.0
-  freezed: 3.2.0
-  injectable_generator: 2.8.1
+  build_runner: 2.13.1
+  json_serializable: 6.13.1
+  freezed: 3.2.5
+  injectable_generator: 2.12.1
   flutter_launcher_icons: 0.14.4
 
 # For information on the generic Dart part of this file, see the
