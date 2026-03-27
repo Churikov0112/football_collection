@@ -74,6 +74,16 @@ class MenuDrawer extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
+                context.push(RoutePaths.footballPlayersDuplicates);
+              },
+              leading: Icon(Icons.copy, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.duplicates,
+                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            ListTile(
+              onTap: () {
                 showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
