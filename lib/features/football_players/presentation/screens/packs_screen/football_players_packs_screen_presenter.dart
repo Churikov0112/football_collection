@@ -42,6 +42,8 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   final BehaviorSubject<bool> _isUnpackingAnimationPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isUnpackingAnimationPlayingStream$ => _isUnpackingAnimationPlayingSubject.stream;
 
+  Set<String> _newCardIdsForOpenedPack = <String>{};
+
   @override
   void initState() {
     super.initState();
@@ -83,9 +85,11 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   Future<void> openPack(PackModel pack) async {
     final participantCountry = getIt.get<LeaderboardCountryBloc>().state.countryName;
     final alreadySavedCards = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
-    final newCardsFromPack = (pack.cards ?? const <CardModel>[])
+    _newCardIdsForOpenedPack = (pack.cards ?? const <CardModel>[])
         .where((card) => !alreadySavedCards.contains(card.cardId))
-        .length;
+        .map((card) => card.cardId)
+        .toSet();
+    final newCardsFromPack = _newCardIdsForOpenedPack.length;
 
     try {
       final packTitle = pack.title.toLowerCase().replaceAll(" ", "_");
@@ -180,7 +184,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isUnpackingAnimationPlayingSubject.add(false);
     await context.push(
       RoutePaths.footballPlayersPackResults,
-      extra: FootballPlayersPackResultsScreenArgs(cards: players),
+      extra: FootballPlayersPackResultsScreenArgs(cards: players, newCardIds: _newCardIdsForOpenedPack),
     );
     getNewPacks();
   }

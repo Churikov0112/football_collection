@@ -2,8 +2,9 @@ part of '../football_players_packs_screen.dart';
 
 class _PlayerCardsSwiper extends StatefulWidget {
   final List<CardModel> cards;
+  final Set<String> newCardIds;
 
-  const _PlayerCardsSwiper({required this.cards});
+  const _PlayerCardsSwiper({required this.cards, required this.newCardIds});
 
   @override
   State<_PlayerCardsSwiper> createState() => _PlayerCardsSwiperState();
@@ -48,7 +49,12 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       cardsCount: widget.cards.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
         final player = widget.cards[index] as FootballPlayerCardModel;
-        return FootballPlayerCard(player: player, count: 1, hideTransferValue: false);
+        return FootballPlayerCard(
+          player: player,
+          count: 1,
+          hideTransferValue: false,
+          showNew: widget.newCardIds.contains(player.cardId),
+        );
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
         final prevPlayer = widget.cards[previousIndex] as FootballPlayerCardModel;

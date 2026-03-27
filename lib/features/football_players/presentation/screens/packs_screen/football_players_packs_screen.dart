@@ -115,7 +115,11 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            if (state.unpacking) _PlayerCardsSwiper(cards: selectedPack.cards!),
+                            if (state.unpacking)
+                              _PlayerCardsSwiper(
+                                cards: selectedPack.cards!,
+                                newCardIds: presenter._newCardIdsForOpenedPack,
+                              ),
                             if (state.show3dObject)
                               AnimatedBuilder(
                                 animation: presenter._hidePacksAnimation,

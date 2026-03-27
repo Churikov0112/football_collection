@@ -48,7 +48,7 @@ class _OnboardingCardsSwiperState extends State<_OnboardingCardsSwiper> {
       cardsCount: widget.cards.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
         final player = widget.cards[index] as FootballPlayerCardModel;
-        return FootballPlayerCard(player: player, count: 1, hideTransferValue: false);
+        return FootballPlayerCard(player: player, count: 1, hideTransferValue: false, showNew: true);
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
         final prevPlayer = widget.cards[previousIndex] as FootballPlayerCardModel;

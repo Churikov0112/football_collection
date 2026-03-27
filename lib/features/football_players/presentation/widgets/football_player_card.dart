@@ -35,6 +35,7 @@ class FootballPlayerCard extends StatefulWidget {
     this.height = packHeight,
     this.width = packWidth,
     this.enableFlip = false,
+    this.showNew = false,
     this.onSell,
     this.onShare,
     this.onSellAll,
@@ -47,6 +48,7 @@ class FootballPlayerCard extends StatefulWidget {
   final bool hideNationalTeam;
   final bool hideName;
   final bool enableFlip;
+  final bool showNew;
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
   final VoidCallback? onShare;
@@ -80,7 +82,7 @@ class _FootballPlayerCardState extends State<FootballPlayerCard> {
           Expanded(
             child: Stack(
               children: [
-                _PlayerImage(player: widget.player, count: widget.count),
+                _PlayerImage(player: widget.player, count: widget.count, showNew: widget.showNew),
                 _Flag(player: widget.player, hideNationalTeam: widget.hideNationalTeam),
                 _PriceAndPosition(player: widget.player, hideTransferValue: widget.hideTransferValue),
               ],

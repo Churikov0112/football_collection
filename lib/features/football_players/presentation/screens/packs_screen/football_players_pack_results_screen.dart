@@ -8,7 +8,8 @@ import '../../../domain/models/player.dart';
 
 class FootballPlayersPackResultsScreenArgs {
   final List<FootballPlayerCardModel> cards;
-  const FootballPlayersPackResultsScreenArgs({required this.cards});
+  final Set<String> newCardIds;
+  const FootballPlayersPackResultsScreenArgs({required this.cards, required this.newCardIds});
 }
 
 class FootballPlayersPackResultsScreen extends StatelessWidget {
@@ -43,7 +44,13 @@ class FootballPlayersPackResultsScreen extends StatelessWidget {
                   ),
                   itemCount: args.cards.length,
                   itemBuilder: (context, index) {
-                    return FootballPlayerCard(player: args.cards[index], count: 1, enableFlip: true);
+                    final player = args.cards[index];
+                    return FootballPlayerCard(
+                      player: player,
+                      count: 1,
+                      enableFlip: true,
+                      showNew: args.newCardIds.contains(player.cardId),
+                    );
                   },
                 ),
               ),
