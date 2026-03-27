@@ -15,6 +15,7 @@ import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.d
 import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
 import '../../features/football_confederations/domain/models/football_confederation.dart';
 import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
+import '../../features/football_players/presentation/screens/packs_screen/football_players_pack_results_screen.dart';
 import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/home/home_screen/home_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
@@ -32,6 +33,7 @@ class RoutePaths {
   static const footballCountries = '/footballCountries';
   static const footballPlayersAlbum = '/footballPlayersAlbum';
   static const footballPlayersPacks = '/footballPlayersPacks';
+  static const footballPlayersPackResults = '/footballPlayersPackResults';
 
   // minigames
   static const miniGames = '/miniGames';
@@ -106,6 +108,11 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballPlayersPacks,
           builder: (context, state) => FootballPlayersPacksScreen(args: state.extra as FootballPlayersPacksScreenArgs),
+        ),
+        GoRoute(
+          path: RoutePaths.footballPlayersPackResults,
+          builder: (context, state) =>
+              FootballPlayersPackResultsScreen(args: state.extra as FootballPlayersPackResultsScreenArgs),
         ),
 
         GoRoute(path: RoutePaths.miniGames, builder: (context, state) => MiniGamesScreen()),

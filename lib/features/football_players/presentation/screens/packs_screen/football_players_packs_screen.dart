@@ -23,15 +23,18 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/log/log_service.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:o3d/o3d.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../../services/navigation/navigation.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/models/player.dart';
 import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart';
 import '../../widgets/football_player_card.dart';
+import 'football_players_pack_results_screen.dart';
 import 'widgets/confirm_buy_pack_bs.dart';
 import 'widgets/not_enoght_money_bs.dart';
 import 'widgets/pack_3d_model.dart';

@@ -36,7 +36,7 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     final backgroundHeight = mq.size.height - mq.padding.top - mq.padding.bottom - 56;
 
     return CardSwiper(
-      onEnd: presenter.getNewPacks,
+      onEnd: () => presenter.showReceivedCards(widget.cards),
       padding: EdgeInsets.only(
         left: (mq.size.width - packWidth) / 2,
         right: (mq.size.width - packWidth) / 2,

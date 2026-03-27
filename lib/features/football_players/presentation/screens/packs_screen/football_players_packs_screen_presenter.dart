@@ -175,6 +175,16 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: player.cardId));
   }
 
+  Future<void> showReceivedCards(List<CardModel> cards) async {
+    final players = cards.whereType<FootballPlayerCardModel>().toList();
+    _isUnpackingAnimationPlayingSubject.add(false);
+    await context.push(
+      RoutePaths.footballPlayersPackResults,
+      extra: FootballPlayersPackResultsScreenArgs(cards: players),
+    );
+    getNewPacks();
+  }
+
   @override
   void dispose() {
     _hidePacksAnimationController.dispose();
