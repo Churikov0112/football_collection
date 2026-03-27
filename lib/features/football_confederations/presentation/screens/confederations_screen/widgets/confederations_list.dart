@@ -14,13 +14,14 @@ class _RegionsList extends StatelessWidget {
 
         return Expanded(
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
               childAspectRatio: 1 / 1,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 250),
+            padding: EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
             itemCount: confederations.length,
             itemBuilder: (context, index) {
               return _RegionTile(confederation: confederations[index]);

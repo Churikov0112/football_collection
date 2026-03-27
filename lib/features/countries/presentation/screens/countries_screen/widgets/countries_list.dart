@@ -16,13 +16,15 @@ class _CountriesList extends StatelessWidget {
 
         return Expanded(
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
               childAspectRatio: 1 / 1,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 250),
+            padding: EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
+
             itemCount: countries.length,
             itemBuilder: (context, index) {
               return _CountryTile(country: countries[index]);
@@ -86,9 +88,7 @@ class _CountryTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Align(
-                      child: Text(emojiFlagByCountryName(country.name) ?? "🏴‍☠️", style: TextStyle(fontSize: 32)),
-                    ),
+                    Align(child: Text(emojiFlagByCountryName(country.name) ?? "🏴‍☠️", style: TextStyle(fontSize: 32))),
                     Align(
                       child: AutoSizeText(
                         country.name,

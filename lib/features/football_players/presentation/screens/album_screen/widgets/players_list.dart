@@ -16,13 +16,14 @@ class _FootballPlayersList extends StatelessWidget {
 
         return Expanded(
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
               childAspectRatio: 2 / 3,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
-            padding: EdgeInsets.only(top: mq.padding.top + 75, left: 10, right: 10, bottom: 250),
+            padding: EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
             itemCount: players.length,
             itemBuilder: (context, index) {
               return _FootballPlayerAlbumWidget(player: players[index], country: country);

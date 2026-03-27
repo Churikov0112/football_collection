@@ -45,7 +45,7 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
                 Column(children: [_FootballPlayersList(country: country)]),
                 TransparentAppbar(
                   title: "${emojiFlagByCountryName(country.name) ?? ""}  ${country.name}",
-                  backgroundColor: country.confederation.color,
+                  // backgroundColor: country.confederation.color,
                 ),
                 Positioned(
                   bottom: mq.padding.bottom,
