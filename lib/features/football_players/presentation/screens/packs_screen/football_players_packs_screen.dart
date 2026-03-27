@@ -128,7 +128,7 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                                   return Positioned(
                                     left: 0,
                                     right: 0,
-                                    bottom: -2 * packHeight + (2 * packHeight) * value,
+                                    bottom: -2 * packHeight + (2.1 * packHeight) * value,
                                     child: Pack3dModel(selectedPack: selectedPack),
                                   );
                                 },

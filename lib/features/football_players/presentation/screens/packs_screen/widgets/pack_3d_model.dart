@@ -5,10 +5,7 @@ import 'package:o3d/o3d.dart';
 import '../football_players_packs_screen.dart';
 
 class Pack3dModel extends StatelessWidget {
-  const Pack3dModel({
-    required this.selectedPack,
-    super.key,
-  });
+  const Pack3dModel({required this.selectedPack, super.key});
 
   final PackModel selectedPack;
 

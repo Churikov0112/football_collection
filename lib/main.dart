@@ -63,7 +63,7 @@ Future<void> main() async {
   }
 
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent, statusBarColor: Colors.black),
+    SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.transparent),
   );
 
   await SystemChrome.setPreferredOrientations([
