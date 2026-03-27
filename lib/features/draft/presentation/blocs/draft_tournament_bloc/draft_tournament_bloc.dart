@@ -25,7 +25,7 @@ part 'draft_tournament_bloc_state.dart';
 
 @singleton
 class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentState> {
-  final FootballPlayersRepository _repository;
+  final CommonFootballRepository _repository;
   final Random random = Random();
 
   DraftTournamentBloc(this._repository) : super(DraftTournamentStateInitial()) {
@@ -40,8 +40,8 @@ class DraftTournamentBloc extends Bloc<DraftTournamentEvent, DraftTournamentStat
 
   Future<void> _start(DraftTournamentEventStart event, Emitter<DraftTournamentState> emit) async {
     try {
-      final allPlayers = await _repository.cardsGet();
-      final allTeams = await _repository.countriesGet();
+      final allPlayers = await _repository.playersGet();
+      final allTeams = await _repository.teamsGet();
 
       final random = Random();
       final gameTeams = <FootballTeamGameModel>[];

@@ -9,7 +9,8 @@ part 'all_countries_bloc_state.dart';
 
 @singleton
 class AllCountriesBloc extends Bloc<AllCountriesEvent, AllCountriesState> {
-  final FootballPlayersRepository _repository;
+  final CommonFootballRepository _repository;
+
   AllCountriesBloc(this._repository) : super(AllCountriesStateInitial()) {
     on<AllCountriesEvent>(
       (event, emitter) => switch (event) {
@@ -21,7 +22,7 @@ class AllCountriesBloc extends Bloc<AllCountriesEvent, AllCountriesState> {
   Future<void> _get(AllCountriesEventGet event, Emitter<AllCountriesState> emit) async {
     try {
       emit(AllCountriesStatePending());
-      final countries = await _repository.countriesGet();
+      final countries = await _repository.teamsGet();
       emit(AllCountriesStateLoadSucceeded(countries));
     } on Object catch (_) {
       emit(AllCountriesStateFailed('Произошла ошибка'));

@@ -11,7 +11,7 @@ part 'football_players_packs_bloc_state.dart';
 
 @singleton
 class FootballPlayersPacksBloc extends Bloc<FootballPlayersPacksEvent, FootballPlayersPacksState> {
-  final FootballPlayersRepository _repository;
+  final CommonFootballRepository _repository;
 
   FootballPlayersPacksBloc(this._repository) : super(FootballPlayersPacksStateInitial()) {
     on<FootballPlayersPacksEvent>(
@@ -24,7 +24,7 @@ class FootballPlayersPacksBloc extends Bloc<FootballPlayersPacksEvent, FootballP
   Future<void> _get(FootballPlayersPacksEventGet event, Emitter<FootballPlayersPacksState> emit) async {
     try {
       emit(FootballPlayersPacksStatePending());
-      final packs = await _repository.packsGet(country: event.country, confederation: event.confederation);
+      final packs = await _repository.packsGet(team: event.country, confederation: event.confederation);
       emit(FootballPlayersPacksStateLoadSucceeded(packs));
     } on Object catch (_) {
       emit(FootballPlayersPacksStateFailed('Произошла ошибка'));

@@ -1,34 +1,3 @@
-import 'package:equatable/equatable.dart';
-
-class FootballPlayerMarketValueModel extends Equatable {
-  final String id;
-  final String name;
-  final String teamId;
-  final String teamName;
-  final MarketValueModel? marketValue;
-
-  const FootballPlayerMarketValueModel({
-    required this.id,
-    required this.teamId,
-    required this.teamName,
-    required this.name,
-    required this.marketValue,
-  });
-
-  factory FootballPlayerMarketValueModel.fromJson(Map<dynamic, dynamic> json) {
-    return FootballPlayerMarketValueModel(
-      id: json['id'],
-      teamId: json['team_id'],
-      teamName: json['team_name'],
-      name: json['name'],
-      marketValue: json['market_value'] == null ? null : MarketValueModel.fromJson(json['market_value']),
-    );
-  }
-
-  @override
-  List<Object?> get props => [id];
-}
-
 class MarketValueModel {
   final String id;
   final String updatedAt;

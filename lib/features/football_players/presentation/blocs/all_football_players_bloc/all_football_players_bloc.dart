@@ -9,11 +9,9 @@ part 'all_football_players_state.dart';
 
 @singleton
 class AllFootballPlayersBloc extends Bloc<AllFootballPlayersEvent, AllFootballPlayersState> {
-  final FootballPlayersRepository repository;
+  final CommonFootballRepository repository;
 
-  AllFootballPlayersBloc({
-    required this.repository,
-  }) : super(AllFootballPlayersStateInitial()) {
+  AllFootballPlayersBloc({required this.repository}) : super(AllFootballPlayersStateInitial()) {
     on<AllFootballPlayersEvent>((event, emit) async {
       if (event is AllFootballPlayersEventLoad) {
         await _load(event, emit);
@@ -24,7 +22,7 @@ class AllFootballPlayersBloc extends Bloc<AllFootballPlayersEvent, AllFootballPl
   Future<void> _load(AllFootballPlayersEventLoad event, Emitter emit) async {
     try {
       emit(AllFootballPlayersStatePending());
-      final players = await repository.cardsGet();
+      final players = await repository.playersGet();
       emit(AllFootballPlayersStateLoadSucceeded(players: players));
     } catch (e) {
       emit(AllFootballPlayersStateFailed(message: e.toString()));

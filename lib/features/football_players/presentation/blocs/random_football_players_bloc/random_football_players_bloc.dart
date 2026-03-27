@@ -7,7 +7,7 @@ part 'random_football_players_bloc_event.dart';
 part 'random_football_players_bloc_state.dart';
 
 class RandomFootballPlayersBloc extends Bloc<RandomFootballPlayersEvent, RandomFootballPlayersState> {
-  final FootballPlayersRepository _repository;
+  final CommonFootballRepository _repository;
 
   RandomFootballPlayersBloc(this._repository) : super(RandomFootballPlayersStateInitial()) {
     on<RandomFootballPlayersEvent>(
@@ -17,10 +17,7 @@ class RandomFootballPlayersBloc extends Bloc<RandomFootballPlayersEvent, RandomF
     );
   }
 
-  Future<void> _get(
-    RandomFootballPlayersEventGet event,
-    Emitter<RandomFootballPlayersState> emit,
-  ) async {
+  Future<void> _get(RandomFootballPlayersEventGet event, Emitter<RandomFootballPlayersState> emit) async {
     try {
       emit(RandomFootballPlayersStatePending());
       final players = await _repository.getRandomCards(

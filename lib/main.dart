@@ -62,7 +62,6 @@ Future<void> main() async {
     LogService.error(e.toString(), e);
   }
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent, statusBarColor: Colors.black),
   );
