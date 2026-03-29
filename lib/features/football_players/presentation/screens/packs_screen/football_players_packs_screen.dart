@@ -119,6 +119,7 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                               _PlayerCardsSwiper(
                                 cards: selectedPack.cards!,
                                 newCardIds: presenter._newCardIdsForOpenedPack,
+                                packName: selectedPack.title,
                               ),
                             if (state.show3dObject)
                               AnimatedBuilder(

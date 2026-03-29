@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_players/presentation/widgets/football_player_card.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
+import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../domain/models/player.dart';
 
 class FootballPlayersPackResultsScreenArgs {
   final List<FootballPlayerCardModel> cards;
   final Set<String> newCardIds;
-  const FootballPlayersPackResultsScreenArgs({required this.cards, required this.newCardIds});
+  final String packName;
+  const FootballPlayersPackResultsScreenArgs({required this.packName, required this.cards, required this.newCardIds});
 }
 
 class FootballPlayersPackResultsScreen extends StatelessWidget {
@@ -56,14 +59,12 @@ class FootballPlayersPackResultsScreen extends StatelessWidget {
               ),
             ],
           ),
+          Positioned(top: 0, left: 0, right: 0, child: TransparentAppbar(title: args.packName, showBalance: false)),
           Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Translator(
-              termin: AppGlossary.cardsReceived,
-              builder: (value) => TransparentAppbar(title: value, showBalance: false),
-            ),
+            left: 16,
+            right: 16,
+            bottom: mq.padding.bottom + 16,
+            child: GlassButton(onPressed: context.pop, text: AppGlossary.confirm.translate()),
           ),
         ],
       ),

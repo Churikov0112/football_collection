@@ -3,8 +3,9 @@ part of '../football_players_packs_screen.dart';
 class _PlayerCardsSwiper extends StatefulWidget {
   final List<CardModel> cards;
   final Set<String> newCardIds;
+  final String packName;
 
-  const _PlayerCardsSwiper({required this.cards, required this.newCardIds});
+  const _PlayerCardsSwiper({required this.cards, required this.newCardIds, required this.packName});
 
   @override
   State<_PlayerCardsSwiper> createState() => _PlayerCardsSwiperState();
@@ -37,7 +38,7 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     final backgroundHeight = mq.size.height - mq.padding.top - mq.padding.bottom - 56;
 
     return CardSwiper(
-      onEnd: () => presenter.showReceivedCards(widget.cards),
+      onEnd: () => presenter.showReceivedCards(widget.cards, widget.packName),
       padding: EdgeInsets.only(
         left: (mq.size.width - packWidth) / 2,
         right: (mq.size.width - packWidth) / 2,
