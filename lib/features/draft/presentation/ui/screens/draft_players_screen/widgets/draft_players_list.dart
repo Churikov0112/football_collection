@@ -117,7 +117,11 @@ class _DraftFootballPlayerListTile extends StatelessWidget {
             );
             context.pop(playerGameModel);
           },
-          child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight + 60, width: playerPhotoWidth),
+          child: DraftFootballPlayerCardWidget(
+            player: player,
+            height: size.height > 650 ? playerPhotoHeight + 60 : playerPhotoHeight + 20,
+            width: playerPhotoWidth,
+          ),
         ),
         // Column(
         //   crossAxisAlignment: CrossAxisAlignment.start,
