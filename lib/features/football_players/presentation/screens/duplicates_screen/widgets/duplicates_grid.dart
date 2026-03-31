@@ -24,10 +24,10 @@ class _DuplicatesGrid extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
         childAspectRatio: 2 / 3,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
-      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 16, right: 16, bottom: bottomPadding),
+      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 20, right: 20, bottom: bottomPadding),
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];

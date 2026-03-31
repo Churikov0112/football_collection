@@ -36,8 +36,8 @@ class FootballPlayersPackResultsScreen extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
                     childAspectRatio: 2 / 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
                   ),
                   padding: EdgeInsets.only(
                     top: mq.padding.top + 85,
