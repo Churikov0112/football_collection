@@ -40,9 +40,9 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     return CardSwiper(
       onEnd: () => presenter.showReceivedCards(widget.cards, widget.packName),
       padding: EdgeInsets.only(
-        left: (mq.size.width - packWidth) / 2,
-        right: (mq.size.width - packWidth) / 2,
-        top: backgroundHeight / 2,
+        left: (mq.size.width - packWidth * 1) / 2,
+        right: (mq.size.width - packWidth * 1.1) / 2,
+        top: (backgroundHeight - packHeight / 3) / 2,
       ),
       isLoop: false,
       numberOfCardsDisplayed: 2,
@@ -51,6 +51,8 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
         final player = widget.cards[index] as FootballPlayerCardModel;
         return FootballPlayerCard(
+          height: packHeight * 1.1,
+          width: packWidth * 1.1,
           player: player,
           count: 1,
           hideTransferValue: false,
