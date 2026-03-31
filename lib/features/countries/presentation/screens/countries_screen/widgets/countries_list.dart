@@ -13,6 +13,7 @@ class _CountriesList extends StatelessWidget {
       bloc: getIt.get(),
       builder: (context, allCountriesState) {
         final countries = (allCountriesState.countries ?? []).where((c) => c.confederation == confederation).toList();
+        countries.sort((a, b) => a.name.compareTo(b.name));
 
         return Expanded(
           child: GridView.builder(
