@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 
+import '../../../../abstract/domain/models/card.dart';
 import '../../../data/football_players_repository.dart';
 import '../../../domain/cards/player_card.dart';
 
@@ -21,11 +22,12 @@ class RandomFootballPlayersBloc extends Bloc<RandomFootballPlayersEvent, RandomF
     try {
       emit(RandomFootballPlayersStatePending());
       final players = await _repository.getRandomCards(
+        cardTypes: {CardType.player},
         count: event.count,
         minPrimeTransferValue: event.minPrimeTransferValue,
         unique: event.unique,
       );
-      emit(RandomFootballPlayersStateLoadSucceeded(players));
+      emit(RandomFootballPlayersStateLoadSucceeded(players.whereType<FootballPlayerCardModel>().toList()));
     } on Object catch (_) {
       emit(RandomFootballPlayersStateFailed('Произошла ошибка'));
     }

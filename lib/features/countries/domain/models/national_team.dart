@@ -249,7 +249,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Equatorial Guinea':
       return '🇬🇶';
     case 'Eswatini':
-      return '🇸🇪';
+      return '🇸🇿';
     case 'Ethiopia':
       return '🇪🇹';
     case 'Gambia':

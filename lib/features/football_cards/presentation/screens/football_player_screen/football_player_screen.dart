@@ -12,7 +12,7 @@ import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../countries/domain/models/national_team.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../widgets/football_player_card.dart';
+import '../../widgets/player_card/football_player_card.dart';
 
 part 'football_player_screen_presenter.dart';
 part 'widgets/name.dart';

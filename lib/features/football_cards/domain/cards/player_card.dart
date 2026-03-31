@@ -1,11 +1,15 @@
+// player_card.dart
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
 class FootballPlayerCardModel extends CardModel {
   final String playerId;
+
   final String name;
-  // final List<String>? citizenship;
+
+  @override
   final String? teamId;
+
   final String? teamName;
   final String? teamShirtNumber;
   final String? clubId;
@@ -22,6 +26,7 @@ class FootballPlayerCardModel extends CardModel {
   const FootballPlayerCardModel({
     required super.cardId,
     required super.imageAssetPath,
+    super.cardType = CardType.player,
     required this.playerId,
     required this.name,
     required this.position,
@@ -37,7 +42,6 @@ class FootballPlayerCardModel extends CardModel {
     required this.maxMarketValue,
     required this.outfitter,
     required this.isRetired,
-    // required this.citizenship,
   });
 
   factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {
@@ -46,7 +50,6 @@ class FootballPlayerCardModel extends CardModel {
       imageAssetPath: "assets/raster/player_faces/${json['id']}.jpg",
       playerId: json['id'],
       name: json['name'],
-      // position: FootballPlayerPosition.fromJson(json['position']),
       position: json['position']?['main'],
       birthDate: json['birth_date'],
       height: json['height'],
@@ -60,7 +63,6 @@ class FootballPlayerCardModel extends CardModel {
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
-      // citizenship: json['citizenship'] as List<String>?,
     );
   }
 
@@ -68,17 +70,7 @@ class FootballPlayerCardModel extends CardModel {
   List<Object?> get props => [cardId, playerId];
 }
 
-// class FootballPlayerPosition {
-//   final String main;
-//   final List<String> other;
-
-//   FootballPlayerPosition({required this.main, required this.other});
-
-//   factory FootballPlayerPosition.fromJson(Map<dynamic, dynamic> json) {
-//     return FootballPlayerPosition(main: json["main"], other: json["other"]);
-//   }
-// }
-
+// Вспомогательные функции остаются без изменений
 String? footballPlayerPositionToShort(String? position) {
   if (position == null) return null;
   switch (position) {

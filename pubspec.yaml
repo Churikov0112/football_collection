@@ -133,7 +133,7 @@ flutter:
     - assets/raster/field/
     - assets/raster/player_faces/
     - assets/raster/team_flags/
-    # - assets/raster/clubs_logos/
+    - assets/raster/coach_faces/
     - assets/raster/packs/
     - assets/raster/background/
     - assets/raster/icon/

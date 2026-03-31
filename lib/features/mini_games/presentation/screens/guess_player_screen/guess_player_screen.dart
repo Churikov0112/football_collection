@@ -15,7 +15,7 @@ import 'package:yandex_mobileads/mobile_ads.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../../football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
-import '../../../../football_cards/presentation/widgets/football_player_card.dart';
+import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 import 'widgets/yandex_ads_banner_mixin.dart';
 

@@ -1,12 +1,15 @@
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
 class FootballSquadCardModel extends CardModel {
+  @override
   final String? teamId;
+
   final String? teamName;
 
   const FootballSquadCardModel({
     required super.cardId,
     required super.imageAssetPath,
+    super.cardType = CardType.squad,
     required this.teamId,
     required this.teamName,
   });

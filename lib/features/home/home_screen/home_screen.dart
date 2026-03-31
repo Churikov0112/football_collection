@@ -14,11 +14,11 @@ import '../../../services/toast/toast_service.dart';
 import '../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import '../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../abstract/domain/models/card.dart';
 import '../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../draft/presentation/ui/screens/draft_description_screen/draft_description_screen.dart';
-import '../../football_cards/domain/cards/player_card.dart';
 import '../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../football_cards/presentation/blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
 import '../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../football_confederations/domain/models/football_confederation.dart';
 import '../../football_confederations/presentation/blocs/football_confederations_bloc/football_confederations_bloc.dart';
@@ -42,17 +42,17 @@ class HomeScreen extends StatelessWidget {
           return BlocBuilder<AllCountriesBloc, AllCountriesState>(
             bloc: getIt.get(),
             builder: (context, allCountriesState) {
-              return BlocBuilder<AllFootballPlayersBloc, AllFootballPlayersState>(
+              return BlocBuilder<AllFootballCardsBloc, AllFootballCardsState>(
                 bloc: getIt.get(),
-                builder: (context, allPlayersState) {
+                builder: (context, allFootballCardsState) {
                   return BlocBuilder<FootballConfederationsBloc, FootballConfederationsState>(
                     bloc: getIt.get(),
                     builder: (context, allFootballConfederationsState) {
                       final allCompetitions = allFootballConfederationsState.confederations ?? [];
-                      final allPlayers = allPlayersState.allPlayers ?? [];
+                      final allCards = allFootballCardsState.cards ?? [];
                       final allTeams = allCountriesState.countries ?? [];
 
-                      if (allCompetitions.isEmpty || allTeams.isEmpty || allPlayers.isEmpty) {
+                      if (allCompetitions.isEmpty || allTeams.isEmpty || allCards.isEmpty) {
                         return const Center(child: CircularProgressIndicator());
                       }
 
@@ -65,11 +65,7 @@ class HomeScreen extends StatelessWidget {
                               spacing: 16,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                _CollectionTile(
-                                  competitions: allCompetitions,
-                                  allPlayers: allPlayers,
-                                  showOriginal: true,
-                                ),
+                                _CollectionTile(competitions: allCompetitions, allCards: allCards, showOriginal: true),
                                 const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: _DraftTile()),
                               ],
                             ),

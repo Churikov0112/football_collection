@@ -43,9 +43,9 @@ class _RegionTile extends StatelessWidget {
     return BlocBuilder<SavedCardsBloc, SavedCardsState>(
       bloc: getIt.get<SavedCardsBloc>(),
       builder: (context, savedState) {
-        final savedPlayerIds = savedState.savedCardsIds ?? const <String>[];
-        final savedPlayerIdsSet = savedPlayerIds.toSet();
-        final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? const <FootballPlayerCardModel>[];
+        final savedCardIds = savedState.savedCardsIds ?? const <String>[];
+        final savedCardIdsSet = savedCardIds.toSet();
+        final allCards = getIt.get<AllFootballCardsBloc>().state.cards ?? const <CardModel>[];
         final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? const <FootballNationalTeamModel>[];
 
         final confederationCountryIds = allCountries
@@ -55,11 +55,11 @@ class _RegionTile extends StatelessWidget {
 
         var savedCount = 0;
         var totalCount = 0;
-        for (final player in allPlayers) {
-          final teamId = player.teamId;
+        for (final card in allCards) {
+          final teamId = card.teamId;
           if (teamId == null || !confederationCountryIds.contains(teamId)) continue;
           totalCount += 1;
-          if (savedPlayerIdsSet.contains(player.cardId)) savedCount += 1;
+          if (savedCardIdsSet.contains(card.cardId)) savedCount += 1;
         }
 
         final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;

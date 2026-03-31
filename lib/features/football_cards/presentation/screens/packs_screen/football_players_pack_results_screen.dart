@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:football_collection/features/football_cards/presentation/widgets/football_player_card.dart';
+import 'package:football_collection/features/football_cards/presentation/widgets/player_card/football_player_card.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../abstract/domain/models/card.dart';
+import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/player_card.dart';
+import '../../widgets/coach_card/football_coach_card.dart';
 
-class FootballPlayersPackResultsScreenArgs {
-  final List<FootballPlayerCardModel> cards;
+class FootballCardsPackResultsScreenArgs {
+  final List<CardModel> cards;
   final Set<String> newCardIds;
   final String packName;
-  const FootballPlayersPackResultsScreenArgs({required this.packName, required this.cards, required this.newCardIds});
+  const FootballCardsPackResultsScreenArgs({required this.packName, required this.cards, required this.newCardIds});
 }
 
-class FootballPlayersPackResultsScreen extends StatelessWidget {
-  const FootballPlayersPackResultsScreen({required this.args, super.key});
+class FootballCardsPackResultsScreen extends StatelessWidget {
+  const FootballCardsPackResultsScreen({required this.args, super.key});
 
-  final FootballPlayersPackResultsScreenArgs args;
+  final FootballCardsPackResultsScreenArgs args;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +50,26 @@ class FootballPlayersPackResultsScreen extends StatelessWidget {
                   ),
                   itemCount: args.cards.length,
                   itemBuilder: (context, index) {
-                    final player = args.cards[index];
-                    return FootballPlayerCard(
-                      player: player,
-                      count: 1,
-                      enableFlip: true,
-                      showNew: args.newCardIds.contains(player.cardId),
-                    );
+                    final card = args.cards[index];
+                    if (card is FootballPlayerCardModel) {
+                      return FootballPlayerCard(
+                        player: card,
+                        count: 1,
+                        enableFlip: true,
+                        showNew: args.newCardIds.contains(card.cardId),
+                      );
+                    }
+
+                    if (card is FootballCoachCardModel) {
+                      return FootballCoachCard(
+                        coach: card,
+                        count: 1,
+                        enableFlip: true,
+                        showNew: args.newCardIds.contains(card.cardId),
+                      );
+                    }
+
+                    return const SizedBox.shrink();
                   },
                 ),
               ),

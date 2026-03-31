@@ -15,10 +15,10 @@ import 'package:square_progress_indicator/square_progress_indicator.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
-import '../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../../../football_cards/presentation/blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
 import '../../../../football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
 import '../../../domain/models/national_team.dart';
 

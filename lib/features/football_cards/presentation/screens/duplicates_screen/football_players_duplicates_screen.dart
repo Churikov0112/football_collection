@@ -5,7 +5,7 @@ import 'package:football_collection/features/abstract/presentation/blocs/saved_c
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/features/football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
-import 'package:football_collection/features/football_cards/presentation/widgets/football_player_card.dart';
+import 'package:football_collection/features/football_cards/presentation/widgets/player_card/football_player_card.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';

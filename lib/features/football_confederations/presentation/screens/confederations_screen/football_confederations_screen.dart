@@ -11,11 +11,11 @@ import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
+import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../countries/domain/models/national_team.dart';
-import '../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../../../football_cards/presentation/blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
 import '../../../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../blocs/football_confederations_bloc/football_confederations_bloc.dart';
 import 'widgets/open_packs_screen_button.dart';
@@ -42,15 +42,15 @@ class FootballConfederationsScreen extends StatelessWidget {
                 BackgroundImage(),
                 Column(
                   children: [
-                    BlocBuilder<AllFootballPlayersBloc, AllFootballPlayersState>(
+                    BlocBuilder<AllFootballCardsBloc, AllFootballCardsState>(
                       bloc: getIt.get(),
-                      builder: (context, allPlayersState) {
+                      builder: (context, allFootballCardsState) {
                         return BlocBuilder<AllCountriesBloc, AllCountriesState>(
                           bloc: getIt.get(),
                           builder: (context, allCountriesState) {
                             final allCountries = allCountriesState.countries ?? [];
-                            final allPlayers = allPlayersState.allPlayers ?? [];
-                            if (allCountries.isEmpty || allPlayers.isEmpty) return const LinearProgressIndicator();
+                            final allCards = allFootballCardsState.cards ?? [];
+                            if (allCountries.isEmpty || allCards.isEmpty) return const LinearProgressIndicator();
                             return const _RegionsList();
                           },
                         );

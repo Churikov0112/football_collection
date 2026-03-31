@@ -175,20 +175,15 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isUnpackingAnimationPlayingSubject.add(false);
   }
 
-  void savePlayer(FootballPlayerCardModel player) {
-    getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: player.cardId));
+  void saveCard(CardModel card) {
+    getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: card.cardId));
   }
 
   Future<void> showReceivedCards(List<CardModel> cards, String packName) async {
-    final players = cards.whereType<FootballPlayerCardModel>().toList();
     _isUnpackingAnimationPlayingSubject.add(false);
     await context.push(
-      RoutePaths.footballPlayersPackResults,
-      extra: FootballPlayersPackResultsScreenArgs(
-        cards: players,
-        newCardIds: _newCardIdsForOpenedPack,
-        packName: packName,
-      ),
+      RoutePaths.footballCardsPackResults,
+      extra: FootballCardsPackResultsScreenArgs(cards: cards, newCardIds: _newCardIdsForOpenedPack, packName: packName),
     );
     getNewPacks();
   }

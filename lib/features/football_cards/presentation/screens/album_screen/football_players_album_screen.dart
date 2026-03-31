@@ -14,14 +14,17 @@ import 'package:go_router/go_router.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/player_card.dart';
-import '../../blocs/all_football_players_bloc/all_football_players_bloc.dart';
-import '../../widgets/football_player_card.dart';
+import '../../blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
+import '../../widgets/coach_card/football_coach_card.dart';
+import '../../widgets/player_card/football_player_card.dart';
 import '../packs_screen/football_players_packs_screen.dart';
 
 part 'football_players_album_screen_presenter.dart';
 part 'widgets/album_widget.dart';
-part 'widgets/players_list.dart';
+part 'widgets/cards_list.dart';
+part 'widgets/coach_album_widget.dart';
 
 class FootballPlayersAlbumScreen extends StatelessWidget {
   const FootballPlayersAlbumScreen({required this.country, super.key});
@@ -42,7 +45,7 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
               children: [
                 BackgroundImage(),
                 BackgroundImageColorFilter(color: country.confederation.color),
-                Column(children: [_FootballPlayersList(country: country)]),
+                Column(children: [_FootballCardsList(country: country)]),
                 TransparentAppbar(
                   title: "${emojiFlagByCountryName(country.name) ?? ""}  ${country.name}",
                   // backgroundColor: country.confederation.color,

@@ -1,21 +1,25 @@
+// coach_card.dart
 import 'package:football_collection/features/abstract/domain/models/card.dart';
 
 class FootballCoachCardModel extends CardModel {
   final String coachId;
+
   final String name;
+
+  @override
   final String? teamId;
+
   final String? teamName;
   final dynamic citizenship;
 
   const FootballCoachCardModel({
     required super.cardId,
     required super.imageAssetPath,
+    super.cardType = CardType.coach,
     required this.coachId,
     required this.name,
-
     required this.teamId,
     required this.teamName,
-
     required this.citizenship,
   });
 
@@ -25,8 +29,8 @@ class FootballCoachCardModel extends CardModel {
       cardId: "football_coach-${json['id']}",
       imageAssetPath: "assets/raster/coach_faces/${json['id']}.jpg",
       name: json['name'],
-      teamId: json['team_id'],
-      teamName: json['team_name'],
+      teamId: json['current_club']?['id'],
+      teamName: json['current_club']?['name'],
       citizenship: json['citizenship'],
     );
   }

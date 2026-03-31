@@ -23,11 +23,15 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     });
   }
 
-  Future<void> checkConfetti(FootballPlayerCardModel player) async {
-    final settings = getIt.get<SettingsBloc>().state;
-    if (!settings.enableConfetti) return;
-    final needConfetti = (player.maxMarketValue ?? 0) >= 50000000;
-    if (needConfetti) Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
+  Future<void> checkConfetti(CardModel card) async {
+    if (card is FootballPlayerCardModel) {
+      final settings = getIt.get<SettingsBloc>().state;
+      if (!settings.enableConfetti) return;
+      final needConfetti = (card.maxMarketValue ?? 0) >= 50000000;
+      if (needConfetti) {
+        Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
+      }
+    }
   }
 
   @override
@@ -49,21 +53,37 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       backCardOffset: Offset(20, 20),
       cardsCount: widget.cards.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
-        final player = widget.cards[index] as FootballPlayerCardModel;
-        return FootballPlayerCard(
-          height: packHeight * 1.1,
-          width: packWidth * 1.1,
-          player: player,
-          count: 1,
-          hideTransferValue: false,
-          showNew: widget.newCardIds.contains(player.cardId),
-        );
+        final card = widget.cards[index];
+
+        if (card is FootballPlayerCardModel) {
+          return FootballPlayerCard(
+            height: packHeight * 1.1,
+            width: packWidth * 1.1,
+            player: card,
+            count: 1,
+            hideTransferValue: false,
+            showNew: widget.newCardIds.contains(card.cardId),
+          );
+        }
+        if (card is FootballCoachCardModel) {
+          return FootballCoachCard(
+            height: packHeight * 1.1,
+            width: packWidth * 1.1,
+            coach: card,
+            count: 1,
+            hideNationalTeam: false,
+            showNew: widget.newCardIds.contains(card.cardId),
+          );
+        }
+        return Container();
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
-        final prevPlayer = widget.cards[previousIndex] as FootballPlayerCardModel;
-        final currentPlayer = currentIndex != null ? widget.cards[currentIndex] as FootballPlayerCardModel : null;
-        presenter.savePlayer(prevPlayer);
-        if (currentPlayer != null) unawaited(checkConfetti(currentPlayer));
+        final prevCard = widget.cards[previousIndex];
+        final currentCard = currentIndex != null ? widget.cards[currentIndex] : null;
+        if (currentCard != null) {
+          presenter.saveCard(prevCard);
+          unawaited(checkConfetti(currentCard));
+        }
         return true;
       },
     );

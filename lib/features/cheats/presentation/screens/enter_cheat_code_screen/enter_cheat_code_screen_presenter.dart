@@ -27,21 +27,21 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
 
     cheatCodeTextEditingController.clear();
 
-    if (cheatCode.contains("CLUB ")) {
-      final club = cheatCode.replaceAll("CLUB ", "");
-      final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
-      final List<FootballPlayerCardModel> clubPlayers = [];
-      for (final player in allPlayers) {
-        if (player.clubName == club) {
-          clubPlayers.add(player);
-        }
-      }
-      if (clubPlayers.isNotEmpty) {
-        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: clubPlayers.map((e) => e.cardId).toList()));
-        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
-        return;
-      }
-    }
+    // if (cheatCode.contains("CLUB ")) {
+    //   final club = cheatCode.replaceAll("CLUB ", "");
+    //   final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
+    //   final List<FootballPlayerCardModel> clubPlayers = [];
+    //   for (final player in allPlayers) {
+    //     if (player.clubName == club) {
+    //       clubPlayers.add(player);
+    //     }
+    //   }
+    //   if (clubPlayers.isNotEmpty) {
+    //     getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: clubPlayers.map((e) => e.cardId).toList()));
+    //     ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
+    //     return;
+    //   }
+    // }
     // TODO remove
     if (cheatCode.contains("BALANCE ")) {
       final balanceString = cheatCode.replaceAll("BALANCE ", "");
@@ -53,9 +53,9 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
       }
     }
     if (cheatCode == "ALL") {
-      final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
-      if (allPlayers.isNotEmpty) {
-        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allPlayers.map((e) => e.cardId).toList()));
+      final allCards = getIt.get<AllFootballCardsBloc>().state.cards ?? [];
+      if (allCards.isNotEmpty) {
+        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allCards.map((e) => e.cardId).toList()));
         ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
         return;
       }

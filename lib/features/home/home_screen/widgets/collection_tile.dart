@@ -1,10 +1,10 @@
 part of '../home_screen.dart';
 
 class _CollectionTile extends StatelessWidget {
-  const _CollectionTile({required this.competitions, required this.allPlayers, required this.showOriginal});
+  const _CollectionTile({required this.competitions, required this.allCards, required this.showOriginal});
 
   final List<FootballConfederations> competitions;
-  final List<FootballPlayerCardModel> allPlayers;
+  final List<CardModel> allCards;
   final bool showOriginal;
 
   @override
@@ -16,8 +16,8 @@ class _CollectionTile extends StatelessWidget {
       builder: (context, savedState) {
         final savedPlayerIds = savedState.savedCardsIds ?? const <String>[];
         final savedPlayerIdsSet = savedPlayerIds.toSet();
-        final totalCount = allPlayers.length;
-        final savedCount = allPlayers.where((player) => savedPlayerIdsSet.contains(player.cardId)).length;
+        final totalCount = allCards.length;
+        final savedCount = allCards.where((player) => savedPlayerIdsSet.contains(player.cardId)).length;
         final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;
 
         return GestureDetector(

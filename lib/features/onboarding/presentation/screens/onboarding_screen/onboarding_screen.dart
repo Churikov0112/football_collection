@@ -17,7 +17,7 @@ import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
-import '../../../../football_cards/presentation/widgets/football_player_card.dart';
+import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
 import '../../../../football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
 import '../../../../settings/presentation/ui/screens/settings_screen/widgets/select_language.dart';
 

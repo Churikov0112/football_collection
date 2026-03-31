@@ -47,16 +47,16 @@ class _CountryTile extends StatelessWidget {
     return BlocBuilder<SavedCardsBloc, SavedCardsState>(
       bloc: getIt.get<SavedCardsBloc>(),
       builder: (context, savedState) {
-        final savedPlayerIds = savedState.savedCardsIds ?? const <String>[];
-        final savedPlayerIdsSet = savedPlayerIds.toSet();
-        final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? const <FootballPlayerCardModel>[];
+        final savedCardIds = savedState.savedCardsIds ?? const <String>[];
+        final savedCardIdsSet = savedCardIds.toSet();
+        final allCards = getIt.get<AllFootballCardsBloc>().state.cards ?? const <CardModel>[];
 
         var savedCount = 0;
         var totalCount = 0;
-        for (final player in allPlayers) {
-          if (player.teamId != country.id) continue;
+        for (final card in allCards) {
+          if (card.teamId != country.id) continue;
           totalCount += 1;
-          if (savedPlayerIdsSet.contains(player.cardId)) savedCount += 1;
+          if (savedCardIdsSet.contains(card.cardId)) savedCount += 1;
         }
 
         final progress = totalCount == 0 ? 0.0 : savedCount / totalCount;

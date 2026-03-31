@@ -13,7 +13,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../../../../football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
-import '../../../../football_cards/presentation/widgets/football_player_card.dart';
+import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
 import 'widgets/guess_options.dart';
 import 'widgets/yandex_ads_banner_mixin.dart';
