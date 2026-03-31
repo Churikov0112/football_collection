@@ -13,7 +13,7 @@ import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frost
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 
 import '../../../../leaderboard/presentation/screens/leaderboard_screen/widgets/country_selection_bottom_sheet.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 
 part 'football_players_duplicates_screen_presenter.dart';
 part 'widgets/duplicates_grid.dart';

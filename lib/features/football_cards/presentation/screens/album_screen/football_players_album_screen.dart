@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_football_players_bloc/all_football_players_bloc.dart';
 import '../../widgets/football_player_card.dart';
 import '../packs_screen/football_players_packs_screen.dart';

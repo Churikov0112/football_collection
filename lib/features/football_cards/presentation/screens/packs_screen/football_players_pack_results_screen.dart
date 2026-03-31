@@ -6,7 +6,7 @@ import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dar
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 
 class FootballPlayersPackResultsScreenArgs {
   final List<FootballPlayerCardModel> cards;

@@ -8,7 +8,7 @@ import 'package:football_collection/features/draft/domain/models/role.dart';
 
 import '../../../../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../../../../countries/domain/models/national_team.dart';
-import '../../../../../../../football_cards/domain/models/player.dart';
+import '../../../../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../../../../../domain/models/position.dart';
 

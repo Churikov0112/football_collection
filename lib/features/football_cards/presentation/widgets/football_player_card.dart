@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../data/utils.dart';
-import '../../domain/models/player.dart';
+import '../../domain/cards/player_card.dart';
 import '../screens/packs_screen/football_players_packs_screen.dart';
 
 part 'parts/back_widget.dart';

@@ -9,7 +9,7 @@ import 'package:football_collection/features/football_cards/data/football_player
 import 'package:injectable/injectable.dart';
 
 import '../../../../../services/log/log_service.dart';
-import '../../../../football_cards/domain/models/player.dart';
+import '../../../../football_cards/domain/cards/player_card.dart';
 import '../../../domain/models/draft_tournament.dart';
 import '../../../domain/models/draft_tournament_match.dart';
 import '../../../domain/models/draft_tournament_round.dart';

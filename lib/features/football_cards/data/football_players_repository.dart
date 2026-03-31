@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../countries/domain/models/national_team.dart';
 import '../../football_confederations/domain/models/football_confederation.dart';
-import '../domain/models/player.dart';
+import '../domain/cards/player_card.dart';
 
 @singleton
 class CommonFootballRepository {

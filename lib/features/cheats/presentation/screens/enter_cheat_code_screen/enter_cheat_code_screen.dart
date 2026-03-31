@@ -7,7 +7,7 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 
 import '../../../../../services/log/log_service.dart';
-import '../../../../football_cards/domain/models/player.dart';
+import '../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
 import '../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 
@@ -33,9 +33,7 @@ class EnterCheatCodeScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 TextField(
                   controller: presenter.cheatCodeTextEditingController,
-                  decoration: InputDecoration(
-                    hintText: AppGlossary.cheatCodeHere.translate(),
-                  ),
+                  decoration: InputDecoration(hintText: AppGlossary.cheatCodeHere.translate()),
                 ),
                 SizedBox(height: 16),
                 Row(

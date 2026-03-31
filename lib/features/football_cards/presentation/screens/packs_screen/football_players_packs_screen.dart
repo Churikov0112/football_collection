@@ -31,7 +31,7 @@ import '../../../../../services/navigation/navigation.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../football_confederations/domain/models/football_confederation.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart';
 import '../../widgets/football_player_card.dart';
 import 'football_players_pack_results_screen.dart';

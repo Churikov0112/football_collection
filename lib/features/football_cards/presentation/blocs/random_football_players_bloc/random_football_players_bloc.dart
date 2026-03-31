@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import '../../../data/football_players_repository.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 
 part 'random_football_players_bloc_event.dart';
 part 'random_football_players_bloc_state.dart';

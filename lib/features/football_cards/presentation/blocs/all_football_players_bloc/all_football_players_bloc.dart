@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../data/football_players_repository.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 
 part 'all_football_players_event.dart';
 part 'all_football_players_state.dart';

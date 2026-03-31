@@ -16,7 +16,7 @@ import '../../../../../../services/navigation/navigation.dart';
 import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
 import '../../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../../abstract/presentation/blocs/utils/ratings.dart';
-import '../../../../../football_cards/domain/models/player.dart';
+import '../../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../../../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
 import '../../../../domain/models/player.dart';

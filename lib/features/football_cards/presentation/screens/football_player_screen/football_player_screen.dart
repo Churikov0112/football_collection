@@ -10,7 +10,7 @@ import '../../../../../services/localization/translator.dart';
 import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../countries/domain/models/national_team.dart';
-import '../../../domain/models/player.dart';
+import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_countries_bloc/all_countries_bloc.dart';
 import '../../widgets/football_player_card.dart';
 

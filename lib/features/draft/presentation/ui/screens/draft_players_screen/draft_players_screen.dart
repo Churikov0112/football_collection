@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import '../../../../../../ui_kit/effects/touchable_scale.dart';
-import '../../../../../football_cards/domain/models/player.dart';
+import '../../../../../football_cards/domain/cards/player_card.dart';
 import '../../../../../football_cards/presentation/screens/football_player_screen/football_player_screen.dart';
 import '../../../../domain/models/player.dart';
 import '../../../../domain/models/position.dart';
