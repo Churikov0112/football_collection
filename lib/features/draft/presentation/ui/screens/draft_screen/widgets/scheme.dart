@@ -78,18 +78,18 @@ class _Scheme extends StatelessWidget {
 
   Color _getChemistryColor(double chemistry) {
     if (chemistry >= 0.85) {
-      return Colors.green; // Отличная химия
+      return const Color.fromARGB(255, 0, 234, 255); // Отличная химия
     }
     if (chemistry >= 0.65) {
-      return Colors.yellow; // Средняя химия
+      return Colors.green;
     }
     if (chemistry >= 0.5) {
-      return Colors.orange;
+      return Colors.yellow; // Средняя химия
     }
     if (chemistry >= 0.2) {
-      return Colors.red; // Слабая химия
+      return Colors.orange; // Слабая химия
     }
-    return Colors.black; // Плохая химия
+    return Colors.red; // Плохая химия
   }
 
   @override
