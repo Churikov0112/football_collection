@@ -41,10 +41,10 @@ class _PlayerCardBackWidget extends StatelessWidget {
                       termin: AppGlossary.height,
                       builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
-                    _RoundedContainer(text: player.height!),
+                    _RoundedContainer(text: player.height.toString()),
                   ],
                 ),
-              if (player.currentMarketValue != null)
+              if (player.marketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -52,10 +52,10 @@ class _PlayerCardBackWidget extends StatelessWidget {
                       termin: AppGlossary.currentValue,
                       builder: (value) => Text("$value:  ", style: TextStyle(color: Colors.black)),
                     ),
-                    _RoundedContainer(text: beautifyTransferValue(player.currentMarketValue!)),
+                    _RoundedContainer(text: beautifyTransferValue(player.marketValue!)),
                   ],
                 ),
-              if (player.currentMarketValue != null)
+              if (player.maxMarketValue != null)
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

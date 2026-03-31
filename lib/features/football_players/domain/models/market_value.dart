@@ -2,12 +2,14 @@ class MarketValueModel {
   final String id;
   final String updatedAt;
   final int? marketValue;
+  final int? maxMarketValue;
   final List<MarketValueHistoryModel>? marketValueHistory;
 
   MarketValueModel({
     required this.id,
     required this.updatedAt,
     required this.marketValue,
+    required this.maxMarketValue,
     required this.marketValueHistory,
   });
 
@@ -15,6 +17,7 @@ class MarketValueModel {
     updatedAt: json["updatedAt"],
     id: json["id"],
     marketValue: json["marketValue"],
+    maxMarketValue: json["maxMarketValue"],
     marketValueHistory: List<MarketValueHistoryModel>.from(
       json["marketValueHistory"].map((x) => MarketValueHistoryModel.fromJson(x)),
     ),

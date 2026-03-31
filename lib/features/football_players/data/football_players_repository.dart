@@ -9,14 +9,13 @@ import 'package:injectable/injectable.dart';
 
 import '../../countries/domain/models/national_team.dart';
 import '../../football_confederations/domain/models/football_confederation.dart';
-import '../domain/models/club.dart';
 import '../domain/models/player.dart';
 
 @singleton
 class CommonFootballRepository {
   List<FootballNationalTeamModel> _allTeamsCache = [];
   List<FootballPlayerCardModel> _allPlayersCache = [];
-  List<FootballClubModel> _allClubsCache = [];
+  // List<FootballClubModel> _allClubsCache = [];
 
   final Random _random = Random();
 
@@ -32,6 +31,9 @@ class CommonFootballRepository {
     try {
       final List<FootballPlayerCardModel> players = [];
       for (final item in data) {
+        if (item['id'] == null) {
+          print("object");
+        }
         players.add(FootballPlayerCardModel.fromJson(item));
       }
       return players;
@@ -41,23 +43,23 @@ class CommonFootballRepository {
     }
   }
 
-  List<FootballClubModel> _parseClubs(List<dynamic> data) {
-    final List<FootballClubModel> clubs = [];
-    for (final item in data) {
-      clubs.add(FootballClubModel.fromJson(item));
-    }
-    return clubs;
-  }
+  // List<FootballClubModel> _parseClubs(List<dynamic> data) {
+  //   final List<FootballClubModel> clubs = [];
+  //   for (final item in data) {
+  //     clubs.add(FootballClubModel.fromJson(item));
+  //   }
+  //   return clubs;
+  // }
 
   Future<void> _ensureInitialized() async {
     if (_allTeamsCache.isEmpty || _allPlayersCache.isEmpty) {
-      final String teamsJson = await rootBundle.loadString('assets/json/teams_data.json');
+      final String teamsJson = await rootBundle.loadString('assets/json/prepared_tm_teams.json');
       final List<dynamic> teamsData = jsonDecode(teamsJson);
 
-      final String clubsJson = await rootBundle.loadString('assets/json/clubs_data.json');
-      final List<dynamic> clubsData = jsonDecode(clubsJson);
+      // final String clubsJson = await rootBundle.loadString('assets/json/prepared_tm_clubs.json');
+      // final List<dynamic> clubsData = jsonDecode(clubsJson);
 
-      final String playersJson = await rootBundle.loadString('assets/json/players_with_market_values_data.json');
+      final String playersJson = await rootBundle.loadString('assets/json/prepared_tm_players_profiles.json');
       final List<dynamic> playersData = jsonDecode(playersJson);
 
       try {
@@ -75,13 +77,13 @@ class CommonFootballRepository {
       } catch (e) {
         LogService.log(e.toString());
       }
-      try {
-        if (_allClubsCache.isEmpty) {
-          _allClubsCache = await compute(_parseClubs, clubsData);
-        }
-      } catch (e) {
-        LogService.log(e.toString());
-      }
+      // try {
+      //   if (_allClubsCache.isEmpty) {
+      //     _allClubsCache = await compute(_parseClubs, clubsData);
+      //   }
+      // } catch (e) {
+      //   LogService.log(e.toString());
+      // }
     }
   }
 
@@ -218,13 +220,13 @@ class CommonFootballRepository {
           if (minPrimeTransferValue != null && player.maxMarketValue == null) {
             return false;
           }
-          if (minCurrentTransferValue != null && player.currentMarketValue == null) {
+          if (minCurrentTransferValue != null && player.marketValue == null) {
             return false;
           }
           if (minPrimeTransferValue != null && player.maxMarketValue! < minPrimeTransferValue) {
             return false;
           }
-          if (minCurrentTransferValue != null && player.currentMarketValue! < minCurrentTransferValue) {
+          if (minCurrentTransferValue != null && player.marketValue! < minCurrentTransferValue) {
             return false;
           }
         }

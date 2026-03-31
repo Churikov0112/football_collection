@@ -11,7 +11,6 @@ import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparen
 import 'package:rxdart/rxdart.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
-import '../../../../football_players/domain/models/player.dart';
 import '../../../../football_players/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
 import '../../../../football_players/presentation/widgets/football_player_card.dart';
 import '../../blocs/balance_bloc/balance_bloc.dart';
@@ -105,9 +104,9 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                                       termin: AppGlossary.equal,
                                       builder: (equal) => _GuessOptionsLessMoreEqual(
                                         options: ["< $left", equal, "$right >"],
-                                        rightAnswer: player2.currentMarketValue! < player1.currentMarketValue!
+                                        rightAnswer: player2.marketValue! < player1.marketValue!
                                             ? "< $left"
-                                            : player2.currentMarketValue! > player1.currentMarketValue!
+                                            : player2.marketValue! > player1.marketValue!
                                             ? "$right >"
                                             : equal,
                                       ),

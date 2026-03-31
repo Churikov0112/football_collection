@@ -68,12 +68,12 @@ class _TmPlayerBio extends StatelessWidget {
           const _Separator(),
         ],
 
-        if (tmData.currentMarketValue != null) ...[
+        if (tmData.marketValue != null) ...[
           Translator(
             termin: AppGlossary.currentValue,
             builder: (value) => _BioTile(
               title: value,
-              value: hideCurrentTransferValue ? '?' : beautifyTransferValue(tmData.currentMarketValue!),
+              value: hideCurrentTransferValue ? '?' : beautifyTransferValue(tmData.marketValue!),
             ),
           ),
           const _Separator(),

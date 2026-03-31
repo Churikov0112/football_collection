@@ -58,6 +58,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Poland':
       return '🇵🇱';
     case 'Czech Republic':
+    case 'Czechia':
       return '🇨🇿';
     case 'Serbia':
       return '🇷🇸';
@@ -375,6 +376,8 @@ String? emojiFlagByCountryName(String? countryName) {
     // CONCACAF (Северная и Центральная Америка, Карибы)
     case 'United States':
       return '🇺🇸';
+    case 'Anguilla':
+      return '🇦🇮';
     case 'Mexico':
       return '🇲🇽';
     case 'Canada':
@@ -520,6 +523,7 @@ Color? shirtColorByCountryName(String? countryName) {
     case 'Poland':
       return Colors.white;
     case 'Czech Republic':
+    case 'Czechia':
       return Colors.blue;
     case 'Serbia':
       return Colors.white;
@@ -939,6 +943,9 @@ Color? shirtColorByCountryName(String? countryName) {
     // CONCACAF (Северная и Центральная Америка, Карибы)
     case 'United States':
       return Colors.blue;
+
+    case 'Anguilla':
+      return Colors.orange;
 
     case 'Mexico':
       return Colors.green;

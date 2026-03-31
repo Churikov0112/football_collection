@@ -17,8 +17,8 @@ class _PriceAndPosition extends StatelessWidget {
       child: Wrap(
         spacing: 4,
         children: [
-          if (player.currentMarketValue != null && hideTransferValue != null)
-            _RoundedContainer(text: hideTransferValue! ? "?" : beautifyTransferValue(player.currentMarketValue!)),
+          if (player.marketValue != null && hideTransferValue != null)
+            _RoundedContainer(text: hideTransferValue! ? "?" : beautifyTransferValue(player.marketValue!)),
           if (shortPosition != null)
             _RoundedContainer(
               text: shortPosition,

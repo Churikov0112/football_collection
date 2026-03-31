@@ -85,6 +85,7 @@ FootballConfederations footballConfederationFromCountryName(String countryName) 
     case 'Austria':
     case 'Poland':
     case 'Czech Republic':
+    case 'Czechia':
     case 'Serbia':
     case 'Greece':
     case 'Scotland':

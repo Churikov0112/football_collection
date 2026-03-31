@@ -135,7 +135,7 @@ class FootballPlayersDuplicatesScreenPresenterState extends State<FootballPlayer
   }
 
   void _sortItems(List<_DuplicateItem> items, _SortOption option) {
-    int valueOf(_DuplicateItem item) => item.player.currentMarketValue ?? item.player.maxMarketValue ?? 0;
+    int valueOf(_DuplicateItem item) => item.player.marketValue ?? item.player.maxMarketValue ?? 0;
 
     switch (option) {
       case _SortOption.nameAsc:

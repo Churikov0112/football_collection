@@ -9,7 +9,7 @@ import '../models/football_confederation.dart';
 @singleton
 class FootballConfederationsRepository {
   Future<List<FootballConfederations>> footballConfederationsGet() async {
-    String jsonString = await rootBundle.loadString('assets/json/teams_data.json');
+    String jsonString = await rootBundle.loadString('assets/json/prepared_tm_teams.json');
     List<dynamic> data = jsonDecode(jsonString);
     List<FootballConfederations> confederations = await compute(_parseConfederations, data);
     return confederations;

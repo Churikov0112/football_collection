@@ -280,8 +280,8 @@ List<FootballPlayerCardModel> sortPlayers(
   int maxMaxValue = 0;
 
   for (final player in players) {
-    if ((player.currentMarketValue ?? 0) > maxCurrentValue) {
-      maxCurrentValue = player.currentMarketValue ?? 0;
+    if ((player.marketValue ?? 0) > maxCurrentValue) {
+      maxCurrentValue = player.marketValue ?? 0;
     }
     if ((player.maxMarketValue ?? 0) > maxMaxValue) {
       maxMaxValue = player.maxMarketValue ?? 0;
@@ -292,7 +292,7 @@ List<FootballPlayerCardModel> sortPlayers(
   final playersWithScore = players.map((player) {
     final positionWeightValue = positionWeightsCache[player.position] ?? 0;
 
-    final normCurrent = maxCurrentValue > 0 ? (player.currentMarketValue ?? 0) / maxCurrentValue : 0;
+    final normCurrent = maxCurrentValue > 0 ? (player.marketValue ?? 0) / maxCurrentValue : 0;
     final normMax = maxMaxValue > 0 ? (player.maxMarketValue ?? 0) / maxMaxValue : 0;
 
     final score =

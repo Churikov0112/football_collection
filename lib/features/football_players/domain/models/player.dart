@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/abstract/domain/models/card.dart';
-import 'package:football_collection/features/football_players/domain/models/market_value.dart';
 
 class FootballPlayerCardModel extends CardModel {
   final String playerId;
   final String name;
+  // final List<String>? citizenship;
   final String? teamId;
   final String? teamName;
+  final String? teamShirtNumber;
   final String? clubId;
   final String? clubName;
   final String? position;
-  final String? number;
   final String? birthDate;
-  final String? height;
+  final int? height;
+  final String? outfitter;
+  final bool? isRetired;
   final String? foot;
   final int? maxMarketValue;
-  final MarketValueModel? marketValue;
+  final int? marketValue;
 
   const FootballPlayerCardModel({
     required super.cardId,
@@ -26,13 +28,16 @@ class FootballPlayerCardModel extends CardModel {
     required this.birthDate,
     required this.height,
     required this.foot,
-    required this.number,
     required this.clubId,
+    required this.clubName,
     required this.teamId,
     required this.teamName,
-    required this.clubName,
-    required this.maxMarketValue,
+    required this.teamShirtNumber,
     required this.marketValue,
+    required this.maxMarketValue,
+    required this.outfitter,
+    required this.isRetired,
+    // required this.citizenship,
   });
 
   factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {
@@ -41,23 +46,38 @@ class FootballPlayerCardModel extends CardModel {
       imageAssetPath: "assets/raster/player_faces/${json['id']}.jpg",
       playerId: json['id'],
       name: json['name'],
-      position: json['position'],
+      // position: FootballPlayerPosition.fromJson(json['position']),
+      position: json['position']?['main'],
       birthDate: json['birth_date'],
       height: json['height'],
       foot: json['foot'],
-      number: json['number'],
+      teamShirtNumber: json['team_shirt_number'],
       clubId: json['club_id'],
       teamId: json['team_id'],
       teamName: json['team_name'],
       clubName: json['club_name'],
-      maxMarketValue: json['max_market_value'],
-      marketValue: json['market_value'] == null ? null : MarketValueModel.fromJson(json['market_value']),
+      maxMarketValue: json['maxMarketValue'],
+      marketValue: json['marketValue'],
+      outfitter: json['outfitter'],
+      isRetired: json['isRetired'],
+      // citizenship: json['citizenship'] as List<String>?,
     );
   }
 
   @override
   List<Object?> get props => [cardId, playerId];
 }
+
+// class FootballPlayerPosition {
+//   final String main;
+//   final List<String> other;
+
+//   FootballPlayerPosition({required this.main, required this.other});
+
+//   factory FootballPlayerPosition.fromJson(Map<dynamic, dynamic> json) {
+//     return FootballPlayerPosition(main: json["main"], other: json["other"]);
+//   }
+// }
 
 String? footballPlayerPositionToShort(String? position) {
   if (position == null) return null;
@@ -129,8 +149,4 @@ Color? footballPlayerPositionToColor(String? position) {
     default:
       return null;
   }
-}
-
-extension FootballPlayerCardModelExtension on FootballPlayerCardModel {
-  int? get currentMarketValue => marketValue?.marketValue;
 }
