@@ -5,11 +5,11 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/draft/domain/models/position.dart';
-import 'package:football_collection/features/football_players/data/football_players_repository.dart';
+import 'package:football_collection/features/football_cards/data/football_players_repository.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../services/log/log_service.dart';
-import '../../../../football_players/domain/models/player.dart';
+import '../../../../football_cards/domain/models/player.dart';
 import '../../../domain/models/draft_tournament.dart';
 import '../../../domain/models/draft_tournament_match.dart';
 import '../../../domain/models/draft_tournament_round.dart';

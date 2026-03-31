@@ -7,7 +7,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
-import 'package:football_collection/features/football_players/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
+import 'package:football_collection/features/football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:go_router/go_router.dart';
@@ -15,10 +15,10 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import '../../../../football_cards/domain/models/player.dart';
+import '../../../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
+import '../../../../football_cards/presentation/widgets/football_player_card.dart';
 import '../../../../football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
-import '../../../../football_players/domain/models/player.dart';
-import '../../../../football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
-import '../../../../football_players/presentation/widgets/football_player_card.dart';
 import '../../../../settings/presentation/ui/screens/settings_screen/widgets/select_language.dart';
 
 part 'onboarding_screen_presenter.dart';

@@ -13,11 +13,11 @@ import '../../features/countries/presentation/screens/countries_screen/countries
 import '../../features/draft/presentation/ui/screens/draft_match_screen/draft_match_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
+import '../../features/football_cards/presentation/screens/album_screen/football_players_album_screen.dart';
+import '../../features/football_cards/presentation/screens/duplicates_screen/football_players_duplicates_screen.dart';
+import '../../features/football_cards/presentation/screens/packs_screen/football_players_pack_results_screen.dart';
+import '../../features/football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/football_confederations/domain/models/football_confederation.dart';
-import '../../features/football_players/presentation/screens/album_screen/football_players_album_screen.dart';
-import '../../features/football_players/presentation/screens/duplicates_screen/football_players_duplicates_screen.dart';
-import '../../features/football_players/presentation/screens/packs_screen/football_players_pack_results_screen.dart';
-import '../../features/football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/home/home_screen/home_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../football_players/domain/models/player.dart';
+import '../../../football_cards/domain/models/player.dart';
 import 'position.dart';
 import 'stats.dart';
 

@@ -15,7 +15,7 @@ import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
-import 'package:football_collection/features/football_players/presentation/screens/packs_screen/widgets/yandex_ads_rewarded_mixin.dart';
+import 'package:football_collection/features/football_cards/presentation/screens/packs_screen/widgets/yandex_ads_rewarded_mixin.dart';
 import 'package:football_collection/features/leaderboard/presentation/blocs/leaderboard_country_bloc/leaderboard_country_bloc.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:football_collection/services/firebase/firestore_service.dart';

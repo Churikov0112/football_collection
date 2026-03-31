@@ -16,13 +16,13 @@ import '../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.
 import '../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../draft/presentation/ui/screens/draft_description_screen/draft_description_screen.dart';
+import '../../football_cards/domain/models/player.dart';
+import '../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
+import '../../football_cards/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
+import '../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../football_confederations/domain/models/football_confederation.dart';
 import '../../football_confederations/presentation/blocs/football_confederations_bloc/football_confederations_bloc.dart';
 import '../../football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
-import '../../football_players/domain/models/player.dart';
-import '../../football_players/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../football_players/presentation/blocs/all_football_players_bloc/all_football_players_bloc.dart';
-import '../../football_players/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../menu/presentation/screens/drawer/menu_drawer.dart';
 
 part 'home_screen_presenter.dart';
