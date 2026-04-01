@@ -84,6 +84,7 @@ dependencies:
   throttling: 2.0.1
   url_launcher: 6.3.2
   logger: 2.7.0
+  share_plus: 12.0.2
 
   firebase_analytics: 12.2.0
   firebase_core: 4.6.0

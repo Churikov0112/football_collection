@@ -9,8 +9,8 @@ abstract class CardModel extends Equatable {
 
   const CardModel({required this.cardId, required this.imageAssetPath, required this.cardType});
 
-  // Добавляем общие методы, которые должны быть у всех карт
   String? get teamId;
+  String get name;
 
   @override
   List<Object?> get props => [cardId];

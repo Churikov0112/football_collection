@@ -5,6 +5,7 @@ import 'package:football_collection/features/abstract/domain/models/card.dart';
 class FootballPlayerCardModel extends CardModel {
   final String playerId;
 
+  @override
   final String name;
 
   @override

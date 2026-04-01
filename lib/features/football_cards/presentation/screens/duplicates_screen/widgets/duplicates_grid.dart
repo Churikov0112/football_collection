@@ -30,8 +30,22 @@ class _DuplicatesGrid extends StatelessWidget {
       padding: EdgeInsets.only(top: mq.padding.top + 160, left: 20, right: 20, bottom: bottomPadding),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final item = items[index];
-        return FootballPlayerCard(player: item.player, count: item.count, enableFlip: true);
+        final card = items[index].card;
+
+        if (card is FootballPlayerCardModel) {
+          return FootballPlayerCard(
+            player: card,
+            count: items[index].count,
+            hideTransferValue: false,
+            enableFlip: true,
+          );
+        }
+
+        if (card is FootballCoachCardModel) {
+          return FootballCoachCard(coach: card, count: items[index].count, enableFlip: true);
+        }
+
+        return const SizedBox.shrink();
       },
     );
   }

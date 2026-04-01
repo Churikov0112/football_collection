@@ -1,17 +1,9 @@
 part of '../football_players_duplicates_screen.dart';
 
 class _TopControlsRow extends StatelessWidget {
-  const _TopControlsRow({
-    required this.controller,
-    required this.filtersDirty,
-    required this.onOpenFilters,
-    required this.onOpenSort,
-  });
+  const _TopControlsRow({required this.controller});
 
   final TextEditingController controller;
-  final bool filtersDirty;
-  final VoidCallback onOpenFilters;
-  final VoidCallback onOpenSort;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +17,13 @@ class _TopControlsRow extends StatelessWidget {
           child: Row(
             spacing: 8,
             children: [
-              GestureDetector(
-                onTap: onOpenFilters,
-                child: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.tune)),
-              ),
               Expanded(
                 child: TextField(
                   onTapUpOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                   controller: controller,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
                     hintText: AppGlossary.search.translate(),
                     hintStyle: const TextStyle(color: Colors.white),
                     // filled: true,
@@ -43,10 +32,6 @@ class _TopControlsRow extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: onOpenSort,
-                child: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.swap_vert)),
               ),
             ],
           ),

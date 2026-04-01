@@ -35,7 +35,7 @@ class RoutePaths {
   static const footballPlayersAlbum = '/footballPlayersAlbum';
   static const footballPlayersPacks = '/footballPlayersPacks';
   static const footballCardsPackResults = '/footballCardsPackResults';
-  static const footballPlayersDuplicates = '/footballPlayersDuplicates';
+  static const cardsDuplicates = '/cardsDuplicates';
 
   // minigames
   static const miniGames = '/miniGames';
@@ -116,10 +116,7 @@ class FootballCollectionRouter {
           builder: (context, state) =>
               FootballCardsPackResultsScreen(args: state.extra as FootballCardsPackResultsScreenArgs),
         ),
-        GoRoute(
-          path: RoutePaths.footballPlayersDuplicates,
-          builder: (context, state) => const FootballPlayersDuplicatesScreen(),
-        ),
+        GoRoute(path: RoutePaths.cardsDuplicates, builder: (context, state) => const CardsDuplicatesScreen()),
 
         GoRoute(path: RoutePaths.miniGames, builder: (context, state) => MiniGamesScreen()),
         GoRoute(
