@@ -37,25 +37,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              StreamBuilder<int>(
-                stream: presenter.playersDuplicatesStream,
-                builder: (context, playersDuplicatesSnapshot) {
-                  return FootballPlayerCard(
-                    player: players[0],
-                    count: playersDuplicatesSnapshot.data ?? 1,
-                    enableFlip: true,
-                    onSell: () {
-                      presenter.playersDuplicatesSubject.add(1);
-                    },
-                    onShare: () {
-                      presenter.playersDuplicatesSubject.add(1);
-                    },
-                    onSellAll: () {
-                      presenter.playersDuplicatesSubject.add(1);
-                    },
-                  );
-                },
-              ),
+              FootballPlayerCardWidget(player: players[0], badge: CardBadge.showCount),
               const Spacer(),
               SizedBox(
                 width: mq.size.width,

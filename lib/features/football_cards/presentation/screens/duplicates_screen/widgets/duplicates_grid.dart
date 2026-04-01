@@ -17,36 +17,6 @@ class _DuplicatesGrid extends StatelessWidget {
       );
     }
 
-    final mq = MediaQuery.of(context);
-
-    return GridView.builder(
-      physics: const BouncingScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-      ),
-      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 20, right: 20, bottom: bottomPadding),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final card = items[index].card;
-
-        if (card is FootballPlayerCardModel) {
-          return FootballPlayerCard(
-            player: card,
-            count: items[index].count,
-            hideTransferValue: false,
-            enableFlip: true,
-          );
-        }
-
-        if (card is FootballCoachCardModel) {
-          return FootballCoachCard(coach: card, count: items[index].count, enableFlip: true);
-        }
-
-        return const SizedBox.shrink();
-      },
-    );
+    return CardsGrid(cards: items.map((e) => e.card).toList(), badge: CardBadge.showCount);
   }
 }

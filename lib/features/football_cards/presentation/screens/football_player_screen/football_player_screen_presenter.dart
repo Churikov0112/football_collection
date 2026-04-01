@@ -7,10 +7,7 @@ class FootballPlayerScreenPresenter extends StatefulWidget {
 
   final Widget child;
 
-  const FootballPlayerScreenPresenter({
-    required this.child,
-    super.key,
-  });
+  const FootballPlayerScreenPresenter({required this.child, super.key});
 
   @override
   State<FootballPlayerScreenPresenter> createState() => FootballPlayerScreenPresenterState();

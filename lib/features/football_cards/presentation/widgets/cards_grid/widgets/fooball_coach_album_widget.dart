@@ -1,7 +1,7 @@
-part of '../football_players_album_screen.dart';
+part of '../cards_grid.dart';
 
-class _CoachAlbumWidget extends StatelessWidget {
-  const _CoachAlbumWidget({required this.coach, required this.country});
+class _FootballCoachAlbumWidget extends StatelessWidget {
+  const _FootballCoachAlbumWidget({required this.coach, required this.country});
 
   final FootballCoachCardModel coach;
   final FootballNationalTeamModel country;
@@ -10,7 +10,7 @@ class _CoachAlbumWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // return SavedPlayerCard(player: player);
 
-    final absentWIdget = Container(
+    final absentWidget = Container(
       color: country.confederation.color?.darken().withAlpha(200),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -39,12 +39,11 @@ class _CoachAlbumWidget extends StatelessWidget {
       builder: (context, savedCardsState) {
         if (savedCardsState is SavedCardsStateLoadSucceeded) {
           final isCardSaved = savedCardsState.savedCardsIds?.contains(coach.cardId) ?? false;
-          final count = savedCardsState.savedCardsIds?.where((id) => id == coach.cardId).length ?? 1;
           if (isCardSaved) {
-            return FootballCoachCard(coach: coach, count: count, enableFlip: true);
+            return FootballCoachCardWidget(coach: coach, badge: .showCount);
           }
         }
-        return absentWIdget;
+        return absentWidget;
       },
     );
   }

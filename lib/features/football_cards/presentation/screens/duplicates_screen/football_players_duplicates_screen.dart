@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
-import 'package:football_collection/features/football_cards/presentation/widgets/player_card/football_player_card.dart';
+import 'package:football_collection/features/football_cards/presentation/widgets/cards_grid/cards_grid.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -12,10 +12,8 @@ import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparen
 
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../leaderboard/presentation/screens/leaderboard_screen/widgets/country_selection_bottom_sheet.dart';
-import '../../../domain/cards/coach_card.dart';
-import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
-import '../../widgets/coach_card/football_coach_card.dart';
+import '../../widgets/card_image_wrapper/card_image_wrapper.dart';
 
 part 'football_players_duplicates_screen_presenter.dart';
 part 'widgets/duplicates_grid.dart';

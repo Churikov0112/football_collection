@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-
-import '../../../../../../services/localization/translator.dart';
-import '../../../../../abstract/domain/models/card.dart';
+part of '../../card_image_wrapper.dart';
 
 class CardQrBottomSheet extends StatelessWidget {
   const CardQrBottomSheet({super.key, required this.card});

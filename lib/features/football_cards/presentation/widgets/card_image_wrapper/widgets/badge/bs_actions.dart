@@ -1,4 +1,4 @@
-part of '../football_coach_card.dart';
+part of '../../card_image_wrapper.dart';
 
 enum _WhatToDoWithDuplicate { sellAll, sell, qr }
 

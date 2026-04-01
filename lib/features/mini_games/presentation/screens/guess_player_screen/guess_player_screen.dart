@@ -59,12 +59,10 @@ class GuessPlayerScreen extends StatelessWidget {
                             builder: (context, selectedOptionSnapshot) {
                               final showResult = selectedOptionSnapshot.data != null;
                               return Align(
-                                child: FootballPlayerCard(
+                                child: FootballPlayerCardWidget(
                                   player: correctPlayer,
-                                  count: 1,
-                                  hideTransferValue: false,
-                                  hideName: !showResult,
-                                  enableFlip: true,
+                                  badge: .none,
+                                  nameVisibility: showResult ? .show : .quest,
                                 ),
                               );
                             },

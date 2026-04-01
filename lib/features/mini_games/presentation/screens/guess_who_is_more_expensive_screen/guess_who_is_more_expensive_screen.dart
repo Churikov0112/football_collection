@@ -64,18 +64,18 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                                   children: [
                                     SizedBox(width: 8),
                                     Expanded(
-                                      child: FootballPlayerCard(
+                                      child: FootballPlayerCardWidget(
                                         player: player1!,
-                                        count: 1,
-                                        hideTransferValue: selectedOption == null,
+                                        badge: .none,
+                                        marketValueVisibility: selectedOption != null ? .show : .quest,
                                       ),
                                     ),
                                     SizedBox(width: 8),
                                     Expanded(
-                                      child: FootballPlayerCard(
+                                      child: FootballPlayerCardWidget(
                                         player: player2!,
-                                        count: 1,
-                                        hideTransferValue: selectedOption == null,
+                                        badge: .none,
+                                        marketValueVisibility: selectedOption != null ? .show : .quest,
                                       ),
                                     ),
                                     SizedBox(width: 8),

@@ -1,4 +1,4 @@
-part of '../football_players_album_screen.dart';
+part of '../cards_grid.dart';
 
 class _FootballPlayerAlbumWidget extends StatelessWidget {
   const _FootballPlayerAlbumWidget({required this.player, required this.country});
@@ -10,7 +10,7 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // return SavedPlayerCard(player: player);
 
-    final absentWIdget = Container(
+    final absentWidget = Container(
       color: country.confederation.color?.darken().withAlpha(200),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -39,12 +39,11 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
       builder: (context, savedCardsState) {
         if (savedCardsState is SavedCardsStateLoadSucceeded) {
           final isPlayerSaved = savedCardsState.savedCardsIds?.contains(player.cardId) ?? false;
-          final count = savedCardsState.savedCardsIds?.where((id) => id == player.cardId).length ?? 1;
           if (isPlayerSaved) {
-            return FootballPlayerCard(player: player, count: count, enableFlip: true);
+            return FootballPlayerCardWidget(player: player, badge: .showCount);
           }
         }
-        return absentWIdget;
+        return absentWidget;
       },
     );
   }

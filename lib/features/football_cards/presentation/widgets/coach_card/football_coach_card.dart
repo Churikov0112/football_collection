@@ -1,44 +1,38 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
-import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+import 'package:football_collection/features/football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import 'package:football_collection/services/localization/translator.dart';
-import 'package:football_collection/services/toast/toast_service.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../domain/cards/coach_card.dart';
-import '../../screens/packs_screen/football_players_packs_screen.dart';
-import '../player_card/parts/player_qr_bs.dart';
+import '../card_image_wrapper/card_image_wrapper.dart';
 
 part 'parts/flag.dart';
-part 'parts/player_image.dart';
 part 'parts/rounded_white_container.dart';
-part 'parts/what_to_do_with_duplicate_bs.dart';
 
-class FootballCoachCard extends StatefulWidget {
-  const FootballCoachCard({
+class FootballCoachCardWidget extends StatelessWidget {
+  const FootballCoachCardWidget({
     required this.coach,
-    required this.count,
-    this.hideNationalTeam = false,
-    this.hideName = false,
-    this.height = packHeight,
-    this.width = packWidth,
-    this.enableFlip = false,
-    this.showNew = false,
+    required this.badge,
+    this.nationalTeamVisibility = CardElementVisibility.show,
+    this.nameVisibility = CardElementVisibility.show,
     this.onSell,
     this.onShare,
     this.onSellAll,
+    this.onTap,
+    this.height = packHeight,
+    this.width = packWidth,
     super.key,
   });
 
   final FootballCoachCardModel coach;
-  final int count;
-  final bool hideNationalTeam;
-  final bool hideName;
-  final bool enableFlip;
-  final bool showNew;
+  final CardBadge badge;
+
+  final CardElementVisibility nationalTeamVisibility;
+  final CardElementVisibility nameVisibility;
+
+  final VoidCallback? onTap;
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
   final VoidCallback? onShare;
@@ -47,148 +41,65 @@ class FootballCoachCard extends StatefulWidget {
   final double width;
 
   @override
-  State<FootballCoachCard> createState() => _FootballCoachCardState();
-}
-
-class _FootballCoachCardState extends State<FootballCoachCard> {
-  @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
-    // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
-
-    final card = Container(
-      height: widget.height,
-      width: widget.width,
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black54, width: 1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                _PlayerImage(coach: widget.coach, count: widget.count, showNew: widget.showNew),
-                _Flag(coach: widget.coach, hideNationalTeam: widget.hideNationalTeam),
-                Positioned(bottom: 5, right: 5, child: _RoundedContainer(text: "Coach")),
-              ],
-            ),
+    return SizedBox(
+      height: height,
+      width: width,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.blueAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          const SizedBox(height: 5),
-          Text(
-            widget.hideName ? "?" : widget.coach.name.toUpperCase(),
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ],
-      ),
-    );
-
-    if (widget.enableFlip) {
-      return Stack(
-        children: [
-          card,
-          if (widget.count > 1)
-            Positioned(
-              top: 0,
-              right: 0,
-              child: GestureDetector(
-                onTap: () async {
-                  final whatToDo = await showModalBottomSheet<_WhatToDoWithDuplicate>(
-                    context: context,
-                    builder: (context) => _WhatToDoWithDuplicateBottomSheet(),
-                  );
-
-                  if (whatToDo == _WhatToDoWithDuplicate.qr && mounted) {
-                    widget.onShare?.call();
-                    // try {
-                    //   await FirebaseAnalytics.instance.logEvent(
-                    //     name: "player_to_qr",
-                    //     parameters: {
-                    //       "player_id": widget.player.playerId,
-                    //       "player_country_id": widget.player.teamId.toString(),
-                    //       "player_club": widget.player.clubName ?? "no_data",
-                    //       "player_position": widget.player.position ?? "no_data",
-                    //       "current_current_market_value": widget.player.marketValue ?? "no_data",
-                    //       "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
-                    //     },
-                    //   );
-                    // } catch (e) {
-                    //   LogService.error(e.toString(), e);
-                    // }
-                    await showModalBottomSheet(
-                      context: context,
-                      builder: (context) => CardQrBottomSheet(card: widget.coach),
-                    ).timeout(
-                      const Duration(milliseconds: 300),
-                      onTimeout: () async {
-                        getIt.get<SavedCardsBloc>().add(SavedCardsEventRemove(cardId: widget.coach.cardId));
-                        return true;
-                      },
-                    );
-                  }
-                  if (whatToDo == _WhatToDoWithDuplicate.sell && mounted) {
-                    widget.onSell?.call();
-                    // try {
-                    //   await FirebaseAnalytics.instance.logEvent(
-                    //     name: "player_sell",
-                    //     parameters: {
-                    //       "player_id": widget.player.playerId,
-                    //       "player_country_id": widget.player.teamId.toString(),
-                    //       "player_club": widget.player.clubName ?? "no_data",
-                    //       "player_position": widget.player.position ?? "no_data",
-                    //       "current_current_market_value": widget.player.marketValue ?? "no_data",
-                    //       "player_max_market_value": widget.player.maxMarketValue ?? "no_data",
-                    //     },
-                    //   );
-                    // } catch (e) {
-                    //   LogService.error(e.toString(), e);
-                    // }
-                    getIt.get<SavedCardsBloc>().add(SavedCardsEventRemove(cardId: widget.coach.cardId));
-                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: 1));
-                    ToastService.showToast(title: "${AppGlossary.balanceIncreased.translate()} + 1 🏆", seconds: 2);
-                  }
-
-                  if (whatToDo == _WhatToDoWithDuplicate.sellAll) {
-                    final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
-                    final savedCardsIdsSingle = <String>[];
-                    final duplicates = <String>[];
-                    for (final savedCardId in savedCardsIds) {
-                      if (!savedCardsIdsSingle.contains(savedCardId)) {
-                        savedCardsIdsSingle.add(savedCardId);
-                      } else {
-                        duplicates.add(savedCardId);
-                      }
-                    }
-                    // try {
-                    //   await FirebaseAnalytics.instance.logEvent(
-                    //     name: "player_sellAll",
-                    //     parameters: {
-                    //       "saved_cards_ids_length": savedCardsIds.length,
-                    //       "duplicates_length": duplicates.length,
-                    //     },
-                    //   );
-                    // } catch (e) {
-                    //   LogService.error(e.toString(), e);
-                    // }
-                    getIt.get<SavedCardsBloc>().add(SavedCardsEventRemoveAll(cardIds: duplicates));
-                    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: duplicates.length));
-                    ToastService.showToast(
-                      title: "${AppGlossary.balanceIncreased.translate()} + ${duplicates.length} 🏆",
-                      seconds: 2,
-                    );
-                    widget.onSellAll?.call();
-                  }
-                },
-                child: Container(height: 64, width: 64, color: Colors.transparent),
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2))],
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Stack(
+                children: [
+                  CardImageWrapper(
+                    card: coach,
+                    badge: badge,
+                    onSell: onSell,
+                    onSellAll: onSellAll,
+                    onShare: onShare,
+                    child: Image.asset(coach.imageAssetPath, fit: BoxFit.cover),
+                  ),
+                  Positioned(
+                    top: 5,
+                    left: 5,
+                    child: _Flag(
+                      imageAssetPath: 'assets/raster/team_flags/${coach.teamId}.jpg',
+                      nationalTeamVisibility: nationalTeamVisibility,
+                    ),
+                  ),
+                  Positioned(bottom: 5, right: 5, child: _RoundedContainer(text: "Coach")),
+                ],
               ),
             ),
-        ],
-      );
-    }
-    return card;
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: AutoSizeText(
+                nameVisibility == .quest
+                    ? "?"
+                    : nameVisibility == .show
+                    ? coach.name.toUpperCase()
+                    : "",
+                maxLines: 1,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                minFontSize: 14,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Spacer(flex: 2),
+          ],
+        ),
+      ),
+    );
   }
 }

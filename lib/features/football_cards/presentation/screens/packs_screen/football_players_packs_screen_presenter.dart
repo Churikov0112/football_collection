@@ -183,7 +183,11 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isUnpackingAnimationPlayingSubject.add(false);
     await context.push(
       RoutePaths.footballCardsPackResults,
-      extra: FootballCardsPackResultsScreenArgs(cards: cards, newCardIds: _newCardIdsForOpenedPack, packName: packName),
+      extra: FootballCardsPackResultsScreenArgs(
+        cards: cards,
+        packName: packName,
+        newCardsIds: _newCardIdsForOpenedPack.toList(),
+      ),
     );
     getNewPacks();
   }

@@ -7,24 +7,18 @@ import 'package:football_collection/features/countries/domain/models/national_te
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
-import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
-import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../domain/cards/coach_card.dart';
-import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
-import '../../widgets/coach_card/football_coach_card.dart';
-import '../../widgets/player_card/football_player_card.dart';
+import '../../widgets/cards_grid/cards_grid.dart';
 import '../packs_screen/football_players_packs_screen.dart';
 
 part 'football_players_album_screen_presenter.dart';
-part 'widgets/album_widget.dart';
 part 'widgets/cards_list.dart';
-part 'widgets/coach_album_widget.dart';
 
 class FootballPlayersAlbumScreen extends StatelessWidget {
   const FootballPlayersAlbumScreen({required this.country, super.key});

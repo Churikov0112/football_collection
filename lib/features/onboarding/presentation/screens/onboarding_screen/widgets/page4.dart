@@ -39,19 +39,7 @@ class _OnboardingPage4 extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Expanded(
-                    child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 2 / 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      padding: EdgeInsets.only(top: 20, bottom: mq.padding.bottom + 100),
-                      itemCount: players.length,
-                      itemBuilder: (context, index) {
-                        return FootballPlayerCard(player: players[index], count: 1, enableFlip: true, showNew: true);
-                      },
-                    ),
+                    child: CardsGrid(cards: players, badge: .showNew),
                   ),
                 ],
               ),

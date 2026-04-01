@@ -67,11 +67,10 @@ class GuessNationalTeamScreen extends StatelessWidget {
                             builder: (context, selectedOptionSnapshot) {
                               final showResult = selectedOptionSnapshot.data != null;
                               return Align(
-                                child: FootballPlayerCard(
+                                child: FootballPlayerCardWidget(
                                   player: player,
-                                  count: 1,
-                                  hideTransferValue: false,
-                                  hideNationalTeam: !showResult,
+                                  badge: .none,
+                                  nationalTeamVisibility: showResult ? .show : .quest,
                                 ),
                               );
                             },

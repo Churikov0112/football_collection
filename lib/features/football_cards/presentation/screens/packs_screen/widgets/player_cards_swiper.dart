@@ -2,10 +2,9 @@ part of '../football_players_packs_screen.dart';
 
 class _PlayerCardsSwiper extends StatefulWidget {
   final List<CardModel> cards;
-  final Set<String> newCardIds;
   final String packName;
 
-  const _PlayerCardsSwiper({required this.cards, required this.newCardIds, required this.packName});
+  const _PlayerCardsSwiper({required this.cards, required this.packName});
 
   @override
   State<_PlayerCardsSwiper> createState() => _PlayerCardsSwiperState();
@@ -54,28 +53,25 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       cardsCount: widget.cards.length,
       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
         final card = widget.cards[index];
+        final isNewCard = presenter._newCardIdsForOpenedPack.contains(card.cardId);
 
         if (card is FootballPlayerCardModel) {
-          return FootballPlayerCard(
+          return FootballPlayerCardWidget(
             height: packHeight * 1.1,
             width: packWidth * 1.1,
             player: card,
-            count: 1,
-            hideTransferValue: false,
-            showNew: widget.newCardIds.contains(card.cardId),
+            badge: isNewCard ? .showNew : .none,
           );
         }
         if (card is FootballCoachCardModel) {
-          return FootballCoachCard(
+          return FootballCoachCardWidget(
             height: packHeight * 1.1,
             width: packWidth * 1.1,
             coach: card,
-            count: 1,
-            hideNationalTeam: false,
-            showNew: widget.newCardIds.contains(card.cardId),
+            badge: isNewCard ? .showNew : .none,
           );
         }
-        return Container();
+        return SizedBox.shrink();
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
         final prevCard = widget.cards[previousIndex];

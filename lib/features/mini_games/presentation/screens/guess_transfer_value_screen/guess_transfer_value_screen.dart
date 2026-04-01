@@ -62,10 +62,10 @@ class GuessTransferValueScreen extends StatelessWidget {
                               stream: presenter.selectedOptionStream$,
                               builder: (context, selectedOptionSnapshot) {
                                 return Align(
-                                  child: FootballPlayerCard(
+                                  child: FootballPlayerCardWidget(
                                     player: player,
-                                    count: 1,
-                                    hideTransferValue: selectedOptionSnapshot.data == null,
+                                    badge: .none,
+                                    marketValueVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
                                   ),
                                 );
                               },

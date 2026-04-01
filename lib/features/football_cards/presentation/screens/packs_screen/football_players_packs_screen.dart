@@ -34,6 +34,7 @@ import '../../../../football_confederations/domain/models/football_confederation
 import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart';
+import '../../widgets/card_image_wrapper/card_image_wrapper.dart';
 import '../../widgets/coach_card/football_coach_card.dart';
 import '../../widgets/player_card/football_player_card.dart';
 import 'football_players_pack_results_screen.dart';
@@ -118,11 +119,7 @@ class FootballPlayersPacksScreen extends StatelessWidget {
                               },
                             ),
                             if (state.unpacking)
-                              _PlayerCardsSwiper(
-                                cards: selectedPack.cards!,
-                                newCardIds: presenter._newCardIdsForOpenedPack,
-                                packName: selectedPack.title,
-                              ),
+                              _PlayerCardsSwiper(cards: selectedPack.cards!, packName: selectedPack.title),
                             if (state.show3dObject)
                               AnimatedBuilder(
                                 animation: presenter._hidePacksAnimation,

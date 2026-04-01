@@ -12,7 +12,6 @@ import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../countries/domain/models/national_team.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../widgets/player_card/football_player_card.dart';
 
 part 'football_player_screen_presenter.dart';
 part 'widgets/name.dart';
@@ -97,7 +96,7 @@ class FootballPlayerScreen extends StatelessWidget {
                             topRight: Radius.circular(20),
                           ),
                         ),
-                        child: FootballPlayerImage(player: player, size: mq.size.width * 0.3, isFake: hidePhoto),
+                        child: Image.asset(player.imageAssetPath, fit: BoxFit.cover, height: mq.size.width * 0.3),
                       ),
                       IconButton(onPressed: context.pop, icon: const Icon(Icons.close)),
                     ],
