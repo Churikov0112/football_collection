@@ -15,12 +15,25 @@ import '../domain/cards/player_card.dart';
 
 @singleton
 class CommonFootballRepository {
+  List<FootballConfederations> _allConfederationCache = [];
   List<FootballNationalTeamModel> _allTeamsCache = [];
   List<FootballPlayerCardModel> _allPlayersCache = [];
   List<FootballCoachCardModel> _allCoachesCache = [];
   // List<FootballClubModel> _allClubsCache = [];
 
   final Random _random = Random();
+
+  List<FootballConfederations> _parseConfederations(List<dynamic> teamsData) {
+    Set<FootballConfederations> confederations = {};
+    for (var team in teamsData) {
+      if (team.containsKey('name')) {
+        String countryName = team['name'];
+        FootballConfederations confederation = footballConfederationFromCountryName(countryName);
+        if (!confederations.contains(confederation)) confederations.add(confederation);
+      }
+    }
+    return confederations.toList();
+  }
 
   List<FootballNationalTeamModel> _parseTeams(List<dynamic> data) {
     final List<FootballNationalTeamModel> teams = [];
@@ -90,6 +103,14 @@ class CommonFootballRepository {
       }
 
       try {
+        if (_allConfederationCache.isEmpty) {
+          _allConfederationCache = await compute(_parseConfederations, teamsData);
+        }
+      } catch (e) {
+        LogService.log(e.toString());
+      }
+
+      try {
         if (_allCoachesCache.isEmpty) {
           _allCoachesCache = await compute(_parseCoaches, coachesData);
         }
@@ -105,6 +126,11 @@ class CommonFootballRepository {
       //   LogService.log(e.toString());
       // }
     }
+  }
+
+  Future<List<FootballConfederations>> footballConfederationsGet() async {
+    await _ensureInitialized();
+    return [..._allConfederationCache];
   }
 
   Future<List<FootballNationalTeamModel>> teamsGet({FootballConfederations? confederation, String? teamId}) async {

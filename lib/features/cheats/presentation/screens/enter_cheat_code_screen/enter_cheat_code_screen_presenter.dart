@@ -16,7 +16,7 @@ class EnterCheatCodeScreenPresenter extends StatefulWidget {
 class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPresenter> {
   final TextEditingController cheatCodeTextEditingController = TextEditingController();
 
-  void verifyCheatCode() {
+  void verifyCheatCode() async {
     final cheatCode = cheatCodeTextEditingController.value.text;
 
     try {
@@ -53,7 +53,8 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
       }
     }
     if (cheatCode == "ALL") {
-      final allCards = getIt.get<AllFootballCardsBloc>().state.cards ?? [];
+      final repo = getIt.get<CommonFootballRepository>();
+      final allCards = await repo.getAllCards(cardTypes: CardType.values.toSet());
       if (allCards.isNotEmpty) {
         getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allCards.map((e) => e.cardId).toList()));
         ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);

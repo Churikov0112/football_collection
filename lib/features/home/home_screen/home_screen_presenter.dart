@@ -20,9 +20,6 @@ class HomeScreenPresenterState extends State<HomeScreenPresenter> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // loadBannerAd();
-      getIt.get<AllCountriesBloc>().add(AllCountriesEventGet());
-      getIt.get<AllFootballCardsBloc>().add(AllFootballCardsEventLoad());
-      getIt.get<FootballConfederationsBloc>().add(FootballConfederationsEventGet());
     });
   }
 

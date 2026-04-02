@@ -17,16 +17,6 @@ class FootballPlayersDuplicatesScreenPresenterState extends State<FootballPlayer
   final TextEditingController searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-
-    final allCardsBloc = getIt.get<AllFootballCardsBloc>();
-    if (allCardsBloc.state is! AllFootballCardsStateLoadSucceeded) {
-      allCardsBloc.add(AllFootballCardsEventLoad());
-    }
-  }
-
-  @override
   void dispose() {
     searchController.dispose();
     super.dispose();

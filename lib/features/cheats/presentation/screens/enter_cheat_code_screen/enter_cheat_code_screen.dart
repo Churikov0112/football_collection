@@ -2,12 +2,13 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import 'package:football_collection/features/football_cards/data/football_players_repository.dart';
 // import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 
 import '../../../../../services/log/log_service.dart';
-import '../../../../football_cards/presentation/blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
+import '../../../../abstract/domain/models/card.dart';
 import '../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 
 part 'enter_cheat_code_screen_presenter.dart';

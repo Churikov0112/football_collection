@@ -29,8 +29,6 @@ class _TmPlayerBio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tmData = player;
-    final allCountries = getIt.get<AllCountriesBloc>().state.countries ?? [];
-    final countryName = allCountries.firstWhereOrNull((c) => c.id == tmData.teamId)?.name ?? '?';
 
     return Column(
       spacing: 8,
@@ -97,14 +95,14 @@ class _TmPlayerBio extends StatelessWidget {
           const _Separator(),
         ],
 
-        if (tmData.teamId?.isNotEmpty == true)
-          Translator(
-            termin: AppGlossary.nationality,
-            builder: (value) => _BioTile(
-              title: value,
-              value: hideNationality ? '?' : "${emojiFlagByCountryName(countryName) ?? ""}  $countryName",
-            ),
-          ),
+        // if (tmData.teamId?.isNotEmpty == true)
+        //   Translator(
+        //     termin: AppGlossary.nationality,
+        //     builder: (value) => _BioTile(
+        //       title: value,
+        //       value: hideNationality ? '?' : "${emojiFlagByCountryName(countryName) ?? ""}  $countryName",
+        //     ),
+        //   ),
         const _Separator(),
       ],
     );

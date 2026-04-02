@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/football_cards/data/football_players_repository.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
@@ -14,10 +15,7 @@ import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../countries/domain/models/national_team.dart';
-import '../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
-import '../../../../football_cards/presentation/blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
 import '../../../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
-import '../../blocs/football_confederations_bloc/football_confederations_bloc.dart';
 import 'widgets/open_packs_screen_button.dart';
 
 part 'football_confederations_screen_presenter.dart';
@@ -29,6 +27,7 @@ class FootballConfederationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    final repo = getIt.get<CommonFootballRepository>();
 
     return FootballConfederationsScreenPresenter(
       child: Builder(
@@ -42,14 +41,14 @@ class FootballConfederationsScreen extends StatelessWidget {
                 BackgroundImage(),
                 Column(
                   children: [
-                    BlocBuilder<AllFootballCardsBloc, AllFootballCardsState>(
-                      bloc: getIt.get(),
+                    FutureBuilder<List<CardModel>>(
+                      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
                       builder: (context, allFootballCardsState) {
-                        return BlocBuilder<AllCountriesBloc, AllCountriesState>(
-                          bloc: getIt.get(),
+                        return FutureBuilder<List<FootballNationalTeamModel>>(
+                          future: repo.teamsGet(),
                           builder: (context, allCountriesState) {
-                            final allCountries = allCountriesState.countries ?? [];
-                            final allCards = allFootballCardsState.cards ?? [];
+                            final allCountries = allCountriesState.data ?? [];
+                            final allCards = allFootballCardsState.data ?? [];
                             if (allCountries.isEmpty || allCards.isEmpty) return const LinearProgressIndicator();
                             return const _RegionsList();
                           },

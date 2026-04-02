@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
@@ -12,8 +11,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../ui_kit/widgets/background_image/background_image_color_filter.dart';
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../../../abstract/domain/models/card.dart';
+import '../../../data/football_players_repository.dart';
 import '../../../domain/cards/coach_card.dart';
-import '../../blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
 import '../../widgets/cards_grid/cards_grid.dart';
 import '../packs_screen/football_players_packs_screen.dart';
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
-import 'package:football_collection/features/football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
 import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
 import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
@@ -27,11 +26,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     super.initState();
 
     getIt.get<LeaderboardBloc>().add(LeaderboardEventLoad());
-
-    final countriesState = getIt.get<AllCountriesBloc>().state;
-    if (countriesState.countries?.isEmpty != false) {
-      getIt.get<AllCountriesBloc>().add(AllCountriesEventGet());
-    }
   }
 
   Future<void> _onRefresh() async {

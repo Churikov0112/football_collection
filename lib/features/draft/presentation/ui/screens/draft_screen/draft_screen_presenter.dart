@@ -83,8 +83,9 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     _draftPageSubject.add(_draftPageSubject.value - 1);
   }
 
-  void getDraftPlayers() {
-    final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
+  Future<void> getDraftPlayers() async {
+    final repo = getIt.get<CommonFootballRepository>();
+    final allPlayers = await repo.playersGet();
     final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
     final savedPlayers = allPlayers.where((p) => savedCardsIds.contains(p.cardId)).toList();
 
@@ -264,7 +265,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     _captainIdSubject.add(playerId);
   }
 
-  List<PositionConnection> getPositionConnections() {
+  Future<List<PositionConnection>> getPositionConnections() async {
     final yourScheme = _schemeSubject.value;
     final positions = FootballSchemes.vertical[yourScheme] ?? [];
     final startingSquad = _startingSquadSubject.value;
@@ -280,7 +281,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
           final toPlayer = startingSquad.firstWhereOrNull((p) => p.$1.id == toPof.id)?.$2;
 
           if (fromPlayer != null && toPlayer != null) {
-            final chemistry = _playersChemistry(fromPlayer, toPlayer);
+            final chemistry = await _playersChemistry(fromPlayer, toPlayer);
             connections.add(PositionConnection(from: fromPof, to: toPof, chemistry: chemistry));
           }
         }
@@ -290,7 +291,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     return connections;
   }
 
-  void _calcSquadChemistry() {
+  Future<void> _calcSquadChemistry() async {
     final schemePofs = FootballSchemes.vertical[_schemeSubject.value] ?? [];
     final schemeConnections = FootballSchemeConnections.getConnectionsForScheme(_schemeSubject.value);
 
@@ -301,7 +302,7 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
           final player1 = _startingSquadSubject.value.firstWhereOrNull((p) => p.$1.id == pof.id);
           final player2 = _startingSquadSubject.value.firstWhereOrNull((p) => p.$1.id == connection.toPositionId);
           if (player1?.$2 != null && player2?.$2 != null) {
-            final chemistry = _playersChemistry(player1!.$2!, player2!.$2!);
+            final chemistry = await _playersChemistry(player1!.$2!, player2!.$2!);
             connectionsChemistry.add((connection, chemistry));
           }
         }
@@ -310,13 +311,14 @@ class DraftScreenPresenterState extends State<DraftScreenPresenter> {
     _connectionsChemistrySubject.add(connectionsChemistry);
   }
 
-  double _playersChemistry(FootballPlayerGameModel player1, FootballPlayerGameModel player2) {
-    final allCoounries = getIt.get<AllCountriesBloc>().state.countries;
+  Future<double> _playersChemistry(FootballPlayerGameModel player1, FootballPlayerGameModel player2) async {
+    final repo = getIt.get<CommonFootballRepository>();
+    final allCoounries = await repo.teamsGet();
 
-    final player1CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player1.card.teamId)?.name ?? '';
+    final player1CountryName = allCoounries.firstWhereOrNull((c) => c.id == player1.card.teamId)?.name ?? '';
     final FootballConfederations player1Confederation = footballConfederationFromCountryName(player1CountryName);
 
-    final player2CountryName = allCoounries?.firstWhereOrNull((c) => c.id == player2.card.teamId)?.name ?? '';
+    final player2CountryName = allCoounries.firstWhereOrNull((c) => c.id == player2.card.teamId)?.name ?? '';
     final FootballConfederations player2Confederation = footballConfederationFromCountryName(player2CountryName);
 
     double chemistry = 0.0;

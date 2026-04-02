@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/draft/domain/models/ratings.dart';
 import 'package:football_collection/ui_kit/colors/colors.dart';
@@ -11,7 +10,6 @@ import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../countries/domain/models/national_team.dart';
 import '../../../domain/cards/player_card.dart';
-import '../../blocs/all_countries_bloc/all_countries_bloc.dart';
 
 part 'football_player_screen_presenter.dart';
 part 'widgets/name.dart';

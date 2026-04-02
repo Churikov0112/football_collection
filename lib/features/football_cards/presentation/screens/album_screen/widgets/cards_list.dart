@@ -7,10 +7,12 @@ class _FootballCardsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllFootballCardsBloc, AllFootballCardsState>(
-      bloc: getIt.get(),
+    final repo = getIt.get<CommonFootballRepository>();
+
+    return FutureBuilder<List<CardModel>>(
+      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
       builder: (context, allFootballCardsState) {
-        final cards = (allFootballCardsState.cards ?? []).where((p) => p.teamId == country.id).toList();
+        final cards = (allFootballCardsState.data ?? []).where((p) => p.teamId == country.id).toList();
 
         // тренер выводится первым
         cards.sort((a, b) => (b is FootballCoachCardModel ? 1 : 0).compareTo(a is FootballCoachCardModel ? 1 : 0));

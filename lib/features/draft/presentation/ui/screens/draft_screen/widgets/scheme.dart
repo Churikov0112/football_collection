@@ -116,108 +116,113 @@ class _Scheme extends StatelessWidget {
               return const SizedBox.shrink();
             }
 
-            final connections = presenter.getPositionConnections();
+            return FutureBuilder<List<PositionConnection>>(
+              future: presenter.getPositionConnections(),
+              builder: (context, positionConnectionsSnapshot) {
+                final connections = positionConnectionsSnapshot.data ?? [];
 
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                final fieldWidth = constraints.maxWidth;
-                final fieldHeight = constraints.maxHeight;
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    final fieldWidth = constraints.maxWidth;
+                    final fieldHeight = constraints.maxHeight;
 
-                return Stack(
-                  children: [
-                    Stack(
+                    return Stack(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                        Stack(
                           children: [
-                            Image.asset("assets/raster/field/field_goal_top.jpg"),
-                            Expanded(
-                              child: Image.asset(
-                                "assets/raster/field/field_space_top.jpg",
-                                height: 300,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Image.asset("assets/raster/field/field_center.jpg"),
-                            Expanded(
-                              child: Image.asset(
-                                "assets/raster/field/field_space_bottom.jpg",
-                                height: 300,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Image.asset("assets/raster/field/field_goal_bottom.jpg"),
-                          ],
-                        ),
-                        StreamBuilder(
-                          stream: presenter.draftPage$,
-                          builder: (context, draftPageSnapshot) {
-                            final page = draftPageSnapshot.data;
-
-                            return StreamBuilder(
-                              stream: presenter.selectedPlayer$,
-                              builder: (context, selectedPlayerSnapshot) {
-                                if (selectedPlayerSnapshot.data == null || page != 1) {
-                                  return const SizedBox.shrink();
-                                }
-
-                                return Positioned(
-                                  bottom: 16,
-                                  right: 16,
-                                  child: GlassButton(
-                                    icon: Icons.change_circle_outlined,
-                                    onPressed: () {
-                                      presenter.openPlayerSelector(selectedPlayerSnapshot.data!.$1);
-                                    },
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Image.asset("assets/raster/field/field_goal_top.jpg"),
+                                Expanded(
+                                  child: Image.asset(
+                                    "assets/raster/field/field_space_top.jpg",
+                                    height: 300,
+                                    fit: BoxFit.fill,
                                   ),
+                                ),
+                                Image.asset("assets/raster/field/field_center.jpg"),
+                                Expanded(
+                                  child: Image.asset(
+                                    "assets/raster/field/field_space_bottom.jpg",
+                                    height: 300,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Image.asset("assets/raster/field/field_goal_bottom.jpg"),
+                              ],
+                            ),
+                            StreamBuilder(
+                              stream: presenter.draftPage$,
+                              builder: (context, draftPageSnapshot) {
+                                final page = draftPageSnapshot.data;
+
+                                return StreamBuilder(
+                                  stream: presenter.selectedPlayer$,
+                                  builder: (context, selectedPlayerSnapshot) {
+                                    if (selectedPlayerSnapshot.data == null || page != 1) {
+                                      return const SizedBox.shrink();
+                                    }
+
+                                    return Positioned(
+                                      bottom: 16,
+                                      right: 16,
+                                      child: GlassButton(
+                                        icon: Icons.change_circle_outlined,
+                                        onPressed: () {
+                                          presenter.openPlayerSelector(selectedPlayerSnapshot.data!.$1);
+                                        },
+                                      ),
+                                    );
+                                  },
                                 );
                               },
-                            );
-                          },
+                            ),
+                          ],
                         ),
+
+                        // Линии химии между позициями
+                        ...connections.map((connection) {
+                          final fromX = connection.from.x * fieldWidth;
+                          final fromY = (1 - connection.from.y) * fieldHeight;
+                          final toX = connection.to.x * fieldWidth;
+                          final toY = (1 - connection.to.y) * fieldHeight;
+
+                          return CustomPaint(
+                            painter: _ConnectionPainter(
+                              from: Offset(fromX, fromY),
+                              to: Offset(toX, toY),
+                              color: _getChemistryColor(connection.chemistry),
+                              lineWidth: 4,
+                              // lineWidth: 2.0 + connection.chemistry * 3.0,
+                            ),
+                          );
+                        }),
+
+                        // Кружки позиций
+                        ...yourSchemePositions.map((pof) {
+                          const double _cardAspectRatio = 2 / 3;
+                          final double cardHeight = fieldWidth * 0.25; // mqSize.width * 0.23;
+                          final double cardWidth = cardHeight * _cardAspectRatio;
+                          final double x = pof.x * fieldWidth;
+                          final double y = (1 - pof.y) * fieldHeight;
+
+                          return Positioned(
+                            // left: x - circleSize / 2,
+                            // top: y - circleSize / 2,
+                            left: x - cardWidth / 2,
+                            top: y - cardHeight / 2,
+                            child: _PositionOnField(
+                              pof: pof,
+                              height: cardHeight,
+                              width: cardWidth,
+                              color: Colors.blueGrey.withOpacity(0.7),
+                            ),
+                          );
+                        }),
                       ],
-                    ),
-
-                    // Линии химии между позициями
-                    ...connections.map((connection) {
-                      final fromX = connection.from.x * fieldWidth;
-                      final fromY = (1 - connection.from.y) * fieldHeight;
-                      final toX = connection.to.x * fieldWidth;
-                      final toY = (1 - connection.to.y) * fieldHeight;
-
-                      return CustomPaint(
-                        painter: _ConnectionPainter(
-                          from: Offset(fromX, fromY),
-                          to: Offset(toX, toY),
-                          color: _getChemistryColor(connection.chemistry),
-                          lineWidth: 4,
-                          // lineWidth: 2.0 + connection.chemistry * 3.0,
-                        ),
-                      );
-                    }),
-
-                    // Кружки позиций
-                    ...yourSchemePositions.map((pof) {
-                      const double _cardAspectRatio = 2 / 3;
-                      final double cardHeight = fieldWidth * 0.25; // mqSize.width * 0.23;
-                      final double cardWidth = cardHeight * _cardAspectRatio;
-                      final double x = pof.x * fieldWidth;
-                      final double y = (1 - pof.y) * fieldHeight;
-
-                      return Positioned(
-                        // left: x - circleSize / 2,
-                        // top: y - circleSize / 2,
-                        left: x - cardWidth / 2,
-                        top: y - cardHeight / 2,
-                        child: _PositionOnField(
-                          pof: pof,
-                          height: cardHeight,
-                          width: cardWidth,
-                          color: Colors.blueGrey.withOpacity(0.7),
-                        ),
-                      );
-                    }),
-                  ],
+                    );
+                  },
                 );
               },
             );

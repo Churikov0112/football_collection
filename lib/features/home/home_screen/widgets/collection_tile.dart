@@ -1,9 +1,8 @@
 part of '../home_screen.dart';
 
 class _CollectionTile extends StatelessWidget {
-  const _CollectionTile({required this.competitions, required this.allCards, required this.showOriginal});
+  const _CollectionTile({required this.allCards, required this.showOriginal});
 
-  final List<FootballConfederations> competitions;
   final List<CardModel> allCards;
   final bool showOriginal;
 
@@ -65,16 +64,6 @@ class _CollectionTile extends StatelessWidget {
                         ),
                       ),
 
-                      // Align(
-                      //   child: Row(
-                      //     mainAxisSize: MainAxisSize.min,
-                      //     spacing: 8,
-                      //     children: [
-                      //       for (final competition in competitions)
-                      //         CompetitionLogoWidget(competitionId: competition.id),
-                      //     ],
-                      //   ),
-                      // ),
                       Align(
                         child: Text(
                           totalCount == 0 ? "" : "$savedCount / $totalCount",

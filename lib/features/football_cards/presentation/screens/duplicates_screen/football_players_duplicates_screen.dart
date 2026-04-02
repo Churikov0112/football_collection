@@ -12,7 +12,7 @@ import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparen
 
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../leaderboard/presentation/screens/leaderboard_screen/widgets/country_selection_bottom_sheet.dart';
-import '../../blocs/all_football_cards_bloc/all_football_cards_bloc.dart';
+import '../../../data/football_players_repository.dart';
 import '../../widgets/card_image_wrapper/card_image_wrapper.dart';
 
 part 'football_players_duplicates_screen_presenter.dart';
@@ -30,6 +30,8 @@ class CardsDuplicatesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final repo = getIt.get<CommonFootballRepository>();
+
     return FootballPlayersDuplicatesScreenPresenter(
       child: Builder(
         builder: (context) {
@@ -43,18 +45,18 @@ class CardsDuplicatesScreen extends StatelessWidget {
                 return Stack(
                   children: [
                     const BackgroundImage(),
-                    BlocBuilder<AllFootballCardsBloc, AllFootballCardsState>(
-                      bloc: getIt.get(),
+                    FutureBuilder<List<CardModel>>(
+                      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
                       builder: (context, allFootballCardsState) {
                         return BlocBuilder<SavedCardsBloc, SavedCardsState>(
                           bloc: getIt.get(),
                           builder: (context, savedCardsState) {
-                            if (allFootballCardsState is AllFootballCardsStatePending ||
+                            if (allFootballCardsState.connectionState == .waiting ||
                                 savedCardsState is SavedCardsStatePending) {
                               return const Center(child: CircularProgressIndicator());
                             }
 
-                            final allCards = allFootballCardsState.cards ?? const <CardModel>[];
+                            final allCards = allFootballCardsState.data ?? const <CardModel>[];
                             final savedIds = savedCardsState.savedCardsIds ?? const <String>[];
 
                             return ValueListenableBuilder<TextEditingValue>(

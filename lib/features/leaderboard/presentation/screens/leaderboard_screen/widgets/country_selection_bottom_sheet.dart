@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../di/di.dart';
 import '../../../../../../services/localization/translator.dart';
 import '../../../../../countries/domain/models/national_team.dart';
-import '../../../../../football_cards/presentation/blocs/all_countries_bloc/all_countries_bloc.dart';
+import '../../../../../football_cards/data/football_players_repository.dart';
 
 class CountrySelectionBottomSheet extends StatefulWidget {
   const CountrySelectionBottomSheet({super.key});
@@ -25,6 +24,8 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
 
   @override
   Widget build(BuildContext context) {
+    final repo = getIt.get<CommonFootballRepository>();
+
     return Material(
       color: const Color(0xFF101010),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
@@ -53,11 +54,11 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
               ),
               const SizedBox(height: 12),
               Expanded(
-                child: BlocBuilder<AllCountriesBloc, AllCountriesState>(
-                  bloc: getIt.get<AllCountriesBloc>(),
+                child: FutureBuilder<List<FootballNationalTeamModel>>(
+                  future: repo.teamsGet(),
                   builder: (context, state) {
                     final countries =
-                        (state.countries ?? <FootballNationalTeamModel>[])
+                        (state.data ?? <FootballNationalTeamModel>[])
                             .where((country) => country.name.toLowerCase().contains(_query))
                             .toList()
                           ..sort((a, b) => a.name.compareTo(b.name));
