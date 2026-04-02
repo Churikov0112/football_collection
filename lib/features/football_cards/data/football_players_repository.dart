@@ -167,14 +167,18 @@ class CommonFootballRepository {
     final List<PackModel> packs = [
       if (team != null)
         PackModel(
+          type: .team,
           title: team.name,
           price: 100,
           cards: await getRandomCards(team: team, cardTypes: CardType.values.toSet()),
-          imageAssetPath: "assets/raster/packs/pack-general.png",
-          glbAssetPath: "assets/3d/pack-general.glb",
+          // imageAssetPath: "assets/raster/packs/pack-general.png",
+          // glbAssetPath: "assets/3d/pack-general.glb",
+          imageAssetPath: "assets/raster/packs/countrypackwc26.png",
+          glbAssetPath: "assets/3d/countrywc26.glb",
         ),
       if (confederation != null && confederation != FootballConfederations.unknown)
         PackModel(
+          type: .confederation,
           title: confederation.name,
           price: 5,
           cards: await getRandomCards(confederation: confederation, cardTypes: CardType.values.toSet()),
@@ -182,13 +186,17 @@ class CommonFootballRepository {
           glbAssetPath: "assets/3d/pack-${confederation.name}.glb",
         ),
       PackModel(
+        type: .common,
         title: "World tour",
         price: 0,
         cards: await getRandomCards(cardTypes: CardType.values.toSet()),
-        imageAssetPath: "assets/raster/packs/pack-worldtour.png",
-        glbAssetPath: "assets/3d/pack-worldtour.glb",
+        // imageAssetPath: "assets/raster/packs/pack-worldtour.png",
+        // glbAssetPath: "assets/3d/pack-worldtour.glb",
+        imageAssetPath: "assets/raster/packs/generalpackwc2026.png",
+        glbAssetPath: "assets/3d/generalwc26.glb",
       ),
       PackModel(
+        type: .topPlayers,
         title: "Top players",
         price: 100,
         cards: await getRandomCards(minPrimeTransferValue: 50000000, cardTypes: CardType.values.toSet()),
@@ -196,6 +204,7 @@ class CommonFootballRepository {
         glbAssetPath: "assets/3d/pack-topplayers.glb",
       ),
       PackModel(
+        type: .topCountries,
         title: "Top 25 countries",
         price: 25,
         cards: await getRandomCards(topCountries: true, cardTypes: CardType.values.toSet()),
@@ -206,6 +215,7 @@ class CommonFootballRepository {
         for (final conf in FootballConfederations.values)
           if (conf != FootballConfederations.unknown)
             PackModel(
+              type: .confederation,
               title: conf.name,
               price: 5,
               cards: await getRandomCards(confederation: conf, cardTypes: CardType.values.toSet()),

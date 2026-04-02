@@ -5,6 +5,7 @@ import 'package:football_collection/services/localization/translator.dart';
 
 import '../../../../../countries/domain/models/national_team.dart';
 import '../football_players_packs_screen.dart';
+import 'team_flag_on_pack.dart';
 
 class PacksPageView extends StatelessWidget {
   const PacksPageView({required this.packs, required this.state, super.key});
@@ -84,7 +85,22 @@ class PacksPageView extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Image.asset(packs[i].imageAssetPath, height: packHeight, width: packWidth, fit: BoxFit.fill),
+                  Stack(
+                    children: [
+                      Image.asset(packs[i].imageAssetPath, height: packHeight, width: packWidth, fit: BoxFit.fill),
+                      if (packs[i].type == PackType.team)
+                        Positioned(
+                          top: (packHeight - packWidth * 0.3) / 2,
+                          left: (packWidth - packWidth * 0.3) / 2,
+                          right: (packWidth - packWidth * 0.3) / 2,
+                          bottom: (packHeight - packWidth * 0.3) / 2,
+                          child: TeamFlagOnPack(
+                            teamdId: packs[i].cards?.firstOrNull?.teamId ?? "",
+                            size: packWidth * 0.3,
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
             ),
