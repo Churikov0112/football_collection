@@ -33,13 +33,17 @@ class Pack3dModel extends StatelessWidget {
             cameraControls: false,
             exposure: 0.75, // уменьшает яркость
           ),
-          Positioned(
-            top: (packSize3d.height - packSize3d.width * 0.3) / 2,
-            left: (packSize3d.width - packSize3d.width * 0.3) / 2,
-            right: (packSize3d.width - packSize3d.width * 0.3) / 2,
-            bottom: (packSize3d.height - packSize3d.width * 0.3) / 2,
-            child: TeamFlagOnPack(teamdId: selectedPack.cards?.firstOrNull?.teamId ?? "", size: packSize3d.width * 0.3),
-          ),
+          if (selectedPack.type == .team)
+            Positioned(
+              top: (packSize3d.height - packSize3d.width * 0.3) / 2,
+              left: (packSize3d.width - packSize3d.width * 0.3) / 2,
+              right: (packSize3d.width - packSize3d.width * 0.3) / 2,
+              bottom: (packSize3d.height - packSize3d.width * 0.3) / 2,
+              child: TeamFlagOnPack(
+                teamdId: selectedPack.cards?.firstOrNull?.teamId ?? "",
+                size: packSize3d.width * 0.3,
+              ),
+            ),
         ],
       ),
     );
