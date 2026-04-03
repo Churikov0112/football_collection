@@ -1,5 +1,25 @@
 part of 'enter_cheat_code_screen.dart';
 
+const _kDisposableCheatCodes = <String>[
+  "MONEY", // 1000
+  "RABONA", // 500,
+  "BICYCLE", // 500,
+  "TRIVELLA", // 500,
+  "SCORPION", // 500,
+  "RESPECT", // 500,
+  "RIP", // 500,
+  "HATTRICK", // 500,
+  "POKER", // 4000
+  "PENTATRICK", // 5000
+  "DARKHORSE", // 1000
+  "QUATERFINAL", // 1000
+  "SEMIFINAL", // 1000
+  "FINAL", // 1000
+  "GOAT", // 10000 карточек криша,
+  "23", // 1000 карточек рональдиньо если кто-то забьет 23 гола
+  "KLOSE", // 1000
+];
+
 class EnterCheatCodeScreenPresenter extends StatefulWidget {
   static EnterCheatCodeScreenPresenterState of(BuildContext context) {
     return context.findAncestorStateOfType<EnterCheatCodeScreenPresenterState>()!;

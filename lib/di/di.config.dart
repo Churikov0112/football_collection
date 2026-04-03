@@ -18,6 +18,8 @@ import '../features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_blo
     as _i367;
 import '../features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart'
     as _i809;
+import '../features/cheats/presentation/blocs/cheat_codes_history_bloc/cheat_codes_history_bloc.dart'
+    as _i153;
 import '../features/draft/presentation/blocs/draft_tournament_bloc/draft_tournament_bloc.dart'
     as _i1008;
 import '../features/football_cards/data/football_players_repository.dart'
@@ -43,6 +45,9 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i717.FirstLaunchBloc>(() => _i717.FirstLaunchBloc());
   gh.singleton<_i367.SavedCardsBloc>(() => _i367.SavedCardsBloc());
   gh.singleton<_i809.SettingsBloc>(() => _i809.SettingsBloc());
+  gh.singleton<_i153.CheatCodesHistoryBloc>(
+    () => _i153.CheatCodesHistoryBloc(),
+  );
   gh.singleton<_i1065.CommonFootballRepository>(
     () => _i1065.CommonFootballRepository(),
   );
