@@ -8,12 +8,15 @@ import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_blo
 import '../../../../countries/domain/models/national_team.dart';
 import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/cards/coach_card.dart';
+import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
 import '../card_image_wrapper/card_image_wrapper.dart';
 import '../coach_card/football_coach_card.dart';
+import '../legend_card/football_legend_card.dart';
 import '../player_card/football_player_card.dart';
 
 part 'widgets/fooball_coach_album_widget.dart';
+part 'widgets/fooball_legend_album_widget.dart';
 part 'widgets/football_player_album_widget.dart';
 
 class CardsGrid extends StatelessWidget {
@@ -58,6 +61,10 @@ class CardsGrid extends StatelessWidget {
           if (card is FootballCoachCardModel) {
             return _FootballCoachAlbumWidget(coach: card, country: country!);
           }
+
+          if (card is FootballLegendCardModel) {
+            return _FootballLegendAlbumWidget(legend: card, country: country!);
+          }
         }
 
         // pack results
@@ -70,6 +77,10 @@ class CardsGrid extends StatelessWidget {
           if (card is FootballCoachCardModel) {
             return FootballCoachCardWidget(coach: card, badge: isNewCard ? .showNew : .none);
           }
+
+          if (card is FootballLegendCardModel) {
+            return FootballLegendCardWidget(legend: card, badge: isNewCard ? .showNew : .none);
+          }
         }
 
         // other
@@ -78,6 +89,9 @@ class CardsGrid extends StatelessWidget {
         }
         if (card is FootballCoachCardModel) {
           return FootballCoachCardWidget(coach: card, badge: badge);
+        }
+        if (card is FootballLegendCardModel) {
+          return FootballLegendCardWidget(legend: card, badge: badge);
         }
 
         return SizedBox.shrink();

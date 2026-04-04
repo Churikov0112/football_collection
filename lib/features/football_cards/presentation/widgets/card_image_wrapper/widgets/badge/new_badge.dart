@@ -5,11 +5,22 @@ class _NewBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      width: 64,
-      color: Colors.purpleAccent,
-      child: Center(child: Text("NEW!")),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.deepPurple,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12)),
+      ),
+      child: RotatedBox(
+        quarterTurns: 3,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+
+          child: Text(
+            "NEW",
+            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
     );
   }
 }

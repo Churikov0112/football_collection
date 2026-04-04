@@ -28,14 +28,16 @@ import 'package:o3d/o3d.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../../services/navigation/navigation.dart';
+import '../../../../../ui_kit/colors/colors.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/cards/coach_card.dart';
+import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart';
-import '../../widgets/card_image_wrapper/card_image_wrapper.dart';
 import '../../widgets/coach_card/football_coach_card.dart';
+import '../../widgets/legend_card/football_legend_card.dart';
 import '../../widgets/player_card/football_player_card.dart';
 import 'football_players_pack_results_screen.dart';
 import 'widgets/confirm_buy_pack_bs.dart';

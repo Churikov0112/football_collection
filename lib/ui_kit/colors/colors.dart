@@ -1,4 +1,4 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
 extension ColorBrightness on Color {
   Color darken([double amount = .1]) {
@@ -24,3 +24,5 @@ class AppColors {
   static const Color darkBackgroundPrimary = Color(0xFF1C1C1C);
   static const Color darkBackgroundSecondary = Color(0xFF282828);
 }
+
+const List<Color> goldConfettiColors = [Colors.amber, Colors.yellow, Colors.orange, Colors.black];

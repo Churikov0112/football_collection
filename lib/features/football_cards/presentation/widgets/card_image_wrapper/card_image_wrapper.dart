@@ -6,14 +6,27 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../../services/localization/translator.dart';
 import '../../../../../services/toast/toast_service.dart';
+import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
+import '../../../domain/cards/coach_card.dart';
+import '../../../domain/cards/legend_card.dart';
+import '../../../domain/cards/player_card.dart';
 
 part 'widgets/badge/bs_actions.dart';
 part 'widgets/badge/bs_qr.dart';
 part 'widgets/badge/count_badge.dart';
 part 'widgets/badge/new_badge.dart';
+part 'widgets/market_value/legend_market_value.dart';
+part 'widgets/market_value/player_market_value.dart';
+part 'widgets/shildik/coach_shildik.dart';
+part 'widgets/shildik/legend_shildik.dart';
+part 'widgets/shildik/player_shildik.dart';
+part 'widgets/top_left/coach_top_left.dart';
+part 'widgets/top_left/legend_top_left.dart';
+part 'widgets/top_left/player_top_left.dart';
+part 'widgets/top_left/position.dart';
 
 enum CardBadge { none, showCount, showNew }
 
@@ -23,7 +36,9 @@ class CardImageWrapper extends StatelessWidget {
   const CardImageWrapper({
     required this.card,
     required this.badge,
-    required this.child,
+    required this.borderRadius,
+    required this.nationalTeamVisibility,
+    this.marketValueVisibility,
     // this.height = packHeight,
     // this.width = packWidth,
     // this.onTap,
@@ -41,41 +56,68 @@ class CardImageWrapper extends StatelessWidget {
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
   final VoidCallback? onShare;
-  final Widget child;
+  final BorderRadius borderRadius;
+
+  final CardElementVisibility? marketValueVisibility;
+  final CardElementVisibility nationalTeamVisibility;
 
   @override
   Widget build(BuildContext context) {
-    // return SizedBox(
-    //   height: height,
-    //   width: width,
-    //   child: Stack(
-    //     children: [
-    //       GestureDetector(onTap: onTap, child: child),
-    //       Positioned(
-    //         top: 0,
-    //         right: 0,
-    //         child: badge == CardBadge.showCount
-    //             ? _CountBadge(card: card, onSell: onSell, onSellAll: onSellAll, onShare: onShare)
-    //             : badge == CardBadge.showNew
-    //             ? _NewBadge()
-    //             : SizedBox.shrink(),
-    //       ),
-    //     ],
-    //   ),
-    // );
-    return Stack(
-      children: [
-        child,
-        Positioned(
-          top: 0,
-          right: 0,
-          child: badge == CardBadge.showCount
-              ? _CountBadge(card: card, onSell: onSell, onSellAll: onSellAll, onShare: onShare)
-              : badge == CardBadge.showNew
-              ? _NewBadge()
-              : SizedBox.shrink(),
-        ),
-      ],
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: Stack(
+        children: [
+          Image.asset(card.imageAssetPath, fit: BoxFit.cover),
+
+          Positioned(
+            top: 0,
+            right: 0,
+            child: badge == CardBadge.showCount
+                ? _CountBadge(card: card, onSell: onSell, onSellAll: onSellAll, onShare: onShare)
+                : badge == CardBadge.showNew
+                ? _NewBadge()
+                : SizedBox.shrink(),
+          ),
+
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: card is FootballPlayerCardModel
+                ? _PlayerShildik(player: card as FootballPlayerCardModel, innerBorderRadius: borderRadius.bottomRight)
+                : card is FootballLegendCardModel
+                ? _LegendShildik(innerBorderRadius: borderRadius.bottomRight)
+                : card is FootballCoachCardModel
+                ? _CoachShildik(innerBorderRadius: borderRadius.bottomRight)
+                : SizedBox.shrink(),
+          ),
+
+          Positioned(
+            top: 0,
+            left: 0,
+            child: card is FootballPlayerCardModel
+                ? _PlayerTopLeft(
+                    player: card as FootballPlayerCardModel,
+                    nationalTeamVisibility: nationalTeamVisibility,
+                  )
+                : card is FootballLegendCardModel
+                ? _LegendTopLeft(legend: card as FootballLegendCardModel)
+                : card is FootballCoachCardModel
+                ? _CoachTopLeft(coach: card as FootballCoachCardModel)
+                : SizedBox.shrink(),
+          ),
+
+          if (marketValueVisibility == .show)
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: card is FootballPlayerCardModel
+                  ? _PlayerMarketValue(player: card as FootballPlayerCardModel)
+                  : card is FootballLegendCardModel
+                  ? _LegendMarketValue(legend: card as FootballLegendCardModel)
+                  : SizedBox.shrink(),
+            ),
+        ],
+      ),
     );
   }
 }

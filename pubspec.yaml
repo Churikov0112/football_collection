@@ -133,6 +133,7 @@ flutter:
     - assets/json/
     - assets/raster/field/
     - assets/raster/player_faces/
+    - assets/raster/legends_faces/
     - assets/raster/team_flags/
     - assets/raster/coach_faces/
     - assets/raster/packs/

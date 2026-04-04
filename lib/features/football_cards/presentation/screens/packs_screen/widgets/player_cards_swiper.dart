@@ -23,13 +23,21 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
   }
 
   Future<void> checkConfetti(CardModel card) async {
+    final settings = getIt.get<SettingsBloc>().state;
+    if (!settings.enableConfetti) return;
+
     if (card is FootballPlayerCardModel) {
-      final settings = getIt.get<SettingsBloc>().state;
-      if (!settings.enableConfetti) return;
       final needConfetti = (card.maxMarketValue ?? 0) >= 50000000;
       if (needConfetti) {
         Confetti.launch(context, options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6));
       }
+    }
+
+    if (card is FootballLegendCardModel) {
+      Confetti.launch(
+        context,
+        options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6, colors: goldConfettiColors),
+      );
     }
   }
 
@@ -44,7 +52,7 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       onEnd: () => presenter.showReceivedCards(widget.cards, widget.packName),
       padding: EdgeInsets.only(
         left: (mq.size.width - packWidth * 1) / 2,
-        right: (mq.size.width - packWidth * 1.1) / 2,
+        right: (mq.size.width - packWidth * 1) / 2,
         top: (backgroundHeight - packHeight / 3) / 2,
       ),
       isLoop: false,
@@ -57,16 +65,24 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
 
         if (card is FootballPlayerCardModel) {
           return FootballPlayerCardWidget(
-            height: packHeight * 1.1,
-            width: packWidth * 1.1,
+            height: packHeight * 1,
+            width: packWidth * 1,
             player: card,
+            badge: isNewCard ? .showNew : .none,
+          );
+        }
+        if (card is FootballLegendCardModel) {
+          return FootballLegendCardWidget(
+            height: packHeight * 1,
+            width: packWidth * 1,
+            legend: card,
             badge: isNewCard ? .showNew : .none,
           );
         }
         if (card is FootballCoachCardModel) {
           return FootballCoachCardWidget(
-            height: packHeight * 1.1,
-            width: packWidth * 1.1,
+            height: packHeight * 1,
+            width: packWidth * 1,
             coach: card,
             badge: isNewCard ? .showNew : .none,
           );

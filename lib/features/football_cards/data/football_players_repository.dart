@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:football_collection/features/abstract/domain/models/pack.dart';
@@ -11,6 +12,7 @@ import '../../abstract/domain/models/card.dart';
 import '../../countries/domain/models/national_team.dart';
 import '../../football_confederations/domain/models/football_confederation.dart';
 import '../domain/cards/coach_card.dart';
+import '../domain/cards/legend_card.dart';
 import '../domain/cards/player_card.dart';
 
 @singleton
@@ -18,6 +20,7 @@ class CommonFootballRepository {
   List<FootballConfederations> _allConfederationCache = [];
   List<FootballNationalTeamModel> _allTeamsCache = [];
   List<FootballPlayerCardModel> _allPlayersCache = [];
+  List<FootballLegendCardModel> _allLegendsCache = [];
   List<FootballCoachCardModel> _allCoachesCache = [];
   // List<FootballClubModel> _allClubsCache = [];
 
@@ -56,6 +59,19 @@ class CommonFootballRepository {
     }
   }
 
+  List<FootballLegendCardModel> _parseLegends(List<dynamic> data) {
+    try {
+      final List<FootballLegendCardModel> legends = [];
+      for (final item in data) {
+        legends.add(FootballLegendCardModel.fromJson(item));
+      }
+      return legends;
+    } catch (e) {
+      LogService.log(e.toString());
+      return [];
+    }
+  }
+
   // List<FootballClubModel> _parseClubs(List<dynamic> data) {
   //   final List<FootballClubModel> clubs = [];
   //   for (final item in data) {
@@ -83,12 +99,23 @@ class CommonFootballRepository {
       final String playersJson = await rootBundle.loadString('assets/json/prepared_tm_players_profiles.json');
       final List<dynamic> playersData = jsonDecode(playersJson);
 
+      final String legendsJson = await rootBundle.loadString('assets/json/prepared_tm_legends_profiles.json');
+      final List<dynamic> legendsData = jsonDecode(legendsJson);
+
       final String coachesJson = await rootBundle.loadString('assets/json/prepared_tm_coach_profiles.json');
       final List<dynamic> coachesData = jsonDecode(coachesJson);
 
       try {
         if (_allPlayersCache.isEmpty) {
           _allPlayersCache = await compute(_parsePlayers, playersData);
+        }
+      } catch (e) {
+        LogService.log(e.toString());
+      }
+
+      try {
+        if (_allLegendsCache.isEmpty) {
+          _allLegendsCache = await compute(_parseLegends, legendsData);
         }
       } catch (e) {
         LogService.log(e.toString());
@@ -158,10 +185,10 @@ class CommonFootballRepository {
     return [..._allPlayersCache].where((player) => player.teamId == teamId).toList();
   }
 
-  Future<List<FootballCoachCardModel>> coachesGet(FootballNationalTeamModel? team) async {
-    await _ensureInitialized();
-    return [..._allCoachesCache].where((c) => c.teamId == team?.id).toList();
-  }
+  // Future<List<FootballCoachCardModel>> coachesGet(FootballNationalTeamModel? team) async {
+  //   await _ensureInitialized();
+  //   return [..._allCoachesCache].where((c) => c.teamId == team?.id).toList();
+  // }
 
   Future<List<PackModel>> packsGet({FootballConfederations? confederation, FootballNationalTeamModel? team}) async {
     final List<PackModel> packs = [
@@ -229,7 +256,11 @@ class CommonFootballRepository {
   // Общий метод для получения всех карт (игроки + тренеры)
   Future<List<CardModel>> getAllCards({required Set<CardType> cardTypes}) async {
     await _ensureInitialized();
-    final List<CardModel> allCards = [..._allPlayersCache, if (cardTypes.contains(CardType.coach)) ..._allCoachesCache];
+    final List<CardModel> allCards = [
+      if (cardTypes.contains(CardType.player)) ..._allPlayersCache,
+      if (cardTypes.contains(CardType.coach)) ..._allCoachesCache,
+      if (cardTypes.contains(CardType.legend)) ..._allLegendsCache,
+    ];
     return allCards;
   }
 
@@ -252,23 +283,16 @@ class CommonFootballRepository {
 
       // Фильтрация по конфедерации
       if (confederation != null) {
-        final cardTeam = _allTeamsCache.firstWhere(
-          (t) => t.id == card.teamId,
-          orElse: () => throw Exception('Team not found for card: ${card.cardId}'),
-        );
-        if (cardTeam.confederation != confederation) {
+        final cardTeam = _allTeamsCache.firstWhereOrNull((t) => t.id == card.teamId);
+        if (cardTeam?.confederation != confederation) {
           return false;
         }
       }
 
       // Фильтрация по топ-странам
       if (topCountries == true) {
-        final top8Teams = _allTeamsCache.sublist(0, 8);
-        final cardTeam = _allTeamsCache.firstWhere(
-          (t) => t.id == card.teamId,
-          orElse: () => throw Exception('Team not found for card: ${card.cardId}'),
-        );
-        if (!top8Teams.contains(cardTeam)) {
+        final top25Teams = _allTeamsCache.sublist(0, 25);
+        if (top25Teams.firstWhereOrNull((t) => t.id == card.teamId) == null) {
           return false;
         }
       }

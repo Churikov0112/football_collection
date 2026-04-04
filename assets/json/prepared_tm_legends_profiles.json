@@ -1,0 +1,2826 @@
+[
+  {
+    "id": "16101",
+    "name": "Atiba Hutchinson",
+    "height": 187,
+    "citizenship": [
+      "Canada",
+      "Trinidad and Tobago"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-01-07",
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield",
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3510",
+    "team_name": "Canada"
+  },
+  {
+    "id": "2904",
+    "name": "Rafa Márquez",
+    "height": 184,
+    "citizenship": [
+      "Mexico",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-03-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "6303",
+    "team_name": "Mexico"
+  },
+  {
+    "id": "29573",
+    "name": "Jared Borgetti",
+    "height": 185,
+    "citizenship": [
+      "Mexico",
+      "Italy"
+    ],
+    "isRetired": true,
+    "retiredSince": "2011-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "6303",
+    "team_name": "Mexico"
+  },
+  {
+    "id": "68",
+    "name": "Landon Donovan",
+    "height": 173,
+    "citizenship": [
+      "United States",
+      "Canada"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Right Winger",
+        "Second Striker"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3505",
+    "team_name": "United States"
+  },
+  {
+    "id": "27577",
+    "name": "Clint Dempsey",
+    "height": 185,
+    "citizenship": [
+      "United States"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-08-29",
+    "position": {
+      "main": "Second Striker",
+      "other": [
+        "Left Winger",
+        "Centre-Forward"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3505",
+    "team_name": "United States"
+  },
+  {
+    "id": "102004",
+    "name": "Marcelo Balboa",
+    "height": 186,
+    "citizenship": [
+      "United States"
+    ],
+    "isRetired": true,
+    "retiredSince": "2003-01-01",
+    "position": {
+      "main": "Sweeper",
+      "other": [
+        "Centre-Back",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3505",
+    "team_name": "United States"
+  },
+  {
+    "id": "117747",
+    "name": "Rabah Madjer",
+    "citizenship": [
+      "Algeria"
+    ],
+    "isRetired": true,
+    "retiredSince": "1992-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Right Winger",
+        "Second Striker"
+      ]
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3614",
+    "team_name": "Algeria"
+  },
+  {
+    "id": "117732",
+    "name": "Lakhdar Belloumi",
+    "height": 178,
+    "citizenship": [
+      "Algeria"
+    ],
+    "isRetired": true,
+    "retiredSince": "1999-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Centre-Forward"
+      ]
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3614",
+    "team_name": "Algeria"
+  },
+  {
+    "id": "8024",
+    "name": "Diego Maradona",
+    "citizenship": [
+      "Argentina"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Second Striker"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3437",
+    "team_name": "Argentina"
+  },
+  {
+    "id": "37264",
+    "name": "Mario Kempes",
+    "height": 182,
+    "citizenship": [
+      "Argentina",
+      "Italy"
+    ],
+    "isRetired": true,
+    "retiredSince": "1996-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Left Winger",
+        "Second Striker"
+      ]
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3437",
+    "team_name": "Argentina"
+  },
+  {
+    "id": "5959",
+    "name": "Gabriel Batistuta",
+    "height": 185,
+    "citizenship": [
+      "Argentina",
+      "Italy"
+    ],
+    "isRetired": true,
+    "retiredSince": "2005-03-13",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3437",
+    "team_name": "Argentina"
+  },
+  {
+    "id": "13556",
+    "name": "Tim Cahill",
+    "height": 178,
+    "citizenship": [
+      "Australia",
+      "Samoa"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-04",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Second Striker",
+        "Central Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "New Balance",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3433",
+    "team_name": "Australia"
+  },
+  {
+    "id": "3357",
+    "name": "Mark Schwarzer",
+    "citizenship": [
+      "Australia",
+      "Germany"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3433",
+    "team_name": "Australia"
+  },
+  {
+    "id": "129716",
+    "name": "Matthias Sindelar",
+    "citizenship": [
+      "Austria"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker"
+      ]
+    },
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3383",
+    "team_name": "Austria"
+  },
+  {
+    "id": "78388",
+    "name": "Hans Krankl",
+    "citizenship": [
+      "Austria"
+    ],
+    "isRetired": true,
+    "retiredSince": "1989-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3383",
+    "team_name": "Austria"
+  },
+  {
+    "id": "50202",
+    "name": "Eden Hazard",
+    "height": 175,
+    "citizenship": [
+      "Belgium"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-10-10",
+    "position": {
+      "main": "Left Winger",
+      "other": [
+        "Attacking Midfield",
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3382",
+    "team_name": "Belgium"
+  },
+  {
+    "id": "118147",
+    "name": "Jan Ceulemans",
+    "height": 188,
+    "citizenship": [
+      "Belgium"
+    ],
+    "isRetired": true,
+    "retiredSince": "1992-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Centre-Forward",
+        "Left Winger"
+      ]
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3382",
+    "team_name": "Belgium"
+  },
+  {
+    "id": "95378",
+    "name": "Jean-Marie Pfaff",
+    "citizenship": [
+      "Belgium"
+    ],
+    "isRetired": true,
+    "retiredSince": "1990-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3382",
+    "team_name": "Belgium"
+  },
+  {
+    "id": "21175",
+    "name": "Vedad Ibisevic",
+    "citizenship": [
+      "Bosnia-Herzegovina",
+      "United States"
+    ],
+    "isRetired": true,
+    "retiredSince": "2021-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3446",
+    "team_name": "Bosnia-Herzegovina"
+  },
+  {
+    "id": "25812",
+    "name": "Emir Spahic",
+    "height": 186,
+    "citizenship": [
+      "Bosnia-Herzegovina",
+      "Croatia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2017-01-31",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3446",
+    "team_name": "Bosnia-Herzegovina"
+  },
+  {
+    "id": "68290",
+    "name": "Neymar",
+    "height": 175,
+    "citizenship": [
+      "Brazil"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Left Winger",
+        "Second Striker"
+      ]
+    },
+    "foot": "right",
+    "marketValue": 10000000,
+    "outfitter": "Puma",
+    "club_id": "221",
+    "club_name": "Santos",
+    "team_id": "3439",
+    "team_name": "Brazil"
+  },
+  {
+    "id": "3140",
+    "name": "Ronaldo",
+    "height": 183,
+    "citizenship": [
+      "Brazil",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2011-02-13",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3439",
+    "team_name": "Brazil"
+  },
+  {
+    "id": "3373",
+    "name": "Ronaldinho",
+    "height": 182,
+    "citizenship": [
+      "Brazil",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-01-16",
+    "position": {
+      "main": "Left Winger",
+      "other": [
+        "Attacking Midfield",
+        "Second Striker"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3439",
+    "team_name": "Brazil"
+  },
+  {
+    "id": "17121",
+    "name": "Pelé",
+    "height": 170,
+    "citizenship": [
+      "Brazil"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3439",
+    "team_name": "Brazil"
+  },
+  {
+    "id": "80009",
+    "name": "Odaïr Fortes",
+    "height": 185,
+    "citizenship": [
+      "Cape Verde"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-01-07",
+    "position": {
+      "main": "Right Winger",
+      "other": [
+        "Attacking Midfield",
+        "Left Winger"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "4311",
+    "team_name": "Cape Verde"
+  },
+  {
+    "id": "13185",
+    "name": "José Veiga",
+    "height": 188,
+    "citizenship": [
+      "Cape Verde",
+      "Portugal"
+    ],
+    "isRetired": true,
+    "retiredSince": "2021-05-14",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "4311",
+    "team_name": "Cape Verde"
+  },
+  {
+    "id": "88998",
+    "name": "Carlos Valderrama",
+    "height": 177,
+    "citizenship": [
+      "Colombia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2002-01-01",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3816",
+    "team_name": "Colombia"
+  },
+  {
+    "id": "39152",
+    "name": "Radamel Falcao",
+    "height": 177,
+    "citizenship": [
+      "Colombia",
+      "Venezuela"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "marketValue": 100000,
+    "outfitter": "Nike",
+    "club_id": "2350",
+    "club_name": "Millonarios",
+    "team_id": "3816",
+    "team_name": "Colombia"
+  },
+  {
+    "id": "102150",
+    "name": "Faustino Asprilla",
+    "height": 176,
+    "citizenship": [
+      "Colombia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2004-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3816",
+    "team_name": "Colombia"
+  },
+  {
+    "id": "134697",
+    "name": "Dioko Kaluyituka",
+    "height": 175,
+    "citizenship": [
+      "DR Congo"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3854",
+    "team_name": "Democratic Republic of the Congo"
+  },
+  {
+    "id": "42949",
+    "name": "Zola Matumona",
+    "height": 165,
+    "citizenship": [
+      "DR Congo"
+    ],
+    "isRetired": true,
+    "position": {
+      "main": "Left Midfield",
+      "other": [
+        "Left Winger"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3854",
+    "team_name": "Democratic Republic of the Congo"
+  },
+  {
+    "id": "1407",
+    "name": "Davor Suker",
+    "citizenship": [
+      "Croatia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2003-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3556",
+    "team_name": "Croatia"
+  },
+  {
+    "id": "89545",
+    "name": "Zvonimir Boban",
+    "height": 183,
+    "citizenship": [
+      "Croatia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2002-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield",
+        "Left Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3556",
+    "team_name": "Croatia"
+  },
+  {
+    "id": "8013",
+    "name": "Robert Prosinecki",
+    "height": 183,
+    "citizenship": [
+      "Croatia",
+      "Serbia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2004-01-07",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Attacking Midfield",
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3556",
+    "team_name": "Croatia"
+  },
+  {
+    "id": "59802",
+    "name": "Sendley Bito",
+    "height": 186,
+    "citizenship": [
+      "Curacao",
+      "Netherlands"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "32364",
+    "team_name": "Curaçao"
+  },
+  {
+    "id": "209940",
+    "name": "Shanon Carmelia",
+    "height": 185,
+    "citizenship": [
+      "Curacao",
+      "Netherlands"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Right-Back",
+      "other": [
+        "Right Midfield",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": "34156",
+    "club_name": "Hercules",
+    "team_id": "32364",
+    "team_name": "Curaçao"
+  },
+  {
+    "id": "5658",
+    "name": "Petr Cech",
+    "height": 196,
+    "citizenship": [
+      "Czech Republic"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "left",
+    "outfitter": "Puma",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3445",
+    "team_name": "Czechia"
+  },
+  {
+    "id": "3603",
+    "name": "Pavel Nedved",
+    "height": 177,
+    "citizenship": [
+      "Czech Republic",
+      "Italy"
+    ],
+    "isRetired": true,
+    "retiredSince": "2009-01-07",
+    "position": {
+      "main": "Left Midfield",
+      "other": [
+        "Attacking Midfield",
+        "Central Midfield"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3445",
+    "team_name": "Czechia"
+  },
+  {
+    "id": "1157",
+    "name": "Jan Koller",
+    "citizenship": [
+      "Czech Republic"
+    ],
+    "isRetired": true,
+    "retiredSince": "2011-01-08",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3445",
+    "team_name": "Czechia"
+  },
+  {
+    "id": "3924",
+    "name": "Didier Drogba",
+    "height": 189,
+    "citizenship": [
+      "Cote d'Ivoire",
+      "France"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-01-12",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "both",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3591",
+    "team_name": "Ivory Coast"
+  },
+  {
+    "id": "13091",
+    "name": "Yaya Touré",
+    "height": 188,
+    "citizenship": [
+      "Cote d'Ivoire",
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-01-01",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Defensive Midfield",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3591",
+    "team_name": "Ivory Coast"
+  },
+  {
+    "id": "3202",
+    "name": "Kolo Touré",
+    "height": 178,
+    "citizenship": [
+      "Cote d'Ivoire",
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2017-10-08",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "New Balance",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3591",
+    "team_name": "Ivory Coast"
+  },
+  {
+    "id": "15639",
+    "name": "Iván Hurtado",
+    "height": 180,
+    "citizenship": [
+      "Ecuador"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-01",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "5750",
+    "team_name": "Ecuador"
+  },
+  {
+    "id": "80438",
+    "name": "Álex Aguinaga",
+    "citizenship": [
+      "Ecuador"
+    ],
+    "isRetired": true,
+    "retiredSince": "2005-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "5750",
+    "team_name": "Ecuador"
+  },
+  {
+    "id": "3849",
+    "name": "Agustín Delgado",
+    "height": 188,
+    "citizenship": [
+      "Ecuador"
+    ],
+    "isRetired": true,
+    "retiredSince": "2012-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "5750",
+    "team_name": "Ecuador"
+  },
+  {
+    "id": "184816",
+    "name": "Ahmed Hassan",
+    "height": 191,
+    "citizenship": [
+      "Egypt",
+      "Portugal"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "marketValue": 700000,
+    "club_id": "7732",
+    "club_name": "Al-Ettifaq",
+    "team_id": "3672",
+    "team_name": "Egypt"
+  },
+  {
+    "id": "38171",
+    "name": "Hossam Hassan",
+    "height": 178,
+    "citizenship": [
+      "Egypt"
+    ],
+    "isRetired": true,
+    "retiredSince": "2008-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3672",
+    "team_name": "Egypt"
+  },
+  {
+    "id": "174874",
+    "name": "Sir Bobby Charlton",
+    "height": 173,
+    "citizenship": [
+      "England"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Left Winger",
+        "Central Midfield"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3299",
+    "team_name": "England"
+  },
+  {
+    "id": "3332",
+    "name": "Wayne Rooney",
+    "height": 176,
+    "citizenship": [
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2021-01-15",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3299",
+    "team_name": "England"
+  },
+  {
+    "id": "3139",
+    "name": "David Beckham",
+    "height": 182,
+    "citizenship": [
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2013-01-07",
+    "position": {
+      "main": "Right Midfield",
+      "other": [
+        "Central Midfield",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3299",
+    "team_name": "England"
+  },
+  {
+    "id": "3163",
+    "name": "Frank Lampard",
+    "height": 184,
+    "citizenship": [
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2017-02-02",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3299",
+    "team_name": "England"
+  },
+  {
+    "id": "3111",
+    "name": "Zinédine Zidane",
+    "height": 185,
+    "citizenship": [
+      "France",
+      "Algeria"
+    ],
+    "isRetired": true,
+    "retiredSince": "2006-10-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Left Midfield"
+      ]
+    },
+    "foot": "both",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3377",
+    "team_name": "France"
+  },
+  {
+    "id": "88994",
+    "name": "Michel Platini",
+    "citizenship": [
+      "France",
+      "Italy"
+    ],
+    "isRetired": true,
+    "retiredSince": "1987-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3377",
+    "team_name": "France"
+  },
+  {
+    "id": "3207",
+    "name": "Thierry Henry",
+    "height": 188,
+    "citizenship": [
+      "France",
+      "Guadeloupe"
+    ],
+    "isRetired": true,
+    "retiredSince": "2015-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Left Winger",
+        "Second Striker"
+      ]
+    },
+    "foot": "both",
+    "outfitter": "Puma",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3377",
+    "team_name": "France"
+  },
+  {
+    "id": "3521",
+    "name": "Lilian Thuram",
+    "height": 182,
+    "citizenship": [
+      "France",
+      "Guadeloupe"
+    ],
+    "isRetired": true,
+    "retiredSince": "2008-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3377",
+    "team_name": "France"
+  },
+  {
+    "id": "72347",
+    "name": "Franz Beckenbauer",
+    "height": 181,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Sweeper",
+      "other": [
+        "Centre-Back",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3262",
+    "team_name": "Germany"
+  },
+  {
+    "id": "35604",
+    "name": "Gerd Müller",
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3262",
+    "team_name": "Germany"
+  },
+  {
+    "id": "31909",
+    "name": "Toni Kroos",
+    "height": 183,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-06-07",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Attacking Midfield",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3262",
+    "team_name": "Germany"
+  },
+  {
+    "id": "2514",
+    "name": "Bastian Schweinsteiger",
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-01-01",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Right Midfield",
+        "Left Midfield"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3262",
+    "team_name": "Germany"
+  },
+  {
+    "id": "26802",
+    "name": "Asamoah Gyan",
+    "height": 180,
+    "citizenship": [
+      "Ghana"
+    ],
+    "isRetired": true,
+    "retiredSince": "2022-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3441",
+    "team_name": "Ghana"
+  },
+  {
+    "id": "5588",
+    "name": "Michael Essien",
+    "height": 178,
+    "citizenship": [
+      "Ghana",
+      "France"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-09-09",
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield",
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3441",
+    "team_name": "Ghana"
+  },
+  {
+    "id": "328",
+    "name": "Anthony Yeboah",
+    "height": 180,
+    "citizenship": [
+      "Ghana"
+    ],
+    "isRetired": true,
+    "retiredSince": "2002-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3441",
+    "team_name": "Ghana"
+  },
+  {
+    "id": "145397",
+    "name": "Emmanuel Sanon",
+    "citizenship": [
+      "Haiti"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": null,
+    "team_id": "14161",
+    "team_name": "Haiti"
+  },
+  {
+    "id": "82028",
+    "name": "Frantz Gilles",
+    "citizenship": [
+      "Haiti"
+    ],
+    "isRetired": true,
+    "retiredSince": "2017-01-01",
+    "position": {
+      "main": "Left-Back",
+      "other": []
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "14161",
+    "team_name": "Haiti"
+  },
+  {
+    "id": "24619",
+    "name": "Javad Nekounam",
+    "height": 186,
+    "citizenship": [
+      "Iran"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-07",
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3582",
+    "team_name": "Iran"
+  },
+  {
+    "id": "335",
+    "name": "Ali Daei",
+    "citizenship": [
+      "Iran"
+    ],
+    "isRetired": true,
+    "retiredSince": "2007-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3582",
+    "team_name": "Iran"
+  },
+  {
+    "id": "118238",
+    "name": "Hussein Saeed Mohammed",
+    "height": 180,
+    "citizenship": [
+      "Iraq"
+    ],
+    "isRetired": true,
+    "retiredSince": "1989-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Left Winger",
+        "Right Winger"
+      ]
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3560",
+    "team_name": "Iraq"
+  },
+  {
+    "id": "63466",
+    "name": "Nashat Akram",
+    "height": 186,
+    "citizenship": [
+      "Iraq"
+    ],
+    "isRetired": true,
+    "retiredSince": "2015-01-04",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": []
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3560",
+    "team_name": "Iraq"
+  },
+  {
+    "id": "5875",
+    "name": "Hidetoshi Nakata",
+    "height": 175,
+    "citizenship": [
+      "Japan"
+    ],
+    "isRetired": true,
+    "retiredSince": "2006-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield",
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3435",
+    "team_name": "Japan"
+  },
+  {
+    "id": "66521",
+    "name": "Keisuke Honda",
+    "height": 182,
+    "citizenship": [
+      "Japan"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-01-11",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Right Winger",
+        "Left Winger"
+      ]
+    },
+    "foot": "left",
+    "outfitter": "Mizuno",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3435",
+    "team_name": "Japan"
+  },
+  {
+    "id": "119176",
+    "name": "Kunishige Kamamoto",
+    "height": 179,
+    "citizenship": [
+      "Japan"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3435",
+    "team_name": "Japan"
+  },
+  {
+    "id": "172911",
+    "name": "Amer Shafi",
+    "height": 183,
+    "citizenship": [
+      "Jordan"
+    ],
+    "isRetired": true,
+    "retiredSince": "2021-08-02",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "15737",
+    "team_name": "Jordan"
+  },
+  {
+    "id": "69286",
+    "name": "Odai Al-Saify",
+    "height": 179,
+    "citizenship": [
+      "Jordan"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-08-31",
+    "position": {
+      "main": "Right Midfield",
+      "other": [
+        "Left Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "15737",
+    "team_name": "Jordan"
+  },
+  {
+    "id": "101574",
+    "name": "Myung-bo Hong",
+    "height": 181,
+    "citizenship": [
+      "Korea, South"
+    ],
+    "isRetired": true,
+    "retiredSince": "2004-08-10",
+    "position": {
+      "main": "Sweeper",
+      "other": [
+        "Centre-Back",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3589",
+    "team_name": "South Korea"
+  },
+  {
+    "id": "27407",
+    "name": "Woon-jae Lee",
+    "height": 182,
+    "citizenship": [
+      "Korea, South"
+    ],
+    "isRetired": true,
+    "retiredSince": "2013-01-01",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3589",
+    "team_name": "South Korea"
+  },
+  {
+    "id": "96628",
+    "name": "Bum-kun Cha",
+    "height": 179,
+    "citizenship": [
+      "Korea, South"
+    ],
+    "isRetired": true,
+    "retiredSince": "1989-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3589",
+    "team_name": "South Korea"
+  },
+  {
+    "id": "7493",
+    "name": "Noureddine Naybet",
+    "height": 186,
+    "citizenship": [
+      "Morocco"
+    ],
+    "isRetired": true,
+    "retiredSince": "2006-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Sweeper"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3575",
+    "team_name": "Morocco"
+  },
+  {
+    "id": "224075",
+    "name": "Ahmed Faras",
+    "height": 172,
+    "citizenship": [
+      "Morocco"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3575",
+    "team_name": "Morocco"
+  },
+  {
+    "id": "21822",
+    "name": "Houssine Kharja",
+    "height": 180,
+    "citizenship": [
+      "Morocco",
+      "France"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-07",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Defensive Midfield",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3575",
+    "team_name": "Morocco"
+  },
+  {
+    "id": "4673",
+    "name": "Wesley Sneijder",
+    "height": 170,
+    "citizenship": [
+      "Netherlands"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield",
+        "Left Winger"
+      ]
+    },
+    "foot": "both",
+    "outfitter": "Nike",
+    "club_id": "133840",
+    "club_name": "OSM '75",
+    "team_id": "3379",
+    "team_name": "Netherlands"
+  },
+  {
+    "id": "3516",
+    "name": "Edwin van der Sar",
+    "height": 199,
+    "citizenship": [
+      "Netherlands"
+    ],
+    "isRetired": true,
+    "retiredSince": "2011-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3379",
+    "team_name": "Netherlands"
+  },
+  {
+    "id": "4385",
+    "name": "Patrick Kluivert",
+    "height": 191,
+    "citizenship": [
+      "Netherlands",
+      "Suriname"
+    ],
+    "isRetired": true,
+    "retiredSince": "2008-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3379",
+    "team_name": "Netherlands"
+  },
+  {
+    "id": "8021",
+    "name": "Johan Cruyff",
+    "citizenship": [
+      "Netherlands"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Centre-Forward",
+        "Second Striker"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3379",
+    "team_name": "Netherlands"
+  },
+  {
+    "id": "9538",
+    "name": "Wynton Rufer",
+    "citizenship": [
+      "New Zealand"
+    ],
+    "isRetired": true,
+    "retiredSince": "2002-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Attacking Midfield",
+        "Right Winger"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "9171",
+    "team_name": "New Zealand"
+  },
+  {
+    "id": "28878",
+    "name": "Ryan Nelsen",
+    "height": 185,
+    "citizenship": [
+      "New Zealand"
+    ],
+    "isRetired": true,
+    "retiredSince": "2013-01-31",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "9171",
+    "team_name": "New Zealand"
+  },
+  {
+    "id": "3220",
+    "name": "John Arne Riise",
+    "citizenship": [
+      "Norway"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-01-01",
+    "position": {
+      "main": "Left-Back",
+      "other": [
+        "Left Midfield",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3440",
+    "team_name": "Norway"
+  },
+  {
+    "id": "3823",
+    "name": "Henning Berg",
+    "height": 183,
+    "citizenship": [
+      "Norway",
+      "Cyprus"
+    ],
+    "isRetired": true,
+    "retiredSince": "2004-01-07",
+    "position": {
+      "main": "Right-Back",
+      "other": [
+        "Defensive Midfield",
+        "Centre-Back"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3440",
+    "team_name": "Norway"
+  },
+  {
+    "id": "97270",
+    "name": "Erik Thorstvedt",
+    "citizenship": [
+      "Norway"
+    ],
+    "isRetired": true,
+    "retiredSince": "1996-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3440",
+    "team_name": "Norway"
+  },
+  {
+    "id": "52028",
+    "name": "Gabriel Gómez",
+    "height": 183,
+    "citizenship": [
+      "Panama"
+    ],
+    "isRetired": true,
+    "retiredSince": "2022-01-01",
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3577",
+    "team_name": "Panama"
+  },
+  {
+    "id": "43851",
+    "name": "Jaime Penedo",
+    "height": 183,
+    "citizenship": [
+      "Panama",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-24",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3577",
+    "team_name": "Panama"
+  },
+  {
+    "id": "58109",
+    "name": "Blas Pérez",
+    "height": 187,
+    "citizenship": [
+      "Panama"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3577",
+    "team_name": "Panama"
+  },
+  {
+    "id": "38800",
+    "name": "Paulo da Silva",
+    "height": 184,
+    "citizenship": [
+      "Paraguay"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-10-20",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3581",
+    "team_name": "Paraguay"
+  },
+  {
+    "id": "38811",
+    "name": "Justo Villar",
+    "height": 182,
+    "citizenship": [
+      "Paraguay"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3581",
+    "team_name": "Paraguay"
+  },
+  {
+    "id": "215",
+    "name": "Roque Santa Cruz",
+    "height": 193,
+    "citizenship": [
+      "Paraguay",
+      "Spain"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "marketValue": 100000,
+    "outfitter": "Puma",
+    "club_id": "7098",
+    "club_name": "Nacional",
+    "team_id": "3581",
+    "team_name": "Paraguay"
+  },
+  {
+    "id": "14132",
+    "name": "Pepe",
+    "height": 187,
+    "citizenship": [
+      "Portugal",
+      "Brazil"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-08-08",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Umbro",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3300",
+    "team_name": "Portugal"
+  },
+  {
+    "id": "3446",
+    "name": "Luís Figo",
+    "height": 180,
+    "citizenship": [
+      "Portugal"
+    ],
+    "isRetired": true,
+    "retiredSince": "2009-01-07",
+    "position": {
+      "main": "Right Winger",
+      "other": [
+        "Left Winger",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3300",
+    "team_name": "Portugal"
+  },
+  {
+    "id": "33706",
+    "name": "Nani",
+    "height": 177,
+    "citizenship": [
+      "Portugal",
+      "Cape Verde"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Left Winger",
+      "other": [
+        "Right Winger",
+        "Second Striker"
+      ]
+    },
+    "foot": "both",
+    "marketValue": 100000,
+    "club_id": "10157",
+    "club_name": "Aktobe",
+    "team_id": "3300",
+    "team_name": "Portugal"
+  },
+  {
+    "id": "5831",
+    "name": "Fernando Couto",
+    "height": 184,
+    "citizenship": [
+      "Portugal"
+    ],
+    "isRetired": true,
+    "retiredSince": "2008-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3300",
+    "team_name": "Portugal"
+  },
+  {
+    "id": "524402",
+    "name": "Mansour Muftah",
+    "height": 178,
+    "citizenship": [
+      "Qatar"
+    ],
+    "isRetired": true,
+    "retiredSince": "1998-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "14162",
+    "team_name": "Qatar"
+  },
+  {
+    "id": "436477",
+    "name": "Mubarak Mustafa Noorallah",
+    "height": 175,
+    "citizenship": [
+      "Qatar"
+    ],
+    "isRetired": true,
+    "retiredSince": "2007-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Right Winger",
+        "Right-Back"
+      ]
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "14162",
+    "team_name": "Qatar"
+  },
+  {
+    "id": "39364",
+    "name": "Mohammad Al-Deayea",
+    "height": 192,
+    "citizenship": [
+      "Saudi Arabia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2010-06-22",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3807",
+    "team_name": "Saudi Arabia"
+  },
+  {
+    "id": "31384",
+    "name": "Sami Al-Jaber",
+    "height": 177,
+    "citizenship": [
+      "Saudi Arabia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2007-08-24",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3807",
+    "team_name": "Saudi Arabia"
+  },
+  {
+    "id": "135269",
+    "name": "Kenny Dalglish",
+    "height": 173,
+    "citizenship": [
+      "Scotland"
+    ],
+    "isRetired": true,
+    "retiredSince": "1990-01-07",
+    "position": {
+      "main": "Second Striker",
+      "other": [
+        "Centre-Forward",
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3380",
+    "team_name": "Scotland"
+  },
+  {
+    "id": "91920",
+    "name": "Jim Leighton",
+    "height": 186,
+    "citizenship": [
+      "Scotland"
+    ],
+    "isRetired": true,
+    "retiredSince": "2001-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3380",
+    "team_name": "Scotland"
+  },
+  {
+    "id": "3547",
+    "name": "Darren Fletcher",
+    "height": 184,
+    "citizenship": [
+      "Scotland"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-01-01",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Defensive Midfield",
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3380",
+    "team_name": "Scotland"
+  },
+  {
+    "id": "3900",
+    "name": "Henri Camara",
+    "height": 178,
+    "citizenship": [
+      "Senegal",
+      "France"
+    ],
+    "isRetired": true,
+    "retiredSince": "2018-08-16",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Left Winger",
+        "Right Winger"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3499",
+    "team_name": "Senegal"
+  },
+  {
+    "id": "215151",
+    "name": "Mamadou Tew",
+    "citizenship": [
+      "Senegal"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Right-Back",
+      "other": [
+        "Centre-Back"
+      ]
+    },
+    "club_id": null,
+    "club_name": null,
+    "team_id": "3499",
+    "team_name": "Senegal"
+  },
+  {
+    "id": "3907",
+    "name": "Lamine Diatta",
+    "height": 184,
+    "citizenship": [
+      "Senegal",
+      "France"
+    ],
+    "isRetired": true,
+    "retiredSince": "2012-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3499",
+    "team_name": "Senegal"
+  },
+  {
+    "id": "3091",
+    "name": "Benni McCarthy",
+    "height": 184,
+    "citizenship": [
+      "South Africa"
+    ],
+    "isRetired": true,
+    "retiredSince": "2013-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3806",
+    "team_name": "South Africa"
+  },
+  {
+    "id": "90199",
+    "name": "Bernard Parker",
+    "height": 177,
+    "citizenship": [
+      "South Africa"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-01-07",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Central Midfield",
+        "Second Striker"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3806",
+    "team_name": "South Africa"
+  },
+  {
+    "id": "3089",
+    "name": "Shaun Bartlett",
+    "height": 188,
+    "citizenship": [
+      "South Africa"
+    ],
+    "isRetired": true,
+    "retiredSince": "2009-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3806",
+    "team_name": "South Africa"
+  },
+  {
+    "id": "25557",
+    "name": "Sergio Ramos",
+    "height": 184,
+    "citizenship": [
+      "Spain"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "marketValue": 800000,
+    "outfitter": "Mizuno",
+    "club_id": "515",
+    "club_name": "Without Club",
+    "team_id": "3375",
+    "team_name": "Spain"
+  },
+  {
+    "id": "3979",
+    "name": "Iker Casillas",
+    "height": 182,
+    "citizenship": [
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-04-08",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "left",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3375",
+    "team_name": "Spain"
+  },
+  {
+    "id": "7607",
+    "name": "Xavi",
+    "height": 170,
+    "citizenship": [
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-01-07",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Attacking Midfield",
+        "Defensive Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3375",
+    "team_name": "Spain"
+  },
+  {
+    "id": "7600",
+    "name": "Andrés Iniesta",
+    "height": 171,
+    "citizenship": [
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-07-10",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3375",
+    "team_name": "Spain"
+  },
+  {
+    "id": "3455",
+    "name": "Zlatan Ibrahimović",
+    "height": 195,
+    "citizenship": [
+      "Sweden",
+      "Bosnia-Herzegovina"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3557",
+    "team_name": "Sweden"
+  },
+  {
+    "id": "3688",
+    "name": "Anders Svensson",
+    "height": 178,
+    "citizenship": [
+      "Sweden"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-01",
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield",
+        "Centre-Back"
+      ]
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3557",
+    "team_name": "Sweden"
+  },
+  {
+    "id": "101104",
+    "name": "Thomas Ravelli",
+    "height": 186,
+    "citizenship": [
+      "Sweden"
+    ],
+    "isRetired": true,
+    "retiredSince": "2000-01-01",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3557",
+    "team_name": "Sweden"
+  },
+  {
+    "id": "31720",
+    "name": "Sebastian Larsson",
+    "height": 178,
+    "citizenship": [
+      "Sweden"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-01-01",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Right Midfield",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3557",
+    "team_name": "Sweden"
+  },
+  {
+    "id": "149236",
+    "name": "Heinz Hermann",
+    "citizenship": [
+      "Switzerland"
+    ],
+    "isRetired": true,
+    "retiredSince": "1994-01-07",
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Left Midfield",
+        "Centre-Back"
+      ]
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3384",
+    "team_name": "Switzerland"
+  },
+  {
+    "id": "101903",
+    "name": "Alain Geiger",
+    "height": 180,
+    "citizenship": [
+      "Switzerland"
+    ],
+    "isRetired": true,
+    "retiredSince": "1997-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back",
+        "Sweeper"
+      ]
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3384",
+    "team_name": "Switzerland"
+  },
+  {
+    "id": "2865",
+    "name": "Stephan Lichtsteiner",
+    "height": 182,
+    "citizenship": [
+      "Switzerland"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-12-08",
+    "position": {
+      "main": "Right-Back",
+      "other": [
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Puma",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3384",
+    "team_name": "Switzerland"
+  },
+  {
+    "id": "19310",
+    "name": "Radhi Jaïdi",
+    "height": 192,
+    "citizenship": [
+      "Tunisia",
+      "England"
+    ],
+    "isRetired": true,
+    "retiredSince": "2012-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "both",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3670",
+    "team_name": "Tunisia"
+  },
+  {
+    "id": "49834",
+    "name": "Khaled Badra",
+    "citizenship": [
+      "Tunisia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2009-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3670",
+    "team_name": "Tunisia"
+  },
+  {
+    "id": "69110",
+    "name": "Youssef Msakni",
+    "height": 179,
+    "citizenship": [
+      "Tunisia"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Left Winger",
+      "other": [
+        "Attacking Midfield",
+        "Second Striker"
+      ]
+    },
+    "foot": "right",
+    "marketValue": 400000,
+    "club_id": "3342",
+    "club_name": "Esperance",
+    "team_id": "3670",
+    "team_name": "Tunisia"
+  },
+  {
+    "id": "4077",
+    "name": "Rüştü Reçber",
+    "height": 187,
+    "citizenship": [
+      "Türkiye"
+    ],
+    "isRetired": true,
+    "retiredSince": "2012-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3381",
+    "team_name": "Turkiye"
+  },
+  {
+    "id": "3363",
+    "name": "Hakan Şükür",
+    "height": 191,
+    "citizenship": [
+      "Türkiye"
+    ],
+    "isRetired": true,
+    "retiredSince": "2008-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3381",
+    "team_name": "Turkiye"
+  },
+  {
+    "id": "3380",
+    "name": "Bülent Korkmaz",
+    "height": 181,
+    "citizenship": [
+      "Türkiye"
+    ],
+    "isRetired": true,
+    "retiredSince": "2005-01-07",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "outfitter": "adidas",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3381",
+    "team_name": "Turkiye"
+  },
+  {
+    "id": "21369",
+    "name": "Arda Turan",
+    "height": 177,
+    "citizenship": [
+      "Türkiye"
+    ],
+    "isRetired": true,
+    "retiredSince": "2022-12-09",
+    "position": {
+      "main": "Left Winger",
+      "other": [
+        "Attacking Midfield",
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "outfitter": "Nike",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3381",
+    "team_name": "Turkiye"
+  },
+  {
+    "id": "54928",
+    "name": "Diego Godín",
+    "height": 187,
+    "citizenship": [
+      "Uruguay",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2024-01-10",
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3449",
+    "team_name": "Uruguay"
+  },
+  {
+    "id": "57834",
+    "name": "Maxi Pereira",
+    "height": 173,
+    "citizenship": [
+      "Uruguay"
+    ],
+    "isRetired": true,
+    "retiredSince": "2023-05-18",
+    "position": {
+      "main": "Right-Back",
+      "other": [
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3449",
+    "team_name": "Uruguay"
+  },
+  {
+    "id": "116067",
+    "name": "Rodolfo Rodríguez",
+    "height": 191,
+    "citizenship": [
+      "Uruguay"
+    ],
+    "isRetired": true,
+    "retiredSince": "1994-01-07",
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3449",
+    "team_name": "Uruguay"
+  },
+  {
+    "id": "3408",
+    "name": "Diego Forlán",
+    "citizenship": [
+      "Uruguay",
+      "Spain"
+    ],
+    "isRetired": true,
+    "retiredSince": "2019-06-08",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker",
+        "Left Winger"
+      ]
+    },
+    "foot": "N/A",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3449",
+    "team_name": "Uruguay"
+  },
+  {
+    "id": "9798",
+    "name": "Maksim Shatskikh",
+    "height": 187,
+    "citizenship": [
+      "Uzbekistan",
+      "Ukraine"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-01",
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Second Striker",
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3563",
+    "team_name": "Uzbekistan"
+  },
+  {
+    "id": "63608",
+    "name": "Server Djeparov",
+    "height": 178,
+    "citizenship": [
+      "Uzbekistan",
+      "Russia"
+    ],
+    "isRetired": true,
+    "retiredSince": "2020-01-01",
+    "position": {
+      "main": "Attacking Midfield",
+      "other": [
+        "Left Midfield",
+        "Central Midfield"
+      ]
+    },
+    "foot": "left",
+    "club_id": null,
+    "club_name": "Retired",
+    "team_id": "3563",
+    "team_name": "Uzbekistan"
+  },
+  {
+    "id": "10",
+    "name": "Miroslav Klose",
+    "height": 184,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": true,
+    "retiredSince": "2016-01-07",
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "club": {
+      "name": "Retired",
+      "joined": "2016-01-07",
+      "lastClubId": "398",
+      "lastClubName": "SS Lazio"
+    },
+    "team_id": "3262",
+    "team_name": "Germany"
+  }
+]

@@ -46,58 +46,78 @@ class FootballCoachCardWidget extends StatelessWidget {
       height: height,
       width: width,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.blueAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        decoration: BoxDecoration(
+          // borderRadius: BorderRadius.all(.circular(4)),
+          color: Color(0xFF1F5ED3),
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2))],
         ),
-        child: Column(
-          children: [
-            SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Stack(
-                children: [
-                  CardImageWrapper(
-                    card: coach,
-                    badge: badge,
-                    onSell: onSell,
-                    onSellAll: onSellAll,
-                    onShare: onShare,
-                    child: Image.asset(coach.imageAssetPath, fit: BoxFit.cover),
-                  ),
-                  Positioned(
-                    top: 5,
-                    left: 5,
-                    child: _Flag(
-                      imageAssetPath: 'assets/raster/team_flags/${coach.teamId}.jpg',
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.all(.circular(4)),
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                const Color.fromARGB(0, 255, 255, 255),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                // Colors.transparent,
+                const Color.fromARGB(0, 255, 255, 255),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                Color.fromARGB(84, 8, 12, 86).withValues(alpha: 0.2),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+              ],
+              stops: [0.05, 0.18, 0.3, 0.50, 0.7, 0.85, 1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+
+                child: Stack(
+                  children: [
+                    CardImageWrapper(
+                      card: coach,
+                      badge: badge,
+                      onSell: onSell,
+                      onSellAll: onSellAll,
+                      onShare: onShare,
                       nationalTeamVisibility: nationalTeamVisibility,
+
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
                     ),
-                  ),
-                  Positioned(bottom: 5, right: 5, child: _RoundedContainer(text: "Coach")),
-                ],
+
+                    // Positioned(
+                    //   top: 5,
+                    //   left: 5,
+                    //   child: _Flag(
+                    //     imageAssetPath: 'assets/raster/team_flags/${coach.teamId}.jpg',
+                    //     nationalTeamVisibility: nationalTeamVisibility,
+                    //   ),
+                    // ),
+                    // Positioned(bottom: 5, right: 5, child: _RoundedContainer(text: "Coach")),
+                  ],
+                ),
               ),
-            ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: AutoSizeText(
-                nameVisibility == .quest
-                    ? "?"
-                    : nameVisibility == .show
-                    ? coach.name.toUpperCase()
-                    : "",
-                maxLines: 1,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                minFontSize: 14,
-                textAlign: TextAlign.center,
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AutoSizeText(
+                  nameVisibility == .quest
+                      ? "?"
+                      : nameVisibility == .show
+                      ? coach.name.toUpperCase()
+                      : "",
+                  maxLines: 1,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  minFontSize: 12,
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-            Spacer(flex: 2),
-          ],
+              Spacer(flex: 2),
+            ],
+          ),
         ),
       ),
     );

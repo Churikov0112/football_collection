@@ -459503,5 +459503,370 @@
     ],
     "ranking": {},
     "maxMarketValue": 175000
+  },
+  {
+  "updatedAt": "2026-04-04T19:41:44.125813",
+  "id": "8198",
+  "marketValue": 12000000,
+  "marketValueHistory": [
+    {
+      "age": 19,
+      "date": "2004-04-10",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 18000000
+    },
+    {
+      "age": 20,
+      "date": "2005-11-02",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 22800000
+    },
+    {
+      "age": 20,
+      "date": "2005-10-18",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 26500000
+    },
+    {
+      "age": 21,
+      "date": "2006-06-14",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 25000000
+    },
+    {
+      "age": 22,
+      "date": "2007-04-25",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 34000000
+    },
+    {
+      "age": 22,
+      "date": "2008-04-02",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 50000000
+    },
+    {
+      "age": 23,
+      "date": "2008-08-04",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 55000000
+    },
+    {
+      "age": 23,
+      "date": "2008-04-07",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 60000000
+    },
+    {
+      "age": 24,
+      "date": "2009-07-22",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 70000000
+    },
+    {
+      "age": 24,
+      "date": "2009-03-12",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 70000000
+    },
+    {
+      "age": 24,
+      "date": "2010-07-01",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 75000000
+    },
+    {
+      "age": 25,
+      "date": "2010-12-04",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 75000000
+    },
+    {
+      "age": 25,
+      "date": "2010-08-27",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 90000000
+    },
+    {
+      "age": 25,
+      "date": "2011-04-02",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 90000000
+    },
+    {
+      "age": 26,
+      "date": "2011-07-29",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 90000000
+    },
+    {
+      "age": 26,
+      "date": "2012-03-02",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 90000000
+    },
+    {
+      "age": 27,
+      "date": "2012-07-08",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 27,
+      "date": "2013-10-01",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 28,
+      "date": "2013-12-06",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 28,
+      "date": "2014-01-23",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 29,
+      "date": "2014-07-20",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 29,
+      "date": "2014-10-22",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 120000000
+    },
+    {
+      "age": 29,
+      "date": "2015-01-23",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 120000000
+    },
+    {
+      "age": 30,
+      "date": "2015-01-07",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 120000000
+    },
+    {
+      "age": 30,
+      "date": "2015-11-22",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 110000000
+    },
+    {
+      "age": 31,
+      "date": "2016-02-22",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 110000000
+    },
+    {
+      "age": 31,
+      "date": "2016-01-06",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 110000000
+    },
+    {
+      "age": 31,
+      "date": "2016-07-15",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 110000000
+    },
+    {
+      "age": 31,
+      "date": "2017-01-24",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 32,
+      "date": "2017-05-06",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 32,
+      "date": "2018-01-01",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 120000000
+    },
+    {
+      "age": 33,
+      "date": "2018-05-30",
+      "clubId": "418",
+      "clubName": "Real Madrid",
+      "marketValue": 100000000
+    },
+    {
+      "age": 33,
+      "date": "2018-12-20",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 100000000
+    },
+    {
+      "age": 34,
+      "date": "2019-06-06",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 90000000
+    },
+    {
+      "age": 34,
+      "date": "2019-12-12",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 75000000
+    },
+    {
+      "age": 35,
+      "date": "2020-08-04",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 60000000
+    },
+    {
+      "age": 35,
+      "date": "2020-08-25",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 60000000
+    },
+    {
+      "age": 35,
+      "date": "2020-12-29",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 60000000
+    },
+    {
+      "age": 36,
+      "date": "2021-03-23",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 50000000
+    },
+    {
+      "age": 36,
+      "date": "2021-01-06",
+      "clubId": "506",
+      "clubName": "Juventus FC",
+      "marketValue": 45000000
+    },
+    {
+      "age": 36,
+      "date": "2021-12-23",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 35000000
+    },
+    {
+      "age": 37,
+      "date": "2022-06-15",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 30000000
+    },
+    {
+      "age": 37,
+      "date": "2022-09-15",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 20000000
+    },
+    {
+      "age": 37,
+      "date": "2022-03-11",
+      "clubId": "985",
+      "clubName": "Manchester United",
+      "marketValue": 20000000
+    },
+    {
+      "age": 38,
+      "date": "2023-12-06",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 15000000
+    },
+    {
+      "age": 38,
+      "date": "2023-12-15",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 15000000
+    },
+    {
+      "age": 39,
+      "date": "2024-04-06",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 15000000
+    },
+    {
+      "age": 39,
+      "date": "2024-12-13",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 12000000
+    },
+    {
+      "age": 40,
+      "date": "2025-05-27",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 12000000
+    },
+    {
+      "age": 40,
+      "date": "2025-12-18",
+      "clubId": "18544",
+      "clubName": "Al-Nassr FC",
+      "marketValue": 12000000
+    }
+  ],
+  "ranking": {
+    "Worldwide": 997,
+    "Saudi Pro League": 27,
+    "Al-Nassr": 5,
+    "Portugal": 44,
+    "Centre-Forward": 147,
+    "Year 1985": 1
   }
+}
 ]

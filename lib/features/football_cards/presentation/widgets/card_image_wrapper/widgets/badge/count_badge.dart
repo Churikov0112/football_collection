@@ -4,6 +4,7 @@ class _CountBadge extends StatelessWidget {
   const _CountBadge({required this.card, required this.onSell, required this.onSellAll, required this.onShare});
 
   final CardModel card;
+
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
   final VoidCallback? onShare;
@@ -72,12 +73,38 @@ class _CountBadge extends StatelessWidget {
             return const SizedBox.shrink();
           }
 
-          return Container(
-            height: 64,
-            width: 64,
-            color: Colors.green,
-            child: Center(child: Text("x$count")),
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.lightGreenAccent,
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12)),
+            ),
+            child: RotatedBox(
+              quarterTurns: 3,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+                child: Text(
+                  "x$count",
+                  style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           );
+          // return DecoratedBox(
+          //   decoration: BoxDecoration(
+          //     color: Colors.lightGreenAccent,
+          //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(22)),
+          //   ),
+
+          //   child: SizedBox.square(
+          //     dimension: 30,
+          //     child: Center(
+          //       child: Text(
+          //         "x$count",
+          //         style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+          //       ),
+          //     ),
+          //   ),
+          // );
         },
       ),
     );

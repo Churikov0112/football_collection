@@ -50,62 +50,80 @@ class FootballPlayerCardWidget extends StatelessWidget {
       height: height,
       width: width,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.blueAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        decoration: BoxDecoration(
+          // borderRadius: BorderRadius.all(.circular(4)),
+          color: Color(0xFF1F5ED3),
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2))],
         ),
-        child: Column(
-          children: [
-            SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Stack(
-                children: [
-                  CardImageWrapper(
-                    card: player,
-                    badge: badge,
-                    onSell: onSell,
-                    onSellAll: onSellAll,
-                    onShare: onShare,
-                    child: Image.asset(player.imageAssetPath, fit: BoxFit.cover),
-                  ),
-                  Positioned(
-                    top: 5,
-                    left: 5,
-                    child: _Flag(player: player, nationalTeamVisibility: nationalTeamVisibility),
-                  ),
-                  Positioned(
-                    bottom: 5,
-                    right: 5,
-                    child: _PriceAndPosition(player: player, marketValueVisibility: marketValueVisibility),
-                  ),
-                ],
-              ),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.all(.circular(4)),
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                const Color.fromARGB(0, 255, 255, 255),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                // Colors.transparent,
+                const Color.fromARGB(0, 255, 255, 255),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                Color.fromARGB(84, 8, 12, 86).withValues(alpha: 0.2),
+                Color(0xFFFFFFFF).withValues(alpha: 0.3),
+              ],
+              stops: [0.05, 0.18, 0.3, 0.50, 0.7, 0.85, 1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
-            // SizedBox(height: 4),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: AutoSizeText(
-                nameVisibility == .quest
-                    ? "?"
-                    : nameVisibility == .show
-                    ? player.name.toUpperCase()
-                    : "",
-                maxLines: 1,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                minFontSize: 14,
-                textAlign: TextAlign.center,
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                child: Stack(
+                  children: [
+                    CardImageWrapper(
+                      card: player,
+                      nationalTeamVisibility: nationalTeamVisibility,
+                      marketValueVisibility: marketValueVisibility,
+                      badge: badge,
+                      onSell: onSell,
+                      onSellAll: onSellAll,
+                      onShare: onShare,
+                      borderRadius: BorderRadius.only(topLeft: .circular(8), bottomRight: .circular(8)),
+                    ),
+                    // Positioned(
+                    //   top: 5,
+                    //   left: 5,
+                    //   child: _Flag(player: player, nationalTeamVisibility: nationalTeamVisibility),
+                    // ),
+                    // Positioned(
+                    //   bottom: 5,
+                    //   right: 5,
+                    //   child: _PriceAndPosition(player: player, marketValueVisibility: marketValueVisibility),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-            Spacer(flex: 2),
+              // SizedBox(height: 4),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AutoSizeText(
+                  nameVisibility == .quest
+                      ? "?"
+                      : nameVisibility == .show
+                      ? player.name.toUpperCase()
+                      : "",
+                  maxLines: 1,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  minFontSize: 12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Spacer(flex: 2),
 
-            // SizedBox(height: 4),
-          ],
+              // SizedBox(height: 4),
+            ],
+          ),
         ),
       ),
     );

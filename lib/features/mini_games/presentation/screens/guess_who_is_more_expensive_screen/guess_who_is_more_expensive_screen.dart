@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -19,12 +20,18 @@ import 'widgets/yandex_ads_banner_mixin.dart';
 part 'guess_who_is_more_expensive_screen_presenter.dart';
 part 'widgets/guess_options.dart';
 
+const _kCardPadding = 8.0;
+
 class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
   const GuessWhichFootballPlayerIsMoreExpensiveScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+
+    final cardWidth = (mq.size.width - _kCardPadding * 3) / 2;
+    final cardAspectRatio = packWidth / packHeight;
+    final cardHeight = cardWidth / cardAspectRatio;
 
     return BlocProvider(
       create: (context) => RandomFootballPlayersBloc(getIt.get()),
@@ -62,23 +69,27 @@ class GuessWhichFootballPlayerIsMoreExpensiveScreen extends StatelessWidget {
                                 const Spacer(),
                                 Row(
                                   children: [
-                                    SizedBox(width: 8),
+                                    SizedBox(width: _kCardPadding),
                                     Expanded(
                                       child: FootballPlayerCardWidget(
+                                        height: cardHeight,
+                                        width: cardWidth,
                                         player: player1!,
                                         badge: .none,
                                         marketValueVisibility: selectedOption != null ? .show : .quest,
                                       ),
                                     ),
-                                    SizedBox(width: 8),
+                                    SizedBox(width: _kCardPadding),
                                     Expanded(
                                       child: FootballPlayerCardWidget(
+                                        height: cardHeight,
+                                        width: cardWidth,
                                         player: player2!,
                                         badge: .none,
                                         marketValueVisibility: selectedOption != null ? .show : .quest,
                                       ),
                                     ),
-                                    SizedBox(width: 8),
+                                    SizedBox(width: _kCardPadding),
                                   ],
                                 ),
                                 SizedBox(height: 16),

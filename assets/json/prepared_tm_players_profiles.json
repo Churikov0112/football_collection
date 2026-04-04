@@ -3986,6 +3986,37 @@
     "team_name": "Portugal"
   },
   {
+    "id": "8198",
+    "name": "Cristiano Ronaldo",
+    "height": 188,
+    "citizenship": [
+      "Portugal"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": [
+        "Left Winger",
+        "Right Winger"
+      ]
+    },
+    "foot": "right",
+    "team_shirt_number": "7",
+    "club": {
+      "id": "18544",
+      "name": "Al-Nassr",
+      "joined": "2023-01-01",
+      "contractExpires": "2027-06-30"
+    },
+    "marketValue": 12000000,
+    "maxMarketValue": 120000000,
+    "outfitter": "Nike",
+    "club_id": "18544",
+    "club_name": "Al-Nassr",
+    "team_id": "3300",
+    "team_name": "Portugal"
+  },
+  {
     "id": "565093",
     "name": "Bart Verbruggen",
     "height": 194,
