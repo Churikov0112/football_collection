@@ -1,24 +1,28 @@
 part of 'enter_cheat_code_screen.dart';
 
-const _kDisposableCheatCodes = <String>[
-  "MONEY", // 1000
-  "RABONA", // 500,
-  "BICYCLE", // 500,
-  "TRIVELLA", // 500,
-  "SCORPION", // 500,
-  "RESPECT", // 500,
-  "RIP", // 500,
-  "HATTRICK", // 500,
-  "POKER", // 4000
-  "PENTATRICK", // 5000
-  "DARKHORSE", // 1000
-  "QUATERFINAL", // 1000
-  "SEMIFINAL", // 1000
-  "FINAL", // 1000
-  "GOAT", // 10000 карточек криша,
-  "23", // 1000 карточек рональдиньо если кто-то забьет 23 гола
-  "KLOSE", // 1000
-];
+enum DisposableCheatCode {
+  money(code: "MONEY"),
+  rabona(code: "RABONA"),
+  bicycle(code: "BICYCLE"),
+  trivella(code: "TRIVELLA"),
+  scorpion(code: "SCORPION"),
+  respect(code: "RESPECT"),
+  rip(code: "RIP"),
+  hatrick(code: "HATTRICK"),
+  poker(code: "POKER"),
+  pentatrick(code: "PENTATRICK"),
+  darkhorse(code: "DARKHORSE"),
+  quaterfinal(code: "QUATERFINAL"),
+  semifinal(code: "SEMIFINAL"),
+  $final(code: "FINAL"),
+  goat(code: "GOAT"),
+  ronaldinho23(code: "RONALDINHO23"),
+  klose(code: "KLOSE");
+
+  const DisposableCheatCode({required this.code});
+
+  final String code;
+}
 
 class EnterCheatCodeScreenPresenter extends StatefulWidget {
   static EnterCheatCodeScreenPresenterState of(BuildContext context) {
@@ -47,6 +51,75 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
 
     cheatCodeTextEditingController.clear();
 
+    final cheatCodesHistoryBloc = getIt.get<CheatCodesHistoryBloc>();
+    // проверка на одноразовость
+    if (DisposableCheatCode.values.map((e) => e.code).toList().contains(cheatCode)) {
+      // проверка, что код еще не использовался
+      final cheatCodesHistory = cheatCodesHistoryBloc.state.history ?? [];
+      if (cheatCodesHistory.contains(cheatCode)) {
+        ToastService.showToast(title: AppGlossary.cheatCodeAlreadyUsed.translate(), seconds: 2);
+        return;
+      } else {
+        if (cheatCode == DisposableCheatCode.money.code) {
+          _increaseBalance(1000);
+        }
+        if (cheatCode == DisposableCheatCode.rabona.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.bicycle.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.trivella.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.scorpion.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.respect.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.rip.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.hatrick.code) {
+          _increaseBalance(500);
+        }
+        if (cheatCode == DisposableCheatCode.poker.code) {
+          _increaseBalance(4000);
+        }
+        if (cheatCode == DisposableCheatCode.pentatrick.code) {
+          _increaseBalance(5000);
+        }
+        if (cheatCode == DisposableCheatCode.darkhorse.code) {
+          _increaseBalance(1000);
+        }
+        if (cheatCode == DisposableCheatCode.quaterfinal.code) {
+          _increaseBalance(1000);
+        }
+        if (cheatCode == DisposableCheatCode.semifinal.code) {
+          _increaseBalance(1000);
+        }
+        if (cheatCode == DisposableCheatCode.$final.code) {
+          _increaseBalance(1000);
+        }
+        if (cheatCode == DisposableCheatCode.goat.code) {
+          _increaseBalance(10000);
+          _getCard("8198");
+        }
+        if (cheatCode == DisposableCheatCode.ronaldinho23.code) {
+          _increaseBalance(10000);
+          _getCard("3373");
+        }
+        if (cheatCode == DisposableCheatCode.klose.code) {
+          _increaseBalance(1000);
+          _getCard("10");
+        }
+
+        _onCheatCodeVerified(cheatCode);
+        return;
+      }
+    }
+
     // if (cheatCode.contains("CLUB ")) {
     //   final club = cheatCode.replaceAll("CLUB ", "");
     //   final allPlayers = getIt.get<AllFootballPlayersBloc>().state.allPlayers ?? [];
@@ -62,26 +135,41 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
     //     return;
     //   }
     // }
-    // TODO remove
-    if (cheatCode.contains("BALANCE ")) {
-      final balanceString = cheatCode.replaceAll("BALANCE ", "");
-      final valueToAdd = int.tryParse(balanceString);
-      if (valueToAdd is int && valueToAdd > 0) {
-        getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: valueToAdd));
-        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
-        return;
+    if (kDebugMode) {
+      if (cheatCode.contains("BALANCE ")) {
+        final balanceString = cheatCode.replaceAll("BALANCE ", "");
+        final valueToAdd = int.tryParse(balanceString);
+        if (valueToAdd is int && valueToAdd > 0) {
+          getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: valueToAdd));
+          _onCheatCodeVerified(cheatCode);
+          return;
+        }
+      }
+      if (cheatCode == "ALL") {
+        final repo = getIt.get<CommonFootballRepository>();
+        final allCards = await repo.getAllCards(cardTypes: CardType.values.toSet());
+        if (allCards.isNotEmpty) {
+          getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allCards.map((e) => e.cardId).toList()));
+          _onCheatCodeVerified(cheatCode);
+          return;
+        }
       }
     }
-    if (cheatCode == "ALL") {
-      final repo = getIt.get<CommonFootballRepository>();
-      final allCards = await repo.getAllCards(cardTypes: CardType.values.toSet());
-      if (allCards.isNotEmpty) {
-        getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allCards.map((e) => e.cardId).toList()));
-        ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
-        return;
-      }
-    }
+
     ToastService.showErrorToast(title: AppGlossary.cheatCodeNotFound.translate(), seconds: 2);
+  }
+
+  void _increaseBalance(int amount) {
+    getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: amount));
+  }
+
+  void _getCard(String id) {
+    getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: id));
+  }
+
+  void _onCheatCodeVerified(String code) {
+    getIt.get<CheatCodesHistoryBloc>().add(CheatCodesHistoryEventAdd(code: code));
+    ToastService.showToast(title: AppGlossary.cheatCodeActivated.translate(), seconds: 2);
   }
 
   @override
