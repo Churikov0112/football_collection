@@ -36,19 +36,18 @@ class CardsDuplicatesScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final presenter = FootballPlayersDuplicatesScreenPresenter.of(context);
-          final mq = MediaQuery.of(context);
 
-          return Material(
-            child: ValueListenableBuilder(
-              valueListenable: presenter.searchController,
-              builder: (context, searchState, _) {
-                return Stack(
-                  children: [
-                    const BackgroundImage(),
-                    FutureBuilder<List<CardModel>>(
-                      future: repo.getCards(cardTypes: CardType.values.toSet()),
-                      builder: (context, allFootballCardsState) {
-                        return BlocBuilder<SavedCardsBloc, SavedCardsState>(
+          return FutureBuilder<List<CardModel>>(
+            future: repo.getCards(cardTypes: CardType.values.toSet()),
+            builder: (context, allFootballCardsState) {
+              return Material(
+                child: ValueListenableBuilder(
+                  valueListenable: presenter.searchController,
+                  builder: (context, searchState, _) {
+                    return Stack(
+                      children: [
+                        const BackgroundImage(),
+                        BlocBuilder<SavedCardsBloc, SavedCardsState>(
                           bloc: getIt.get(),
                           builder: (context, savedCardsState) {
                             if (allFootballCardsState.connectionState == .waiting ||
@@ -59,40 +58,43 @@ class CardsDuplicatesScreen extends StatelessWidget {
                             final allCards = allFootballCardsState.data ?? const <CardModel>[];
                             final savedIds = savedCardsState.savedCardsIds ?? const <String>[];
 
+                            final cards = allCards.where((c) => savedIds.contains(c.cardId)).toList();
+                            final filteredCards = cards
+                                .where((c) => c.name.toLowerCase().contains(searchState.text.toLowerCase()))
+                                .toList();
+
                             return ValueListenableBuilder<TextEditingValue>(
                               valueListenable: presenter.searchController,
                               builder: (context, value, _) {
-                                final items = presenter.buildItems(allCards, savedIds, value.text);
-
-                                return _DuplicatesGrid(items: items, bottomPadding: mq.padding.bottom + 16);
+                                return _DuplicatesGrid(cards: filteredCards);
                               },
                             );
                           },
-                        );
-                      },
-                    ),
-
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Translator(
-                        termin: AppGlossary.duplicates,
-                        builder: (value) => Column(
-                          children: [
-                            TransparentAppbar(title: value),
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: _TopControlsRow(controller: presenter.searchController),
-                            ),
-                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: Translator(
+                            termin: AppGlossary.duplicates,
+                            builder: (value) => Column(
+                              children: [
+                                TransparentAppbar(title: value),
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: _TopControlsRow(controller: presenter.searchController),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              );
+            },
           );
         },
       ),

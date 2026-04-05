@@ -15,50 +15,55 @@ class _OnboardingPage4 extends StatelessWidget {
 
         return Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  SizedBox(height: mq.padding.top + 20),
-                  Translator(
-                    termin: AppGlossary.onboardingCardsAreSaved,
-                    builder: (value) => Text(
-                      value,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+            CardsGrid(
+              cards: players,
+              badge: .showNew,
+              padding: EdgeInsets.only(top: mq.padding.top + 200, bottom: mq.padding.bottom + 100, left: 8, right: 8),
+            ),
+            FrostedGlassContainer(
+              blupColor: Colors.black26,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: mq.padding.top + 20),
+                    Translator(
+                      termin: AppGlossary.onboardingCardsAreSaved,
+                      builder: (value) => Text(
+                        value,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Translator(
-                    termin: AppGlossary.onboardingTapOnCardToSeeInfo,
-                    builder: (value) => Text(
-                      value,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                    const SizedBox(height: 20),
+                    Translator(
+                      termin: AppGlossary.onboardingTapOnCardToSeeInfo,
+                      builder: (value) => Text(
+                        value,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: CardsGrid(cards: players, badge: .showNew),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
             Positioned(
               bottom: mq.padding.bottom + 16,
               left: 16,
               right: 16,
-              child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.deepOrange)),
-                onPressed: () {
-                  presenter.onboardingController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.linear);
-                },
-                child: Translator(
-                  termin: AppGlossary.next,
-                  builder: (value) => Text(
-                    value,
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
+              child: Translator(
+                termin: AppGlossary.next,
+                builder: (value) => GlassButton(
+                  onPressed: () {
+                    presenter.onboardingController.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.linear,
+                    );
+                  },
+                  text: value,
                 ),
               ),
             ),

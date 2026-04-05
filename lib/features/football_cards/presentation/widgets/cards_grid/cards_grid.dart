@@ -23,18 +23,25 @@ part 'widgets/football_player_album_widget.dart';
 part 'widgets/football_team_emblem_album_widget.dart';
 
 class CardsGrid extends StatelessWidget {
-  const CardsGrid({required this.cards, required this.badge, this.newCardsIds, super.key}) : country = null;
+  const CardsGrid({required this.cards, required this.badge, this.newCardsIds, this.padding, super.key})
+    : country = null;
 
-  const CardsGrid.album({required this.cards, required this.country, this.badge = CardBadge.showCount, super.key})
-    : newCardsIds = null;
+  const CardsGrid.album({
+    required this.cards,
+    required this.country,
+    this.badge = CardBadge.showCount,
+    this.padding,
+    super.key,
+  }) : newCardsIds = null;
 
-  const CardsGrid.packResults({required this.cards, required this.newCardsIds, super.key})
+  const CardsGrid.packResults({required this.cards, required this.newCardsIds, this.padding, super.key})
     : country = null,
       badge = .none;
 
   final List<CardModel> cards;
   final FootballNationalTeamModel? country;
   final CardBadge badge;
+  final EdgeInsetsGeometry? padding;
 
   final List<String>? newCardsIds;
 
@@ -50,7 +57,8 @@ class CardsGrid extends StatelessWidget {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
-      padding: EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
+      padding:
+          padding ?? EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
       itemCount: cards.length,
       itemBuilder: (context, index) {
         final card = cards[index];

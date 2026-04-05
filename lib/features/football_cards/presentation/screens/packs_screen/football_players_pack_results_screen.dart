@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_cards/presentation/widgets/cards_grid/cards_grid.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
-import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../ui_kit/widgets/glass_button/glass_button.dart';
 import '../../../../abstract/domain/models/card.dart';
 
 class FootballCardsPackResultsScreenArgs {

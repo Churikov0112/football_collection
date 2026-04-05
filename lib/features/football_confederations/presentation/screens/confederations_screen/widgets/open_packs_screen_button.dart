@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/ui_kit/effects/touchable_scale.dart';
-import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 
 import '../../../../../../services/localization/translator.dart';
+import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
 
 class OpenPacksScreenButton extends StatelessWidget {
   const OpenPacksScreenButton({required this.onPressed, super.key});

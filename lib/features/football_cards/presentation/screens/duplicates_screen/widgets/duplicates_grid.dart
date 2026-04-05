@@ -1,14 +1,13 @@
 part of '../football_players_duplicates_screen.dart';
 
 class _DuplicatesGrid extends StatelessWidget {
-  const _DuplicatesGrid({required this.items, required this.bottomPadding});
+  const _DuplicatesGrid({required this.cards});
 
-  final List<_DuplicateItem> items;
-  final double bottomPadding;
+  final List<CardModel> cards;
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) {
+    if (cards.isEmpty) {
       return Center(
         child: Translator(
           termin: AppGlossary.noDuplicates,
@@ -17,6 +16,12 @@ class _DuplicatesGrid extends StatelessWidget {
       );
     }
 
-    return CardsGrid(cards: items.map((e) => e.card).toList(), badge: CardBadge.showCount);
+    final mq = MediaQuery.of(context);
+
+    return CardsGrid(
+      cards: cards,
+      badge: CardBadge.showCount,
+      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 16, right: 16),
+    );
   }
 }

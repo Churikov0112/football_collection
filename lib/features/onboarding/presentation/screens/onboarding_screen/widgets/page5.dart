@@ -41,16 +41,9 @@ class _OnboardingPage5 extends StatelessWidget {
               const Spacer(),
               SizedBox(
                 width: mq.size.width,
-                child: FilledButton(
-                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.deepOrange)),
-                  onPressed: presenter.endOnboarding,
-                  child: Translator(
-                    termin: AppGlossary.onboardingStartCollectioning,
-                    builder: (value) => Text(
-                      value,
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                child: Translator(
+                  termin: AppGlossary.onboardingStartCollectioning,
+                  builder: (value) => GlassButton(onPressed: presenter.endOnboarding, text: value),
                 ),
               ),
               const Spacer(),

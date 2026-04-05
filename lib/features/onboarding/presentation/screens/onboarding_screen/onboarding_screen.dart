@@ -10,8 +10,10 @@ import 'package:football_collection/features/abstract/presentation/blocs/first_l
 import 'package:football_collection/features/football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
+import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../ui_kit/widgets/glass_button/glass_button.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../football_cards/domain/cards/player_card.dart';
