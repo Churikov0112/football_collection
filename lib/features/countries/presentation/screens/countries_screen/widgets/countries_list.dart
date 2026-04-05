@@ -48,7 +48,7 @@ class _CountryTile extends StatelessWidget {
     final repo = getIt.get<CommonFootballRepository>();
 
     return FutureBuilder(
-      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
+      future: repo.getCards(cardTypes: CardType.values.toSet()),
       builder: (context, allCardsSnapshot) {
         return BlocBuilder<SavedCardsBloc, SavedCardsState>(
           bloc: getIt.get<SavedCardsBloc>(),

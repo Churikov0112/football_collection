@@ -10,14 +10,17 @@ import '../../../../football_confederations/domain/models/football_confederation
 import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
+import '../../../domain/cards/team_emblem_card.dart';
 import '../card_image_wrapper/card_image_wrapper.dart';
 import '../coach_card/football_coach_card.dart';
 import '../legend_card/football_legend_card.dart';
 import '../player_card/football_player_card.dart';
+import '../team_emblem_card/football_team_emblem_card.dart';
 
-part 'widgets/fooball_coach_album_widget.dart';
-part 'widgets/fooball_legend_album_widget.dart';
+part 'widgets/football_coach_album_widget.dart';
+part 'widgets/football_legend_album_widget.dart';
 part 'widgets/football_player_album_widget.dart';
+part 'widgets/football_team_emblem_album_widget.dart';
 
 class CardsGrid extends StatelessWidget {
   const CardsGrid({required this.cards, required this.badge, this.newCardsIds, super.key}) : country = null;
@@ -65,6 +68,10 @@ class CardsGrid extends StatelessWidget {
           if (card is FootballLegendCardModel) {
             return _FootballLegendAlbumWidget(legend: card, country: country!);
           }
+
+          if (card is FootballTeamEmblemCardModel) {
+            return _FootballTeamEmblemAlbumWidget(emblem: card, country: country!);
+          }
         }
 
         // pack results
@@ -81,6 +88,10 @@ class CardsGrid extends StatelessWidget {
           if (card is FootballLegendCardModel) {
             return FootballLegendCardWidget(legend: card, badge: isNewCard ? .showNew : .none);
           }
+
+          if (card is FootballTeamEmblemCardModel) {
+            return FootballTeamEmblemCardWidget(emblem: card, badge: isNewCard ? .showNew : .none);
+          }
         }
 
         // other
@@ -92,6 +103,9 @@ class CardsGrid extends StatelessWidget {
         }
         if (card is FootballLegendCardModel) {
           return FootballLegendCardWidget(legend: card, badge: badge);
+        }
+        if (card is FootballTeamEmblemCardModel) {
+          return FootballTeamEmblemCardWidget(emblem: card, badge: badge);
         }
 
         return SizedBox.shrink();

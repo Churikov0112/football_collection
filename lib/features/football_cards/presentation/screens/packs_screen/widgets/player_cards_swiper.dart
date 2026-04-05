@@ -16,8 +16,8 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        final firstPlayer = (widget.cards.firstOrNull as FootballPlayerCardModel?);
-        if (firstPlayer != null) checkConfetti(firstPlayer);
+        final firstCard = widget.cards.firstOrNull;
+        if (firstCard != null) checkConfetti(firstCard);
       }
     });
   }
@@ -33,7 +33,7 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
       }
     }
 
-    if (card is FootballLegendCardModel) {
+    if (card is FootballLegendCardModel || card is FootballTeamEmblemCardModel) {
       Confetti.launch(
         context,
         options: const ConfettiOptions(particleCount: 100, spread: 70, y: 0.6, colors: goldConfettiColors),
@@ -87,13 +87,19 @@ class _PlayerCardsSwiperState extends State<_PlayerCardsSwiper> {
             badge: isNewCard ? .showNew : .none,
           );
         }
+        if (card is FootballTeamEmblemCardModel) {
+          return FootballTeamEmblemCardWidget(
+            height: packHeight * 1,
+            width: packWidth * 1,
+            emblem: card,
+            badge: isNewCard ? .showNew : .none,
+          );
+        }
         return SizedBox.shrink();
       },
       onSwipe: (previousIndex, currentIndex, direction) async {
-        final prevCard = widget.cards[previousIndex];
         final currentCard = currentIndex != null ? widget.cards[currentIndex] : null;
         if (currentCard != null) {
-          presenter.saveCard(prevCard);
           unawaited(checkConfetti(currentCard));
         }
         return true;

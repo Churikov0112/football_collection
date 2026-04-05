@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
             future: repository.teamsGet(),
             builder: (context, allCountriesState) {
               return FutureBuilder<List<CardModel>>(
-                future: repository.getAllCards(cardTypes: CardType.values.toSet()),
+                future: repository.getCards(cardTypes: CardType.values.toSet()),
                 builder: (context, allFootballCardsState) {
                   return FutureBuilder<List<FootballConfederations>>(
                     future: repository.footballConfederationsGet(),

@@ -46,7 +46,7 @@ class CardsDuplicatesScreen extends StatelessWidget {
                   children: [
                     const BackgroundImage(),
                     FutureBuilder<List<CardModel>>(
-                      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
+                      future: repo.getCards(cardTypes: CardType.values.toSet()),
                       builder: (context, allFootballCardsState) {
                         return BlocBuilder<SavedCardsBloc, SavedCardsState>(
                           bloc: getIt.get(),

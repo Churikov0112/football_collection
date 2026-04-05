@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,6 +15,7 @@ class SavedCardsBloc extends HydratedBloc<SavedCardsEvent, SavedCardsState> {
         SavedCardsEventRemove() => _remove(event, emitter),
         SavedCardsEventRemoveAll() => _removeAll(event, emitter),
       },
+      transformer: sequential(),
     );
   }
 
@@ -76,9 +78,7 @@ class SavedCardsBloc extends HydratedBloc<SavedCardsEvent, SavedCardsState> {
 
   @override
   Map<String, dynamic>? toJson(SavedCardsState state) {
-    final json = {
-      _kSavedCardsIdsKey: state.savedCardsIds,
-    };
+    final json = {_kSavedCardsIdsKey: state.savedCardsIds};
     return json;
   }
 }

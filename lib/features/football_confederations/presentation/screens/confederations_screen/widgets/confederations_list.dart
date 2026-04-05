@@ -45,7 +45,7 @@ class _RegionTile extends StatelessWidget {
     return FutureBuilder<List<FootballNationalTeamModel>>(
       future: repo.teamsGet(confederation: confederation),
       builder: (context, allTeamsState) => FutureBuilder<List<CardModel>>(
-        future: repo.getAllCards(cardTypes: CardType.values.toSet()),
+        future: repo.getCards(cardTypes: CardType.values.toSet()),
         builder: (context, allCardsState) => BlocBuilder<SavedCardsBloc, SavedCardsState>(
           bloc: getIt.get<SavedCardsBloc>(),
           builder: (context, savedState) {

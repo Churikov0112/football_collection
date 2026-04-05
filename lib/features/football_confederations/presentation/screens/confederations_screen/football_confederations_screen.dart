@@ -42,7 +42,7 @@ class FootballConfederationsScreen extends StatelessWidget {
                 Column(
                   children: [
                     FutureBuilder<List<CardModel>>(
-                      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
+                      future: repo.getCards(cardTypes: CardType.values.toSet()),
                       builder: (context, allFootballCardsState) {
                         return FutureBuilder<List<FootballNationalTeamModel>>(
                           future: repo.teamsGet(),

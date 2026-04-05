@@ -135,6 +135,7 @@ flutter:
     - assets/raster/player_faces/
     - assets/raster/legends_faces/
     - assets/raster/team_flags/
+    - assets/raster/team_emblems/
     - assets/raster/coach_faces/
     - assets/raster/packs/
     - assets/raster/background/

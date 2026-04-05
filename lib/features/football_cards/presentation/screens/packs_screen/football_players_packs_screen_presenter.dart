@@ -83,6 +83,8 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
   }
 
   Future<void> openPack(PackModel pack) async {
+    _saveCards(pack.cards ?? []);
+
     final participantCountry = getIt.get<LeaderboardCountryBloc>().state.countryName;
     final alreadySavedCards = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
     _newCardIdsForOpenedPack = (pack.cards ?? const <CardModel>[])
@@ -175,8 +177,12 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
     _isUnpackingAnimationPlayingSubject.add(false);
   }
 
-  void saveCard(CardModel card) {
-    getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: card.cardId));
+  // void saveCard(CardModel card) {
+  //   getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: card.cardId));
+  // }
+
+  void _saveCards(List<CardModel> cards) {
+    getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: cards.map((card) => card.cardId).toList()));
   }
 
   Future<void> showReceivedCards(List<CardModel> cards, String packName) async {

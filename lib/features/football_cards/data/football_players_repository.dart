@@ -14,6 +14,7 @@ import '../../football_confederations/domain/models/football_confederation.dart'
 import '../domain/cards/coach_card.dart';
 import '../domain/cards/legend_card.dart';
 import '../domain/cards/player_card.dart';
+import '../domain/cards/team_emblem_card.dart';
 
 @singleton
 class CommonFootballRepository {
@@ -22,6 +23,7 @@ class CommonFootballRepository {
   List<FootballPlayerCardModel> _allPlayersCache = [];
   List<FootballLegendCardModel> _allLegendsCache = [];
   List<FootballCoachCardModel> _allCoachesCache = [];
+  final List<FootballTeamEmblemCardModel> _allEmblemsCache = [];
   // List<FootballClubModel> _allClubsCache = [];
 
   final Random _random = Random();
@@ -88,8 +90,12 @@ class CommonFootballRepository {
     return coaches;
   }
 
-  Future<void> _ensureInitialized() async {
-    if (_allTeamsCache.isEmpty || _allPlayersCache.isEmpty) {
+  Future<void> ensureInitialized() async {
+    if (_allTeamsCache.isEmpty ||
+        _allPlayersCache.isEmpty ||
+        _allLegendsCache.isEmpty ||
+        _allCoachesCache.isEmpty ||
+        _allEmblemsCache.isEmpty) {
       final String teamsJson = await rootBundle.loadString('assets/json/prepared_tm_teams.json');
       final List<dynamic> teamsData = jsonDecode(teamsJson);
 
@@ -104,6 +110,9 @@ class CommonFootballRepository {
 
       final String coachesJson = await rootBundle.loadString('assets/json/prepared_tm_coach_profiles.json');
       final List<dynamic> coachesData = jsonDecode(coachesJson);
+
+      final String emblemsJson = await rootBundle.loadString('assets/json/prepared_tm_teams_emblems.json');
+      final List<dynamic> emblemsData = jsonDecode(emblemsJson);
 
       try {
         if (_allPlayersCache.isEmpty) {
@@ -124,6 +133,14 @@ class CommonFootballRepository {
       try {
         if (_allTeamsCache.isEmpty) {
           _allTeamsCache = await compute(_parseTeams, teamsData);
+        }
+
+        for (final emblem in emblemsData) {
+          final team = _allTeamsCache.firstWhereOrNull((team) => team.id == emblem['id']);
+          if (team != null) {
+            final emblemModel = FootballTeamEmblemCardModel.fromTeam(team);
+            _allEmblemsCache.add(emblemModel);
+          }
         }
       } catch (e) {
         LogService.log(e.toString());
@@ -156,12 +173,10 @@ class CommonFootballRepository {
   }
 
   Future<List<FootballConfederations>> footballConfederationsGet() async {
-    await _ensureInitialized();
     return [..._allConfederationCache];
   }
 
   Future<List<FootballNationalTeamModel>> teamsGet({FootballConfederations? confederation, String? teamId}) async {
-    await _ensureInitialized();
     if (confederation == null && teamId == null) {
       return [..._allTeamsCache];
     }
@@ -178,7 +193,6 @@ class CommonFootballRepository {
   }
 
   Future<List<FootballPlayerCardModel>> playersGet([String? teamId]) async {
-    await _ensureInitialized();
     if (teamId == null) {
       return [..._allPlayersCache];
     }
@@ -254,18 +268,18 @@ class CommonFootballRepository {
   }
 
   // Общий метод для получения всех карт (игроки + тренеры)
-  Future<List<CardModel>> getAllCards({required Set<CardType> cardTypes}) async {
-    await _ensureInitialized();
+  Future<List<CardModel>> _getAllCards({required Set<CardType> cardTypes}) async {
     final List<CardModel> allCards = [
       if (cardTypes.contains(CardType.player)) ..._allPlayersCache,
       if (cardTypes.contains(CardType.coach)) ..._allCoachesCache,
       if (cardTypes.contains(CardType.legend)) ..._allLegendsCache,
+      if (cardTypes.contains(CardType.emblem)) ..._allEmblemsCache,
     ];
     return allCards;
   }
 
   // Фильтрация карт по различным критериям
-  Future<List<CardModel>> _filterCards({
+  Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
     FootballNationalTeamModel? team,
@@ -273,7 +287,7 @@ class CommonFootballRepository {
     int? minCurrentTransferValue,
     bool? topCountries,
   }) async {
-    final allCards = await getAllCards(cardTypes: cardTypes);
+    final allCards = await _getAllCards(cardTypes: cardTypes);
 
     return allCards.where((card) {
       // Фильтрация по команде
@@ -328,12 +342,11 @@ class CommonFootballRepository {
     bool? topCountries,
     bool unique = false,
   }) async {
-    await _ensureInitialized();
     final result = <CardModel>[];
 
     try {
       // Получаем все доступные карты с учетом фильтров
-      List<CardModel> availableCards = await _filterCards(
+      List<CardModel> availableCards = await getCards(
         confederation: confederation,
         team: team,
         minPrimeTransferValue: minPrimeTransferValue,

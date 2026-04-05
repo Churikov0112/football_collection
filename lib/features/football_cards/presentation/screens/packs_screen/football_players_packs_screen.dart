@@ -15,6 +15,7 @@ import 'package:football_collection/features/abstract/domain/models/pack.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
+import 'package:football_collection/features/football_cards/domain/cards/team_emblem_card.dart';
 import 'package:football_collection/features/football_cards/presentation/screens/packs_screen/widgets/yandex_ads_rewarded_mixin.dart';
 import 'package:football_collection/features/leaderboard/presentation/blocs/leaderboard_country_bloc/leaderboard_country_bloc.dart';
 import 'package:football_collection/features/mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
@@ -39,6 +40,7 @@ import '../../blocs/football_players_packs_bloc/football_players_packs_bloc.dart
 import '../../widgets/coach_card/football_coach_card.dart';
 import '../../widgets/legend_card/football_legend_card.dart';
 import '../../widgets/player_card/football_player_card.dart';
+import '../../widgets/team_emblem_card/football_team_emblem_card.dart';
 import 'football_players_pack_results_screen.dart';
 import 'widgets/confirm_buy_pack_bs.dart';
 import 'widgets/not_enoght_money_bs.dart';

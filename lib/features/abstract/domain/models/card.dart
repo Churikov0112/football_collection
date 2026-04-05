@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum CardType { player, legend, coach, squad, flag }
+enum CardType { player, legend, coach, squad, emblem }
 
 abstract class CardModel extends Equatable {
   final String cardId;

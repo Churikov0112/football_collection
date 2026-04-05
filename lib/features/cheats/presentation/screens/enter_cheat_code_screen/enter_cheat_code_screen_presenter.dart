@@ -147,7 +147,7 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
       }
       if (cheatCode == "ALL") {
         final repo = getIt.get<CommonFootballRepository>();
-        final allCards = await repo.getAllCards(cardTypes: CardType.values.toSet());
+        final allCards = await repo.getCards(cardTypes: CardType.values.toSet());
         if (allCards.isNotEmpty) {
           getIt.get<SavedCardsBloc>().add(SavedCardsEventAddAll(cardIds: allCards.map((e) => e.cardId).toList()));
           _onCheatCodeVerified(cheatCode);

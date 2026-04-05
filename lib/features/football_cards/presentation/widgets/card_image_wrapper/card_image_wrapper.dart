@@ -37,7 +37,7 @@ class CardImageWrapper extends StatelessWidget {
     required this.card,
     required this.badge,
     required this.borderRadius,
-    required this.nationalTeamVisibility,
+    this.nationalTeamVisibility,
     this.marketValueVisibility,
     // this.height = packHeight,
     // this.width = packWidth,
@@ -59,7 +59,7 @@ class CardImageWrapper extends StatelessWidget {
   final BorderRadius borderRadius;
 
   final CardElementVisibility? marketValueVisibility;
-  final CardElementVisibility nationalTeamVisibility;
+  final CardElementVisibility? nationalTeamVisibility;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class CardImageWrapper extends StatelessWidget {
             child: card is FootballPlayerCardModel
                 ? _PlayerTopLeft(
                     player: card as FootballPlayerCardModel,
-                    nationalTeamVisibility: nationalTeamVisibility,
+                    nationalTeamVisibility: nationalTeamVisibility!,
                   )
                 : card is FootballLegendCardModel
                 ? _LegendTopLeft(legend: card as FootballLegendCardModel)

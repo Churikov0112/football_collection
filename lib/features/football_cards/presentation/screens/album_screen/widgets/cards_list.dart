@@ -10,12 +10,18 @@ class _FootballCardsList extends StatelessWidget {
     final repo = getIt.get<CommonFootballRepository>();
 
     return FutureBuilder<List<CardModel>>(
-      future: repo.getAllCards(cardTypes: CardType.values.toSet()),
+      future: repo.getCards(cardTypes: CardType.values.toSet(), team: country),
       builder: (context, allFootballCardsState) {
-        final cards = (allFootballCardsState.data ?? []).where((p) => p.teamId == country.id).toList();
+        final cards = allFootballCardsState.data ?? [];
 
-        // тренер выводится первым
-        cards.sort((a, b) => (b is FootballCoachCardModel ? 1 : 0).compareTo(a is FootballCoachCardModel ? 1 : 0));
+        // эмблема выводится выводится первой, тренер вторым, легенды в конце
+        cards.sort((a, b) {
+          if (a.cardType == .emblem) return -1;
+          if (b.cardType == .emblem) return 1;
+          if (a.cardType == .coach) return -1;
+          if (b.cardType == .coach) return 1;
+          return 0;
+        });
 
         return Expanded(
           child: CardsGrid.album(cards: cards, country: country),
