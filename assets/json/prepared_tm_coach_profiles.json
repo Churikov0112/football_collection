@@ -590,16 +590,6 @@
     }
   },
   {
-    "id": "89939",
-    "name": "Bostjan Cesar",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Slovenia",
-    "current_club": {
-      "id": "3588",
-      "name": "Slovenia"
-    }
-  },
-  {
     "id": "84856",
     "name": "Bubista",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/84856-1705950450.jpg",
@@ -637,26 +627,6 @@
     "current_club": {
       "id": "3806",
       "name": "South Africa"
-    }
-  },
-  {
-    "id": "47567",
-    "name": "John Paintsil",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Ghana",
-    "current_club": {
-      "id": "3441",
-      "name": "Ghana"
-    }
-  },
-  {
-    "id": "104684",
-    "name": "Merron Gordon",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Jamaica",
-    "current_club": {
-      "id": "3671",
-      "name": "Jamaica"
     }
   },
   {
@@ -880,16 +850,6 @@
     }
   },
   {
-    "id": "151506",
-    "name": "Cédric Moubamba",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Gabon",
-    "current_club": {
-      "id": "5704",
-      "name": "Gabon"
-    }
-  },
-  {
     "id": "24427",
     "name": "Dragan Talajic",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/24427-1725536760.jpg",
@@ -907,16 +867,6 @@
     "current_club": {
       "id": "5598",
       "name": "China"
-    }
-  },
-  {
-    "id": "10169",
-    "name": "Derek King",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Trinidad and Tobago",
-    "current_club": {
-      "id": "7149",
-      "name": "Trinidad"
     }
   },
   {
@@ -1180,16 +1130,6 @@
     }
   },
   {
-    "id": "23462",
-    "name": "Callisto Pasuwa",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Zimbabwe",
-    "current_club": {
-      "id": "8988",
-      "name": "Malawi"
-    }
-  },
-  {
     "id": "16510",
     "name": "Kwesi Appiah",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/16510-1755609381.jpg",
@@ -1290,26 +1230,6 @@
     }
   },
   {
-    "id": "105519",
-    "name": "Éloge Enza-Yamissi",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Central African Republic",
-    "current_club": {
-      "id": "12933",
-      "name": "Central Africa"
-    }
-  },
-  {
-    "id": "147663",
-    "name": "Emiliano Té",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Guinea-Bissau",
-    "current_club": {
-      "id": "3701",
-      "name": "Guinea-Bissau"
-    }
-  },
-  {
     "id": "14602",
     "name": "Goce Sedloski",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/14602-1677510368.png",
@@ -1360,16 +1280,6 @@
     }
   },
   {
-    "id": "22338",
-    "name": "Leslie Notsi",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Lesotho",
-    "current_club": {
-      "id": "13962",
-      "name": "Lesotho"
-    }
-  },
-  {
     "id": "18641",
     "name": "Marcelo Neveleff",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/18641-1549702483.JPG",
@@ -1377,16 +1287,6 @@
     "current_club": {
       "id": "15232",
       "name": "Dominican Rep."
-    }
-  },
-  {
-    "id": "23965",
-    "name": "Thomas Kojo",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Liberia",
-    "current_club": {
-      "id": "9172",
-      "name": "Liberia"
     }
   },
   {
@@ -1430,16 +1330,6 @@
     }
   },
   {
-    "id": "24808",
-    "name": "Wayne Dover",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Guyana",
-    "current_club": {
-      "id": "15736",
-      "name": "Guyana"
-    }
-  },
-  {
     "id": "30143",
     "name": "Roberto Losada",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/30143-1630340987.JPG",
@@ -1460,26 +1350,6 @@
     }
   },
   {
-    "id": "114009",
-    "name": "Ben Cahn",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Australia",
-    "current_club": {
-      "id": "136278",
-      "name": "Solomon Kings"
-    }
-  },
-  {
-    "id": "72543",
-    "name": "Stéphane Auvray",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Guadeloupe",
-    "current_club": {
-      "id": "13955",
-      "name": "Fiji"
-    }
-  },
-  {
     "id": "73995",
     "name": "Gavin Lee",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/73995-1727000163.jpg",
@@ -1490,16 +1360,6 @@
     }
   },
   {
-    "id": "89133",
-    "name": "Patrick Sangwa",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Belgium",
-    "current_club": {
-      "id": "13943",
-      "name": "Burundi"
-    }
-  },
-  {
     "id": "19523",
     "name": "Lilian Popescu",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/19523-1614403506.png",
@@ -1507,16 +1367,6 @@
     "current_club": {
       "id": "6090",
       "name": "Moldova"
-    }
-  },
-  {
-    "id": "73375",
-    "name": "Jay Mims",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "United States",
-    "current_club": {
-      "id": "17759",
-      "name": "Puerto Rico"
     }
   },
   {
@@ -1540,16 +1390,6 @@
     }
   },
   {
-    "id": "136675",
-    "name": "Sifiso Ntibane",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Eswatini",
-    "current_club": {
-      "id": "13675",
-      "name": "Eswatini"
-    }
-  },
-  {
     "id": "62850",
     "name": "Marcelo Serrano",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/62850-1561130910.jpg",
@@ -1567,66 +1407,6 @@
     "current_club": {
       "id": "15922",
       "name": "Yemen"
-    }
-  },
-  {
-    "id": "70181",
-    "name": "José Antonio Nogueira",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Brazil",
-    "current_club": {
-      "id": "3576",
-      "name": "Afghanistan"
-    }
-  },
-  {
-    "id": "43468",
-    "name": "Jacques Passy",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Mexico",
-    "current_club": {
-      "id": "49806",
-      "name": "Lorca Deportiva"
-    }
-  },
-  {
-    "id": "37024",
-    "name": "Anthony Modeste",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Grenada",
-    "current_club": {
-      "id": "14175",
-      "name": "Grenada"
-    }
-  },
-  {
-    "id": "154803",
-    "name": "Maurice Lowe",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Bermuda",
-    "current_club": {
-      "id": "15735",
-      "name": "Bermuda"
-    }
-  },
-  {
-    "id": "38283",
-    "name": "Nicolas Dupuis",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "France",
-    "current_club": {
-      "id": "33192",
-      "name": "South Sudan"
-    }
-  },
-  {
-    "id": "105170",
-    "name": "David Muta",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Papua New Guinea",
-    "current_club": {
-      "id": "15233",
-      "name": "Papua N. Guinea"
     }
   },
   {
@@ -1660,26 +1440,6 @@
     }
   },
   {
-    "id": "85865",
-    "name": "Stern John",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Trinidad and Tobago",
-    "current_club": {
-      "id": "17761",
-      "name": "Saint Lucia"
-    }
-  },
-  {
-    "id": "130126",
-    "name": "Guillaume Moullec",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "France",
-    "current_club": {
-      "id": "14239",
-      "name": "Mauritius"
-    }
-  },
-  {
     "id": "128694",
     "name": "Matt Ross",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/128694-1714644622.jpg",
@@ -1687,36 +1447,6 @@
     "current_club": {
       "id": "15363",
       "name": "Chinese Taipei"
-    }
-  },
-  {
-    "id": "89716",
-    "name": "Mohamed Shiyaz",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Maldives",
-    "current_club": {
-      "id": "15456",
-      "name": "Maldives"
-    }
-  },
-  {
-    "id": "24538",
-    "name": "Raoul Savoy",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Switzerland",
-    "current_club": {
-      "id": "13978",
-      "name": "Chad"
-    }
-  },
-  {
-    "id": "126590",
-    "name": "Kent Hall",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Barbados",
-    "current_club": {
-      "id": "16030",
-      "name": "Barbados"
     }
   },
   {
@@ -1750,26 +1480,6 @@
     }
   },
   {
-    "id": "22703",
-    "name": "Koji Gyotoku",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Japan",
-    "current_club": {
-      "id": "38229",
-      "name": "Cambodia U23"
-    }
-  },
-  {
-    "id": "23010",
-    "name": "Tuka Tisam",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Cookinseln",
-    "current_club": {
-      "id": "17752",
-      "name": "Cook Islands"
-    }
-  },
-  {
     "id": "18020",
     "name": "Guglielmo Arena",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/18020-1647382178.jpg",
@@ -1777,16 +1487,6 @@
     "current_club": {
       "id": "15350",
       "name": "Nepal"
-    }
-  },
-  {
-    "id": "113356",
-    "name": "Diego Gómez",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Spain",
-    "current_club": {
-      "id": "17746",
-      "name": "A. Samoa"
     }
   },
   {
@@ -1800,16 +1500,6 @@
     }
   },
   {
-    "id": "53182",
-    "name": "Ricardo Monsanto",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Portugal",
-    "current_club": {
-      "id": "15236",
-      "name": "São Tomé and P."
-    }
-  },
-  {
     "id": "39779",
     "name": "Samuel Garcia",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/39779-1774092443.jpg",
@@ -1820,46 +1510,6 @@
     }
   },
   {
-    "id": "74443",
-    "name": "Jess Ibrom",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "New Zealand",
-    "current_club": {
-      "id": "15235",
-      "name": "Samoa"
-    }
-  },
-  {
-    "id": "126656",
-    "name": "Pedro Pereira",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Cuba",
-    "current_club": {
-      "id": "32703",
-      "name": "Cuba U20"
-    }
-  },
-  {
-    "id": "23469",
-    "name": "Daniel Bartolotta",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Uruguay",
-    "current_club": {
-      "id": "15919",
-      "name": "Belize"
-    }
-  },
-  {
-    "id": "94013",
-    "name": "Colin Rowe",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Cayman Islands",
-    "current_club": {
-      "id": "18364",
-      "name": "Scholars"
-    }
-  },
-  {
     "id": "90359",
     "name": "Emmanuel Noruega",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/90359-1737213667.jpg",
@@ -1867,26 +1517,6 @@
     "current_club": {
       "id": "16432",
       "name": "Macau"
-    }
-  },
-  {
-    "id": "76769",
-    "name": "Garidmagnai Bayasgalan",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Mongolia",
-    "current_club": {
-      "id": "15739",
-      "name": "Mongolia"
-    }
-  },
-  {
-    "id": "17126",
-    "name": "Kilifi Uele",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Tonga",
-    "current_club": {
-      "id": "16435",
-      "name": "Tonga"
     }
   },
   {
@@ -1910,36 +1540,6 @@
     }
   },
   {
-    "id": "140751",
-    "name": "Yusuf Ali Nur",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Somalia",
-    "current_club": {
-      "id": "13974",
-      "name": "Somalia"
-    }
-  },
-  {
-    "id": "97519",
-    "name": "Mohamed Meraneh Hassan",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Djibouti",
-    "current_club": {
-      "id": "16427",
-      "name": "Djibouti"
-    }
-  },
-  {
-    "id": "41233",
-    "name": "Atsushi Nakamura",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Japan",
-    "current_club": {
-      "id": "15920",
-      "name": "Bhutan"
-    }
-  },
-  {
     "id": "121468",
     "name": "Ross Awa",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/121468-1699274365.jpg",
@@ -1950,46 +1550,6 @@
     }
   },
   {
-    "id": "114497",
-    "name": "Ellington Sabin",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Dominica",
-    "current_club": {
-      "id": "16033",
-      "name": "Dominica"
-    }
-  },
-  {
-    "id": "58600",
-    "name": "Zé Pedro",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Portugal",
-    "current_club": {
-      "id": "17757",
-      "name": "Timor-Leste"
-    }
-  },
-  {
-    "id": "19500",
-    "name": "Ralph Jean-Louis",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Seychelles",
-    "current_club": {
-      "id": "3562",
-      "name": "Seychelles"
-    }
-  },
-  {
-    "id": "64628",
-    "name": "Marvic Bermúdez",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Aruba",
-    "current_club": {
-      "id": "17749",
-      "name": "Aruba"
-    }
-  },
-  {
     "id": "5570",
     "name": "Vladica Grujic",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/_1382955832.jpg",
@@ -1997,26 +1557,6 @@
     "current_club": {
       "id": "16431",
       "name": "Laos"
-    }
-  },
-  {
-    "id": "68434",
-    "name": "Nesley Jean",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Bahamas",
-    "current_club": {
-      "id": "15918",
-      "name": "Bahamas"
-    }
-  },
-  {
-    "id": "22054",
-    "name": "Terrence Jones",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "American Virgin Islands",
-    "current_club": {
-      "id": "17747",
-      "name": "US Virgin"
     }
   },
   {
@@ -2040,16 +1580,6 @@
     }
   },
   {
-    "id": "94929",
-    "name": "David Pérez",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Spain",
-    "current_club": {
-      "id": "17750",
-      "name": "B. Virgin"
-    }
-  },
-  {
     "id": "9452",
     "name": "Roberto Cevoli",
     "image_url": "https://img.a.transfermarkt.technology/portrait/header/9452-1662933969.png",
@@ -2057,16 +1587,6 @@
     "current_club": {
       "id": "10521",
       "name": "San Marino"
-    }
-  },
-  {
-    "id": "55292",
-    "name": "Keith Jeffrey",
-    "image_url": "https://img.a.transfermarkt.technology/portrait/header/default.jpg",
-    "citizenship": "Trinidad and Tobago",
-    "current_club": {
-      "id": "17748",
-      "name": "Anguilla"
     }
   }
 ]
