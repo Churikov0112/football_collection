@@ -32,11 +32,14 @@ enum CardBadge { none, showCount, showNew }
 
 enum CardElementVisibility { none, show, quest }
 
+const _kTopLeftElementSize = 24.0;
+
 class CardImageWrapper extends StatelessWidget {
   const CardImageWrapper({
     required this.card,
     required this.badge,
     required this.borderRadius,
+    this.imagePadding = EdgeInsets.zero,
     this.nationalTeamVisibility,
     this.marketValueVisibility,
     // this.height = packHeight,
@@ -56,6 +59,8 @@ class CardImageWrapper extends StatelessWidget {
   final VoidCallback? onSell;
   final VoidCallback? onSellAll;
   final VoidCallback? onShare;
+
+  final EdgeInsetsGeometry imagePadding;
   final BorderRadius borderRadius;
 
   final CardElementVisibility? marketValueVisibility;
@@ -67,7 +72,10 @@ class CardImageWrapper extends StatelessWidget {
       borderRadius: borderRadius,
       child: Stack(
         children: [
-          Image.asset(card.imageAssetPath, fit: BoxFit.cover),
+          Padding(
+            padding: imagePadding,
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Image.asset(card.imageAssetPath)]),
+          ),
 
           Positioned(
             top: 0,

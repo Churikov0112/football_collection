@@ -114,31 +114,31 @@ Color? footballPlayerPositionToColor(String? position) {
     case "Goalkeeper":
       return Colors.orange;
     case "Centre-Back":
-      return Colors.blue;
+      return Colors.lightBlue;
     case "Left-Back":
-      return Colors.blue;
+      return Colors.lightBlue;
     case "Right-Back":
-      return Colors.blue;
+      return Colors.lightBlue;
     case "Defensive Midfield":
-      return Colors.lightGreenAccent;
+      return Colors.green;
     case "Central Midfield":
-      return Colors.lightGreenAccent;
+      return Colors.green;
     case "Attacking Midfield":
-      return Colors.lightGreenAccent;
+      return Colors.green;
     case "Left Midfield":
-      return Colors.lightGreenAccent;
+      return Colors.green;
     case "Right Midfield":
-      return Colors.lightGreenAccent;
+      return Colors.green;
     case "Left Winger":
-      return const Color.fromARGB(255, 255, 17, 0);
+      return Colors.red;
     case "Right Winger":
-      return const Color.fromARGB(255, 255, 17, 0);
+      return Colors.red;
     case "Centre-Forward":
-      return const Color.fromARGB(255, 255, 17, 0);
+      return Colors.red;
     case "Second Striker":
-      return const Color.fromARGB(255, 255, 17, 0);
+      return Colors.red;
     case "Striker":
-      return const Color.fromARGB(255, 255, 17, 0);
+      return Colors.red;
     default:
       return null;
   }

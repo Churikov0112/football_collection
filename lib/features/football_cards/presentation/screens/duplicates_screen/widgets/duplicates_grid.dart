@@ -21,7 +21,7 @@ class _DuplicatesGrid extends StatelessWidget {
     return CardsGrid(
       cards: cards,
       badge: CardBadge.showCount,
-      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 16, right: 16),
+      padding: EdgeInsets.only(top: mq.padding.top + 160, left: 16, right: 16, bottom: mq.padding.bottom + 16),
     );
   }
 }

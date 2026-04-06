@@ -1,5 +1,6 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/cards/team_emblem_card.dart';
@@ -62,50 +63,31 @@ class FootballTeamEmblemCardWidget extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-                child: Stack(
-                  children: [
-                    CardImageWrapper(
-                      card: emblem,
-                      badge: badge,
-                      onSell: onSell,
-                      onSellAll: onSellAll,
-                      onShare: onShare,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                    ),
-                    // Positioned(
-                    //   top: 5,
-                    //   left: 5,
-                    //   child: _Flag(legend: legend, nationalTeamVisibility: nationalTeamVisibility),
-                    // ),
-                    // Positioned(
-                    //   bottom: 5,
-                    //   right: 5,
-                    //   child: _PriceAndPosition(legend: legend, marketValueVisibility: marketValueVisibility),
-                    // ),
-                  ],
+              Expanded(
+                child: CardImageWrapper(
+                  card: emblem,
+                  badge: badge,
+                  onSell: onSell,
+                  onSellAll: onSellAll,
+                  onShare: onShare,
+                  imagePadding: EdgeInsets.all(8),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
                 ),
               ),
-              // // SizedBox(height: 4),
-              // Spacer(),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 4),
-              //   child: AutoSizeText(
-              //     nameVisibility == .quest
-              //         ? "?"
-              //         : nameVisibility == .show
-              //         ? legend.name.toUpperCase()
-              //         : "",
-              //     maxLines: 1,
-              //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-              //     minFontSize: 12,
-              //     textAlign: TextAlign.center,
-              //   ),
-              // ),
-              // Spacer(flex: 2),
 
-              // // SizedBox(height: 4),
+              // SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AutoSizeText(
+                  emblem.name.toUpperCase(),
+                  maxLines: 1,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  minFontSize: 12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+
+              SizedBox(height: height * 0.05),
             ],
           ),
         ),

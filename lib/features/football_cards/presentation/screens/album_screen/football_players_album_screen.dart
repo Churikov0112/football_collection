@@ -13,6 +13,10 @@ import '../../../../../ui_kit/widgets/background_image/background_image_color_fi
 import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../data/football_players_repository.dart';
+import '../../../domain/cards/coach_card.dart';
+import '../../../domain/cards/legend_card.dart';
+import '../../../domain/cards/player_card.dart';
+import '../../../domain/cards/team_emblem_card.dart';
 import '../../widgets/cards_grid/cards_grid.dart';
 import '../packs_screen/football_players_packs_screen.dart';
 

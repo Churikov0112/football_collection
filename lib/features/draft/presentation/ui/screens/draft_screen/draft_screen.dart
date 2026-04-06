@@ -41,6 +41,8 @@ class DraftScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
     return DraftScreenPresenter(
       child: Builder(
         builder: (context) {
@@ -65,7 +67,7 @@ class DraftScreen extends StatelessWidget {
                         const _ChooseCaptainMessage()
                       else if (page == 3)
                         const _SquadRating(),
-                      const SizedBox(height: 16),
+                      SizedBox(height: mq.padding.bottom + 16),
 
                       // Padding(
                       //   padding: const EdgeInsets.all(16),

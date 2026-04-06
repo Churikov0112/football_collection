@@ -5,6 +5,16 @@ class _FootballCardsList extends StatelessWidget {
 
   final FootballNationalTeamModel country;
 
+  int _getPriority(CardModel card) {
+    return switch (card) {
+      FootballTeamEmblemCardModel() => 0,
+      FootballCoachCardModel() => 1,
+      FootballPlayerCardModel() => 2,
+      FootballLegendCardModel() => 3,
+      _ => 4,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final repo = getIt.get<CommonFootballRepository>();
@@ -14,17 +24,22 @@ class _FootballCardsList extends StatelessWidget {
       builder: (context, allFootballCardsState) {
         final cards = allFootballCardsState.data ?? [];
 
-        // эмблема выводится выводится первой, тренер вторым, легенды в конце
-        cards.sort((a, b) {
-          if (a.cardType == .emblem) return -1;
-          if (b.cardType == .emblem) return 1;
-          if (a.cardType == .coach) return -1;
-          if (b.cardType == .coach) return 1;
-          return 0;
-        });
+        // эмблема выводится выводится первой, тренер вторым, потом игроки в следующем порядке
+        // вратари
+        // защитники
+        // полузащитники
+        // нападающие
+        // в конце выводятся легенды
+
+        final sortedCards = List<CardModel>.from(cards)
+          ..sort((a, b) {
+            final priorityA = _getPriority(a);
+            final priorityB = _getPriority(b);
+            return priorityA.compareTo(priorityB);
+          });
 
         return Expanded(
-          child: CardsGrid.album(cards: cards, country: country),
+          child: CardsGrid.album(cards: sortedCards, country: country),
         );
       },
     );

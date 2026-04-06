@@ -20,7 +20,7 @@ class _PlayerTopLeft extends StatelessWidget {
               borderRadius: hasNumber ? null : BorderRadius.only(bottomRight: .circular(8)),
               image: DecorationImage(image: AssetImage('assets/raster/team_flags/${player.teamId}.jpg')),
             ),
-            child: SizedBox.square(dimension: 20),
+            child: SizedBox.square(dimension: _kTopLeftElementSize),
           )
         else if (nationalTeamVisibility == .quest)
           DecoratedBox(
@@ -29,7 +29,7 @@ class _PlayerTopLeft extends StatelessWidget {
               color: Colors.lightGreenAccent,
             ),
             child: SizedBox.square(
-              dimension: 20,
+              dimension: _kTopLeftElementSize,
               child: Center(
                 child: Text(
                   "?",
@@ -48,10 +48,10 @@ class _PlayerTopLeft extends StatelessWidget {
               borderRadius: BorderRadius.only(bottomRight: .circular(8)),
             ),
             child: SizedBox.square(
-              dimension: 20,
+              dimension: _kTopLeftElementSize,
               child: Center(
                 child: Text(
-                  "${player.teamShirtNumber}",
+                  "#${player.teamShirtNumber}",
                   style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
                 ),
               ),

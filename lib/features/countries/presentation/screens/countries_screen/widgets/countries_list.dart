@@ -25,7 +25,7 @@ class _CountriesList extends StatelessWidget {
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
-            padding: EdgeInsets.only(top: mq.padding.top + 85, left: 20, right: 20, bottom: mq.padding.bottom + 100),
+            padding: EdgeInsets.only(top: mq.padding.top + 85, left: 16, right: 16, bottom: mq.padding.bottom + 100),
 
             itemCount: countries.length,
             itemBuilder: (context, index) {

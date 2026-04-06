@@ -15,9 +15,9 @@ class _PositionTopLeft extends StatelessWidget {
     }
 
     return DecoratedBox(
-      decoration: BoxDecoration(color: Colors.lightGreenAccent),
+      decoration: BoxDecoration(color: color),
       child: SizedBox.square(
-        dimension: 20,
+        dimension: _kTopLeftElementSize,
         child: Center(
           child: Text(
             short,

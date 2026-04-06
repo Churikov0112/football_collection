@@ -49,19 +49,16 @@ class FootballCountriesScreen extends StatelessWidget {
                   builder: (value) => TransparentAppbar(title: value, backgroundColor: confederation.color),
                 ),
                 Positioned(
-                  bottom: mq.padding.bottom,
-                  right: 0,
-                  left: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: OpenPacksScreenButton(
-                      onPressed: () {
-                        context.push(
-                          RoutePaths.footballPlayersPacks,
-                          extra: FootballPlayersPacksScreenArgs(confederation: confederation),
-                        );
-                      },
-                    ),
+                  bottom: mq.padding.bottom + 16,
+                  right: 24,
+                  left: 24,
+                  child: OpenPacksScreenButton(
+                    onPressed: () {
+                      context.push(
+                        RoutePaths.footballPlayersPacks,
+                        extra: FootballPlayersPacksScreenArgs(confederation: confederation),
+                      );
+                    },
                   ),
                 ),
               ],

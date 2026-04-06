@@ -161,14 +161,16 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   @override
   Widget build(BuildContext context) {
     return !isInitialized
-        ? Center(child: const CircularProgressIndicator())
+        ? Center(child: const CircularProgressIndicator(color: Colors.blueAccent))
         : BlocBuilder<LanguageBloc, LanguageState>(
             bloc: getIt.get(),
             builder: (context, languageState) {
               return ToastificationWrapper(
                 config: toastificationConfig,
                 child: MaterialApp.router(
-                  theme: ThemeData.dark().copyWith(colorScheme: ColorScheme.dark(primary: Colors.deepOrange)),
+                  theme: ThemeData.dark().copyWith(
+                    colorScheme: ColorScheme.dark(primary: Colors.blueAccent, secondary: Colors.lightGreenAccent),
+                  ),
                   routerConfig: _router.router,
                   title: 'Football Collection 2025',
                   color: Colors.black,
@@ -187,9 +189,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                             behavior: DisableBlueGlowBehavior(),
                             child: AnnotatedRegion(
                               value: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                              child: MediaQuery.withNoTextScaling(
-                                child: SafeArea(top: false, bottom: true, child: child),
-                              ),
+                              child: MediaQuery.withNoTextScaling(child: child),
                             ),
                           );
                   },

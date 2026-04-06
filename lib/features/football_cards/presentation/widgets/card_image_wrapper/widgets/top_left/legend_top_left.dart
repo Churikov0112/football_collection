@@ -17,7 +17,7 @@ class _LegendTopLeft extends StatelessWidget {
             borderRadius: hasNumber ? null : BorderRadius.only(bottomRight: .circular(8)),
             image: DecorationImage(image: AssetImage('assets/raster/team_flags/${legend.teamId}.jpg')),
           ),
-          child: SizedBox.square(dimension: 20),
+          child: SizedBox.square(dimension: _kTopLeftElementSize),
         ),
 
         if (legend.teamShirtNumber != null && legend.teamShirtNumber != "-")
@@ -27,7 +27,7 @@ class _LegendTopLeft extends StatelessWidget {
               borderRadius: BorderRadius.only(bottomRight: .circular(8)),
             ),
             child: SizedBox.square(
-              dimension: 20,
+              dimension: _kTopLeftElementSize,
               child: Center(
                 child: Text(
                   "#${legend.teamShirtNumber}",

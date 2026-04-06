@@ -1,6 +1,7 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/draft/domain/models/ratings.dart';
@@ -50,7 +51,7 @@ class SmallDraftFootballPlayerCardWidget extends StatelessWidget {
         final rating =
             ratings[player.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(player).rating;
         final allCountries = teamsSnapshot.data ?? [];
-        final playerCountryName = allCountries.firstWhere((c) => c.id == player.teamId).name;
+        final playerCountryName = allCountries.firstWhereOrNull((c) => c.id == player.teamId)?.name;
         final emojiFlag = emojiFlagByCountryName(playerCountryName);
 
         return ClipRRect(
