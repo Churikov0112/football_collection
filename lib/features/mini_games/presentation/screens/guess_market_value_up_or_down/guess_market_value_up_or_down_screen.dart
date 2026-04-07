@@ -209,8 +209,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Spacer(),
-                                const Spacer(),
+                                SizedBox(height: mq.padding.top + 64),
                                 StreamBuilder<String?>(
                                   stream: presenter.selectedOptionStream$,
                                   builder: (context, selectedOptionSnapshot) {
@@ -222,6 +221,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                             badge: .none,
                                             marketValueVisibility: .none,
                                           ),
+                                          const SizedBox(height: 12),
                                           Translator(
                                             termin: AppGlossary.age,
                                             builder: (ageValue) => Translator(
@@ -232,39 +232,41 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                     packHeight -
                                                     mq.padding.top -
                                                     mq.padding.bottom -
-                                                    240,
-                                                width: mq.size.width * 0.8,
-                                                child: LineChart(
-                                                  LineChartData(
-                                                    backgroundColor: Colors.black26,
-                                                    borderData: FlBorderData(
-                                                      border: Border.all(color: Colors.blueAccent, width: 4),
-                                                    ),
-                                                    lineBarsData: [
-                                                      LineChartBarData(
-                                                        spots: whiteLineSpots,
-                                                        color: Colors.white,
-                                                        barWidth: 4,
-                                                        dotData: FlDotData(show: false),
+                                                    265,
+                                                width: mq.size.width - 32,
+                                                child: DecoratedBox(
+                                                  decoration: const BoxDecoration(color: Colors.black54),
+                                                  child: LineChart(
+                                                    LineChartData(
+                                                      borderData: FlBorderData(
+                                                        border: Border.all(color: Colors.blueAccent, width: 4),
                                                       ),
-                                                      if (selectedOptionSnapshot.data != null) ...[
-                                                        ...getColoredSegments(marketValueHistory, randomHistoryIndex),
+                                                      lineBarsData: [
+                                                        LineChartBarData(
+                                                          spots: whiteLineSpots,
+                                                          color: Colors.white,
+                                                          barWidth: 4,
+                                                          dotData: FlDotData(show: false),
+                                                        ),
+                                                        if (selectedOptionSnapshot.data != null) ...[
+                                                          ...getColoredSegments(marketValueHistory, randomHistoryIndex),
+                                                        ],
                                                       ],
-                                                    ],
-                                                    titlesData: FlTitlesData(
-                                                      leftTitles: AxisTitles(
-                                                        axisNameWidget: Text(marketValueValue),
-                                                        sideTitles: SideTitles(showTitles: false),
+                                                      titlesData: FlTitlesData(
+                                                        leftTitles: AxisTitles(
+                                                          axisNameWidget: Text(marketValueValue),
+                                                          sideTitles: SideTitles(showTitles: false),
+                                                        ),
+                                                        topTitles: AxisTitles(
+                                                          axisNameWidget: Text(ageValue),
+                                                          sideTitles: SideTitles(showTitles: false, reservedSize: 22),
+                                                        ),
                                                       ),
-                                                      topTitles: AxisTitles(
-                                                        axisNameWidget: Text(ageValue),
-                                                        sideTitles: SideTitles(showTitles: false, reservedSize: 22),
-                                                      ),
+                                                      // Добавляем минимальные и максимальные значения для осей
+                                                      // minX: 0,
+                                                      // maxX: 50, // Максимальный возраст футболиста
+                                                      // minY: 0,
                                                     ),
-                                                    // Добавляем минимальные и максимальные значения для осей
-                                                    // minX: 0,
-                                                    // maxX: 50, // Максимальный возраст футболиста
-                                                    // minY: 0,
                                                   ),
                                                 ),
                                               ),
@@ -275,7 +277,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                     );
                                   },
                                 ),
-                                const SizedBox(height: 4),
+                                const SizedBox(height: 12),
                                 Translator(
                                   termin: AppGlossary.up,
                                   builder: (upValue) => Translator(
