@@ -3,13 +3,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
-import 'package:football_collection/services/localization/translator.dart';
 
 import '../../../domain/cards/coach_card.dart';
 import '../card_image_wrapper/card_image_wrapper.dart';
-
-part 'parts/flag.dart';
-part 'parts/rounded_white_container.dart';
 
 class FootballCoachCardWidget extends StatelessWidget {
   const FootballCoachCardWidget({
@@ -84,7 +80,6 @@ class FootballCoachCardWidget extends StatelessWidget {
                       onSellAll: onSellAll,
                       onShare: onShare,
                       nationalTeamVisibility: nationalTeamVisibility,
-
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
                     ),
 
