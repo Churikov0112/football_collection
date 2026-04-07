@@ -23,6 +23,7 @@ class FootballPlayerCardModel extends CardModel {
   final String? foot;
   final int? maxMarketValue;
   final int? marketValue;
+  final List<String>? citizenship;
 
   const FootballPlayerCardModel({
     required super.cardId,
@@ -42,6 +43,7 @@ class FootballPlayerCardModel extends CardModel {
     required this.marketValue,
     required this.maxMarketValue,
     required this.outfitter,
+    required this.citizenship,
     required this.isRetired,
   });
 
@@ -64,6 +66,9 @@ class FootballPlayerCardModel extends CardModel {
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
+      citizenship: (json['citizenship'] is List)
+          ? [for (final citizenship in json['citizenship']) citizenship.toString()]
+          : null,
     );
   }
 

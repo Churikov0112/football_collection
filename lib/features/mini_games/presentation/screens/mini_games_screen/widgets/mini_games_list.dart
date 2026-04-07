@@ -115,7 +115,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessPlayerSponsor,
-            color: const Color.fromARGB(255, 255, 68, 211).darken(0.3),
+            color: const Color.fromARGB(255, 255, 68, 211),
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -128,7 +128,21 @@ class _MiniGamesList extends StatelessWidget {
               context.push(RoutePaths.footballMiniGameGuessPlayerSponsor);
             },
           ),
-
+          _MiniGameTile(
+            title: AppGlossary.guessSecondCitizenship,
+            color: const Color.fromARGB(255, 112, 0, 0),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_second_citizenship"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessSecondCitizenship);
+            },
+          ),
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",

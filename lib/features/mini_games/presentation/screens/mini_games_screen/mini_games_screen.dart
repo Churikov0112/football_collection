@@ -48,8 +48,14 @@ class MiniGamesScreen extends StatelessWidget {
                   child: StreamBuilder<bool>(
                     stream: presenter.isBannerAlreadyCreatedStream$,
                     builder: (context, isBannerAlreadyCreatedSnapshot) {
-                      if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox.shrink();
-                      return AdWidget(bannerAd: presenter.banner);
+                      if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                      return SizedBox(
+                        height: 100,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [AdWidget(bannerAd: presenter.banner)],
+                        ),
+                      );
                     },
                   ),
                 ),

@@ -7,11 +7,13 @@ final class RandomFootballPlayersEventGet extends RandomFootballPlayersEvent {
   final int? minPrimeTransferValue;
   final bool unique;
   final bool? withSponsor;
+  final bool? withSecondCitizenship;
 
   RandomFootballPlayersEventGet({
     required this.count,
     this.minPrimeTransferValue,
     this.unique = true,
     this.withSponsor,
+    this.withSecondCitizenship,
   });
 }
