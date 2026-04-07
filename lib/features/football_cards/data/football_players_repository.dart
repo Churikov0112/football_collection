@@ -281,14 +281,16 @@ class CommonFootballRepository {
     return allCards;
   }
 
-  // Фильтрация карт по различным критериям
+  /// Возвращает карты с учетом фильтров
+  ///
+  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
     FootballNationalTeamModel? team,
+    bool? topCountries,
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
-    bool? topCountries,
     bool? withSponsor,
     bool? withSecondCitizenship,
   }) async {
@@ -397,12 +399,16 @@ class CommonFootballRepository {
     return result;
   }
 
-  // Future<FootballPlayerCardModel?> _randomPlayerGet({
+  // Future<List<FootballPlayerCardModel>> randomPlayersGet({
   //   FootballConfederations? confederation,
   //   FootballNationalTeamModel? team,
   //   bool? topCountries,
   //   int? minPrimeTransferValue,
   //   int? minCurrentTransferValue,
+  //   bool unique = false,
+  //   bool withSponsor = false,
+  //   bool withSecondCitizenship = false,
+  //   int count = 5,
   // }) async {
   //   try {
   //     final playersSublist = _allPlayersCache.where((player) {
