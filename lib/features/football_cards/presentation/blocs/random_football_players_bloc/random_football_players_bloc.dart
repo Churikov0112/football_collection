@@ -25,6 +25,7 @@ class RandomFootballPlayersBloc extends Bloc<RandomFootballPlayersEvent, RandomF
         cardTypes: {CardType.player},
         count: event.count,
         minPrimeTransferValue: event.minPrimeTransferValue,
+        withSponsor: event.withSponsor,
         unique: event.unique,
       );
       emit(RandomFootballPlayersStateLoadSucceeded(players.whereType<FootballPlayerCardModel>().toList()));

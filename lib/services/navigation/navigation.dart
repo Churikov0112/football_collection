@@ -21,6 +21,7 @@ import '../../features/football_cards/presentation/screens/packs_screen/football
 import '../../features/football_confederations/domain/models/football_confederation.dart';
 import '../../features/home/home_screen/home_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_player_sponsor_screen/guess_player_sponsor_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_who_is_more_expensive_screen/guess_who_is_more_expensive_screen.dart';
 import '../../features/qr/presentation/screens/get_card_by_qr_screen/get_card_by_qr_screen.dart';
 
@@ -45,6 +46,7 @@ class RoutePaths {
   static const footballMiniGameGuessNationalTeam = '/footballMiniGameGuessNationalTeam';
   static const footballMiniGameGuessPlayer = '/footballMiniGameGuessPlayer';
   static const footballMiniGameMarketValueUpOrDown = '/footballMiniGameMarketValueUpOrDown';
+  static const footballMiniGameGuessPlayerSponsor = '/footballMiniGameGuessPlayerSponsor';
 
   static const draft = '/draft';
   static const draftTournamentStage = '/draftTournamentStage';
@@ -134,6 +136,10 @@ class FootballCollectionRouter {
           builder: (context, state) => GuessNationalTeamScreen(),
         ),
         GoRoute(path: RoutePaths.footballMiniGameGuessPlayer, builder: (context, state) => GuessPlayerScreen()),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerSponsor,
+          builder: (context, state) => GuessPlayerSponsorScreen(),
+        ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,
           builder: (context, state) => GuessMarketValueUpOrDownScreen(),

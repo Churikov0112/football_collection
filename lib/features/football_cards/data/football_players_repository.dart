@@ -289,6 +289,7 @@ class CommonFootballRepository {
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
     bool? topCountries,
+    bool? withSponsor,
   }) async {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
@@ -316,6 +317,9 @@ class CommonFootballRepository {
 
       // Фильтрация для игроков (по трансферной стоимости)
       if (card is FootballPlayerCardModel) {
+        if (withSponsor == true && card.outfitter == null) {
+          return false;
+        }
         if (minPrimeTransferValue != null && card.maxMarketValue == null) {
           return false;
         }
@@ -343,6 +347,7 @@ class CommonFootballRepository {
     int? minPrimeTransferValue,
     int? minCurrentTransferValue,
     bool? topCountries,
+    bool? withSponsor,
     bool unique = false,
   }) async {
     final result = <CardModel>[];
@@ -355,6 +360,7 @@ class CommonFootballRepository {
         minPrimeTransferValue: minPrimeTransferValue,
         minCurrentTransferValue: minCurrentTransferValue,
         topCountries: topCountries,
+        withSponsor: withSponsor,
         cardTypes: cardTypes,
       );
 

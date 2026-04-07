@@ -8,13 +8,14 @@ class _MiniGamesList extends StatelessWidget {
     final mq = MediaQuery.of(context);
     return Expanded(
       child: GridView(
+        physics: BouncingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
           childAspectRatio: 1 / 1,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 120),
+        padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 200),
         children: [
           _MiniGameTile(
             title: AppGlossary.draft,
@@ -109,6 +110,22 @@ class _MiniGamesList extends StatelessWidget {
                 LogService.error(e.toString(), e);
               }
               context.push(RoutePaths.footballMiniGameMarketValueUpOrDown);
+            },
+          ),
+
+          _MiniGameTile(
+            title: AppGlossary.guessPlayerSponsor,
+            color: const Color.fromARGB(255, 255, 68, 211).darken(0.3),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_sponsor"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerSponsor);
             },
           ),
 
