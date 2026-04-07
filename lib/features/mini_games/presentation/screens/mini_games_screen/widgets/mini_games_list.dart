@@ -17,6 +17,25 @@ class _MiniGamesList extends StatelessWidget {
         padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 120),
         children: [
           _MiniGameTile(
+            title: AppGlossary.draft,
+            color: Colors.pinkAccent,
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(name: "mini_game_opened", parameters: {"mini_game": "draft"});
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+
+              final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
+              if (savedCardsIds.length < 100) {
+                ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
+                return;
+              }
+
+              BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
+            },
+          ),
+          _MiniGameTile(
             title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {
@@ -76,6 +95,23 @@ class _MiniGamesList extends StatelessWidget {
               context.push(RoutePaths.footballMiniGameGuessPlayer);
             },
           ),
+
+          _MiniGameTile(
+            title: AppGlossary.marketValueUpOrDown,
+            color: Colors.blueAccent.darken(0.3),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "market_value_up_or_down"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameMarketValueUpOrDown);
+            },
+          ),
+
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",

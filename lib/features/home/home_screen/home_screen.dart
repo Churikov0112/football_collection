@@ -26,7 +26,7 @@ import '../../menu/presentation/screens/drawer/menu_drawer.dart';
 
 part 'home_screen_presenter.dart';
 part 'widgets/collection_tile.dart';
-part 'widgets/draft_tile.dart';
+part 'widgets/mini_games_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 _CollectionTile(allCards: allFootballCardsState.data ?? [], showOriginal: true),
-                                const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: _DraftTile()),
+                                const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: _MiniGamesTile()),
                               ],
                             ),
                             Translator(

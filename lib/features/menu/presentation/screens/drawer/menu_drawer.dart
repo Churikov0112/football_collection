@@ -17,16 +17,16 @@ class MenuDrawer extends StatelessWidget {
         child: ListView(
           children: [
             const SizedBox(height: 50),
-            ListTile(
-              onTap: () {
-                context.push(RoutePaths.miniGames);
-              },
-              leading: Icon(Icons.gamepad, color: Colors.white),
-              title: Translator(
-                termin: AppGlossary.miniGames,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
-              ),
-            ),
+            // ListTile(
+            //   onTap: () {
+            //     context.push(RoutePaths.miniGames);
+            //   },
+            //   leading: Icon(Icons.gamepad, color: Colors.white),
+            //   title: Translator(
+            //     termin: AppGlossary.miniGames,
+            //     builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+            //   ),
+            // ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.leaderboard);

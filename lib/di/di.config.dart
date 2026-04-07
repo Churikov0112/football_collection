@@ -24,6 +24,7 @@ import '../features/draft/presentation/blocs/draft_tournament_bloc/draft_tournam
     as _i1008;
 import '../features/football_cards/data/football_players_repository.dart'
     as _i1065;
+import '../features/football_cards/data/market_values_repository.dart' as _i991;
 import '../features/football_cards/presentation/blocs/football_players_packs_bloc/football_players_packs_bloc.dart'
     as _i997;
 import '../features/leaderboard/presentation/blocs/leaderboard_bloc/leaderboard_bloc.dart'
@@ -50,6 +51,9 @@ _i174.GetIt $initGetIt(
   );
   gh.singleton<_i1065.CommonFootballRepository>(
     () => _i1065.CommonFootballRepository(),
+  );
+  gh.singleton<_i991.MarketValuesRepository>(
+    () => _i991.MarketValuesRepository(),
   );
   gh.singleton<_i149.LeaderboardCountryBloc>(
     () => _i149.LeaderboardCountryBloc(),

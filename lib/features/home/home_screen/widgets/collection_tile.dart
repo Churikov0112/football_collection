@@ -55,7 +55,7 @@ class _CollectionTile extends StatelessWidget {
                             value,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 32,
                               fontStyle: FontStyle.italic,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

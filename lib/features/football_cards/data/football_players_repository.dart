@@ -192,7 +192,10 @@ class CommonFootballRepository {
     return [..._allTeamsCache].where((team) => team.confederation == confederation && team.id == teamId).toList();
   }
 
-  Future<List<FootballPlayerCardModel>> playersGet([String? teamId]) async {
+  Future<List<FootballPlayerCardModel>> playersGet({String? id, String? teamId}) async {
+    if (id != null) {
+      return [..._allPlayersCache].where((player) => player.playerId == id).toList();
+    }
     if (teamId == null) {
       return [..._allPlayersCache];
     }
