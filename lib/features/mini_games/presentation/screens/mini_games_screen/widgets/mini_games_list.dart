@@ -115,7 +115,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessPlayerSponsor,
-            color: const Color.fromARGB(255, 255, 68, 211),
+            color: const Color.fromARGB(255, 255, 68, 211).darken(0.3),
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(

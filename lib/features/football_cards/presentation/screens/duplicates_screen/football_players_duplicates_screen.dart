@@ -58,15 +58,30 @@ class CardsDuplicatesScreen extends StatelessWidget {
                             final allCards = allFootballCardsState.data ?? const <CardModel>[];
                             final savedIds = savedCardsState.savedCardsIds ?? const <String>[];
 
-                            final cards = allCards.where((c) => savedIds.contains(c.cardId)).toList();
-                            final filteredCards = cards
+                            final duplicates = <CardModel>[];
+
+                            for (final card in allCards) {
+                              int count = 0;
+
+                              for (final savedId in savedIds) {
+                                if (card.cardId == savedId) {
+                                  count++;
+                                }
+                              }
+
+                              if (count > 1) {
+                                duplicates.add(card);
+                              }
+                            }
+
+                            final filteredDuplicates = duplicates
                                 .where((c) => c.name.toLowerCase().contains(searchState.text.toLowerCase()))
                                 .toList();
 
                             return ValueListenableBuilder<TextEditingValue>(
                               valueListenable: presenter.searchController,
                               builder: (context, value, _) {
-                                return _DuplicatesGrid(cards: filteredCards);
+                                return _DuplicatesGrid(cards: filteredDuplicates);
                               },
                             );
                           },
