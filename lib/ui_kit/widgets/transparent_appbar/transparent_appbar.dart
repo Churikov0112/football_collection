@@ -3,6 +3,9 @@ import 'package:football_collection/features/mini_games/presentation/widgets/bal
 import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
+import 'watch_ad_screen/watch_ad_screen.dart';
+
 class TransparentAppbar extends StatelessWidget {
   const TransparentAppbar({
     required this.title,
@@ -49,7 +52,15 @@ class TransparentAppbar extends StatelessWidget {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: foregroundColor ?? Colors.white),
               ),
             ),
-            if (showBalance) ...[const SizedBox(width: 16), BalanceWidget(textColor: foregroundColor ?? Colors.white)],
+            if (showBalance) ...[
+              const SizedBox(width: 16),
+              GestureDetector(
+                onTap: () {
+                  BottomSheetController.showBottomSheet(context, (context) => const WatchAdScreen());
+                },
+                child: BalanceWidget(textColor: foregroundColor ?? Colors.white),
+              ),
+            ],
           ],
         ),
       ),

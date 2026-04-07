@@ -42,7 +42,7 @@ class _MiniGamesTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 32,
                       color: Colors.white,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
