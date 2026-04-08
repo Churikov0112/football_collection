@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -27,94 +28,10 @@ part 'widgets/guess_options.dart';
 class GuessMarketValueUpOrDownScreen extends StatelessWidget {
   const GuessMarketValueUpOrDownScreen({super.key});
 
-  List<LineChartBarData> getColoredSegments(List<MarketValueHistoryModel> history, int startIndex) {
-    final segments = <LineChartBarData>[];
-
-    // Защита от выхода за пределы массива
-    if (history.isEmpty || startIndex <= 0 || startIndex >= history.length) {
-      return segments;
-    }
-
-    // Получаем исходное значение с проверкой на null
-    final startValue = history[startIndex - 1].marketValue ?? 0;
-    final startAge = history[startIndex - 1].age ?? 0;
-
-    if (startValue == 0 && startAge == 0) {
-      return segments; // Некорректные данные
-    }
-
-    final startSpot = FlSpot(startAge.toDouble(), startValue.toDouble());
-
-    // Точки для текущего сегмента
-    final spots = <FlSpot>[startSpot];
-    Color? currentColor;
-
-    for (int i = startIndex; i < history.length; i++) {
-      // Защита от null и некорректных значений
-      final age = history[i].age ?? 0;
-      final value = history[i].marketValue ?? 0;
-
-      // Пропускаем точки с нулевыми или некорректными значениями
-      if (age == 0 && value == 0 && i > startIndex) {
-        continue;
-      }
-
-      final currentSpot = FlSpot(age.toDouble(), value.toDouble());
-
-      // Определяем цвет для текущей точки
-      Color segmentColor;
-      if (i == startIndex) {
-        // Это первая точка после исходной
-        if (value > startValue) {
-          segmentColor = Colors.green;
-        } else if (value < startValue) {
-          segmentColor = Colors.red;
-        } else {
-          segmentColor = Colors.grey; // Только для первой точки, если равна
-        }
-      } else {
-        // Для остальных точек: сравниваем с исходной
-        if (value > startValue) {
-          segmentColor = Colors.green;
-        } else {
-          segmentColor = Colors.red; // Значения равны исходной или ниже - красный
-        }
-      }
-
-      // Если цвет меняется, сохраняем предыдущий сегмент
-      if (currentColor != null && currentColor != segmentColor) {
-        if (spots.length >= 2) {
-          segments.add(
-            LineChartBarData(
-              spots: List.from(spots),
-              color: currentColor,
-              barWidth: 4,
-              dotData: FlDotData(show: false),
-            ),
-          );
-        }
-        // Начинаем новый сегмент с последней точки
-        final lastSpot = spots.last;
-        spots.clear();
-        spots.add(lastSpot);
-      }
-
-      currentColor = segmentColor;
-      spots.add(currentSpot);
-    }
-
-    // Добавляем последний сегмент
-    if (spots.length >= 2 && currentColor != null) {
-      segments.add(LineChartBarData(spots: spots, color: currentColor, barWidth: 4, dotData: FlDotData(show: false)));
-    }
-
-    return segments;
-  }
-
-  // Вспомогательный метод для получения валидных точек
-  List<FlSpot> getValidSpots(List<MarketValueHistoryModel> history, int maxIndex) {
+  // Вспомогательный метод для получения ВСЕХ валидных точек
+  List<FlSpot> getAllValidSpots(List<MarketValueHistoryModel> history) {
     final spots = <FlSpot>[];
-    for (int i = 0; i < maxIndex; i++) {
+    for (int i = 0; i < history.length; i++) {
       final age = history[i].age ?? 0;
       final value = history[i].marketValue ?? 0;
 
@@ -124,6 +41,24 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
       }
     }
     return spots;
+  }
+
+  // Вспомогательный метод для получения ВСЕХ валидных сегментов
+  List<LineChartBarData> getColoredSegmentsForRange(List<FlSpot> spots, int target) {
+    final segments = <LineChartBarData>[];
+    for (int i = 0; i < spots.length - 1; i++) {
+      final value2 = spots[i + 1].y;
+
+      final color = value2 < target
+          ? Colors.red
+          : value2 > target
+          ? Colors.green
+          : Colors.grey;
+      segments.add(
+        LineChartBarData(barWidth: 4, dotData: FlDotData(show: false), color: color, spots: [spots[i], spots[i + 1]]),
+      );
+    }
+    return segments;
   }
 
   @override
@@ -150,9 +85,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
 
                       final retryButton = Center(
                         child: GlassButton(
-                          onPressed: () {
-                            presenter.loadRandomValue();
-                          },
+                          onPressed: presenter.loadRandomValue,
                           text: AppGlossary.tryAgain.translate(),
                         ),
                       );
@@ -163,46 +96,41 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
 
                       final marketValue = randomMarketValueState.value!;
                       final playerId = marketValue.id;
-
                       final marketValueHistory = marketValue.marketValueHistory;
+
                       if (marketValueHistory == null || marketValueHistory.length < 2) {
                         return retryButton;
                       }
-
-                      // Выбираем только такие пары, где значения НЕ равны
-                      final validIndices = <int>[];
-                      for (int i = 0; i < marketValueHistory.length - 1; i++) {
-                        final currentValue = marketValueHistory[i].marketValue;
-                        final nextValue = marketValueHistory[i + 1].marketValue;
-                        if (currentValue != nextValue && currentValue != 0 && nextValue != 0 && i > 1) {
-                          validIndices.add(i);
-                        }
-                      }
-
-                      // Если нет валидных индексов, показываем сообщение
-                      if (validIndices.isEmpty) {
-                        return retryButton;
-                      }
-
-                      final random = presenter.random;
-                      final randomHistoryIndex = validIndices[random.nextInt(validIndices.length)];
-                      final radnomMarketValue = marketValueHistory[randomHistoryIndex];
-                      final nextMarketValue = marketValueHistory[randomHistoryIndex + 1];
 
                       return FutureBuilder(
                         future: getIt.get<CommonFootballRepository>().playersGet(id: playerId),
                         builder: (context, playerSnapshot) {
                           final player = playerSnapshot.data?.firstOrNull;
-                          if (player == null) {
+                          if (playerSnapshot.connectionState == ConnectionState.waiting) {
                             return const Center(child: CircularProgressIndicator());
                           }
-
-                          // Получаем валидные точки для белой линии
-                          final whiteLineSpots = getValidSpots(marketValueHistory, randomHistoryIndex);
-
-                          if (whiteLineSpots.length < 2) {
+                          if (player == null) {
                             return retryButton;
                           }
+
+                          // НОВАЯ ЛОГИКА: Находим первую запись за год, который был 2 года назад
+                          final currentYear = DateTime.now().year;
+                          final targetYear = currentYear - 2;
+
+                          final lastVisibleRecord = marketValueHistory.firstWhereOrNull(
+                            (e) => DateTime.parse(e.date.toString()).year == targetYear,
+                          );
+
+                          if (lastVisibleRecord?.marketValue == null) {
+                            return retryButton;
+                          }
+
+                          final lastVisibleRecordIndex = marketValueHistory.indexOf(lastVisibleRecord!);
+
+                          final startSpots = getAllValidSpots(
+                            marketValueHistory.sublist(0, lastVisibleRecordIndex + 1),
+                          );
+                          final endSpots = getAllValidSpots(marketValueHistory.sublist(lastVisibleRecordIndex));
 
                           return DecoratedBox(
                             decoration: BoxDecoration(),
@@ -236,36 +164,53 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                 width: mq.size.width - 32,
                                                 child: DecoratedBox(
                                                   decoration: const BoxDecoration(color: Colors.black54),
-                                                  child: LineChart(
-                                                    LineChartData(
-                                                      borderData: FlBorderData(
-                                                        border: Border.all(color: Colors.blueAccent, width: 4),
-                                                      ),
-                                                      lineBarsData: [
-                                                        LineChartBarData(
-                                                          spots: whiteLineSpots,
-                                                          color: Colors.white,
-                                                          barWidth: 4,
-                                                          dotData: FlDotData(show: false),
+                                                  child: IgnorePointer(
+                                                    child: LineChart(
+                                                      duration: Duration(milliseconds: 300),
+                                                      LineChartData(
+                                                        borderData: FlBorderData(
+                                                          border: Border.all(color: Colors.blueAccent, width: 4),
                                                         ),
-                                                        if (selectedOptionSnapshot.data != null) ...[
-                                                          ...getColoredSegments(marketValueHistory, randomHistoryIndex),
+                                                        lineBarsData: [
+                                                          // Историческая часть (всегда серая)
+                                                          LineChartBarData(
+                                                            spots: startSpots,
+                                                            color: Colors.white,
+                                                            barWidth: 4,
+                                                            dotData: FlDotData(show: false),
+                                                          ),
+                                                          // Прогнозируемая часть
+                                                          if (selectedOptionSnapshot.data != null) ...[
+                                                            ...getColoredSegmentsForRange(
+                                                              endSpots,
+                                                              lastVisibleRecord.marketValue!,
+                                                            ),
+                                                          ],
                                                         ],
-                                                      ],
-                                                      titlesData: FlTitlesData(
-                                                        leftTitles: AxisTitles(
-                                                          axisNameWidget: Text(marketValueValue),
-                                                          sideTitles: SideTitles(showTitles: false),
-                                                        ),
-                                                        topTitles: AxisTitles(
-                                                          axisNameWidget: Text(ageValue),
-                                                          sideTitles: SideTitles(showTitles: false, reservedSize: 22),
+                                                        titlesData: FlTitlesData(
+                                                          leftTitles: AxisTitles(
+                                                            axisNameWidget: Text(marketValueValue),
+                                                            sideTitles: SideTitles(showTitles: false),
+                                                          ),
+                                                          topTitles: AxisTitles(
+                                                            axisNameWidget: Text(ageValue),
+                                                            sideTitles: SideTitles(showTitles: false, reservedSize: 22),
+                                                          ),
+
+                                                          rightTitles: AxisTitles(
+                                                            sideTitles: SideTitles(
+                                                              showTitles: true,
+                                                              reservedSize: 50,
+                                                              minIncluded: false,
+                                                              maxIncluded: false,
+                                                              // getTitles: (value) {
+                                                              //   // Показываем только целые года
+                                                              //   return value.toInt().toString();
+                                                              // },
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
-                                                      // Добавляем минимальные и максимальные значения для осей
-                                                      // minX: 0,
-                                                      // maxX: 50, // Максимальный возраст футболиста
-                                                      // minY: 0,
                                                     ),
                                                   ),
                                                 ),
@@ -284,15 +229,20 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                     termin: AppGlossary.down,
                                     builder: (downValue) => Translator(
                                       termin: AppGlossary.equal,
-                                      builder: (equalValue) => _GuessOptions(
-                                        options: [downValue, equalValue, upValue],
-                                        rightAnswer:
-                                            (radnomMarketValue.marketValue ?? 0) > (nextMarketValue.marketValue ?? 0)
+                                      builder: (equalValue) {
+                                        final lastValue = marketValueHistory.last.marketValue!;
+                                        final lastVisibleValue = lastVisibleRecord.marketValue!;
+                                        final rightAnswer = lastValue > lastVisibleValue
+                                            ? upValue
+                                            : lastValue < lastVisibleValue
                                             ? downValue
-                                            : (radnomMarketValue.marketValue == nextMarketValue.marketValue)
-                                            ? equalValue
-                                            : upValue,
-                                      ),
+                                            : equalValue;
+                                        return _GuessOptions(
+                                          options: [downValue, equalValue, upValue],
+                                          rightAnswer: rightAnswer,
+                                          // Передаем дополнительную информацию для отображения
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),

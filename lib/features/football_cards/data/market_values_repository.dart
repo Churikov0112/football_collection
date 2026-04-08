@@ -41,6 +41,8 @@ class MarketValuesRepository {
           if (primeValue >= minPrimeValue) {
             return MarketValueModel.fromJson(marketValueData);
           }
+        } else {
+          return MarketValueModel.fromJson(marketValueData);
         }
       }
     }

@@ -35,9 +35,7 @@ class GuessMarketValueUpOrDownScreenPresenterState extends State<GuessMarketValu
   void loadRandomValue() {
     if (mounted) {
       _selectedOptionSubject.add(null);
-      context.read<RandomMarketValueBloc>().add(
-        RandomMarketValueEventGet(minItems: 10, minPrimeTransferValue: 25000000),
-      );
+      context.read<RandomMarketValueBloc>().add(RandomMarketValueEventGet(minItems: 10));
     }
   }
 
