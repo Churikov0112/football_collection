@@ -348,6 +348,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Cambodia':
       return '🇰🇭';
     case 'Hong Kong':
+    case 'Hongkong':
       return '🇭🇰';
     case 'Indonesia':
       return '🇮🇩';
