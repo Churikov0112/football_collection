@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_club_by_stadium/guess_club_by_stadium_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
@@ -49,6 +50,7 @@ class RoutePaths {
   static const footballMiniGameMarketValueUpOrDown = '/footballMiniGameMarketValueUpOrDown';
   static const footballMiniGameGuessPlayerSponsor = '/footballMiniGameGuessPlayerSponsor';
   static const footballMiniGameGuessSecondCitizenship = '/footballMiniGameGuessSecondCitizenship';
+  static const footballMiniGameGuessClubByStadium = '/footballMiniGameGuessClubByStadium';
 
   static const draft = '/draft';
   static const draftTournamentStage = '/draftTournamentStage';
@@ -145,6 +147,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessSecondCitizenship,
           builder: (context, state) => GuessSecondCitizenshipScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessClubByStadium,
+          builder: (context, state) => GuessClubByStadiumScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,

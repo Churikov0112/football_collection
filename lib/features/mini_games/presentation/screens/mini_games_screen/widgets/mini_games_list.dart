@@ -144,6 +144,22 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
 
+          _MiniGameTile(
+            title: AppGlossary.guessClubByStadium,
+            color: const Color.fromARGB(255, 68, 180, 255).darken(0.3),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_club_by_stadium"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessClubByStadium);
+            },
+          ),
+
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",

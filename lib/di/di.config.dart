@@ -22,6 +22,8 @@ import '../features/cheats/presentation/blocs/cheat_codes_history_bloc/cheat_cod
     as _i153;
 import '../features/draft/presentation/blocs/draft_tournament_bloc/draft_tournament_bloc.dart'
     as _i1008;
+import '../features/football_cards/data/football_clubs_repository.dart'
+    as _i406;
 import '../features/football_cards/data/football_players_repository.dart'
     as _i1065;
 import '../features/football_cards/data/market_values_repository.dart' as _i991;
@@ -48,6 +50,9 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i809.SettingsBloc>(() => _i809.SettingsBloc());
   gh.singleton<_i153.CheatCodesHistoryBloc>(
     () => _i153.CheatCodesHistoryBloc(),
+  );
+  gh.singleton<_i406.FootballClubsRepository>(
+    () => _i406.FootballClubsRepository(),
   );
   gh.singleton<_i1065.CommonFootballRepository>(
     () => _i1065.CommonFootballRepository(),

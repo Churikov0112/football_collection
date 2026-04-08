@@ -1,14 +1,12 @@
-import 'dart:ui';
-
 import 'package:equatable/equatable.dart';
 
 class FootballClubModel extends Equatable {
   final String id;
   final String name;
   final DateTime? foundedOn;
-  final List<Color>? colors;
+  final List<dynamic>? colors;
   final String? stadiumName;
-  final String? stadiumSeats;
+  final int? stadiumSeats;
   final int? currentMarketValue;
   final FootballLeagueModel? league;
 
@@ -27,12 +25,12 @@ class FootballClubModel extends Equatable {
     return FootballClubModel(
       id: json['id'],
       name: json['name'],
-      foundedOn: DateTime.tryParse(json['foundedOn']),
-      colors: json['colors']?.map((color) => Color(int.parse(color))).toList(),
+      foundedOn: json['foundedOn'] != null ? DateTime.tryParse(json['foundedOn']) : null,
+      colors: json['colors'],
       stadiumName: json['stadiumName'],
       stadiumSeats: json['stadiumSeats'],
       currentMarketValue: json['currentMarketValue'],
-      league: json['league'] != null ? FootballLeagueModel.fromJson(json['league']) : null,
+      league: json['league']['id'] != null ? FootballLeagueModel.fromJson(json['league']) : null,
     );
   }
 
