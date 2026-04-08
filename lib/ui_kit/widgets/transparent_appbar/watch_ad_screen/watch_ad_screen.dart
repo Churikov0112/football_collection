@@ -55,7 +55,7 @@ class WatchAdScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const SizedBox(height: 16),
-                                    const Icon(Icons.games),
+                                    Text('🎮', style: TextStyle(fontSize: 32)),
                                     const SizedBox(height: 16),
                                     Text(AppGlossary.miniGames.translate(), textAlign: TextAlign.center),
                                     const SizedBox(height: 16),

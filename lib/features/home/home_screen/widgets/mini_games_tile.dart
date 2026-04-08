@@ -47,6 +47,8 @@ class _MiniGamesTile extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
+                const Text('🎮', style: TextStyle(fontSize: 32)),
               ],
             ),
           ),
