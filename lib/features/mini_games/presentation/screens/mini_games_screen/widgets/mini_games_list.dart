@@ -15,25 +15,39 @@ class _MiniGamesList extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 200),
+        padding: EdgeInsets.only(
+          top: mq.padding.top + 80,
+          left: 20,
+          right: 20,
+          bottom: 200,
+        ),
         children: [
           _MiniGameTile(
             title: AppGlossary.draft,
             color: Colors.pinkAccent,
             onTap: () {
               try {
-                FirebaseAnalytics.instance.logEvent(name: "mini_game_opened", parameters: {"mini_game": "draft"});
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "draft"},
+                );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
 
-              final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
+              final savedCardsIds =
+                  getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
               if (savedCardsIds.length < 100) {
-                ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
+                ToastService.showErrorToast(
+                  title: AppGlossary.draftLimitation.translate(),
+                );
                 return;
               }
 
-              BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
+              BottomSheetController.showBottomSheet(
+                context,
+                (context) => const DraftDescriptionScreen(),
+              );
             },
           ),
           _MiniGameTile(
@@ -159,6 +173,21 @@ class _MiniGamesList extends StatelessWidget {
               context.push(RoutePaths.footballMiniGameGuessClubByStadium);
             },
           ),
+          _MiniGameTile(
+            title: AppGlossary.guessStadiumByClub,
+            color: const Color.fromARGB(255, 0, 150, 136).darken(0.2),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_stadium_by_club"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessStadiumByClub);
+            },
+          ),
 
           // _MiniGameTile(
           //   color: Colors.orange,
@@ -177,7 +206,11 @@ class _MiniGamesList extends StatelessWidget {
 }
 
 class _MiniGameTile extends StatelessWidget {
-  const _MiniGameTile({required this.title, required this.color, required this.onTap});
+  const _MiniGameTile({
+    required this.title,
+    required this.color,
+    required this.onTap,
+  });
 
   final AppGlossary title;
   final Color color;
