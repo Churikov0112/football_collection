@@ -6,6 +6,7 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_club/guess_stadium_by_club_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/how_many_seats_in_stadium/how_many_seats_in_stadium_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:football_collection/features/onboarding/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
@@ -61,6 +62,8 @@ class RoutePaths {
       '/footballMiniGameGuessClubByStadium';
   static const footballMiniGameGuessStadiumByClub =
       '/footballMiniGameGuessStadiumByClub';
+  static const footballMiniGameHowManySeatsInStadium =
+      '/footballMiniGameHowManySeatsInStadium';
 
   static const draft = '/draft';
   static const draftTournamentStage = '/draftTournamentStage';
@@ -192,6 +195,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessStadiumByClub,
           builder: (context, state) => GuessStadiumByClubScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameHowManySeatsInStadium,
+          builder: (context, state) => HowManySeatsInStadiumScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,
