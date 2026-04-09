@@ -238,6 +238,36 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
 
+          _MiniGameTile(
+            title: AppGlossary.guessCountryByFlag,
+            color: const Color.fromARGB(255, 78, 146, 192).darken(0.3),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_country_by_flag"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessCountryByFlag);
+            },
+          ),
+          _MiniGameTile(
+            title: AppGlossary.guessCountryFlag,
+            color: const Color.fromARGB(255, 78, 146, 192).darken(0.3),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_country_flag"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessFlagByCountry);
+            },
+          ),
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",

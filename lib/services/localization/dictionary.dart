@@ -270,6 +270,7 @@ enum AppGlossary {
   openQrScannerOnSecondDevice,
   onboardingWelcome,
   onboardingWhoWeAre,
+  guessCountryByFlag,
   onboardingPressPacksButton,
   onboardingOpenPacks,
   onboardingTapOnPackToOpenIt,
@@ -293,6 +294,7 @@ enum AppGlossary {
   height,
   marketValue,
   currentValue,
+  guessCountryFlag,
   primeValue,
   // data packs
   dataPacks,
@@ -920,8 +922,7 @@ const dictionary = {
     Languages.english: 'You have not enough 🏆 to buy pack',
     Languages.russian: 'У вас недостаточно 🏆 для покупки пака',
     Languages.spanish: 'No tienes suficiente 🏆 para comprar el paquete',
-    Languages.portuguese:
-        'Você não tem dinheiro suficiente 🏆 para comprar o pacote',
+    Languages.portuguese: 'Você não tem dinheiro suficiente 🏆 para comprar o pacote',
     Languages.turkish: 'Paketi satın almak için yeterli 🏆 yok',
     Languages.french: "Vous n'avez pas assez de 🏆 pour acheter le pack",
     Languages.chinese: '你没有足够的🏆购买包',
@@ -1225,15 +1226,12 @@ const dictionary = {
   },
   AppGlossary.draft: {
     Languages.english: 'Draft',
-    Languages.spanish:
-        'Draft', // También se usa 'Reparto' o 'Selección', pero 'Draft' es común en juegos.
+    Languages.spanish: 'Draft', // También se usa 'Reparto' o 'Selección', pero 'Draft' es común en juegos.
     Languages.portuguese: 'Draft', // 'Sorteio' también es una opción.
-    Languages.french:
-        'Draft', // 'Repêchage' es el término oficial, pero 'Draft' es muy común en juegos.
+    Languages.french: 'Draft', // 'Repêchage' es el término oficial, pero 'Draft' es muy común en juegos.
     Languages.italian: 'Draft',
     Languages.russian: 'Драфт',
-    Languages.turkish:
-        'Draft', // 'Seçim' de denebilir, ancak 'Draft' yaygın kullanılır.
+    Languages.turkish: 'Draft', // 'Seçim' de denebilir, ancak 'Draft' yaygın kullanılır.
     Languages.chinese: '选秀', // Xuǎnxiù
     Languages.arabic: 'الدرافت', // Ad-Draft
     Languages.japanese: 'ドラフト', // Dorafuto
@@ -1241,8 +1239,7 @@ const dictionary = {
     Languages.bengal: 'ড্রাফ্ট', // Drāphṭa
     Languages.german: 'Draft',
     Languages.korean: '드래프트', // Deuraepeuteu
-    Languages.vietnamese:
-        'Draft', // 'Tuyển chọn' là dịch nghĩa, nhưng 'Draft' phổ biến hơn.
+    Languages.vietnamese: 'Draft', // 'Tuyển chọn' là dịch nghĩa, nhưng 'Draft' phổ biến hơn.
   },
   AppGlossary.selectCountry: {
     Languages.english: 'Select country',
@@ -1637,39 +1634,26 @@ const dictionary = {
     Languages.vietnamese: "Bán tất cả các bản sao",
   },
   AppGlossary.openQrScannerOnSecondDevice: {
-    Languages.english:
-        'Open QR scanner on second device from side menu and scan code',
-    Languages.russian:
-        'Откройте QR сканер на втором устройстве из бокового меню и отсканируйте код',
-    Languages.spanish:
-        'Abra el escáner QR en el segundo dispositivo desde el menú lateral y escanee el código',
-    Languages.portuguese:
-        'Abra o scanner QR no segundo dispositivo a partir do menu lateral e escaneie o código',
-    Languages.turkish:
-        'İkinci cihazdan yan menüden QR tarayıcısını açın ve kodu tarayın',
-    Languages.french:
-        'Ouvrez le scanner QR sur le deuxième appareil à partir du menu latéral et scannez le code',
+    Languages.english: 'Open QR scanner on second device from side menu and scan code',
+    Languages.russian: 'Откройте QR сканер на втором устройстве из бокового меню и отсканируйте код',
+    Languages.spanish: 'Abra el escáner QR en el segundo dispositivo desde el menú lateral y escanee el código',
+    Languages.portuguese: 'Abra o scanner QR no segundo dispositivo a partir do menu lateral e escaneie o código',
+    Languages.turkish: 'İkinci cihazdan yan menüden QR tarayıcısını açın ve kodu tarayın',
+    Languages.french: 'Ouvrez le scanner QR sur le deuxième appareil à partir du menu latéral et scannez le code',
     Languages.chinese: '从侧边栏打开第二个设备的QR扫描仪并扫描代码',
-    Languages.arabic:
-        'افتح مسح الباركود على الجهاز الثاني من قائمة القوائم واقرأ الرمز',
+    Languages.arabic: 'افتح مسح الباركود على الجهاز الثاني من قائمة القوائم واقرأ الرمز',
     Languages.japanese: '側面メニューから2番目のデバイスでQRスキャナーを開き、コードをスキャンします',
-    Languages.hindi:
-        'दूसरे उपकरण से साइड मेनू से QR स्कैनर खोलें और कोड स्कैन करें',
-    Languages.bengal:
-        'সাইড মেনু থেকে দ্বিতীয় উপকরণ থেকে QR স্ক্যানার খোলুন এবং কোড স্ক্যান করুন',
-    Languages.german:
-        'Öffnen Sie den QR-Scanner auf dem zweiten Gerät aus der Seitenleiste und scannen Sie den Code',
+    Languages.hindi: 'दूसरे उपकरण से साइड मेनू से QR स्कैनर खोलें और कोड स्कैन करें',
+    Languages.bengal: 'সাইড মেনু থেকে দ্বিতীয় উপকরণ থেকে QR স্ক্যানার খোলুন এবং কোড স্ক্যান করুন',
+    Languages.german: 'Öffnen Sie den QR-Scanner auf dem zweiten Gerät aus der Seitenleiste und scannen Sie den Code',
     Languages.korean: '측면 메뉴에서 두 번째 장치에서 QR 스캐너를 열고 코드를 스캔하십시오',
-    Languages.italian:
-        'Apri lo scanner QR sul secondo dispositivo dalla barra laterale e scansiona il codice',
-    Languages.vietnamese:
-        'Mở MÁY quét QR trên thiết bị thứ hai từ menu bên và quét mã',
+    Languages.italian: 'Apri lo scanner QR sul secondo dispositivo dalla barra laterale e scansiona il codice',
+    Languages.vietnamese: 'Mở MÁY quét QR trên thiết bị thứ hai từ menu bên và quét mã',
   },
   AppGlossary.scanYourFriendQrToGetPlayer: {
     Languages.english: "Scan your friend's QR to get player",
     Languages.russian: 'Отсканируйте QR код друга, чтобы получить игрока',
-    Languages.spanish:
-        'Escanee el código QR de su amigo para obtener al jugador',
+    Languages.spanish: 'Escanee el código QR de su amigo para obtener al jugador',
     Languages.portuguese: 'Escaneie o QR do seu amigo para obter o jogador',
     Languages.turkish: "Arkadaşınızın QR'sini tarayın ve oyuncuyu alın",
     Languages.french: 'Scannez le QR de votre ami pour obtenir le joueur',
@@ -1678,11 +1662,9 @@ const dictionary = {
     Languages.japanese: '友人のQRをスキャンしてプレイヤーを取得します',
     Languages.hindi: 'अपने दोस्त के QR को स्कैन करें और खिलाड़ी प्राप्त करें',
     Languages.bengal: 'আপনার বন্ধুর QR কে স্ক্যান করুন এবং খেলোয়াড় পান',
-    Languages.german:
-        'Scannen Sie den QR-Code Ihres Freundes, um den Spieler zu erhalten',
+    Languages.german: 'Scannen Sie den QR-Code Ihres Freundes, um den Spieler zu erhalten',
     Languages.korean: '친구의 QR을 스캔하여 플레이어를 얻으십시오',
-    Languages.italian:
-        'Scansiona il codice QR del tuo amico per ottenere il giocatore',
+    Languages.italian: 'Scansiona il codice QR del tuo amico per ottenere il giocatore',
     Languages.vietnamese: 'Quét mã QR của bạn bè để lấy trình phát',
   },
   AppGlossary.onboardingWelcome: {
@@ -1718,16 +1700,14 @@ const dictionary = {
     Languages.chinese: '我们是一对热爱足球的兄弟，我们在这里帮助所有热爱足球的人免费收集他们最喜欢的足球卡。卡片分为包。',
     Languages.arabic:
         'نحن إخوان يحبون الكرة القدم ونحن هنا لمساعدة كل محبي كرة القدم على تجميع أفضل ألعاب كرة القدم المفضلة للجميع بشكل مجاني. تم تقسيم الألعاب إلى حزم.',
-    Languages.japanese:
-        '私たちはサッカーが大好きな兄弟で、世界中のサッカー好きの皆さんが無料でお気に入りのサッカーカードを集めるのを手助けしています。カードはパックに分かれています。',
+    Languages.japanese: '私たちはサッカーが大好きな兄弟で、世界中のサッカー好きの皆さんが無料でお気に入りのサッカーカードを集めるのを手助けしています。カードはパックに分かれています。',
     Languages.hindi:
         'हम फुटबॉल को प्यार करने वाले दो भाई हैं और हम यहां दुनिया भर के सभी फुटबॉल प्यारियों को मुफ्त में अपनी पसंदीदा फुटबॉल कार्ड एकत्र करने में मदद कर रहे हैं। कार्ड पैक में विभाजित हैं।',
     Languages.bengal:
         'আমরা ফুটবল প্রিয় দুই ভাইয়ের আছি এবং আমরা সবার জন্য মুফতে তাদের প্রিয় ফুটবল কার্ড সংগ্রহ করার জন্য এখানে আছি। কার্ড প্যাকের ভিত্তিতে বিভক্ত।',
     Languages.german:
         'Wir sind zwei Brüder, die Fußball lieben, und wir sind hier, um allen Fußballliebhabern zu helfen, ihre Lieblingsfußballkarten kostenlos zu sammeln. Die Karten werden in Pakete unterteilt.',
-    Languages.korean:
-        '우리는 축구를 사랑하는 형제이며, 우리는 모든 축구 팬들이 무료로 자신의 축구 카드를 수집할 수 있도록 여기에 있습니다. 카드는 팩으로 나뉩니다.',
+    Languages.korean: '우리는 축구를 사랑하는 형제이며, 우리는 모든 축구 팬들이 무료로 자신의 축구 카드를 수집할 수 있도록 여기에 있습니다. 카드는 팩으로 나뉩니다.',
     Languages.italian:
         'Siamo due fratelli che amano il calcio e siamo qui per aiutare tutti gli appassionati di calcio a raccogliere le loro carte di calcio preferite gratuitamente. Le carte sono divise in pacchetti.',
     Languages.vietnamese:
@@ -1735,25 +1715,19 @@ const dictionary = {
   },
   AppGlossary.onboardingPressPacksButton: {
     Languages.english: 'Press the button below to go to the packs page.',
-    Languages.russian:
-        'Нажмите кнопку ниже, чтобы перейти на страницу открытия пака.',
-    Languages.spanish:
-        'Presiona el botón de abajo para ir a la página de paquetes.',
-    Languages.portuguese:
-        'Pressione o botão abaixo para ir para a página de pacotes.',
+    Languages.russian: 'Нажмите кнопку ниже, чтобы перейти на страницу открытия пака.',
+    Languages.spanish: 'Presiona el botón de abajo para ir a la página de paquetes.',
+    Languages.portuguese: 'Pressione o botão abaixo para ir para a página de pacotes.',
     Languages.turkish: 'Aşağıdaki düğmeye basarak paketler sayfasına gidin.',
-    Languages.french:
-        'Appuyez sur le bouton ci-dessous pour accéder à la page des paquets.',
+    Languages.french: 'Appuyez sur le bouton ci-dessous pour accéder à la page des paquets.',
     Languages.chinese: '按下下面的按钮转到包页面。',
     Languages.arabic: 'اضغط على الزر أدناه للانتقال إلى صفحة الحزم.',
     Languages.japanese: '下のボタンを押してパックページに移動します。',
     Languages.hindi: 'नीचे दिए गए बटन पर क्लिक करें और पैकेज पेज पर जाएं।',
     Languages.bengal: 'নীচের বাটনটি টিপে প্যাকেজ পেজে যান।',
-    Languages.german:
-        'Klicken Sie auf die Schaltfläche unten, um zur Paketseite zu gelangen.',
+    Languages.german: 'Klicken Sie auf die Schaltfläche unten, um zur Paketseite zu gelangen.',
     Languages.korean: '아래의 버튼을 눌러 팩 페이지로 이동하세요.',
-    Languages.italian:
-        'Clicca sul pulsante qui sotto per andare alla pagina dei pacchetti.',
+    Languages.italian: 'Clicca sul pulsante qui sotto per andare alla pagina dei pacchetti.',
     Languages.vietnamese: "Nhấp vào nút bên dưới để chuyển đến trang mở gói.",
   },
   AppGlossary.onboardingSwipeCardsToSave: {
@@ -1774,12 +1748,10 @@ const dictionary = {
     Languages.vietnamese: "Vuốt thẻ để lưu nó!",
   },
   AppGlossary.onboardingEverySwipedCardWillBeSavedYouCanSwipeAnyDirection: {
-    Languages.english:
-        'Every card you swipe will be saved in your collection. You can swipe in any direction.',
+    Languages.english: 'Every card you swipe will be saved in your collection. You can swipe in any direction.',
     Languages.russian:
         'Каждая карта, которую вы смахнете, будет сохранена в вашей коллекции. Вы можете смахнуть в любом направлении.',
-    Languages.spanish:
-        'Cada tarjeta que desliza se guardará en tu colección. Puedes deslizar en cualquier dirección.',
+    Languages.spanish: 'Cada tarjeta que desliza se guardará en tu colección. Puedes deslizar en cualquier dirección.',
     Languages.portuguese:
         'Todas as cartas que deslizar serão salvas em sua coleção. Você pode deslizar em qualquer direção.',
     Languages.turkish:
@@ -1787,18 +1759,15 @@ const dictionary = {
     Languages.french:
         "Chaque carte que vous ferez glisser sera enregistrée dans votre collection. Vous pouvez faire glisser dans n'importe quelle direction.",
     Languages.chinese: '您滑动过的每张卡片都将保存在您的收藏中。您可以在任何方向上滑动。',
-    Languages.arabic:
-        'سيتم حفظ كل بطاقة تمسحها في مجموعتك. يمكنك التمسك بأي اتجاه.',
+    Languages.arabic: 'سيتم حفظ كل بطاقة تمسحها في مجموعتك. يمكنك التمسك بأي اتجاه.',
     Languages.japanese: 'スワイプしたカードはすべてコレクションに保存されます。どの方向にもスワイプできます。',
     Languages.hindi:
         'आप स्वाइप किए गए प्रत्येक कार्ड आपकी संग्रह में सहेजा जाएगा। आप किसी भी दिशा में स्वाइप कर सकते हैं।',
-    Languages.bengal:
-        'আপনি স্ক্রুপ করা প্রতিটি কার্ড আপনার সংগ্রহে সংরক্ষিত হবে। আপনি যে কোন দিকে স্ক্রুপ করতে পারেন।',
+    Languages.bengal: 'আপনি স্ক্রুপ করা প্রতিটি কার্ড আপনার সংগ্রহে সংরক্ষিত হবে। আপনি যে কোন দিকে স্ক্রুপ করতে পারেন।',
     Languages.german:
         'Jedes Karte, die Sie schieben, wird in Ihrer Sammlung gespeichert. Sie können in jede Richtung schieben.',
     Languages.korean: '스와이프한 모든 카드는 컬렉션에 저장됩니다. 어떤 방향으로든 스와이프할 수 있습니다.',
-    Languages.italian:
-        'Ogni carta che scuoti verrà salvata nella tua raccolta. Puoi scuotere in qualsiasi direzione.',
+    Languages.italian: 'Ogni carta che scuoti verrà salvata nella tua raccolta. Puoi scuotere in qualsiasi direzione.',
     Languages.vietnamese:
         'Mỗi thẻ bạn vuốt sẽ được lưu trong bộ sưu tập của bạn. Bạn có thể vuốt theo bất kỳ hướng nào.',
   },
@@ -1808,8 +1777,7 @@ const dictionary = {
     Languages.spanish: '¡Ahora las tarjetas se guardan en tu colección!',
     Languages.portuguese: 'Agora as cartas são salvas em sua coleção!',
     Languages.turkish: 'Artık kartlarınız koleksiyonunuzda saklanıyor!',
-    Languages.french:
-        'Maintenant, les cartes sont sauvegardées dans votre collection !',
+    Languages.french: 'Maintenant, les cartes sont sauvegardées dans votre collection !',
     Languages.chinese: '现在卡片已保存到您的收藏中！',
     Languages.arabic: 'الآن تم حفظ البطاقات في مجموعتك!',
     Languages.japanese: '今カードはコレクションに保存されています！',
@@ -1823,23 +1791,18 @@ const dictionary = {
   AppGlossary.onboardingTapOnCardToSeeInfo: {
     Languages.english: 'Tap on a card to see more information about it.',
     Languages.russian: 'Нажмите на карточку, чтобы узнать больше о ней.',
-    Languages.spanish:
-        'Toca en una tarjeta para ver más información sobre ella.',
-    Languages.portuguese:
-        'Toque em uma carta para ver mais informações sobre ela.',
+    Languages.spanish: 'Toca en una tarjeta para ver más información sobre ella.',
+    Languages.portuguese: 'Toque em uma carta para ver mais informações sobre ela.',
     Languages.turkish: 'Kartın üzerine dokunun ve daha fazla bilgi görün.',
     Languages.french: "Appuyez sur une carte pour en voir plus d'informations.",
     Languages.chinese: '点击卡片以查看更多信息。',
     Languages.arabic: 'انقر على بطاقة لمعرفة المزيد من المعلومات عنها.',
     Languages.japanese: 'カードをタップして詳細を確認します。',
-    Languages.hindi:
-        'कार्ड पर टैप करें और इसके बारे में अधिक जानकारी प्राप्त करें।',
+    Languages.hindi: 'कार्ड पर टैप करें और इसके बारे में अधिक जानकारी प्राप्त करें।',
     Languages.bengal: 'কার্ডে ট্যাপ করুন এবং এর সম্পর্কে আরও তথ্য পেনে যান।',
-    Languages.german:
-        'Tippen Sie auf eine Karte, um mehr über sie zu erfahren.',
+    Languages.german: 'Tippen Sie auf eine Karte, um mehr über sie zu erfahren.',
     Languages.korean: '카드를 탭하여 자세한 정보를 확인하세요.',
-    Languages.italian:
-        'Tocca su una carta per vedere ulteriori informazioni su di essa.',
+    Languages.italian: 'Tocca su una carta per vedere ulteriori informazioni su di essa.',
     Languages.vietnamese: 'Nhấp vào thẻ để tìm hiểu thêm về nó.',
   },
   AppGlossary.next: {
@@ -1892,16 +1855,14 @@ const dictionary = {
     Languages.chinese: '有时您可能会找到一张您已经拥有的卡片。您可以与朋友分享或出售它。只需点击计数标签。',
     Languages.arabic:
         'أحيانًا يمكنك العثور على بطاقة قمت بالحصول عليها مسبقًا. يمكنك مشاركتها مع أصدقائك أو إيجارها. فقط اضغط على علامة العد.',
-    Languages.japanese:
-        '時々、すでに持っているカードを見つけることができます。友達と共有したり、売却したりできます。カウントラベルをタップしてください。',
+    Languages.japanese: '時々、すでに持っているカードを見つけることができます。友達と共有したり、売却したりできます。カウントラベルをタップしてください。',
     Languages.hindi:
         'कभी-कभी आप एक कार्ड पा सकते हैं जिसे आप पहले से ही हैं। आप इसे अपने दोस्तों के साथ साझा कर सकते हैं या बेच सकते हैं। बस गिनती लेबल पर टैप करें।',
     Languages.bengal:
         'কখনোই আপনি একটি কার্ড পাওয়া যায় যা আপনি ইতিমধ্যে আপণ আছে। আপনি এটি আপনার বন্ধুদের সাথে ভাগ করতে পারেন বা বিক্রি করতে পারেন। শুধু গণনা লেবেলে ট্যাপ করুন।',
     Languages.german:
         'Manchmal können Sie eine Karte finden, die Sie bereits haben. Sie können sie mit Ihren Freunden teilen oder verkaufen. Tippen Sie einfach auf die Anzahl-Bezeichnung.',
-    Languages.korean:
-        '때로는 이미 보유 중인 카드를 찾을 수 있습니다. 친구들과 공유하거나 판매할 수 있습니다. 단순히 수량 레이블을 탭하세요.',
+    Languages.korean: '때로는 이미 보유 중인 카드를 찾을 수 있습니다. 친구들과 공유하거나 판매할 수 있습니다. 단순히 수량 레이블을 탭하세요.',
     Languages.italian:
         "A volte puoi trovare una carta che hai già. Puoi condividerla con i tuoi amici o vendere. Basta toccare l'etichetta di conteggio.",
     Languages.vietnamese:
@@ -1991,6 +1952,40 @@ const dictionary = {
     Languages.korean: '콘페티',
     Languages.italian: 'Confetti',
     Languages.vietnamese: 'Hoa giấy',
+  },
+  AppGlossary.guessCountryByFlag: {
+    Languages.english: 'Guess country by flag',
+    Languages.russian: 'Угадай страну по флагу',
+    Languages.spanish: 'Adivina el pais por bandera',
+    Languages.portuguese: 'Adivinhe o país pela bandeira',
+    Languages.turkish: 'Bayrag\'a gore ulusal tahmin et',
+    Languages.french: 'Devinez le pays par drapeau',
+    Languages.chinese: '猜球员赞助商',
+    Languages.arabic: 'تخمين الفريق الوطني',
+    Languages.japanese: 'ナショナルチームを推測する',
+    Languages.hindi: 'खिलाड़ी का अनुमान लगाएं',
+    Languages.bengal: 'খেলোয়াড়ের দল অনুমান করুন',
+    Languages.german: 'Team des Spielers erraten',
+    Languages.korean: '선수 팀 추측',
+    Languages.italian: 'Indovina la squadra del giocatore',
+    Languages.vietnamese: 'Đoán đội bóng của cầu thủ',
+  },
+  AppGlossary.guessCountryFlag: {
+    Languages.english: 'Guess country flag',
+    Languages.russian: 'Угадай флаг страны',
+    Languages.spanish: 'Adivina el pais por bandera',
+    Languages.portuguese: 'Adivinhe o país pela bandeira',
+    Languages.turkish: 'Bayrag\'a gore ulusal tahmin et',
+    Languages.french: 'Devinez le pays par drapeau',
+    Languages.chinese: '猜球员赞助商',
+    Languages.arabic: 'تخمين الفريق الوطني',
+    Languages.japanese: 'ナショナルチームを推測する',
+    Languages.hindi: 'खिलाड़ी का अनुमान लगाएं',
+    Languages.bengal: 'খেলোয়াড়ের দল অনুমান করুন',
+    Languages.german: 'Team des Spielers erraten',
+    Languages.korean: '선수 팀 추측',
+    Languages.italian: 'Indovina la squadra del giocatore',
+    Languages.vietnamese: 'Đoán đội bóng của cầu thủ',
   },
   AppGlossary.ourWebsite: {
     Languages.english: 'Our website',
@@ -2363,16 +2358,14 @@ const dictionary = {
     Languages.chinese: '加载社区数据包，包括球员姓名和面孔，以及俱乐部和联赛徽标，以增强您的游戏体验！',
     Languages.arabic:
         'قم بتحميل حزمة بيانات من المجتمع تتضمن أسماء ووجوه اللاعبين، بالإضافة إلى شعارات الأندية والبطولات لتعزيز تجربة gaming experience!',
-    Languages.japanese:
-        'コミュニティのデータパックをロードして、選手の名前と顔、クラブやリーグのロゴを含め、ゲーム体験を向上させましょう！',
+    Languages.japanese: 'コミュニティのデータパックをロードして、選手の名前と顔、クラブやリーグのロゴを含め、ゲーム体験を向上させましょう！',
     Languages.hindi:
         'अपने गेमिंग अनुभव को बेहतर बनाने के लिए एक community डेटा पैक लोड करें, जिसमें खिलाड़ियों के नाम और चेहरे, साथ ही क्लब और लीग के लोगो शामिल हैं!',
     Languages.bengal:
         'আপনার গেমিং অভিজ্ঞতা উন্নত করতে একটি কমিউনিটি ডেটা প্যাক লোড করুন, যাতে খেলোয়াড়দের নাম এবং faces, সেইসাথে ক্লাব এবং লিগের লোগো রয়েছে!',
     Languages.german:
         'Laden Sie ein Community-Datenpaket mit Spielernamen und -gesichtern sowie Club- und Ligalogos, um Ihr Spielerlebnis zu verbessern!',
-    Languages.korean:
-        '커뮤니티 데이터 팩을 로드하여 선수 이름과 얼굴, 클럽 및 리그 로고를 포함하여 게임 경험을 향상시키세요!',
+    Languages.korean: '커뮤니티 데이터 팩을 로드하여 선수 이름과 얼굴, 클럽 및 리그 로고를 포함하여 게임 경험을 향상시키세요!',
     Languages.italian:
         'Carica un pacchetto dati della community che include nomi e volti dei giocatori, nonché logo di club e leghe per migliorare la tua esperienza di gioco!',
     Languages.vietnamese:
@@ -3023,25 +3016,18 @@ const dictionary = {
   AppGlossary.draftLimitation: {
     Languages.english: "You need at least 100 cards to play draft game",
     Languages.russian: "Вам нужно хотя бы 100 карт, чтобы играть в драфт",
-    Languages.spanish:
-        "Necesitas al menos 100 cartas para jugar un juego de borrador",
-    Languages.portuguese:
-        "Precisa de pelo menos 100 cartas para jogar um jogo de borrador",
+    Languages.spanish: "Necesitas al menos 100 cartas para jugar un juego de borrador",
+    Languages.portuguese: "Precisa de pelo menos 100 cartas para jogar um jogo de borrador",
     Languages.turkish: "Taslak oyunu oynamak için en az 100 kart gerekli",
-    Languages.french:
-        "Vous devez avoir au moins 100 cartes pour jouer au brouillon",
+    Languages.french: "Vous devez avoir au moins 100 cartes pour jouer au brouillon",
     Languages.chinese: "你需要至少100张卡牌才能玩草稿游戏",
     Languages.arabic: "يجب عليك على الاقل 100 بطاقات لللعب بالتصوير",
     Languages.japanese: "ドラフトゲームをプレイするには、最低でも100枚のカードが必要です",
-    Languages.hindi:
-        "ड्राफ्ट खेल में प्ले करने के लिए कम से कम 100 कार्ड होना चाहिए",
-    Languages.bengal:
-        "ড্রাফ্ট খেলা প্লে করার জন্য কমপক্ষে ১০০ কার্ড প্রয়োজনীয়",
-    Languages.german:
-        "Sie benötigen mindestens 100 Karten, um ein Entwurfsspiel zu spielen",
+    Languages.hindi: "ड्राफ्ट खेल में प्ले करने के लिए कम से कम 100 कार्ड होना चाहिए",
+    Languages.bengal: "ড্রাফ্ট খেলা প্লে করার জন্য কমপক্ষে ১০০ কার্ড প্রয়োজনীয়",
+    Languages.german: "Sie benötigen mindestens 100 Karten, um ein Entwurfsspiel zu spielen",
     Languages.korean: "다포트 게임을 피하기 위한 최소 100 카드가 필요해요",
-    Languages.italian:
-        "Hai bisogno di almeno 100 carte per giocare un gioco di borratura",
+    Languages.italian: "Hai bisogno di almeno 100 carte per giocare un gioco di borratura",
     Languages.vietnamese: "Bài choi bằng tài xế phải cơ bản 100 bài",
   },
   AppGlossary.matchWon: {
@@ -3196,16 +3182,14 @@ const dictionary = {
     Languages.chinese: "在这个游戏中，你需要集合你的队伍并通过四场比赛(1/8，1/4，1/2，决赛)进行淘汰赛。",
     Languages.arabic:
         "في هذه اللعبة، يجب تجميع الفريق الخاص بك والتحدي السياسي بالتنفيذ في اربعة مباريات (1/8، 1/4، 1/2، نهاية).",
-    Languages.japanese:
-        "このゲームでは、あなたのチームを集め、4戦(1/8、1/4、1/2、ファイナル)で淘汰戦に勝利する必要があります。",
+    Languages.japanese: "このゲームでは、あなたのチームを集め、4戦(1/8、1/4、1/2、ファイナル)で淘汰戦に勝利する必要があります。",
     Languages.hindi:
         "इस खेल में, आपको अपने दस्ते को इकट्ठा करने और लगातार चार मैचों (1/8, 1/4, 1/2, फाइनल) में उन्मूलन टूर्नामेंट जीतने की आवश्यकता है । ",
     Languages.bengal:
         "এই গেমটিতে, আপনাকে আপনার স্কোয়াডকে একত্রিত করতে হবে এবং পরপর চারটি ম্যাচে (1/8, 1/4, 1/2, ফাইনাল) নির্মূল টুর্নামেন্ট জিততে হবে",
     Languages.german:
         "In dieser Spiel ist es erforderlich, Ihre Mannschaft zusammenzufassen und den Turnier durch Elimination in vier Matches (1/8, 1/4, 1/2, Final) zu gewinnen.",
-    Languages.korean:
-        "이 게임에서는,당신은 당신의 팀을 조립하고 4 개의 연속 경기(1/8,1/4,1/2,최종)에서 제거 토너먼트에서 승리해야합니다.",
+    Languages.korean: "이 게임에서는,당신은 당신의 팀을 조립하고 4 개의 연속 경기(1/8,1/4,1/2,최종)에서 제거 토너먼트에서 승리해야합니다.",
     Languages.italian:
         "In questo gioco dovete reunire il vostro team e vincere il torneo per eliminazione in quattro partite (1/8, 1/4, 1/2, finale).",
     Languages.vietnamese:
@@ -3224,8 +3208,7 @@ const dictionary = {
         "Sahadaki her pozisyon için, daha önce alınan paketlerden rastgele 5 oyuncu mevcuttur. Ne kadar çok paket açarsanız, seçim o kadar fazla olur ve daha havalı oyuncuları taslak haline getirme olasılığı o kadar artar.",
     Languages.french:
         "Pour chaque position sur le terrain, 5 joueurs sont disponibles au hasard à partir des packs précédemment obtenus. Plus vous ouvrez de packs, plus vous avez de choix et de chances de gagner des joueurs plus cool.",
-    Languages.chinese:
-        "对于场上的每个位置，5名玩家从以前获得的包是随机可用的。 你打开的包越多，你的选择就越多，你就越有可能招募更好的球员。",
+    Languages.chinese: "对于场上的每个位置，5名玩家从以前获得的包是随机可用的。 你打开的包越多，你的选择就越多，你就越有可能招募更好的球员。",
     Languages.arabic:
         "لكل موقف في الميدان ، يتوفر 5 لاعبين من حزم تم الحصول عليها مسبقا بشكل عشوائي. لمزيد من حزم قمت بفتح ، والمزيد من الخيارات لديك والأرجح أنك لصياغة لاعبين أفضل.",
     Languages.japanese:
@@ -3244,35 +3227,24 @@ const dictionary = {
         "Đối với mỗi vị trí trên sân, 5 người chơi từ các gói thu được trước đó có sẵn ngẫu nhiên. Bạn càng mở nhiều gói, bạn càng có nhiều lựa chọn và bạn càng có nhiều khả năng soạn thảo người chơi tốt hơn.",
   },
   AppGlossary.draftDescription3: {
-    Languages.russian:
-        "Чтобы начать драфт, внести 100 🏆. В случае победы в финале вы получите 400 🏆",
+    Languages.russian: "Чтобы начать драфт, внести 100 🏆. В случае победы в финале вы получите 400 🏆",
     Languages.english:
         "To start a draft, you need to put 100 🏆. In case of a win in the finals, you will receive 400 🏆",
-    Languages.spanish:
-        "Para empezar el draft, necesitas poner 100 🏆. En caso de ganar en la final, recibirás 400 🏆",
-    Languages.portuguese:
-        "Para iniciar o saque, Deposite 100 🏆. Se você vencer a final, receberá 400 🏆",
-    Languages.turkish:
-        "Taslağa başlamak için 100 🏆 yatırın. Finali kazanırsanız 400 🏆 kazanacaksınız",
-    Languages.french:
-        "Pour commencer le Draft, Déposez 100 🏆. En cas de victoire en finale, vous recevrez 400 🏆 ",
+    Languages.spanish: "Para empezar el draft, necesitas poner 100 🏆. En caso de ganar en la final, recibirás 400 🏆",
+    Languages.portuguese: "Para iniciar o saque, Deposite 100 🏆. Se você vencer a final, receberá 400 🏆",
+    Languages.turkish: "Taslağa başlamak için 100 🏆 yatırın. Finali kazanırsanız 400 🏆 kazanacaksınız",
+    Languages.french: "Pour commencer le Draft, Déposez 100 🏆. En cas de victoire en finale, vous recevrez 400 🏆 ",
     Languages.chinese: "要开始草稿，请存入100🏆。 如果您赢得决赛，您将获得400🏆",
-    Languages.arabic:
-        "لبدء المسودة ، قم بإيداع 100 دولار. إذا كنت الفوز في المباراة النهائية ، سوف تتلقى 400 🏆",
-    Languages.japanese:
-        "ドラフトを開始するには、100🏆を入金します。 あなたが決勝に勝った場合、あなたは400🏆を受け取ることになります",
+    Languages.arabic: "لبدء المسودة ، قم بإيداع 100 دولار. إذا كنت الفوز في المباراة النهائية ، سوف تتلقى 400 🏆",
+    Languages.japanese: "ドラフトを開始するには、100🏆を入金します。 あなたが決勝に勝った場合、あなたは400🏆を受け取ることになります",
     Languages.hindi:
         "ड्राफ्ट शुरू करने के लिए, 100 🏆 जमा करें ।  यदि आप फाइनल जीतते हैं, तो आपको 400 🏆 प्राप्त होंगे",
-    Languages.bengal:
-        "খসড়া শুরু করতে, 100 🏆জমা দিন আপনি যদি ফাইনাল জিতেন তবে আপনি 400 🏆পাবেন",
+    Languages.bengal: "খসড়া শুরু করতে, 100 🏆জমা দিন আপনি যদি ফাইনাল জিতেন তবে আপনি 400 🏆পাবেন",
     Languages.german:
         "Um den Draft zu starten, geben Sie 100 🏆 ein. Wenn Sie das Finale gewinnen, erhalten Sie 400 🏆",
-    Languages.korean:
-        "초안을 시작하려면 100 🏆 을 입금하십시오. 당신이 결승전에서 승리하면,당신은 400 🏆 을 받게됩니다.",
-    Languages.italian:
-        "Per iniziare il draft, deposita 100 🏆. Se vinci la finale, ottieni 400 🏆",
-    Languages.vietnamese:
-        "Để bắt đầu dự thảo, tiền gửi 100 🏆. Nếu bạn thắng trận chung kết, bạn sẽ nhận được 400 🏆",
+    Languages.korean: "초안을 시작하려면 100 🏆 을 입금하십시오. 당신이 결승전에서 승리하면,당신은 400 🏆 을 받게됩니다.",
+    Languages.italian: "Per iniziare il draft, deposita 100 🏆. Se vinci la finale, ottieni 400 🏆",
+    Languages.vietnamese: "Để bắt đầu dự thảo, tiền gửi 100 🏆. Nếu bạn thắng trận chung kết, bạn sẽ nhận được 400 🏆",
   },
 
   AppGlossary.startDraft: {
