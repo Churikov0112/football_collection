@@ -21,6 +21,8 @@ import '../../features/football_cards/presentation/screens/packs_screen/football
 import '../../features/football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../features/football_confederations/domain/models/football_confederation.dart';
 import '../../features/home/home_screen/home_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_country_by_flag/guess_country_by_flag_screen.dart';
+import '../../features/mini_games/presentation/screens/guess_flag_by_country/guess_flag_by_country_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_country_screen/guess_national_team_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_player_sponsor_screen/guess_player_sponsor_screen.dart';
 import '../../features/mini_games/presentation/screens/guess_second_citizenship_screen/guess_second_citizenship_screen.dart';
@@ -51,6 +53,8 @@ class RoutePaths {
   static const footballMiniGameGuessPlayerSponsor = '/footballMiniGameGuessPlayerSponsor';
   static const footballMiniGameGuessSecondCitizenship = '/footballMiniGameGuessSecondCitizenship';
   static const footballMiniGameGuessClubByStadium = '/footballMiniGameGuessClubByStadium';
+  static const footballMiniGameGuessCountryByFlag = '/footballMiniGameGuessCountryByFlag';
+  static const footballMiniGameGuessFlagByCountry = '/footballMiniGameGuessFlagByCountry';
 
   static const draft = '/draft';
   static const draftTournamentStage = '/draftTournamentStage';
@@ -151,6 +155,15 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessClubByStadium,
           builder: (context, state) => GuessClubByStadiumScreen(),
+        ),
+
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessCountryByFlag,
+          builder: (context, state) => GuessCountryByFlagScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessFlagByCountry,
+          builder: (context, state) => GuessFlagByCountryScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,
