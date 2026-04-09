@@ -222,6 +222,21 @@ class _MiniGamesList extends StatelessWidget {
               );
             },
           ),
+          _MiniGameTile(
+            title: AppGlossary.clubFoundationDate,
+            color: const Color.fromARGB(255, 63, 81, 181).darken(0.1),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "club_foundation_date"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameClubFoundationDate);
+            },
+          ),
 
           // _MiniGameTile(
           //   color: Colors.orange,

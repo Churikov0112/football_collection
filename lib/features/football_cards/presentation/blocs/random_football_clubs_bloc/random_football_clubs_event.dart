@@ -8,10 +8,12 @@ final class RandomFootballClubsEventGet extends RandomFootballClubsEvent {
     this.withStadiumName,
     this.withStadiumSeats,
     this.withLeague,
+    this.withFoundedOn,
   });
 
   final int count;
   final bool? withStadiumName;
   final bool? withStadiumSeats;
   final bool? withLeague;
+  final bool? withFoundedOn;
 }
