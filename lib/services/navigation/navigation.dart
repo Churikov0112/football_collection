@@ -5,6 +5,7 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_club/guess_stadium_by_club_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_country_and_seats/guess_stadium_by_country_and_seats_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/how_many_seats_in_stadium/how_many_seats_in_stadium_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
@@ -64,6 +65,8 @@ class RoutePaths {
       '/footballMiniGameGuessStadiumByClub';
   static const footballMiniGameHowManySeatsInStadium =
       '/footballMiniGameHowManySeatsInStadium';
+  static const footballMiniGameGuessStadiumByCountryAndSeats =
+      '/footballMiniGameGuessStadiumByCountryAndSeats';
 
   static const draft = '/draft';
   static const draftTournamentStage = '/draftTournamentStage';
@@ -199,6 +202,11 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameHowManySeatsInStadium,
           builder: (context, state) => HowManySeatsInStadiumScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessStadiumByCountryAndSeats,
+          builder: (context, state) =>
+              const GuessStadiumByCountryAndSeatsScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,

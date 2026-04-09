@@ -28,6 +28,7 @@ class FootballClubsRepository {
     required int count,
     bool? withStadiumName,
     bool? withStadiumSeats,
+    bool? withLeague,
   }) async {
     final clubsData = await _clubsDataGet();
     final filteredClubsData = clubsData.where((club) {
@@ -45,6 +46,15 @@ class FootballClubsRepository {
           return false;
         }
         if (withStadiumSeats == false && club['stadiumSeats'] != null) {
+          return false;
+        }
+      }
+
+      if (withLeague != null) {
+        if (withLeague == true && club['league'] == null) {
+          return false;
+        }
+        if (withLeague == false && club['league'] != null) {
           return false;
         }
       }

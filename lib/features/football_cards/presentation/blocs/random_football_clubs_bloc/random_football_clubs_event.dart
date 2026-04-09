@@ -3,9 +3,15 @@ part of 'random_football_clubs_bloc.dart';
 sealed class RandomFootballClubsEvent {}
 
 final class RandomFootballClubsEventGet extends RandomFootballClubsEvent {
-  RandomFootballClubsEventGet({required this.count, this.withStadiumName, this.withStadiumSeats});
+  RandomFootballClubsEventGet({
+    required this.count,
+    this.withStadiumName,
+    this.withStadiumSeats,
+    this.withLeague,
+  });
 
   final int count;
   final bool? withStadiumName;
   final bool? withStadiumSeats;
+  final bool? withLeague;
 }

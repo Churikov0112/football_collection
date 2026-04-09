@@ -203,6 +203,25 @@ class _MiniGamesList extends StatelessWidget {
               context.push(RoutePaths.footballMiniGameHowManySeatsInStadium);
             },
           ),
+          _MiniGameTile(
+            title: AppGlossary.guessStadiumByCountryAndSeats,
+            color: const Color.fromARGB(255, 121, 85, 72).darken(0.05),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {
+                    "mini_game": "guess_stadium_by_country_and_seats",
+                  },
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(
+                RoutePaths.footballMiniGameGuessStadiumByCountryAndSeats,
+              );
+            },
+          ),
 
           // _MiniGameTile(
           //   color: Colors.orange,
