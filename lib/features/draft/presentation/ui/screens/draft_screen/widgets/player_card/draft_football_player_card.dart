@@ -42,6 +42,10 @@ class DraftFootballPlayerCardWidget extends StatelessWidget {
     return FutureBuilder(
       future: repo.teamsGet(),
       builder: (context, teamsSnapshot) {
+        if (teamsSnapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
         final rating =
             ratings[player.playerId]?["overall"] ?? 0; // FootballPlayerStatsCalculator.calculateStats(player).rating;
         final allCountries = teamsSnapshot.data ?? [];
