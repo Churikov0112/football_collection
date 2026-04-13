@@ -3,7 +3,7 @@ part of '../countries_screen.dart';
 class _CountriesList extends StatelessWidget {
   const _CountriesList({required this.confederation});
 
-  final FootballConfederations confederation;
+  final FootballConfederations? confederation;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,10 @@ class _CountriesList extends StatelessWidget {
     return FutureBuilder(
       future: repo.teamsGet(),
       builder: (context, allCountriesState) {
-        final countries = (allCountriesState.data ?? []).where((c) => c.confederation == confederation).toList();
+        final countries = (allCountriesState.data ?? [])
+            .where((c) => confederation == null || (c.confederation == confederation))
+            .toList();
+
         countries.sort((a, b) => a.name.compareTo(b.name));
 
         return Expanded(
@@ -79,15 +82,16 @@ class _CountryTile extends StatelessWidget {
                 startPosition: StartPosition.topCenter,
                 strokeCap: StrokeCap.square,
                 clockwise: true,
-                color: Colors.greenAccent,
-                emptyStrokeColor: country.confederation.color,
+                color: Colors.lightGreenAccent,
+                emptyStrokeColor: Colors.blueAccent.darken(0.3),
+
                 strokeWidth: 4,
                 emptyStrokeWidth: 4,
                 strokeAlign: SquareStrokeAlign.outside,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: country.confederation.color?.darken().withAlpha(200),
+                    color: Colors.blueAccent.darken(0.3).withAlpha(180),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),

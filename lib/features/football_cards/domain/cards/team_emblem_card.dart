@@ -19,7 +19,7 @@ class FootballTeamEmblemCardModel extends CardModel {
   factory FootballTeamEmblemCardModel.fromTeam(FootballNationalTeamModel team) {
     return FootballTeamEmblemCardModel(
       cardId: "football_emblem-${team.id}",
-      imageAssetPath: "assets/raster/team_emblems/${team.id}.png",
+      imageAssetPath: "assets/raster/teams_emblems/${team.id}.png",
 
       teamId: team.id,
       name: team.name,

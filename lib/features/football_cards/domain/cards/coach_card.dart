@@ -28,7 +28,7 @@ class FootballCoachCardModel extends CardModel {
     return FootballCoachCardModel(
       coachId: json['id'],
       cardId: "football_coach-${json['id']}",
-      imageAssetPath: "assets/raster/coach_faces/${json['id']}.jpg",
+      imageAssetPath: "assets/raster/coaches_faces/${json['id']}.jpg",
       name: json['name'],
       teamId: json['current_club']?['id'],
       teamName: json['current_club']?['name'],

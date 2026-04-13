@@ -53,7 +53,10 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
       end: 1.0,
     ).animate(CurvedAnimation(parent: _hidePacksAnimationController, curve: Curves.linear));
     context.read<FootballPlayersPacksBloc>().add(
-      FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation),
+      FootballPlayersPacksEventGet(
+        country: widget.args.country,
+        // confederation: widget.args.confederation
+      ),
     );
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -65,7 +68,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
           name: "open_packs_screen",
           parameters: {
             if (widget.args.country != null) "country": widget.args.country!.name,
-            if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
+            // if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
           },
         );
       } catch (e) {
@@ -99,7 +102,7 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
         name: "pack_opened",
         parameters: {
           if (widget.args.country != null) "country": widget.args.country!.name,
-          if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
+          // if (widget.args.confederation != null) "confederation": widget.args.confederation!.name,
           "pack_index": selectedPackIndexSubject.value,
           "pack_title": packTitle,
         },
@@ -171,7 +174,9 @@ class FootballPlayersPacksScreenPresenterState extends State<FootballPlayersPack
 
   void getNewPacks() {
     context.read<FootballPlayersPacksBloc>().add(
-      FootballPlayersPacksEventGet(country: widget.args.country, confederation: widget.args.confederation),
+      FootballPlayersPacksEventGet(
+        country: widget.args.country, // confederation: widget.args.confederation
+      ),
     );
     _isHidePacksAnimationPlayingSubject.add(false);
     _isUnpackingAnimationPlayingSubject.add(false);

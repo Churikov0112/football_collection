@@ -21,7 +21,7 @@ class _CollectionTile extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            context.push(RoutePaths.footballConfederations);
+            context.push(RoutePaths.footballCountries);
           },
           child: SquareProgressIndicator(
             value: progress,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/club_foundation_date/club_foundation_date_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_club_by_stadium/guess_club_by_stadium_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
@@ -8,7 +9,6 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_country_and_seats/guess_stadium_by_country_and_seats_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/how_many_seats_in_stadium/how_many_seats_in_stadium_screen.dart';
-import 'package:football_collection/features/mini_games/presentation/screens/club_foundation_date/club_foundation_date_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/mini_games_screen/mini_games_screen.dart';
 import 'package:football_collection/features/onboarding/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:football_collection/features/settings/presentation/ui/screens/settings_screen/settings_screen.dart';
@@ -121,7 +121,7 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.footballCountries,
-          builder: (context, state) => FootballCountriesScreen(confederation: state.extra as FootballConfederations),
+          builder: (context, state) => FootballCountriesScreen(confederation: state.extra as FootballConfederations?),
         ),
         GoRoute(
           path: RoutePaths.footballPlayersAlbum,

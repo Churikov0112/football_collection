@@ -13,7 +13,7 @@ class TeamFlagOnPack extends StatelessWidget {
         shape: BoxShape.circle,
         // borderRadius: BorderRadius.all(Radius.circular(16)),
         border: Border.all(color: Colors.blueAccent, width: 6, strokeAlign: BorderSide.strokeAlignOutside),
-        image: DecorationImage(image: AssetImage("assets/raster/team_flags/$teamdId.jpg")),
+        image: DecorationImage(image: AssetImage("assets/raster/teams_flags/$teamdId.jpg")),
       ),
       child: SizedBox.square(dimension: size),
     );

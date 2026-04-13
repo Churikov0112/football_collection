@@ -87,7 +87,7 @@ class FootballCoachCardWidget extends StatelessWidget {
                     //   top: 5,
                     //   left: 5,
                     //   child: _Flag(
-                    //     imageAssetPath: 'assets/raster/team_flags/${coach.teamId}.jpg',
+                    //     imageAssetPath: 'assets/raster/teams_flags/${coach.teamId}.jpg',
                     //     nationalTeamVisibility: nationalTeamVisibility,
                     //   ),
                     // ),

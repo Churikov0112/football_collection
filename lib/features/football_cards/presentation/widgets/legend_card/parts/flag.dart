@@ -26,7 +26,7 @@ class _Flag extends StatelessWidget {
                   child: CircleAvatar(backgroundColor: Colors.white, child: Text("?")),
                 )
               : nationalTeamVisibility == .show
-              ? Image.asset('assets/raster/team_flags/${legend.teamId}.jpg', height: 32, width: 32)
+              ? Image.asset('assets/raster/teams_flags/${legend.teamId}.jpg', height: 32, width: 32)
               : SizedBox.shrink(),
         ),
       ),

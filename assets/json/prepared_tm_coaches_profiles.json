@@ -1,0 +1,472 @@
+[
+  {
+    "id": "20031",
+    "name": "Luis de la Fuente",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/20031-1697644064.jpg",
+    "citizenship": "Spain",
+    "current_club": {
+      "id": "3375",
+      "name": "Spain"
+    }
+  },
+  {
+    "id": "523",
+    "name": "Carlo Ancelotti",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/523-1502276656.jpg",
+    "citizenship": "Italy",
+    "current_club": {
+      "id": "3439",
+      "name": "Brazil"
+    }
+  },
+  {
+    "id": "439",
+    "name": "Ronald Koeman",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/439-1602054396.jpg",
+    "citizenship": "Netherlands",
+    "current_club": {
+      "id": "3379",
+      "name": "Netherlands"
+    }
+  },
+  {
+    "id": "1537",
+    "name": "Rudi Garcia",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/1537-1699865721.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "3382",
+      "name": "Belgium"
+    }
+  },
+  {
+    "id": "4328",
+    "name": "Roberto Martínez",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/4328-1673266584.jpg",
+    "citizenship": "Spain",
+    "current_club": {
+      "id": "3300",
+      "name": "Portugal"
+    }
+  },
+  {
+    "id": "112222",
+    "name": "Pape Thiaw",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/112222-1763499410.jpg",
+    "citizenship": "Senegal",
+    "current_club": {
+      "id": "3499",
+      "name": "Senegal"
+    }
+  },
+  {
+    "id": "62271",
+    "name": "Lionel Scaloni",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/62271-1669112335.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "3437",
+      "name": "Argentina"
+    }
+  },
+  {
+    "id": "8402",
+    "name": "Julian Nagelsmann",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/8402-1695117579.jpg",
+    "citizenship": "Germany",
+    "current_club": {
+      "id": "3262",
+      "name": "Germany"
+    }
+  },
+  {
+    "id": "1229",
+    "name": "Didier Deschamps",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/1229-1564582636.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "3377",
+      "name": "France"
+    }
+  },
+  {
+    "id": "36751",
+    "name": "Mohamed Ouahbi",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/36751-1758369418.jpeg",
+    "citizenship": "Belgium",
+    "current_club": {
+      "id": "3575",
+      "name": "Morocco"
+    }
+  },
+  {
+    "id": "9044",
+    "name": "Mauricio Pochettino",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/9044-1699302170.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "3505",
+      "name": "USA"
+    }
+  },
+  {
+    "id": "21905",
+    "name": "Hajime Moriyasu",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/21905-1615555434.jpg",
+    "citizenship": "Japan",
+    "current_club": {
+      "id": "3435",
+      "name": "Japan"
+    }
+  },
+  {
+    "id": "3240",
+    "name": "Murat Yakin",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/3240-1662410572.jpg",
+    "citizenship": "Switzerland",
+    "current_club": {
+      "id": "3384",
+      "name": "Switzerland"
+    }
+  },
+  {
+    "id": "34086",
+    "name": "Néstor Lorenzo",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/34086-1687299671.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "3816",
+      "name": "Colombia"
+    }
+  },
+  {
+    "id": "2711",
+    "name": "Zlatko Dalic",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/2711-1669199027.jpg",
+    "citizenship": "Croatia",
+    "current_club": {
+      "id": "3556",
+      "name": "Croatia"
+    }
+  },
+  {
+    "id": "34076",
+    "name": "Sebastián Beccacece",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/34076-1765277211.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "5750",
+      "name": "Ecuador"
+    }
+  },
+  {
+    "id": "9610",
+    "name": "Amir Ghalenoei",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/9610-1760614247.jpg",
+    "citizenship": "Iran",
+    "current_club": {
+      "id": "3582",
+      "name": "Iran"
+    }
+  },
+  {
+    "id": "196",
+    "name": "Ralf Rangnick",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/196-1713864951.jpg",
+    "citizenship": "Germany",
+    "current_club": {
+      "id": "3383",
+      "name": "Austria"
+    }
+  },
+  {
+    "id": "7471",
+    "name": "Thomas Tuchel",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/7471-1758823371.jpg",
+    "citizenship": "Germany",
+    "current_club": {
+      "id": "3299",
+      "name": "England"
+    }
+  },
+  {
+    "id": "20038",
+    "name": "Tony Popovic",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/20038-1704297296.jpg",
+    "citizenship": "Australia",
+    "current_club": {
+      "id": "3433",
+      "name": "Australia"
+    }
+  },
+  {
+    "id": "11564",
+    "name": "Myung-bo Hong",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/11564-1701827514.jpg",
+    "citizenship": "Korea, South",
+    "current_club": {
+      "id": "3589",
+      "name": "South Korea"
+    }
+  },
+  {
+    "id": "17275",
+    "name": "Jesse Marsch",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/17275-1601105472.png",
+    "citizenship": "United States",
+    "current_club": {
+      "id": "3510",
+      "name": "Canada"
+    }
+  },
+  {
+    "id": "3419",
+    "name": "Ståle Solbakken",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/3419-1472112779.jpg",
+    "citizenship": "Norway",
+    "current_club": {
+      "id": "3440",
+      "name": "Norway"
+    }
+  },
+  {
+    "id": "11795",
+    "name": "Vincenzo Montella",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/11795-1774434145.png",
+    "citizenship": "Italy",
+    "current_club": {
+      "id": "3381",
+      "name": "Turkiye"
+    }
+  },
+  {
+    "id": "1315",
+    "name": "Vladimir Petkovic",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/1315-1773316979.jpg",
+    "citizenship": "Switzerland",
+    "current_club": {
+      "id": "3614",
+      "name": "Algeria"
+    }
+  },
+  {
+    "id": "36659",
+    "name": "Thomas Christiansen",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/36659-1497534543.jpg",
+    "citizenship": "Spain",
+    "current_club": {
+      "id": "3577",
+      "name": "Panama"
+    }
+  },
+  {
+    "id": "63806",
+    "name": "Emerse Faé",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/63806-1707689351.jpg",
+    "citizenship": "Cote d'Ivoire",
+    "current_club": {
+      "id": "3591",
+      "name": "Ivory Coast"
+    }
+  },
+  {
+    "id": "6120",
+    "name": "Hossam Hassan",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/6120-1773315069.jpg",
+    "citizenship": "Egypt",
+    "current_club": {
+      "id": "3672",
+      "name": "Egypt"
+    }
+  },
+  {
+    "id": "23954",
+    "name": "Graham Potter",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/23954-1662574188.jpg",
+    "citizenship": "England",
+    "current_club": {
+      "id": "3557",
+      "name": "Sweden"
+    }
+  },
+  {
+    "id": "1548",
+    "name": "Javier Aguirre",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/1548-1583334311.jpg",
+    "citizenship": "Mexico",
+    "current_club": {
+      "id": "6303",
+      "name": "Mexico"
+    }
+  },
+  {
+    "id": "4871",
+    "name": "Gustavo Alfaro",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/4871-1662410876.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "3581",
+      "name": "Paraguay"
+    }
+  },
+  {
+    "id": "2638",
+    "name": "Steve Clarke",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/2638-1697449814.jpg",
+    "citizenship": "Scotland",
+    "current_club": {
+      "id": "3380",
+      "name": "Scotland"
+    }
+  },
+  {
+    "id": "9822",
+    "name": "Miroslav Koubek",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/9822-1697116392.jpg",
+    "citizenship": "Czech Republic",
+    "current_club": {
+      "id": "3445",
+      "name": "Czechia"
+    }
+  },
+  {
+    "id": "24207",
+    "name": "Sabri Lamouchi",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/24207-1602242285.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "3670",
+      "name": "Tunisia"
+    }
+  },
+  {
+    "id": "22575",
+    "name": "Fabio Cannavaro",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/22575-1643108190.jpg",
+    "citizenship": "Italy",
+    "current_club": {
+      "id": "3563",
+      "name": "Uzbekistan"
+    }
+  },
+  {
+    "id": "28090",
+    "name": "Sébastien Desabre",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/28090-1599226389.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "3854",
+      "name": "DR Congo"
+    }
+  },
+  {
+    "id": "2553",
+    "name": "Marcelo Bielsa",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/2553-1587720388.jpg",
+    "citizenship": "Argentina",
+    "current_club": {
+      "id": "3449",
+      "name": "Uruguay"
+    }
+  },
+  {
+    "id": "3342",
+    "name": "Graham Arnold",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/3342-1663775656.jpg",
+    "citizenship": "Australia",
+    "current_club": {
+      "id": "3560",
+      "name": "Iraq"
+    }
+  },
+  {
+    "id": "6480",
+    "name": "Hervé Renard",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/6480-1668174789.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "3807",
+      "name": "Saudi Arabia"
+    }
+  },
+  {
+    "id": "6615",
+    "name": "Julen Lopetegui",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/6615-1664870155.jpg",
+    "citizenship": "Spain",
+    "current_club": {
+      "id": "14162",
+      "name": "Qatar"
+    }
+  },
+  {
+    "id": "84856",
+    "name": "Bubista",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/84856-1705950450.jpg",
+    "citizenship": "Cape Verde",
+    "current_club": {
+      "id": "4311",
+      "name": "Cape Verde"
+    }
+  },
+  {
+    "id": "25573",
+    "name": "Jamal Sellami",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/25573-1646818554.png",
+    "citizenship": "Morocco",
+    "current_club": {
+      "id": "15737",
+      "name": "Jordan"
+    }
+  },
+  {
+    "id": "706",
+    "name": "Hugo Broos",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/706-1773310247.jpg",
+    "citizenship": "Belgium",
+    "current_club": {
+      "id": "3806",
+      "name": "South Africa"
+    }
+  },
+  {
+    "id": "8649",
+    "name": "Sergej Barbarez",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/8649-1714115585.jpg",
+    "citizenship": "Bosnia-Herzegovina",
+    "current_club": {
+      "id": "3446",
+      "name": "Bosnia"
+    }
+  },
+  {
+    "id": "3747",
+    "name": "Sébastien Migné",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/3747-1763536821.jpg",
+    "citizenship": "France",
+    "current_club": {
+      "id": "14161",
+      "name": "Haiti"
+    }
+  },
+  {
+    "id": "17293",
+    "name": "Darren Bazeley",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/17293-1721931694.jpg",
+    "citizenship": "England",
+    "current_club": {
+      "id": "9171",
+      "name": "New Zealand"
+    }
+  },
+  {
+    "id": "1883",
+    "name": "Fred Rutten",
+    "image_url": "https://img.a.transfermarkt.technology/portrait/header/t_1883_499_2012_1.jpg",
+    "citizenship": "Netherlands",
+    "current_club": {
+      "id": "32364",
+      "name": "Curaçao"
+    }
+  }
+]

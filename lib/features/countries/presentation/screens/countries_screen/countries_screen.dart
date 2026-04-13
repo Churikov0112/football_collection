@@ -27,7 +27,7 @@ part 'widgets/countries_list.dart';
 class FootballCountriesScreen extends StatelessWidget {
   const FootballCountriesScreen({required this.confederation, super.key});
 
-  final FootballConfederations confederation;
+  final FootballConfederations? confederation;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +42,11 @@ class FootballCountriesScreen extends StatelessWidget {
             body: Stack(
               children: [
                 BackgroundImage(),
-                BackgroundImageColorFilter(color: confederation.color),
+                BackgroundImageColorFilter(color: confederation?.color),
                 Column(children: [_CountriesList(confederation: confederation)]),
                 Translator(
-                  termin: confederation.continentTermin,
-                  builder: (value) => TransparentAppbar(title: value, backgroundColor: confederation.color),
+                  termin: AppGlossary.myCollection,
+                  builder: (value) => TransparentAppbar(title: value, backgroundColor: confederation?.color),
                 ),
                 Positioned(
                   bottom: mq.padding.bottom + 16,
@@ -56,7 +56,9 @@ class FootballCountriesScreen extends StatelessWidget {
                     onPressed: () {
                       context.push(
                         RoutePaths.footballPlayersPacks,
-                        extra: FootballPlayersPacksScreenArgs(confederation: confederation),
+                        extra: FootballPlayersPacksScreenArgs(
+                          // confederation: confederation
+                        ),
                       );
                     },
                   ),

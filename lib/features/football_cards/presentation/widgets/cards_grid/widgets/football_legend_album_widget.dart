@@ -11,7 +11,8 @@ class _FootballLegendAlbumWidget extends StatelessWidget {
     // return SavedPlayerCard(player: player);
 
     final absentWidget = Container(
-      color: country.confederation.color?.darken().withAlpha(200),
+      // color: country.confederation.color?.darken().withAlpha(200),
+      color: Colors.blueAccent.darken(0.3).withAlpha(180),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

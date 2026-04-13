@@ -132,11 +132,11 @@ flutter:
     - assets/3d/
     - assets/json/
     - assets/raster/field/
-    - assets/raster/player_faces/
+    - assets/raster/players_faces/
     - assets/raster/legends_faces/
-    - assets/raster/team_flags/
-    - assets/raster/team_emblems/
-    - assets/raster/coach_faces/
+    - assets/raster/teams_flags/
+    - assets/raster/teams_emblems/
+    - assets/raster/coaches_faces/
     - assets/raster/packs/
     - assets/raster/background/
     - assets/raster/icon/

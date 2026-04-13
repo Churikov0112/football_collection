@@ -12,7 +12,7 @@ class _CoachTopLeft extends StatelessWidget {
         DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(bottomRight: .circular(8)),
-            image: DecorationImage(image: AssetImage('assets/raster/team_flags/${coach.teamId}.jpg')),
+            image: DecorationImage(image: AssetImage('assets/raster/teams_flags/${coach.teamId}.jpg')),
           ),
           child: SizedBox.square(dimension: _kTopLeftElementSize),
         ),

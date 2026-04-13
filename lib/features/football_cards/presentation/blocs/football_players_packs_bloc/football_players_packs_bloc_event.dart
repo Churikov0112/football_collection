@@ -4,7 +4,10 @@ sealed class FootballPlayersPacksEvent {}
 
 final class FootballPlayersPacksEventGet extends FootballPlayersPacksEvent {
   final FootballNationalTeamModel? country;
-  final FootballConfederations? confederation;
+  // final FootballConfederations? confederation;
 
-  FootballPlayersPacksEventGet({this.country, this.confederation});
+  FootballPlayersPacksEventGet({
+    this.country,
+    // this.confederation
+  });
 }

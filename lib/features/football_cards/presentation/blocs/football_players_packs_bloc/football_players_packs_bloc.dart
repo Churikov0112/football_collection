@@ -24,7 +24,10 @@ class FootballPlayersPacksBloc extends Bloc<FootballPlayersPacksEvent, FootballP
   Future<void> _get(FootballPlayersPacksEventGet event, Emitter<FootballPlayersPacksState> emit) async {
     try {
       emit(FootballPlayersPacksStatePending());
-      final packs = await _repository.packsGet(team: event.country, confederation: event.confederation);
+      final packs = await _repository.packsGet(
+        team: event.country,
+        // confederation: event.confederation
+      );
       emit(FootballPlayersPacksStateLoadSucceeded(packs));
     } on Object catch (_) {
       emit(FootballPlayersPacksStateFailed('Произошла ошибка'));

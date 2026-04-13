@@ -108,7 +108,7 @@ class _Option extends StatelessWidget {
       //     child: Stack(
       //       fit: StackFit.expand,
       //       children: [
-      //         Image.asset('assets/raster/team_flags/${option.id}.jpg', fit: BoxFit.cover),
+      //         Image.asset('assets/raster/teams_flags/${option.id}.jpg', fit: BoxFit.cover),
       //         if (overlayColor != null) ColoredBox(color: overlayColor),
       //         if (overlayColor != null)
       //           Center(child: Icon(isRight ? Icons.check : Icons.close, color: Colors.white, size: 32)),

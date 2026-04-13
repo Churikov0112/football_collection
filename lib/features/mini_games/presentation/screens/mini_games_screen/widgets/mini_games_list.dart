@@ -15,44 +15,31 @@ class _MiniGamesList extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        padding: EdgeInsets.only(
-          top: mq.padding.top + 80,
-          left: 20,
-          right: 20,
-          bottom: 200,
-        ),
+        padding: EdgeInsets.only(top: mq.padding.top + 80, left: 20, right: 20, bottom: 200),
         children: [
           _MiniGameTile(
             title: AppGlossary.draft,
-            color: Colors.pinkAccent,
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
             onTap: () {
               try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "draft"},
-                );
+                FirebaseAnalytics.instance.logEvent(name: "mini_game_opened", parameters: {"mini_game": "draft"});
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
 
-              final savedCardsIds =
-                  getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
+              final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
               if (savedCardsIds.length < 100) {
-                ToastService.showErrorToast(
-                  title: AppGlossary.draftLimitation.translate(),
-                );
+                ToastService.showErrorToast(title: AppGlossary.draftLimitation.translate());
                 return;
               }
 
-              BottomSheetController.showBottomSheet(
-                context,
-                (context) => const DraftDescriptionScreen(),
-              );
+              BottomSheetController.showBottomSheet(context, (context) => const DraftDescriptionScreen());
             },
           ),
           _MiniGameTile(
             title: AppGlossary.guessPlayer,
-            color: Colors.teal,
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -67,7 +54,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessTransferValue,
-            color: Colors.blue,
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -82,7 +70,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.whoCostsMore,
-            color: Colors.purple,
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -97,7 +86,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.marketValueUpOrDown,
-            color: Colors.blueAccent.darken(0.3),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -112,7 +102,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessPlayerTeam,
-            color: Colors.red,
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -128,7 +119,8 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessSecondCitizenship,
-            color: const Color.fromARGB(255, 112, 0, 0),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -144,7 +136,8 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessPlayerSponsor,
-            color: const Color.fromARGB(255, 255, 68, 211).darken(0.3),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -160,7 +153,8 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessClubByStadium,
-            color: const Color.fromARGB(255, 68, 180, 255).darken(0.3),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -175,7 +169,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessStadiumByClub,
-            color: const Color.fromARGB(255, 0, 150, 136).darken(0.2),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -190,7 +185,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.howManySeatsInStadium,
-            color: const Color.fromARGB(255, 255, 152, 0).darken(0.15),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -205,26 +201,24 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessStadiumByCountryAndSeats,
-            color: const Color.fromARGB(255, 121, 85, 72).darken(0.05),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {
-                    "mini_game": "guess_stadium_by_country_and_seats",
-                  },
+                  parameters: {"mini_game": "guess_stadium_by_country_and_seats"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(
-                RoutePaths.footballMiniGameGuessStadiumByCountryAndSeats,
-              );
+              context.push(RoutePaths.footballMiniGameGuessStadiumByCountryAndSeats);
             },
           ),
           _MiniGameTile(
             title: AppGlossary.clubFoundationDate,
-            color: const Color.fromARGB(255, 63, 81, 181).darken(0.1),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -240,7 +234,8 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessCountryByFlag,
-            color: const Color.fromARGB(255, 78, 146, 192).darken(0.3),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -255,7 +250,8 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessCountryFlag,
-            color: const Color.fromARGB(255, 78, 146, 192).darken(0.3),
+            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -285,11 +281,7 @@ class _MiniGamesList extends StatelessWidget {
 }
 
 class _MiniGameTile extends StatelessWidget {
-  const _MiniGameTile({
-    required this.title,
-    required this.color,
-    required this.onTap,
-  });
+  const _MiniGameTile({required this.title, required this.color, required this.onTap});
 
   final AppGlossary title;
   final Color color;

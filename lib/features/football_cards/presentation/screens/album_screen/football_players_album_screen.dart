@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
-import 'package:football_collection/features/football_confederations/domain/models/football_confederation.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/widgets/open_packs_screen_button.dart';
 import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
@@ -41,7 +40,7 @@ class FootballPlayersAlbumScreen extends StatelessWidget {
             body: Stack(
               children: [
                 BackgroundImage(),
-                BackgroundImageColorFilter(color: country.confederation.color),
+                BackgroundImageColorFilter(color: Colors.blueAccent),
                 Column(children: [_FootballCardsList(country: country)]),
                 TransparentAppbar(
                   title: "${emojiFlagByCountryName(country.name) ?? ""}  ${country.name}",

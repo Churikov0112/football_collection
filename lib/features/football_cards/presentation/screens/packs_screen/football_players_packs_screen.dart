@@ -32,7 +32,6 @@ import '../../../../../services/navigation/navigation.dart';
 import '../../../../../ui_kit/colors/colors.dart';
 import '../../../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../../abstract/domain/models/card.dart';
-import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
@@ -55,8 +54,11 @@ const packWidth = 200.0;
 
 class FootballPlayersPacksScreenArgs {
   final FootballNationalTeamModel? country;
-  final FootballConfederations? confederation;
-  const FootballPlayersPacksScreenArgs({this.country, this.confederation});
+  // final FootballConfederations? confederation;
+  const FootballPlayersPacksScreenArgs({
+    this.country,
+    // this.confederation
+  });
 }
 
 class FootballPlayersPacksScreen extends StatelessWidget {

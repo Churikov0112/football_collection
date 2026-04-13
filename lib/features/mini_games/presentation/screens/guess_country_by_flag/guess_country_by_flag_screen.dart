@@ -108,7 +108,7 @@ class _FlagCard extends StatelessWidget {
     // return DecoratedBox(
     //   decoration: BoxDecoration(
     //     borderRadius: BorderRadius.all(Radius.circular(12)),
-    //     image: DecorationImage(image: AssetImage('assets/raster/team_flags/${team.id}.jpg')),
+    //     image: DecorationImage(image: AssetImage('assets/raster/teams_flags/${team.id}.jpg')),
     //   ),
     //   child: SizedBox.square(dimension: mq.size.width / 2),
     // );
