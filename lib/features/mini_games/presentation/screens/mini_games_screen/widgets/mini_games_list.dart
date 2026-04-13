@@ -126,6 +126,21 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
+            title: AppGlossary.guessPlayerClub,
+            color: Colors.teal.darken(0.85),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_club"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerClub);
+            },
+          ),
+          _MiniGameTile(
             title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {
