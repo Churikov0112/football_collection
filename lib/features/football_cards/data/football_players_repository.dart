@@ -64,6 +64,32 @@ class CommonFootballRepository {
     }
   }
 
+  Map<String, int> _ageByPlayerIdGet(List<dynamic> marketValuesData) {
+    final ageByPlayerId = <String, int>{};
+
+    for (final item in marketValuesData) {
+      final playerId = item['id']?.toString();
+      final history = item['marketValueHistory'];
+      if (playerId == null || history is! List) {
+        continue;
+      }
+
+      int? age;
+      for (final historyItem in history) {
+        final historyAge = historyItem['age'];
+        if (historyAge is int && (age == null || historyAge > age)) {
+          age = historyAge;
+        }
+      }
+
+      if (age != null) {
+        ageByPlayerId[playerId] = age;
+      }
+    }
+
+    return ageByPlayerId;
+  }
+
   List<FootballLegendCardModel> _parseLegends(List<dynamic> data) {
     try {
       final List<FootballLegendCardModel> legends = [];
@@ -112,6 +138,17 @@ class CommonFootballRepository {
       );
       final List<dynamic> playersData = jsonDecode(playersJson);
 
+      final String marketValuesJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_players_market_values.json',
+      );
+      final List<dynamic> marketValuesData = jsonDecode(marketValuesJson);
+      final ageByPlayerId = _ageByPlayerIdGet(marketValuesData);
+      final enrichedPlayersData = playersData.map((item) {
+        final playerData = Map<dynamic, dynamic>.from(item);
+        playerData['age'] = ageByPlayerId[playerData['id']?.toString()];
+        return playerData;
+      }).toList();
+
       final String legendsJson = await rootBundle.loadString(
         'assets/json/prepared_tm_legends_profiles.json',
       );
@@ -129,7 +166,7 @@ class CommonFootballRepository {
 
       try {
         if (_allPlayersCache.isEmpty) {
-          _allPlayersCache = await compute(_parsePlayers, playersData);
+          _allPlayersCache = await compute(_parsePlayers, enrichedPlayersData);
         }
       } catch (e) {
         LogService.log(e.toString());
@@ -338,7 +375,7 @@ class CommonFootballRepository {
 
   /// Возвращает карты с учетом фильтров
   ///
-  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName] влияют только на игроков
+  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName], [withAge] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
@@ -353,6 +390,7 @@ class CommonFootballRepository {
     bool? withFoot,
     bool? withTeamShirtNumber,
     bool? withClubName,
+    bool? withAge,
   }) async {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
@@ -420,6 +458,9 @@ class CommonFootballRepository {
             (card.clubName == null || card.clubName == 'Without Club')) {
           return false;
         }
+        if (withAge == true && card.age == null) {
+          return false;
+        }
       }
 
       return true;
@@ -442,6 +483,7 @@ class CommonFootballRepository {
     bool? withFoot,
     bool? withTeamShirtNumber,
     bool? withClubName,
+    bool? withAge,
     bool unique = false,
   }) async {
     final result = <CardModel>[];
@@ -461,6 +503,7 @@ class CommonFootballRepository {
         withFoot: withFoot,
         withTeamShirtNumber: withTeamShirtNumber,
         withClubName: withClubName,
+        withAge: withAge,
         cardTypes: cardTypes,
       );
 

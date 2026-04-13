@@ -5,6 +5,7 @@ import 'package:football_collection/features/mini_games/presentation/screens/gue
 import 'package:football_collection/features/mini_games/presentation/screens/guess_foot_screen/guess_foot_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_height_screen/guess_height_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_player_age_screen/guess_player_age_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_club_screen/guess_player_club_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_number_screen/guess_player_number_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
@@ -68,6 +69,8 @@ class RoutePaths {
       '/footballMiniGameGuessPlayerNumber';
   static const footballMiniGameGuessPlayerClub =
       '/footballMiniGameGuessPlayerClub';
+  static const footballMiniGameGuessPlayerAge =
+      '/footballMiniGameGuessPlayerAge';
   static const footballMiniGameMarketValueUpOrDown =
       '/footballMiniGameMarketValueUpOrDown';
   static const footballMiniGameGuessPlayerSponsor =
@@ -231,6 +234,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessPlayerClub,
           builder: (context, state) => const GuessPlayerClubScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerAge,
+          builder: (context, state) => const GuessPlayerAgeScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessPlayerSponsor,

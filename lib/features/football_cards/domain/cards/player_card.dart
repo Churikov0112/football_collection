@@ -17,6 +17,7 @@ class FootballPlayerCardModel extends CardModel {
   final String? clubName;
   final String? position;
   final String? birthDate;
+  final int? age;
   final int? height;
   final String? outfitter;
   final bool? isRetired;
@@ -33,6 +34,7 @@ class FootballPlayerCardModel extends CardModel {
     required this.name,
     required this.position,
     required this.birthDate,
+    required this.age,
     required this.height,
     required this.foot,
     required this.clubId,
@@ -55,6 +57,7 @@ class FootballPlayerCardModel extends CardModel {
       name: json['name'],
       position: json['position']?['main'],
       birthDate: json['birth_date'],
+      age: json['age'],
       height: json['height'],
       foot: json['foot'],
       teamShirtNumber: json['team_shirt_number'],
@@ -67,7 +70,10 @@ class FootballPlayerCardModel extends CardModel {
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
       citizenship: (json['citizenship'] is List)
-          ? [for (final citizenship in json['citizenship']) citizenship.toString()]
+          ? [
+              for (final citizenship in json['citizenship'])
+                citizenship.toString(),
+            ]
           : null,
     );
   }

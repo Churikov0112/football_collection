@@ -13,6 +13,7 @@ final class RandomFootballPlayersEventGet extends RandomFootballPlayersEvent {
   final bool? withFoot;
   final bool? withTeamShirtNumber;
   final bool? withClubName;
+  final bool? withAge;
 
   RandomFootballPlayersEventGet({
     required this.count,
@@ -25,5 +26,6 @@ final class RandomFootballPlayersEventGet extends RandomFootballPlayersEvent {
     this.withFoot,
     this.withTeamShirtNumber,
     this.withClubName,
+    this.withAge,
   });
 }
