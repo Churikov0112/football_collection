@@ -89,6 +89,19 @@ class GuessPlayerJoinDateScreen extends StatelessWidget {
                               badge: .none,
                             ),
                           ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              player.clubName!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 20),
                           _GuessOptions(
                             options: options,
