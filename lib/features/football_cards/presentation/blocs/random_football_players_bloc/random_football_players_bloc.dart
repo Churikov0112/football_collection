@@ -33,6 +33,7 @@ class RandomFootballPlayersBloc
         withSponsor: event.withSponsor,
         withSecondCitizenship: event.withSecondCitizenship,
         withHeight: event.withHeight,
+        withPosition: event.withPosition,
         unique: event.unique,
       );
       emit(
