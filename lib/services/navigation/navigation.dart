@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/features/football_confederations/presentation/screens/confederations_screen/football_confederations_screen.dart';
 import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_club_by_stadium/guess_club_by_stadium_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_foot_screen/guess_foot_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_height_screen/guess_height_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
@@ -60,6 +61,7 @@ class RoutePaths {
   static const footballMiniGameGuessPlayer = '/footballMiniGameGuessPlayer';
   static const footballMiniGameGuessHeight = '/footballMiniGameGuessHeight';
   static const footballMiniGameGuessPosition = '/footballMiniGameGuessPosition';
+  static const footballMiniGameGuessFoot = '/footballMiniGameGuessFoot';
   static const footballMiniGameMarketValueUpOrDown =
       '/footballMiniGameMarketValueUpOrDown';
   static const footballMiniGameGuessPlayerSponsor =
@@ -211,6 +213,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.footballMiniGameGuessPosition,
           builder: (context, state) => const GuessPositionScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessFoot,
+          builder: (context, state) => const GuessFootScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessPlayerSponsor,
