@@ -156,6 +156,21 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
+            title: AppGlossary.guessPlayerJoinDate,
+            color: const Color.fromARGB(255, 0, 96, 100),
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_join_date"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerJoinDate);
+            },
+          ),
+          _MiniGameTile(
             title: AppGlossary.guessTransferValue,
             color: Colors.blue,
             onTap: () {

@@ -15,6 +15,7 @@ class FootballPlayerCardModel extends CardModel {
   final String? teamShirtNumber;
   final String? clubId;
   final String? clubName;
+  final DateTime? joinedClubOn;
   final String? position;
   final String? birthDate;
   final int? age;
@@ -39,6 +40,7 @@ class FootballPlayerCardModel extends CardModel {
     required this.foot,
     required this.clubId,
     required this.clubName,
+    required this.joinedClubOn,
     required this.teamId,
     required this.teamName,
     required this.teamShirtNumber,
@@ -65,6 +67,9 @@ class FootballPlayerCardModel extends CardModel {
       teamId: json['team_id'],
       teamName: json['team_name'],
       clubName: json['club_name'],
+      joinedClubOn: json['joinedClubOn'] != null
+          ? DateTime.tryParse(json['joinedClubOn'])
+          : null,
       maxMarketValue: json['maxMarketValue'],
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],

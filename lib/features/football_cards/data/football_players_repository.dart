@@ -90,6 +90,59 @@ class CommonFootballRepository {
     return ageByPlayerId;
   }
 
+  Map<String, String> _joinedClubOnByPlayerIdGet(
+    List<dynamic> marketValuesData,
+  ) {
+    final joinedClubOnByPlayerId = <String, String>{};
+
+    for (final item in marketValuesData) {
+      final playerId = item['id']?.toString();
+      final history = item['marketValueHistory'];
+      if (playerId == null || history is! List || history.isEmpty) {
+        continue;
+      }
+
+      final normalizedHistory = history
+          .whereType<Map>()
+          .map((raw) => Map<String, dynamic>.from(raw))
+          .where((entry) => entry['date'] != null)
+          .toList();
+      if (normalizedHistory.isEmpty) {
+        continue;
+      }
+
+      normalizedHistory.sort(
+        (a, b) => a['date'].toString().compareTo(b['date'].toString()),
+      );
+      final latest = normalizedHistory.last;
+      final currentClubId = latest['clubId']?.toString();
+      final currentClubName = latest['clubName']?.toString();
+      if (currentClubId == null && currentClubName == null) {
+        continue;
+      }
+
+      Map<String, dynamic>? joinedItem;
+      for (final historyItem in normalizedHistory.reversed) {
+        final sameClub =
+            (currentClubId != null &&
+                historyItem['clubId']?.toString() == currentClubId) ||
+            (currentClubId == null &&
+                historyItem['clubName']?.toString() == currentClubName);
+        if (!sameClub) {
+          break;
+        }
+        joinedItem = historyItem;
+      }
+
+      final joinedDate = joinedItem?['date']?.toString();
+      if (joinedDate != null) {
+        joinedClubOnByPlayerId[playerId] = joinedDate;
+      }
+    }
+
+    return joinedClubOnByPlayerId;
+  }
+
   List<FootballLegendCardModel> _parseLegends(List<dynamic> data) {
     try {
       final List<FootballLegendCardModel> legends = [];
@@ -143,9 +196,14 @@ class CommonFootballRepository {
       );
       final List<dynamic> marketValuesData = jsonDecode(marketValuesJson);
       final ageByPlayerId = _ageByPlayerIdGet(marketValuesData);
+      final joinedClubOnByPlayerId = _joinedClubOnByPlayerIdGet(
+        marketValuesData,
+      );
       final enrichedPlayersData = playersData.map((item) {
         final playerData = Map<dynamic, dynamic>.from(item);
         playerData['age'] = ageByPlayerId[playerData['id']?.toString()];
+        playerData['joinedClubOn'] =
+            joinedClubOnByPlayerId[playerData['id']?.toString()];
         return playerData;
       }).toList();
 
@@ -375,7 +433,7 @@ class CommonFootballRepository {
 
   /// Возвращает карты с учетом фильтров
   ///
-  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName], [withAge] влияют только на игроков
+  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName], [withAge], [withJoinedClubOn] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
@@ -391,6 +449,7 @@ class CommonFootballRepository {
     bool? withTeamShirtNumber,
     bool? withClubName,
     bool? withAge,
+    bool? withJoinedClubOn,
   }) async {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
@@ -461,6 +520,9 @@ class CommonFootballRepository {
         if (withAge == true && card.age == null) {
           return false;
         }
+        if (withJoinedClubOn == true && card.joinedClubOn == null) {
+          return false;
+        }
       }
 
       return true;
@@ -484,6 +546,7 @@ class CommonFootballRepository {
     bool? withTeamShirtNumber,
     bool? withClubName,
     bool? withAge,
+    bool? withJoinedClubOn,
     bool unique = false,
   }) async {
     final result = <CardModel>[];
@@ -504,6 +567,7 @@ class CommonFootballRepository {
         withTeamShirtNumber: withTeamShirtNumber,
         withClubName: withClubName,
         withAge: withAge,
+        withJoinedClubOn: withJoinedClubOn,
         cardTypes: cardTypes,
       );
 

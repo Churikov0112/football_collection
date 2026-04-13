@@ -38,6 +38,7 @@ class RandomFootballPlayersBloc
         withTeamShirtNumber: event.withTeamShirtNumber,
         withClubName: event.withClubName,
         withAge: event.withAge,
+        withJoinedClubOn: event.withJoinedClubOn,
         unique: event.unique,
       );
       emit(
