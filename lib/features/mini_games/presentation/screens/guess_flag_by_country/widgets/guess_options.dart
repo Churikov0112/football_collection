@@ -15,17 +15,28 @@ class _GuessOptions extends StatelessWidget {
       builder: (context, selectedOptionSnapshot) {
         final selectedOption = selectedOptionSnapshot.data;
 
-        return Padding(
+        return GridView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              for (final option in options) ...[
-                _Option(option: option, selectedOption: selectedOption, rightAnswer: rightAnswer),
-              ],
-            ],
+          shrinkWrap: true,
+          itemCount: options.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
           ),
+          itemBuilder: (context, index) {
+            final option = options[index];
+            return _Option(option: option, selectedOption: selectedOption, rightAnswer: rightAnswer);
+          },
+          // Wrap(
+          //   spacing: 12,
+          //   runSpacing: 12,
+          //   children: [
+          //     for (final option in options) ...[
+          //       _Option(option: option, selectedOption: selectedOption, rightAnswer: rightAnswer),
+          //     ],
+          //   ],
+          // ),
         );
       },
     );
@@ -57,6 +68,11 @@ class _Option extends StatelessWidget {
         : isRight
         ? Colors.green.withOpacity(0.7)
         : null;
+    final emoji = emojiFlagByCountryName(option.name);
+
+    if (emoji == null) {
+      return const SizedBox.shrink();
+    }
 
     return GestureDetector(
       onTap: () async {
@@ -64,22 +80,42 @@ class _Option extends StatelessWidget {
           presenter.showResult(selectedAnswer: option, rightAnswer: rightAnswer);
         }
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        child: SizedBox(
-          width: tileWidth,
-          height: tileWidth,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset('assets/raster/team_flags/${option.id}.jpg', fit: BoxFit.cover),
-              if (overlayColor != null) ColoredBox(color: overlayColor),
-              if (overlayColor != null)
-                Center(child: Icon(isRight ? Icons.check : Icons.close, color: Colors.white, size: 32)),
-            ],
+      child: Stack(
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.all(Radius.circular(12))),
+            child: Center(child: Text(emoji, style: const TextStyle(fontSize: 48))),
           ),
-        ),
+          if (overlayColor != null) ...[
+            Positioned(
+              left: 0,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                decoration: BoxDecoration(color: overlayColor, borderRadius: BorderRadius.all(Radius.circular(12))),
+              ),
+            ),
+            Center(child: Icon(isRight ? Icons.check : Icons.close, color: Colors.white, size: 32)),
+          ],
+        ],
       ),
+      // ClipRRect(
+      //   borderRadius: BorderRadius.all(Radius.circular(12)),
+      //   child: SizedBox(
+      //     width: tileWidth,
+      //     height: tileWidth,
+      //     child: Stack(
+      //       fit: StackFit.expand,
+      //       children: [
+      //         Image.asset('assets/raster/team_flags/${option.id}.jpg', fit: BoxFit.cover),
+      //         if (overlayColor != null) ColoredBox(color: overlayColor),
+      //         if (overlayColor != null)
+      //           Center(child: Icon(isRight ? Icons.check : Icons.close, color: Colors.white, size: 32)),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
