@@ -338,7 +338,7 @@ class CommonFootballRepository {
 
   /// Возвращает карты с учетом фильтров
   ///
-  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot] влияют только на игроков
+  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
@@ -351,6 +351,7 @@ class CommonFootballRepository {
     bool? withHeight,
     bool? withPosition,
     bool? withFoot,
+    bool? withTeamShirtNumber,
   }) async {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
@@ -410,6 +411,10 @@ class CommonFootballRepository {
         if (withFoot == true && card.foot == null) {
           return false;
         }
+        if (withTeamShirtNumber == true &&
+            (card.teamShirtNumber == null || card.teamShirtNumber == '-')) {
+          return false;
+        }
       }
 
       return true;
@@ -430,6 +435,7 @@ class CommonFootballRepository {
     bool? withHeight,
     bool? withPosition,
     bool? withFoot,
+    bool? withTeamShirtNumber,
     bool unique = false,
   }) async {
     final result = <CardModel>[];
@@ -447,6 +453,7 @@ class CommonFootballRepository {
         withHeight: withHeight,
         withPosition: withPosition,
         withFoot: withFoot,
+        withTeamShirtNumber: withTeamShirtNumber,
         cardTypes: cardTypes,
       );
 

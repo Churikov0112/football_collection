@@ -35,6 +35,7 @@ class RandomFootballPlayersBloc
         withHeight: event.withHeight,
         withPosition: event.withPosition,
         withFoot: event.withFoot,
+        withTeamShirtNumber: event.withTeamShirtNumber,
         unique: event.unique,
       );
       emit(
