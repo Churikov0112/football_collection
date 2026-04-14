@@ -17,14 +17,12 @@ class _GuessOptions extends StatelessWidget {
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
+          child: Row(
             spacing: 8,
             children: [
               for (final option in options) ...[
-                _Option(
-                  option: option,
-                  selectedOption: selectedOption,
-                  rightAnswer: rightAnswer,
+                Expanded(
+                  child: _Option(option: option, selectedOption: selectedOption, rightAnswer: rightAnswer),
                 ),
               ],
             ],
@@ -36,11 +34,7 @@ class _GuessOptions extends StatelessWidget {
 }
 
 class _Option extends StatelessWidget {
-  const _Option({
-    required this.option,
-    required this.selectedOption,
-    required this.rightAnswer,
-  });
+  const _Option({required this.option, required this.selectedOption, required this.rightAnswer});
 
   final String option;
   final String rightAnswer;
@@ -54,10 +48,7 @@ class _Option extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (selectedOption == null) {
-          presenter.showResult(
-            selectedAnswer: option,
-            rightAnswer: rightAnswer,
-          );
+          presenter.showResult(selectedAnswer: option, rightAnswer: rightAnswer);
         }
       },
       child: DecoratedBox(

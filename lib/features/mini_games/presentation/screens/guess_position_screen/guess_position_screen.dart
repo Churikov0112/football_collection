@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/football_cards/presentation/widgets/card_image_wrapper/card_image_wrapper.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:rxdart/rxdart.dart';
@@ -38,10 +39,7 @@ class GuessPositionScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<
-                    RandomFootballPlayersBloc,
-                    RandomFootballPlayersState
-                  >(
+                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
                     builder: (context, randomPlayersState) {
                       final allPlayers = randomPlayersState.players ?? [];
                       final player = allPlayers.firstOrNull;
@@ -54,9 +52,7 @@ class GuessPositionScreen extends StatelessWidget {
                       final wrongOptions = <String>[];
                       for (final item in allPlayers) {
                         final position = item.position;
-                        if (position == null ||
-                            position == correctAnswer ||
-                            wrongOptions.contains(position)) {
+                        if (position == null || position == correctAnswer || wrongOptions.contains(position)) {
                           continue;
                         }
                         wrongOptions.add(position);
@@ -80,13 +76,11 @@ class GuessPositionScreen extends StatelessWidget {
                             child: FootballPlayerCardWidget(
                               player: player,
                               badge: .none,
+                              positionVisibility: CardElementVisibility.none,
                             ),
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(
-                            options: options,
-                            rightAnswer: correctAnswer,
-                          ),
+                          _GuessOptions(options: options, rightAnswer: correctAnswer),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
@@ -94,10 +88,7 @@ class GuessPositionScreen extends StatelessWidget {
                               if (isBannerAlreadyCreatedSnapshot.data != true) {
                                 return const SizedBox(height: 100);
                               }
-                              return SizedBox(
-                                height: 100,
-                                child: AdWidget(bannerAd: presenter.banner),
-                              );
+                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),

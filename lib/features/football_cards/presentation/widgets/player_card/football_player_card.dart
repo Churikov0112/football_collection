@@ -21,6 +21,9 @@ class FootballPlayerCardWidget extends StatelessWidget {
     this.marketValueVisibility = CardElementVisibility.show,
     this.nationalTeamVisibility = CardElementVisibility.show,
     this.nameVisibility = CardElementVisibility.show,
+    this.positionVisibility = CardElementVisibility.show,
+    this.numberVisibility = CardElementVisibility.show,
+    this.clubVisibility = CardElementVisibility.show,
     this.onTap,
     this.onSell,
     this.onSellAll,
@@ -35,6 +38,9 @@ class FootballPlayerCardWidget extends StatelessWidget {
   final CardElementVisibility marketValueVisibility;
   final CardElementVisibility nationalTeamVisibility;
   final CardElementVisibility nameVisibility;
+  final CardElementVisibility positionVisibility;
+  final CardElementVisibility numberVisibility;
+  final CardElementVisibility clubVisibility;
 
   final VoidCallback? onTap;
   final VoidCallback? onSell;
@@ -84,6 +90,9 @@ class FootballPlayerCardWidget extends StatelessWidget {
                       card: player,
                       nationalTeamVisibility: nationalTeamVisibility,
                       marketValueVisibility: marketValueVisibility,
+                      numberVisibility: numberVisibility,
+                      positionVisibility: positionVisibility,
+                      clubVisibility: clubVisibility,
                       badge: badge,
                       onSell: onSell,
                       onSellAll: onSellAll,
