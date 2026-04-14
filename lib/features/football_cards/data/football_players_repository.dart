@@ -235,7 +235,7 @@ class CommonFootballRepository {
       PackModel(
         type: .common,
         title: "World Cup",
-        price: 0,
+        price: 5,
         cards: await getRandomCards(cardTypes: CardType.values.toSet()),
         // imageAssetPath: "assets/raster/packs/pack-worldtour.png",
         // glbAssetPath: "assets/3d/pack-worldtour.glb",
@@ -315,7 +315,7 @@ class CommonFootballRepository {
 
       // Фильтрация по топ-странам
       if (topCountries == true) {
-        final top25Teams = _allTeamsCache.sublist(0, 25);
+        final top25Teams = _allTeamsCache.sublist(0, 10);
         if (top25Teams.firstWhereOrNull((t) => t.id == card.teamId) == null) {
           return false;
         }
