@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../services/localization/translator.dart';
 import '../../../../../../services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import '../../../../../../services/navigation/navigation.dart';
-import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../../../ui_kit/widgets/transparent_appbar/watch_ad_screen/watch_ad_screen.dart';
 import '../../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 
@@ -67,7 +67,7 @@ class DraftDescriptionScreen extends StatelessWidget {
               bottom: mq.padding.bottom + 16,
               child: Translator(
                 termin: AppGlossary.startDraft,
-                builder: (value) => GlassButton(
+                builder: (value) => Button(
                   onPressed: () {
                     final balanceBloc = getIt.get<BalanceBloc>();
                     final balance = balanceBloc.state.balance ?? 0;

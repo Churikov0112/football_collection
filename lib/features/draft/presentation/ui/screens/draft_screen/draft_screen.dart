@@ -13,7 +13,7 @@ import '../../../../../../di/di.dart';
 import '../../../../../../services/localization/translator.dart';
 import '../../../../../../services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import '../../../../../../services/navigation/navigation.dart';
-import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../../../football_cards/data/football_players_repository.dart';

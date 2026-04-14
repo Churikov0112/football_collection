@@ -5,15 +5,11 @@ import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../club_foundation_date_screen.dart';
 
-mixin ClubFoundationDateYandexAdsBannerMixin
-    on State<ClubFoundationDateScreenPresenter> {
+mixin ClubFoundationDateYandexAdsBannerMixin on State<ClubFoundationDateScreenPresenter> {
   late BannerAd banner;
 
-  BehaviorSubject<bool> isBannerAlreadyCreatedSubject = BehaviorSubject.seeded(
-    false,
-  );
-  Stream<bool> get isBannerAlreadyCreatedStream$ =>
-      isBannerAlreadyCreatedSubject.stream;
+  BehaviorSubject<bool> isBannerAlreadyCreatedSubject = BehaviorSubject.seeded(false);
+  Stream<bool> get isBannerAlreadyCreatedStream$ => isBannerAlreadyCreatedSubject.stream;
 
   BannerAdSize _getBannerAdSize() {
     final width = MediaQuery.of(context).size.width.round();
@@ -22,7 +18,7 @@ mixin ClubFoundationDateYandexAdsBannerMixin
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: adConfig.miniGame4BottomBanner,
+      adUnitId: adConfig.miniGamesBottomBanner,
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {

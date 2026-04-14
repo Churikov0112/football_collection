@@ -167,7 +167,7 @@ class _Scheme extends StatelessWidget {
                                     return Positioned(
                                       bottom: 16,
                                       right: 16,
-                                      child: GlassButton(
+                                      child: Button(
                                         icon: Icons.change_circle_outlined,
                                         onPressed: () {
                                           presenter.openPlayerSelector(selectedPlayerSnapshot.data!.$1);

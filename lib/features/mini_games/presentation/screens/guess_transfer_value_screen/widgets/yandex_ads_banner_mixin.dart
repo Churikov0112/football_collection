@@ -18,7 +18,7 @@ mixin GuessTransferValueYandexAdsBannerMixin on State<GuessTransferValueScreenPr
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: adConfig.miniGame1BottomBanner, // "demo-banner-yandex",
+      adUnitId: adConfig.miniGamesBottomBanner, // "demo-banner-yandex",
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {

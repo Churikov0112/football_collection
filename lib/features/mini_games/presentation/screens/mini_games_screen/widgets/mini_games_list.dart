@@ -6,6 +6,8 @@ class _MiniGamesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    final theme = Theme.of(context);
+
     return Expanded(
       child: GridView(
         physics: BouncingScrollPhysics(),
@@ -19,7 +21,7 @@ class _MiniGamesList extends StatelessWidget {
         children: [
           _MiniGameTile(
             title: AppGlossary.draft,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(name: "mini_game_opened", parameters: {"mini_game": "draft"});
@@ -38,8 +40,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessPlayer,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
-
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
@@ -54,7 +55,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessTransferValue,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -70,7 +71,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.whoCostsMore,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -86,7 +87,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.marketValueUpOrDown,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -102,7 +103,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessPlayerTeam,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -119,7 +120,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessSecondCitizenship,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -136,7 +137,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessPlayerSponsor,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -153,7 +154,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessClubByStadium,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -169,7 +170,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessStadiumByClub,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -185,7 +186,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.howManySeatsInStadium,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -201,7 +202,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessStadiumByCountryAndSeats,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -217,7 +218,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.clubFoundationDate,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -234,7 +235,7 @@ class _MiniGamesList extends StatelessWidget {
 
           _MiniGameTile(
             title: AppGlossary.guessCountryByFlag,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
@@ -250,7 +251,7 @@ class _MiniGamesList extends StatelessWidget {
           ),
           _MiniGameTile(
             title: AppGlossary.guessCountryFlag,
-            color: Colors.blueAccent.darken(0.3).withAlpha(180),
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {

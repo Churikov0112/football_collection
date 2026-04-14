@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football_collection/ui_kit/effects/touchable_scale.dart';
 
 import '../../../../../../services/localization/translator.dart';
-import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../../ui_kit/widgets/button/button.dart';
 
 class OpenPacksScreenButton extends StatelessWidget {
   const OpenPacksScreenButton({required this.onPressed, super.key});
@@ -13,7 +13,7 @@ class OpenPacksScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Translator(
       termin: AppGlossary.openPack,
-      builder: (value) => GlassButton(onPressed: onPressed, text: value),
+      builder: (value) => Button(onPressed: onPressed, text: value),
     );
     return TouchableScale(
       onPressed: onPressed,

@@ -5,7 +5,7 @@ import 'package:football_collection/ui_kit/widgets/background_image/background_i
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../abstract/domain/models/card.dart';
 
 class FootballCardsPackResultsScreenArgs {
@@ -41,7 +41,7 @@ class FootballCardsPackResultsScreen extends StatelessWidget {
             left: 16,
             right: 16,
             bottom: mq.padding.bottom + 16,
-            child: GlassButton(onPressed: context.pop, text: AppGlossary.confirm.translate()),
+            child: Button(onPressed: context.pop, text: AppGlossary.confirm.translate()),
           ),
         ],
       ),

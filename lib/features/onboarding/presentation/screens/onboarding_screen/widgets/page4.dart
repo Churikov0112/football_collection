@@ -56,7 +56,7 @@ class _OnboardingPage4 extends StatelessWidget {
               right: 16,
               child: Translator(
                 termin: AppGlossary.next,
-                builder: (value) => GlassButton(
+                builder: (value) => Button(
                   onPressed: () {
                     presenter.onboardingController.nextPage(
                       duration: Duration(milliseconds: 300),

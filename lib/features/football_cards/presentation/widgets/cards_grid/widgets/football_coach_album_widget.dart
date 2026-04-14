@@ -8,11 +8,12 @@ class _FootballCoachAlbumWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     // return SavedPlayerCard(player: player);
 
     final absentWidget = Container(
       // color: country.confederation.color?.darken().withAlpha(200),
-      color: Colors.blueAccent.darken(0.3).withAlpha(180),
+      color: theme.colorScheme.secondary.darken(0.25).withAlpha(180),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(

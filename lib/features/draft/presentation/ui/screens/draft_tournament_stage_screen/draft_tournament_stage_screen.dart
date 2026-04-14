@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../di/di.dart';
 import '../../../../../../services/navigation/navigation.dart';
+import '../../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
-import '../../../../../../ui_kit/widgets/glass_button/glass_button.dart';
 import '../../../blocs/draft_tournament_bloc/draft_tournament_bloc.dart';
 import '../draft_match_screen/draft_match_screen.dart';
 
@@ -216,7 +216,7 @@ class DraftTournamentStageScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: GlassButton(
+                          child: Button(
                             // text: "Start Match",
                             icon: Icons.sports_soccer,
                             onPressed: () async {

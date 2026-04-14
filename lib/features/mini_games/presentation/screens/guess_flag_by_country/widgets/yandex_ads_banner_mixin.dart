@@ -18,7 +18,7 @@ mixin GuessCountryByFlagYandexAdsBannerMixin on State<GuessFlagByCountryScreenPr
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: adConfig.miniGame4BottomBanner, // "demo-banner-yandex",
+      adUnitId: adConfig.miniGamesBottomBanner, // "demo-banner-yandex",
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {

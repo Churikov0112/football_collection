@@ -13,7 +13,7 @@ import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../football_cards/domain/cards/player_card.dart';

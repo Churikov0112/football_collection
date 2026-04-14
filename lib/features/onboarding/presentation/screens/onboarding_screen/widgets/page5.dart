@@ -43,7 +43,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 width: mq.size.width,
                 child: Translator(
                   termin: AppGlossary.onboardingStartCollectioning,
-                  builder: (value) => GlassButton(onPressed: presenter.endOnboarding, text: value),
+                  builder: (value) => Button(onPressed: presenter.endOnboarding, text: value),
                 ),
               ),
               const Spacer(),

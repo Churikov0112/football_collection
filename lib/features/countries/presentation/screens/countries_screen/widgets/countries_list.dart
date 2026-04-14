@@ -48,6 +48,7 @@ class _CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final repo = getIt.get<CommonFootballRepository>();
 
     return FutureBuilder(
@@ -82,16 +83,15 @@ class _CountryTile extends StatelessWidget {
                 startPosition: StartPosition.topCenter,
                 strokeCap: StrokeCap.square,
                 clockwise: true,
-                color: Colors.lightGreenAccent,
-                emptyStrokeColor: Colors.blueAccent.darken(0.3),
-
+                color: theme.colorScheme.primary,
+                emptyStrokeColor: theme.colorScheme.secondary.darken(0.2),
                 strokeWidth: 4,
                 emptyStrokeWidth: 4,
                 strokeAlign: SquareStrokeAlign.outside,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.blueAccent.darken(0.3).withAlpha(180),
+                    color: theme.colorScheme.secondary.darken(0.2).withAlpha(180),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),

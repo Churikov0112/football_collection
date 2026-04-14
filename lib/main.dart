@@ -169,7 +169,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                 config: toastificationConfig,
                 child: MaterialApp.router(
                   theme: ThemeData.dark().copyWith(
-                    colorScheme: ColorScheme.dark(primary: Colors.blueAccent, secondary: Colors.lightGreenAccent),
+                    colorScheme: ColorScheme.dark(primary: Colors.lightGreenAccent, secondary: Colors.blueAccent),
                   ),
                   routerConfig: _router.router,
                   title: 'World Cup Collection 2026',

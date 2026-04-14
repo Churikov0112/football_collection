@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 import 'package:football_collection/services/log/log_service.dart';
@@ -138,14 +137,14 @@ class FirebaseStaticMethods {
       importance: Importance.max,
     );
 
-    final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
+    // final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     await flutterLocalNotificationsPlugin.initialize(
-      settings: const InitializationSettings(android: AndroidInitializationSettings('@mipmap/launcher_icon')),
+      settings: const InitializationSettings(android: AndroidInitializationSettings('@mipmap/ic_notification')),
       onDidReceiveNotificationResponse: _onMessageTapAndroid,
       onDidReceiveBackgroundNotificationResponse: _onMessageTapAndroid,
     );
@@ -164,7 +163,7 @@ class FirebaseStaticMethods {
               channel.id,
               channel.name,
               channelDescription: channel.description,
-              largeIcon: ByteArrayAndroidBitmap(bitmap),
+              // largeIcon: ByteArrayAndroidBitmap(bitmap),
               priority: Priority.max,
               importance: Importance.max,
               enableVibration: true,
@@ -216,7 +215,7 @@ class FirebaseStaticMethods {
     required String body,
     Map<dynamic, dynamic>? data,
   }) async {
-    final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
+    // final bitmap = (await rootBundle.load('assets/raster/icon/icon.png')).buffer.asUint8List();
 
     await flutterLocalNotificationsPlugin.show(
       id: Random().nextInt(999999),
@@ -226,7 +225,7 @@ class FirebaseStaticMethods {
         android: AndroidNotificationDetails(
           "football_collection",
           "football_collection",
-          largeIcon: ByteArrayAndroidBitmap(bitmap),
+          // largeIcon: ByteArrayAndroidBitmap(bitmap),
           priority: Priority.max,
           importance: Importance.max,
           enableVibration: true,

@@ -8,7 +8,7 @@ import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparen
 
 import '../../../../../di/di.dart';
 import '../../../../../services/localization/translator.dart';
-import '../../../../../ui_kit/widgets/glass_button/glass_button.dart';
+import '../../../../../ui_kit/widgets/button/button.dart';
 import '../../blocs/leaderboard_bloc/leaderboard_bloc.dart';
 import '../../blocs/leaderboard_country_bloc/leaderboard_country_bloc.dart';
 import 'widgets/country_selection_bottom_sheet.dart';
@@ -193,13 +193,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                 if (selectedCountryState.countryName != null) {
                   return Translator(
                     termin: AppGlossary.changeTeam,
-                    builder: (value) => GlassButton(onPressed: _openCountryPicker, text: value),
+                    builder: (value) => Button(onPressed: _openCountryPicker, text: value),
                   );
                 }
 
                 return Translator(
                   termin: AppGlossary.participate,
-                  builder: (value) => GlassButton(onPressed: _openCountryPicker, text: value),
+                  builder: (value) => Button(onPressed: _openCountryPicker, text: value),
                 );
               },
             ),

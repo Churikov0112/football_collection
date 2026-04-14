@@ -5,15 +5,11 @@ import 'package:yandex_mobileads/mobile_ads.dart';
 
 import '../guess_stadium_by_club_screen.dart';
 
-mixin GuessStadiumByClubYandexAdsBannerMixin
-    on State<GuessStadiumByClubScreenPresenter> {
+mixin GuessStadiumByClubYandexAdsBannerMixin on State<GuessStadiumByClubScreenPresenter> {
   late BannerAd banner;
 
-  BehaviorSubject<bool> isBannerAlreadyCreatedSubject = BehaviorSubject.seeded(
-    false,
-  );
-  Stream<bool> get isBannerAlreadyCreatedStream$ =>
-      isBannerAlreadyCreatedSubject.stream;
+  BehaviorSubject<bool> isBannerAlreadyCreatedSubject = BehaviorSubject.seeded(false);
+  Stream<bool> get isBannerAlreadyCreatedStream$ => isBannerAlreadyCreatedSubject.stream;
 
   BannerAdSize _getBannerAdSize() {
     final width = MediaQuery.of(context).size.width.round();
@@ -22,7 +18,7 @@ mixin GuessStadiumByClubYandexAdsBannerMixin
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: adConfig.miniGame4BottomBanner,
+      adUnitId: adConfig.miniGamesBottomBanner,
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {

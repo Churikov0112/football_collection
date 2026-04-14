@@ -11,11 +11,11 @@ import 'package:football_collection/features/football_cards/domain/models/market
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/background_image/background_image.dart';
-import 'package:football_collection/ui_kit/widgets/glass_button/glass_button.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
+import '../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../football_cards/presentation/blocs/random_market_value_bloc/random_market_value_bloc.dart';
 import '../../../../football_cards/presentation/screens/packs_screen/football_players_packs_screen.dart';
 import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
@@ -84,10 +84,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                       }
 
                       final retryButton = Center(
-                        child: GlassButton(
-                          onPressed: presenter.loadRandomValue,
-                          text: AppGlossary.tryAgain.translate(),
-                        ),
+                        child: Button(onPressed: presenter.loadRandomValue, text: AppGlossary.tryAgain.translate()),
                       );
 
                       if (randomMarketValueState is RandomMarketValueStateFailed) {

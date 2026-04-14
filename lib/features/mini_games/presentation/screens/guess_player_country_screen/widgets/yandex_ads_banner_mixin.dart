@@ -18,7 +18,7 @@ mixin GuessPlayerCountryYandexAdsBannerMixin on State<GuessNationalTeamScreenPre
 
   BannerAd _createBanner() {
     return BannerAd(
-      adUnitId: adConfig.miniGame3BottomBanner, // "demo-banner-yandex",
+      adUnitId: adConfig.miniGamesBottomBanner, // "demo-banner-yandex",
       adSize: _getBannerAdSize(),
       adRequest: const AdRequest(),
       onAdLoaded: () {

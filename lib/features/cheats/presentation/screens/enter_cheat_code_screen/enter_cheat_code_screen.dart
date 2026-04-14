@@ -9,6 +9,7 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 
 import '../../../../../services/log/log_service.dart';
+import '../../../../../ui_kit/widgets/button/button.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart';
 import '../../blocs/cheat_codes_history_bloc/cheat_codes_history_bloc.dart';
@@ -38,16 +39,7 @@ class EnterCheatCodeScreen extends StatelessWidget {
                   decoration: InputDecoration(hintText: AppGlossary.cheatCodeHere.translate()),
                 ),
                 SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: FilledButton(
-                        onPressed: presenter.verifyCheatCode,
-                        child: Text(AppGlossary.confirm.translate()),
-                      ),
-                    ),
-                  ],
-                ),
+                Button(onPressed: presenter.verifyCheatCode, text: AppGlossary.confirm.translate()),
                 SizedBox(height: mq.viewInsets.bottom + mq.padding.bottom + 16),
               ],
             ),

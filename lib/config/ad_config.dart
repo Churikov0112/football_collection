@@ -4,32 +4,10 @@ final adConfig = _googlePlayAdConfig;
 
 class _AdConfiguration {
   final String openPackRewardedAd;
-  // final String openPackBottomBanner;
-  // final String playersAlbumBottomBanner;
-  // final String countriesBottomBanner;
-  // final String confederationsBottomBanner;
-  // final String settingsBottomBanner;
-  // final String scanQrCodeBottomBanner;
-  final String miniGamesBottomBanner;
-  final String miniGame1BottomBanner;
-  final String miniGame2BottomBanner;
-  final String miniGame3BottomBanner;
-  final String miniGame4BottomBanner;
 
-  _AdConfiguration({
-    required this.openPackRewardedAd,
-    // required this.openPackBottomBanner,
-    // required this.playersAlbumBottomBanner,
-    // required this.countriesBottomBanner,
-    // required this.confederationsBottomBanner,
-    // required this.settingsBottomBanner,
-    // required this.scanQrCodeBottomBanner,
-    required this.miniGamesBottomBanner,
-    required this.miniGame1BottomBanner,
-    required this.miniGame2BottomBanner,
-    required this.miniGame3BottomBanner,
-    required this.miniGame4BottomBanner,
-  });
+  final String miniGamesBottomBanner;
+
+  _AdConfiguration({required this.openPackRewardedAd, required this.miniGamesBottomBanner});
 }
 
 // final _googlePlayAdConfig = _AdConfiguration(
@@ -48,18 +26,8 @@ class _AdConfiguration {
 // );
 
 final _googlePlayAdConfig = _AdConfiguration(
-  openPackRewardedAd: 'R-M-16544729-1',
-  // openPackBottomBanner: "demo-banner-yandex",
-  // playersAlbumBottomBanner: "demo-banner-yandex",
-  // countriesBottomBanner: "demo-banner-yandex",
-  // confederationsBottomBanner: "demo-banner-yandex",
-  // settingsBottomBanner: "demo-banner-yandex",
-  miniGamesBottomBanner: "R-M-16544729-2",
-  miniGame1BottomBanner: "R-M-16544729-3",
-  miniGame2BottomBanner: "R-M-16544729-4",
-  miniGame3BottomBanner: "R-M-16544729-5",
-  miniGame4BottomBanner: "R-M-16544729-6",
-  // scanQrCodeBottomBanner: "demo-banner-yandex",
+  openPackRewardedAd: 'R-M-19106061-1',
+  miniGamesBottomBanner: "R-M-19106061-2",
 );
 
 // final _ruStoreAdConfig = _AdConfiguration(
