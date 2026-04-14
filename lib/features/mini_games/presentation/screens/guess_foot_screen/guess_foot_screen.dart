@@ -59,7 +59,7 @@ class GuessFootScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           _GuessOptions(options: allOptions, rightAnswer: correctAnswer),
-                          const SizedBox(height: 100),
+                          const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
                             builder: (context, isBannerAlreadyCreatedSnapshot) {
