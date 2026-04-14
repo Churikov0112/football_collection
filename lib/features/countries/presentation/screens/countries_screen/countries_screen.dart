@@ -42,7 +42,8 @@ class FootballCountriesScreen extends StatelessWidget {
             body: Stack(
               children: [
                 BackgroundImage(),
-                BackgroundImageColorFilter(color: confederation?.color),
+                // BackgroundImageColorFilter(color: confederation?.color),
+                BackgroundImageColorFilter(color: Colors.blueAccent),
                 Column(children: [_CountriesList(confederation: confederation)]),
                 Translator(
                   termin: AppGlossary.myCollection,
