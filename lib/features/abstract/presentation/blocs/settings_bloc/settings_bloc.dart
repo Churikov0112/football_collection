@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,6 +8,10 @@ part 'settings_bloc_state.dart';
 final _default = SettingsStateReady(
   enableVibrationSettings: true,
   enableConfettiSettings: true,
+  enablePackManualRotateSettings: true,
+  enablePackAutoRotateSettings: false,
+  packAutoRotatePerSecondSettings: 270,
+  packManualRotateSensitivitySettings: 2,
 );
 
 @singleton
@@ -16,6 +21,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       (event, emitter) => switch (event) {
         SettingsEventSet() => _set(event, emitter),
       },
+      transformer: restartable(),
     );
   }
 
@@ -27,6 +33,10 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       SettingsStateReady(
         enableVibrationSettings: event.enableVibration,
         enableConfettiSettings: event.enableConfetti,
+        enablePackManualRotateSettings: event.enablePackManualRotate,
+        enablePackAutoRotateSettings: event.enablePackAutoRotate,
+        packAutoRotatePerSecondSettings: event.autoRotatePerSecond,
+        packManualRotateSensitivitySettings: event.packManualRotateSensitivity,
       ),
     );
   }
@@ -37,6 +47,10 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       return SettingsStateReady(
         enableVibrationSettings: json["enableVibrationSettings"],
         enableConfettiSettings: json["enableConfettiSettings"],
+        enablePackManualRotateSettings: json["enablePackManualRotate"],
+        enablePackAutoRotateSettings: json["enablePackAutoRotate"],
+        packAutoRotatePerSecondSettings: json["packAutoRotatePerSecond"],
+        packManualRotateSensitivitySettings: json["packManualRotateSensitivity"],
       );
     } catch (e) {
       return _default;
@@ -48,6 +62,10 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     final json = {
       "enableVibrationSettings": state.enableVibration,
       "enableConfettiSettings": state.enableConfetti,
+      "enablePackManualRotate": state.enablePackManualRotate,
+      "enablePackAutoRotate": state.enablePackAutoRotate,
+      "packAutoRotatePerSecond": state.packAutoRotatePerSecond,
+      "packManualRotateSensitivity": state.packManualRotateSensitivity,
     };
     return json;
   }

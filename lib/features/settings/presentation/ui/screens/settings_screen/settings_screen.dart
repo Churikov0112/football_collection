@@ -62,6 +62,40 @@ class SettingsScreen extends StatelessWidget {
                             presenter.toggleEnableConfetti(val);
                           },
                         ),
+                        SwitchListTile(
+                          title: Translator(
+                            termin: AppGlossary.settingsPackManualRotate,
+                            builder: (value) => Text(value),
+                          ),
+                          value: settingsState.enablePackManualRotate,
+                          onChanged: (val) {
+                            presenter.togglePackManualRotate(val);
+                          },
+                        ),
+                        SwitchListTile(
+                          title: Translator(
+                            termin: AppGlossary.settingsPackAutoRotate,
+                            builder: (value) => Text(value),
+                          ),
+                          value: settingsState.enablePackAutoRotate,
+                          onChanged: (val) {
+                            presenter.togglePackAutoRotate(val);
+                          },
+                        ),
+
+                        // Slider(
+                        //   // title: Translator(
+                        //   //   termin: AppGlossary.settingsPackAutoRotate,
+                        //   //   builder: (value) => Text(value),
+                        //   // ),
+                        //   min: 90,
+                        //   max: 360,
+                        //   divisions: 9,
+                        //   value: settingsState.packAutoRotatePerSecond.toDouble(),
+                        //   onChanged: (val) {
+                        //     presenter.changeTrackAutoRotateSpeed(val);
+                        //   },
+                        // ),
                         ListTile(title: Text("v. 2.2.6+26")), // CHANGE VERSION
                       ],
                     ),
