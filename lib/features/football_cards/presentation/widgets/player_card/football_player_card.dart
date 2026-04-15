@@ -103,23 +103,45 @@ class FootballPlayerCardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(height: 4),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: AutoSizeText(
-                  nameVisibility == .quest
-                      ? "?"
-                      : nameVisibility == .show
-                      ? player.name.toUpperCase()
-                      : "",
-                  maxLines: 1,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                  minFontSize: 12,
-                  textAlign: TextAlign.center,
+
+              // SizedBox(height: 3),
+              // SizedBox(
+              //   height: height * 0.13,
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 4),
+              //     child: AutoSizeText(
+              //       nameVisibility == .quest
+              //           ? "?"
+              //           : nameVisibility == .show
+              //           ? player.name.toUpperCase()
+              //           : "",
+              //       maxLines: 2,
+              //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+              //       minFontSize: 15,
+              //       maxFontSize: 18,
+              //       textAlign: TextAlign.center,
+              //     ),
+              //   ),
+              // ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(3),
+                  child: AutoSizeText(
+                    nameVisibility == .quest
+                        ? "?"
+                        : nameVisibility == .show
+                        ? player.name.toUpperCase()
+                        : "",
+                    maxLines: 2,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                    minFontSize: 13,
+                    maxFontSize: 18,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-              Spacer(flex: 2),
+
+              // SizedBox(height: 15),
 
               // SizedBox(height: 4),
             ],

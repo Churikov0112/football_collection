@@ -74,19 +74,30 @@ class FootballTeamEmblemCardWidget extends StatelessWidget {
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
                 ),
               ),
-
               // SizedBox(height: 4),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 4),
+              //   child: AutoSizeText(
+              //     emblem.name.toUpperCase(),
+              //     maxLines: 2,
+              //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+              //     minFontSize: 12,
+              //     maxFontSize: 18,
+              //     textAlign: TextAlign.center,
+              //   ),
+              // ),
+              // SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+                padding: const EdgeInsets.all(3),
                 child: AutoSizeText(
                   emblem.name.toUpperCase(),
-                  maxLines: 1,
+                  maxLines: 2,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                  minFontSize: 12,
+                  minFontSize: 13,
+                  maxFontSize: 18,
                   textAlign: TextAlign.center,
                 ),
               ),
-
               SizedBox(height: height * 0.05),
             ],
           ),
