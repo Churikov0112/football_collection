@@ -78,7 +78,9 @@ class FootballPlayerCardModel extends CardModel {
 
 // Вспомогательные функции остаются без изменений
 String? footballPlayerPositionToShort(String? position) {
-  if (position == null) return null;
+  if (position == null) {
+    return null;
+  }
   switch (position) {
     case "Goalkeeper":
       return "GK";
@@ -114,7 +116,9 @@ String? footballPlayerPositionToShort(String? position) {
 }
 
 Color? footballPlayerPositionToColor(String? position) {
-  if (position == null) return null;
+  if (position == null) {
+    return null;
+  }
   switch (position) {
     case "Goalkeeper":
       return Colors.orange;

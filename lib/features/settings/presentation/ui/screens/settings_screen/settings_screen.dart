@@ -72,16 +72,16 @@ class SettingsScreen extends StatelessWidget {
                             presenter.togglePackManualRotate(val);
                           },
                         ),
-                        SwitchListTile(
-                          title: Translator(
-                            termin: AppGlossary.settingsPackAutoRotate,
-                            builder: (value) => Text(value),
-                          ),
-                          value: settingsState.enablePackAutoRotate,
-                          onChanged: (val) {
-                            presenter.togglePackAutoRotate(val);
-                          },
-                        ),
+                        // SwitchListTile(
+                        //   title: Translator(
+                        //     termin: AppGlossary.settingsPackAutoRotate,
+                        //     builder: (value) => Text(value),
+                        //   ),
+                        //   value: settingsState.enablePackAutoRotate,
+                        //   onChanged: (val) {
+                        //     presenter.togglePackAutoRotate(val);
+                        //   },
+                        // ),
 
                         // Slider(
                         //   // title: Translator(
