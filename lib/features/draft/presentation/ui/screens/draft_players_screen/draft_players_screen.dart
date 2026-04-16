@@ -46,8 +46,11 @@ class DraftPlayersScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: mq.size.height * 0.35, child: const _DraftPlayersList()),
-              SizedBox(height: mq.padding.bottom),
+              SizedBox(
+                height: mq.size.height <= 650 ? mq.size.height * 0.42 : mq.size.height * 0.35,
+                child: const _DraftPlayersList(),
+              ),
+              SizedBox(height: mq.size.height <= 650 ? 0 : mq.padding.bottom),
             ],
           ),
         ),

@@ -38,7 +38,7 @@ class SmallDraftFootballPlayerCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
+    final mq = MediaQuery.of(context);
     // final imageUrl = player.photoUrl.contains("medium") ? player.photoUrl.replaceAll("medium", "big") : player.photoUrl;
     // final teamPalette = teamPaletteById(player.teamId);
     // final allCompetitions = getIt.get<AllFootballCompetitionsBloc>().state.allCompetitions;
@@ -59,8 +59,8 @@ class SmallDraftFootballPlayerCardWidget extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(color: Colors.white12),
             child: SizedBox(
-              height: height,
-              width: width,
+              height: mq.size.height <= 650 ? height * 0.85 : height,
+              width: mq.size.height <= 650 ? width * 0.85 : width,
               child: Stack(
                 children: [
                   Positioned.fill(
