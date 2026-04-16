@@ -180,6 +180,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Burkina Faso':
       return '🇧🇫';
     case 'Democratic Republic of the Congo':
+    case 'DR Congo':
       return '🇨🇩';
     case 'Guinea':
       return '🇬🇳';
@@ -222,6 +223,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Kenya':
       return '🇰🇪';
     case 'Republic of the Congo':
+    case 'Congo':
       return '🇨🇬';
     case 'Guyana':
       return '🇬🇾';
