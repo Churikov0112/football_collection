@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
+import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:rxdart/rxdart.dart';
@@ -107,7 +108,7 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          correctClub.league!.countryName!,
+                                          "${emojiFlagByCountryName(correctClub.league!.countryName!) ?? ""} ${correctClub.league!.countryName!}",
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             fontSize: 24,
@@ -116,13 +117,16 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                                           ),
                                         ),
                                         const SizedBox(height: 8),
-                                        Text(
-                                          correctClub.stadiumSeats!.toString(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white.withValues(alpha: 0.9),
+                                        Translator(
+                                          termin: AppGlossary.seatsCount,
+                                          builder: (value) => Text(
+                                            "$value: ${correctClub.stadiumSeats!}",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white.withValues(alpha: 0.9),
+                                            ),
                                           ),
                                         ),
                                       ],

@@ -104,12 +104,14 @@ class _FlagCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        image: DecorationImage(image: AssetImage('assets/raster/team_flags/${team.id}.jpg')),
-      ),
-      child: SizedBox.square(dimension: mq.size.width / 2),
-    );
+
+    // return DecoratedBox(
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.all(Radius.circular(12)),
+    //     image: DecorationImage(image: AssetImage('assets/raster/team_flags/${team.id}.jpg')),
+    //   ),
+    //   child: SizedBox.square(dimension: mq.size.width / 2),
+    // );
+    return Text(emojiFlagByCountryName(team.name) ?? "", style: TextStyle(fontSize: mq.size.width / 5));
   }
 }
