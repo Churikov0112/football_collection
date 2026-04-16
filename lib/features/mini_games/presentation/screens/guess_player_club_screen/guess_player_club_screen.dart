@@ -81,7 +81,7 @@ class GuessPlayerClubScreen extends StatelessWidget {
                                 child: FootballPlayerCardWidget(
                                   player: player,
                                   badge: .none,
-                                  clubVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
+                                  clubVisibility: selectedOptionSnapshot.data != null ? .show : .none,
                                 ),
                               );
                             },

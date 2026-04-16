@@ -48,26 +48,15 @@ class GuessPlayerNumberScreen extends StatelessWidget {
                       }
 
                       final correctAnswer = player!.teamShirtNumber!;
-                      final wrongOptions = <String>[];
-                      for (final item in allPlayers) {
-                        final shirtNumber = item.teamShirtNumber;
-                        if (shirtNumber == null ||
-                            shirtNumber == '-' ||
-                            shirtNumber == correctAnswer ||
-                            wrongOptions.contains(shirtNumber)) {
-                          continue;
-                        }
-                        wrongOptions.add(shirtNumber);
-                      }
+                      final playerPosition = player.position ?? 'Centre-Forward';
 
-                      if (wrongOptions.length < 3) {
-                        SchedulerBinding.instance.addPostFrameCallback((_) {
-                          presenter.loadRandomPlayers();
-                        });
-                        return Align(child: const CircularProgressIndicator());
-                      }
+                      final numbers = presenter.positionToCommonNumbers[playerPosition] ?? [];
 
-                      final options = [correctAnswer, ...wrongOptions.take(3)];
+                      final availableNumbers = numbers.where((n) => n != playerPosition).toList()..shuffle();
+
+                      final wrongOptions = availableNumbers.take(3);
+
+                      final options = [correctAnswer, ...wrongOptions];
                       options.shuffle();
 
                       return Column(
