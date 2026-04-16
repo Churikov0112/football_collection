@@ -1,10 +1,11 @@
 part of '../cards_grid.dart';
 
 class _FootballLegendAlbumWidget extends StatelessWidget {
-  const _FootballLegendAlbumWidget({required this.legend, required this.country});
+  const _FootballLegendAlbumWidget({required this.legend, required this.country, this.onSavedCardTap});
 
   final FootballLegendCardModel legend;
   final FootballNationalTeamModel country;
+  final Function()? onSavedCardTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,11 @@ class _FootballLegendAlbumWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white54),
             ),
-            Icon(Icons.person, size: 64, color: Colors.white54),
-            Text(
+            const Icon(Icons.person, size: 64, color: Colors.white54),
+            const Text(
               "Legend",
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white54),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white54),
             ),
           ],
         ),
@@ -42,7 +43,7 @@ class _FootballLegendAlbumWidget extends StatelessWidget {
         if (savedCardsState is SavedCardsStateLoadSucceeded) {
           final isCardSaved = savedCardsState.savedCardsIds?.contains(legend.cardId) ?? false;
           if (isCardSaved) {
-            return FootballLegendCardWidget(legend: legend, badge: .showCount);
+            return FootballLegendCardWidget(legend: legend, badge: .showCount, onTap: onSavedCardTap);
           }
         }
         return absentWidget;

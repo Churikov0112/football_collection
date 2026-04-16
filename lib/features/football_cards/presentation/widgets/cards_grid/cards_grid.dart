@@ -12,6 +12,7 @@ import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../../domain/cards/team_emblem_card.dart';
+import '../../screens/football_legend_screen/football_legend_screen.dart';
 import '../card_image_wrapper/card_image_wrapper.dart';
 import '../coach_card/football_coach_card.dart';
 import '../legend_card/football_legend_card.dart';
@@ -50,6 +51,10 @@ class CardsGrid extends StatelessWidget {
     BottomSheetController.showBottomSheet(context, (context) => FootballPlayerScreen(player: player));
   }
 
+  void _openLegendBS(BuildContext context, FootballLegendCardModel legend) {
+    BottomSheetController.showBottomSheet(context, (context) => FootballLegendScreen(legend: legend));
+  }
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -74,9 +79,7 @@ class CardsGrid extends StatelessWidget {
             return _FootballPlayerAlbumWidget(
               player: card,
               country: country!,
-              onSavedCardTap: () {
-                _openPlayerBS(context, card);
-              },
+              onSavedCardTap: () => _openPlayerBS(context, card),
             );
           }
 
@@ -85,7 +88,11 @@ class CardsGrid extends StatelessWidget {
           }
 
           if (card is FootballLegendCardModel) {
-            return _FootballLegendAlbumWidget(legend: card, country: country!);
+            return _FootballLegendAlbumWidget(
+              legend: card,
+              country: country!,
+              onSavedCardTap: () => _openLegendBS(context, card),
+            );
           }
 
           if (card is FootballTeamEmblemCardModel) {
@@ -100,9 +107,7 @@ class CardsGrid extends StatelessWidget {
             return FootballPlayerCardWidget(
               player: card,
               badge: isNewCard ? .showNew : .none,
-              onTap: () {
-                _openPlayerBS(context, card);
-              },
+              onTap: () => _openPlayerBS(context, card),
             );
           }
 
@@ -111,7 +116,11 @@ class CardsGrid extends StatelessWidget {
           }
 
           if (card is FootballLegendCardModel) {
-            return FootballLegendCardWidget(legend: card, badge: isNewCard ? .showNew : .none);
+            return FootballLegendCardWidget(
+              legend: card,
+              badge: isNewCard ? .showNew : .none,
+              onTap: () => _openLegendBS(context, card),
+            );
           }
 
           if (card is FootballTeamEmblemCardModel) {
@@ -124,17 +133,18 @@ class CardsGrid extends StatelessWidget {
           return FootballPlayerCardWidget(
             player: card,
             badge: badge,
-
-            onTap: () {
-              _openPlayerBS(context, card);
-            },
+            onTap: () => _openPlayerBS(context, card),
           );
         }
         if (card is FootballCoachCardModel) {
           return FootballCoachCardWidget(coach: card, badge: badge);
         }
         if (card is FootballLegendCardModel) {
-          return FootballLegendCardWidget(legend: card, badge: badge);
+          return FootballLegendCardWidget(
+            legend: card,
+            badge: badge,
+            onTap: () => _openLegendBS(context, card),
+          );
         }
         if (card is FootballTeamEmblemCardModel) {
           return FootballTeamEmblemCardWidget(emblem: card, badge: badge);

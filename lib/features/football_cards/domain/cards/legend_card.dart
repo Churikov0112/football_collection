@@ -23,11 +23,11 @@ class FootballLegendCardModel extends CardModel {
   final String? foot;
   final int? maxMarketValue;
   final int? marketValue;
+  final List<String>? citizenship;
 
   const FootballLegendCardModel({
     required super.cardId,
     required super.imageAssetPath,
-    super.cardType = CardType.legend,
     required this.playerId,
     required this.name,
     required this.position,
@@ -43,6 +43,8 @@ class FootballLegendCardModel extends CardModel {
     required this.maxMarketValue,
     required this.outfitter,
     required this.isRetired,
+    required this.citizenship,
+    super.cardType = CardType.legend,
   });
 
   factory FootballLegendCardModel.fromJson(Map<dynamic, dynamic> json) {
@@ -64,6 +66,9 @@ class FootballLegendCardModel extends CardModel {
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
+      citizenship: (json['citizenship'] is List)
+          ? [for (final citizenship in json['citizenship']) citizenship.toString()]
+          : null,
     );
   }
 
