@@ -55,7 +55,12 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
           ? Colors.green
           : Colors.grey;
       segments.add(
-        LineChartBarData(barWidth: 4, dotData: FlDotData(show: false), color: color, spots: [spots[i], spots[i + 1]]),
+        LineChartBarData(
+          barWidth: 4,
+          dotData: const FlDotData(show: false),
+          color: color,
+          spots: [spots[i], spots[i + 1]],
+        ),
       );
     }
     return segments;
@@ -75,7 +80,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
             return Scaffold(
               body: Stack(
                 children: [
-                  BackgroundImage(),
+                  const BackgroundImage(),
                   BlocBuilder<RandomMarketValueBloc, RandomMarketValueState>(
                     builder: (context, randomMarketValueState) {
                       if (randomMarketValueState is RandomMarketValueStatePending ||
@@ -130,7 +135,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                           final endSpots = getAllValidSpots(marketValueHistory.sublist(lastVisibleRecordIndex));
 
                           return DecoratedBox(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -163,7 +168,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                   decoration: const BoxDecoration(color: Colors.black54),
                                                   child: IgnorePointer(
                                                     child: LineChart(
-                                                      duration: Duration(milliseconds: 300),
+                                                      duration: const Duration(milliseconds: 300),
                                                       LineChartData(
                                                         borderData: FlBorderData(
                                                           border: Border.all(color: Colors.blueAccent, width: 4),
@@ -174,7 +179,7 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                             spots: startSpots,
                                                             color: Colors.white,
                                                             barWidth: 4,
-                                                            dotData: FlDotData(show: false),
+                                                            dotData: const FlDotData(show: false),
                                                           ),
                                                           // Прогнозируемая часть
                                                           if (selectedOptionSnapshot.data != null) ...[
@@ -187,14 +192,17 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                         titlesData: FlTitlesData(
                                                           leftTitles: AxisTitles(
                                                             axisNameWidget: Text(marketValueValue),
-                                                            sideTitles: SideTitles(showTitles: false),
+                                                            sideTitles: const SideTitles(showTitles: false),
                                                           ),
                                                           topTitles: AxisTitles(
                                                             axisNameWidget: Text(ageValue),
-                                                            sideTitles: SideTitles(showTitles: false, reservedSize: 22),
+                                                            sideTitles: const SideTitles(
+                                                              showTitles: false,
+                                                              reservedSize: 22,
+                                                            ),
                                                           ),
 
-                                                          rightTitles: AxisTitles(
+                                                          rightTitles: const AxisTitles(
                                                             sideTitles: SideTitles(
                                                               showTitles: true,
                                                               reservedSize: 50,

@@ -1,10 +1,15 @@
 part of '../cards_grid.dart';
 
 class _FootballPlayerAlbumWidget extends StatelessWidget {
-  const _FootballPlayerAlbumWidget({required this.player, required this.country});
+  const _FootballPlayerAlbumWidget({
+    required this.player,
+    required this.country,
+    this.onSavedCardTap,
+  });
 
   final FootballPlayerCardModel player;
   final FootballNationalTeamModel country;
+  final Function()? onSavedCardTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,7 @@ class _FootballPlayerAlbumWidget extends StatelessWidget {
         if (savedCardsState is SavedCardsStateLoadSucceeded) {
           final isPlayerSaved = savedCardsState.savedCardsIds?.contains(player.cardId) ?? false;
           if (isPlayerSaved) {
-            return FootballPlayerCardWidget(player: player, badge: .showCount);
+            return FootballPlayerCardWidget(player: player, badge: .showCount, onTap: onSavedCardTap);
           }
         }
         return absentWidget;

@@ -8,7 +8,9 @@ class _TmPlayerBio extends StatelessWidget {
     this.hideFoot = false,
     this.hideHeight = false,
     this.hidePosition = false,
+    this.hideOutfitter = false,
     this.hideBirthDate = false,
+    this.hideCitizenship = false,
     this.hideNationality = false,
     this.hidePrimeTransferValue = false,
     this.hideCurrentTransferValue = false,
@@ -21,7 +23,9 @@ class _TmPlayerBio extends StatelessWidget {
   final bool hideFoot;
   final bool hideHeight;
   final bool hidePosition;
+  final bool hideOutfitter;
   final bool hideBirthDate;
+  final bool hideCitizenship;
   final bool hideNationality;
   final bool hidePrimeTransferValue;
   final bool hideCurrentTransferValue;
@@ -95,6 +99,34 @@ class _TmPlayerBio extends StatelessWidget {
           const _Separator(),
         ],
 
+        if (player.outfitter != null) ...[
+          Translator(
+            termin: AppGlossary.outfitter,
+            builder: (value) => _BioTile(title: value, value: hideOutfitter ? '?' : player.outfitter!),
+          ),
+          const _Separator(),
+        ],
+
+        if (player.citizenship is List) ...[
+          Translator(
+            termin: AppGlossary.citizenship,
+            builder: (value) => Column(
+              spacing: 8,
+              children: [
+                for (int i = 0; i < (player.citizenship ?? []).length; i++) ...[
+                  _BioTile(
+                    title: i > 0 ? '$value ${i + 1}' : value,
+                    value: hideCitizenship
+                        ? '?'
+                        : "${emojiFlagByCountryName(player.citizenship![i]) ?? ""} ${player.citizenship![i]}",
+                  ),
+                  const _Separator(),
+                ],
+              ],
+            ),
+          ),
+        ],
+
         // if (tmData.teamId?.isNotEmpty == true)
         //   Translator(
         //     termin: AppGlossary.nationality,
@@ -103,7 +135,7 @@ class _TmPlayerBio extends StatelessWidget {
         //       value: hideNationality ? '?' : "${emojiFlagByCountryName(countryName) ?? ""}  $countryName",
         //     ),
         //   ),
-        const _Separator(),
+        // const _Separator(),
       ],
     );
   }
@@ -124,10 +156,10 @@ class _BioTile extends StatelessWidget {
     // const SizedBox(height: 8),
     Row(
       children: [
-        Text(title, style: const TextStyle(fontSize: 18)),
+        Text(title.toLowerCase(), style: const TextStyle(fontSize: 16)),
         // const SizedBox(width: 8),
         const Spacer(),
-        Text(value),
+        Text(value, style: const TextStyle(fontSize: 18)),
       ],
       //   ),
       // ],

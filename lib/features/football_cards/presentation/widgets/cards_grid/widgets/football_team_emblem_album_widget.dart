@@ -1,7 +1,10 @@
 part of '../cards_grid.dart';
 
 class _FootballTeamEmblemAlbumWidget extends StatelessWidget {
-  const _FootballTeamEmblemAlbumWidget({required this.emblem, required this.country});
+  const _FootballTeamEmblemAlbumWidget({
+    required this.emblem,
+    required this.country,
+  });
 
   final FootballTeamEmblemCardModel emblem;
   final FootballNationalTeamModel country;

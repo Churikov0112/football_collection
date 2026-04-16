@@ -15504,6 +15504,7 @@
     "club_name": "Rennes B",
     "team_id": "3614",
     "team_name": "Algeria",
+    "marketValue": 0,
     "maxMarketValue": 0
   },
   {
@@ -25608,6 +25609,7 @@
     "club_name": "Al-Hussein SC",
     "team_id": "15737",
     "team_name": "Jordan",
+    "marketValue": 50000,
     "maxMarketValue": 100000
   },
   {

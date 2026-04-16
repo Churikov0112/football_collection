@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/features/football_cards/presentation/screens/football_player_screen/football_player_screen.dart';
+import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 
 import '../../../../../di/di.dart';
 import '../../../../../ui_kit/colors/colors.dart';
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../../countries/domain/models/national_team.dart';
-import '../../../../football_confederations/domain/models/football_confederation.dart';
 import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
@@ -45,12 +46,16 @@ class CardsGrid extends StatelessWidget {
 
   final List<String>? newCardsIds;
 
+  void _openPlayerBS(BuildContext context, FootballPlayerCardModel player) {
+    BottomSheetController.showBottomSheet(context, (context) => FootballPlayerScreen(player: player));
+  }
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
 
     return GridView.builder(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
         childAspectRatio: 2 / 3,
@@ -66,7 +71,13 @@ class CardsGrid extends StatelessWidget {
         // album
         if (country != null && newCardsIds == null) {
           if (card is FootballPlayerCardModel) {
-            return _FootballPlayerAlbumWidget(player: card, country: country!);
+            return _FootballPlayerAlbumWidget(
+              player: card,
+              country: country!,
+              onSavedCardTap: () {
+                _openPlayerBS(context, card);
+              },
+            );
           }
 
           if (card is FootballCoachCardModel) {
@@ -86,7 +97,13 @@ class CardsGrid extends StatelessWidget {
         if (country == null && newCardsIds != null) {
           final isNewCard = newCardsIds!.contains(card.cardId);
           if (card is FootballPlayerCardModel) {
-            return FootballPlayerCardWidget(player: card, badge: isNewCard ? .showNew : .none);
+            return FootballPlayerCardWidget(
+              player: card,
+              badge: isNewCard ? .showNew : .none,
+              onTap: () {
+                _openPlayerBS(context, card);
+              },
+            );
           }
 
           if (card is FootballCoachCardModel) {
@@ -104,7 +121,14 @@ class CardsGrid extends StatelessWidget {
 
         // other
         if (card is FootballPlayerCardModel) {
-          return FootballPlayerCardWidget(player: card, badge: badge);
+          return FootballPlayerCardWidget(
+            player: card,
+            badge: badge,
+
+            onTap: () {
+              _openPlayerBS(context, card);
+            },
+          );
         }
         if (card is FootballCoachCardModel) {
           return FootballCoachCardWidget(coach: card, badge: badge);
@@ -116,7 +140,7 @@ class CardsGrid extends StatelessWidget {
           return FootballTeamEmblemCardWidget(emblem: card, badge: badge);
         }
 
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       },
     );
   }

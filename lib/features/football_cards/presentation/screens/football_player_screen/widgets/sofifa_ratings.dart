@@ -70,9 +70,10 @@ class _RatingsBlock extends StatelessWidget {
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: values.length,
+              padding: EdgeInsets.zero,
               shrinkWrap: true,
               separatorBuilder: (context, index) =>
-                  const Column(children: [SizedBox(height: 8), _Separator(), SizedBox(height: 8)]),
+                  const Column(spacing: 8, children: [SizedBox(height: 8), _Separator(), SizedBox(height: 8)]),
               // spacing: 8,
               // crossAxisAlignment: CrossAxisAlignment.start,
               itemBuilder: (context, index) {

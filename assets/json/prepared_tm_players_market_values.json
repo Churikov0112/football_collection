@@ -113628,6 +113628,7 @@
     "id": "1169721",
     "marketValueHistory": [],
     "ranking": {},
+    "marketValue": 0,
     "maxMarketValue": 0
   },
   {
@@ -172541,11 +172542,13 @@
         "age": 20,
         "date": "2025-02-12",
         "clubId": "15795",
-        "clubName": "Al-Hussein SC (Irbid)"
+        "clubName": "Al-Hussein SC (Irbid)",
+        "marketValue": 50000
       }
     ],
     "ranking": {},
-    "maxMarketValue": 100000
+    "maxMarketValue": 100000,
+    "marketValue": 50000
   },
   {
     "updatedAt": "2026-03-30T18:37:40.320734",
@@ -189508,11 +189511,13 @@
         "age": 24,
         "date": "2024-07-16",
         "clubId": "74155",
-        "clubName": "UD Santarém"
+        "clubName": "UD Santarém",
+        "marketValue": 50000
       }
     ],
     "ranking": {},
-    "maxMarketValue": 50000
+    "maxMarketValue": 50000,
+    "marketValue": 50000
   },
   {
     "updatedAt": "2026-03-30T18:38:11.651969",
@@ -195225,6 +195230,7 @@
     "updatedAt": "2026-04-04T19:41:44.125813",
     "id": "8198",
     "marketValue": 12000000,
+    "maxMarketValue": 120000000,
     "marketValueHistory": [
       {
         "age": 19,
