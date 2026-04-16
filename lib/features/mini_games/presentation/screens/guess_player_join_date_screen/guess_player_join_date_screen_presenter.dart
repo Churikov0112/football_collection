@@ -40,11 +40,7 @@ class GuessPlayerJoinDateScreenPresenterState
     if (mounted) {
       _selectedOptionSubject.add(null);
       context.read<RandomFootballPlayersBloc>().add(
-        RandomFootballPlayersEventGet(
-          count: 20,
-          minPrimeTransferValue: 10000000,
-          withJoinedClubOn: true,
-        ),
+        RandomFootballPlayersEventGet(count: 4, withJoinedClubOn: true),
       );
     }
   }

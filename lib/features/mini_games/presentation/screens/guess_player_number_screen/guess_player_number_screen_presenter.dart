@@ -40,11 +40,7 @@ class GuessPlayerNumberScreenPresenterState
     if (mounted) {
       _selectedOptionSubject.add(null);
       context.read<RandomFootballPlayersBloc>().add(
-        RandomFootballPlayersEventGet(
-          count: 20,
-          minPrimeTransferValue: 10000000,
-          withTeamShirtNumber: true,
-        ),
+        RandomFootballPlayersEventGet(count: 4, withTeamShirtNumber: true),
       );
     }
   }

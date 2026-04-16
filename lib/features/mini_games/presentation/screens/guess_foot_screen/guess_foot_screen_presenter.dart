@@ -12,17 +12,14 @@ class GuessFootScreenPresenter extends StatefulWidget {
   const GuessFootScreenPresenter({required this.child, super.key});
 
   @override
-  State<GuessFootScreenPresenter> createState() =>
-      GuessFootScreenPresenterState();
+  State<GuessFootScreenPresenter> createState() => GuessFootScreenPresenterState();
 }
 
-class GuessFootScreenPresenterState extends State<GuessFootScreenPresenter>
-    with GuessFootYandexAdsBannerMixin {
+class GuessFootScreenPresenterState extends State<GuessFootScreenPresenter> with GuessFootYandexAdsBannerMixin {
   int winstrick = 0;
   final Random random = Random();
 
-  final BehaviorSubject<String?> _selectedOptionSubject =
-      BehaviorSubject.seeded(null);
+  final BehaviorSubject<String?> _selectedOptionSubject = BehaviorSubject.seeded(null);
   Stream<String?> get selectedOptionStream$ => _selectedOptionSubject.stream;
 
   @override
@@ -37,25 +34,14 @@ class GuessFootScreenPresenterState extends State<GuessFootScreenPresenter>
   void loadRandomPlayers() {
     if (mounted) {
       _selectedOptionSubject.add(null);
-      context.read<RandomFootballPlayersBloc>().add(
-        RandomFootballPlayersEventGet(
-          count: 1,
-          minPrimeTransferValue: 10000000,
-          withFoot: true,
-        ),
-      );
+      context.read<RandomFootballPlayersBloc>().add(RandomFootballPlayersEventGet(count: 1, withFoot: true));
     }
   }
 
-  Future<void> showResult({
-    required String selectedAnswer,
-    required String rightAnswer,
-  }) async {
+  Future<void> showResult({required String selectedAnswer, required String rightAnswer}) async {
     _selectedOptionSubject.add(selectedAnswer);
     if (selectedAnswer == rightAnswer) {
-      getIt.get<BalanceBloc>().add(
-        BalanceEventIncrease(amount: _kDefaultRewardValue + winstrick),
-      );
+      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue + winstrick));
       ToastService.showToast(
         title: AppGlossary.correct.translate(),
         subtitle:
@@ -64,11 +50,7 @@ class GuessFootScreenPresenterState extends State<GuessFootScreenPresenter>
       );
       winstrick++;
     } else {
-      ToastService.showErrorToast(
-        title: AppGlossary.incorrect.translate(),
-        subtitle: ":(",
-        seconds: 2,
-      );
+      ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
       winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));

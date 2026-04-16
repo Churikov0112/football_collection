@@ -51,14 +51,16 @@ class GuessFootScreen extends StatelessWidget {
                       const allOptions = ['left', 'both', 'right'];
 
                       return Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Spacer(),
                           const Spacer(),
                           Align(
                             child: FootballPlayerCardWidget(player: player, badge: .none),
                           ),
                           const SizedBox(height: 20),
                           _GuessOptions(options: allOptions, rightAnswer: correctAnswer),
+                          const Spacer(),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,

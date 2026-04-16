@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_collection/di/di.dart';
-import 'package:football_collection/features/football_cards/presentation/widgets/card_image_wrapper/card_image_wrapper.dart';
 import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:rxdart/rxdart.dart';
@@ -75,12 +74,17 @@ class GuessPlayerClubScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Spacer(),
-                          Align(
-                            child: FootballPlayerCardWidget(
-                              player: player,
-                              badge: .none,
-                              clubVisibility: CardElementVisibility.none,
-                            ),
+                          StreamBuilder<String?>(
+                            stream: presenter.selectedOptionStream$,
+                            builder: (context, selectedOptionSnapshot) {
+                              return Align(
+                                child: FootballPlayerCardWidget(
+                                  player: player,
+                                  badge: .none,
+                                  clubVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(height: 20),
                           _GuessOptions(options: options, rightAnswer: correctAnswer),
