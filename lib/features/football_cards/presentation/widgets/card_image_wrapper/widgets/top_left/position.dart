@@ -21,7 +21,7 @@ class _PositionTopLeft extends StatelessWidget {
         child: Center(
           child: Text(
             short,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 10),
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
           ),
         ),
       ),
