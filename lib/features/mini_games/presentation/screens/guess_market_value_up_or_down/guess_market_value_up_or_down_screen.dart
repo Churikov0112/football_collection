@@ -198,8 +198,8 @@ class GuessMarketValueUpOrDownScreen extends StatelessWidget {
                                                             sideTitles: SideTitles(
                                                               showTitles: true,
                                                               reservedSize: 50,
-                                                              minIncluded: false,
-                                                              maxIncluded: false,
+                                                              minIncluded: true,
+                                                              maxIncluded: true,
                                                               // getTitles: (value) {
                                                               //   // Показываем только целые года
                                                               //   return value.toInt().toString();
