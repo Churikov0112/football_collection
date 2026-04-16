@@ -28,7 +28,6 @@ class FootballPlayerCardModel extends CardModel {
   const FootballPlayerCardModel({
     required super.cardId,
     required super.imageAssetPath,
-    super.cardType = CardType.player,
     required this.playerId,
     required this.name,
     required this.position,
@@ -45,6 +44,7 @@ class FootballPlayerCardModel extends CardModel {
     required this.outfitter,
     required this.citizenship,
     required this.isRetired,
+    super.cardType = CardType.player,
   });
 
   factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {

@@ -8,7 +8,7 @@ import '../../../domain/cards/legend_card.dart';
 import '../../widgets/legend_card/football_legend_card.dart';
 
 part 'football_legend_screen_presenter.dart';
-part 'widgets/tm_player_bio.dart';
+part 'widgets/tm_legend_bio.dart';
 
 class FootballLegendScreen extends StatelessWidget {
   const FootballLegendScreen({
