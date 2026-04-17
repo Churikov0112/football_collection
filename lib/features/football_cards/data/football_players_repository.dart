@@ -29,12 +29,14 @@ class CommonFootballRepository {
   final Random _random = Random();
 
   List<FootballConfederations> _parseConfederations(List<dynamic> teamsData) {
-    Set<FootballConfederations> confederations = {};
+    final Set<FootballConfederations> confederations = {};
     for (var team in teamsData) {
       if (team.containsKey('name')) {
-        String countryName = team['name'];
-        FootballConfederations confederation = footballConfederationFromCountryName(countryName);
-        if (!confederations.contains(confederation)) confederations.add(confederation);
+        final String countryName = team['name'];
+        final FootballConfederations confederation = footballConfederationFromCountryName(countryName);
+        if (!confederations.contains(confederation)) {
+          confederations.add(confederation);
+        }
       }
     }
     return confederations.toList();
@@ -59,6 +61,83 @@ class CommonFootballRepository {
       LogService.log(e.toString());
       return [];
     }
+  }
+
+  Map<String, int> _ageByPlayerIdGet(List<dynamic> marketValuesData) {
+    final ageByPlayerId = <String, int>{};
+
+    for (final item in marketValuesData) {
+      final playerId = item['id']?.toString();
+      final history = item['marketValueHistory'];
+      if (playerId == null || history is! List) {
+        continue;
+      }
+
+      int? age;
+      for (final historyItem in history) {
+        final historyAge = historyItem['age'];
+        if (historyAge is int && (age == null || historyAge > age)) {
+          age = historyAge;
+        }
+      }
+
+      if (age != null) {
+        ageByPlayerId[playerId] = age;
+      }
+    }
+
+    return ageByPlayerId;
+  }
+
+  Map<String, String> _joinedClubOnByPlayerIdGet(
+    List<dynamic> marketValuesData,
+  ) {
+    final joinedClubOnByPlayerId = <String, String>{};
+
+    for (final item in marketValuesData) {
+      final playerId = item['id']?.toString();
+      final history = item['marketValueHistory'];
+      if (playerId == null || history is! List || history.isEmpty) {
+        continue;
+      }
+
+      final normalizedHistory = history
+          .whereType<Map>()
+          .map((raw) => Map<String, dynamic>.from(raw))
+          .where((entry) => entry['date'] != null)
+          .toList();
+      if (normalizedHistory.isEmpty) {
+        continue;
+      }
+
+      normalizedHistory.sort(
+        (a, b) => a['date'].toString().compareTo(b['date'].toString()),
+      );
+      final latest = normalizedHistory.last;
+      final currentClubId = latest['clubId']?.toString();
+      final currentClubName = latest['clubName']?.toString();
+      if (currentClubId == null && currentClubName == null) {
+        continue;
+      }
+
+      Map<String, dynamic>? joinedItem;
+      for (final historyItem in normalizedHistory.reversed) {
+        final sameClub =
+            (currentClubId != null && historyItem['clubId']?.toString() == currentClubId) ||
+            (currentClubId == null && historyItem['clubName']?.toString() == currentClubName);
+        if (!sameClub) {
+          break;
+        }
+        joinedItem = historyItem;
+      }
+
+      final joinedDate = joinedItem?['date']?.toString();
+      if (joinedDate != null) {
+        joinedClubOnByPlayerId[playerId] = joinedDate;
+      }
+    }
+
+    return joinedClubOnByPlayerId;
   }
 
   List<FootballLegendCardModel> _parseLegends(List<dynamic> data) {
@@ -96,27 +175,50 @@ class CommonFootballRepository {
         _allLegendsCache.isEmpty ||
         _allCoachesCache.isEmpty ||
         _allEmblemsCache.isEmpty) {
-      final String teamsJson = await rootBundle.loadString('assets/json/prepared_tm_teams.json');
+      final String teamsJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_teams.json',
+      );
       final List<dynamic> teamsData = jsonDecode(teamsJson);
 
       // final String clubsJson = await rootBundle.loadString('assets/json/prepared_tm_clubs.json');
       // final List<dynamic> clubsData = jsonDecode(clubsJson);
 
-      final String playersJson = await rootBundle.loadString('assets/json/prepared_tm_players_profiles.json');
+      final String playersJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_players_profiles.json',
+      );
       final List<dynamic> playersData = jsonDecode(playersJson);
 
-      final String legendsJson = await rootBundle.loadString('assets/json/prepared_tm_legends_profiles.json');
+      final String marketValuesJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_players_market_values.json',
+      );
+      final List<dynamic> marketValuesData = jsonDecode(marketValuesJson);
+      final ageByPlayerId = _ageByPlayerIdGet(marketValuesData);
+      final joinedClubOnByPlayerId = _joinedClubOnByPlayerIdGet(
+        marketValuesData,
+      );
+      final enrichedPlayersData = playersData.map((item) {
+        final playerData = Map<dynamic, dynamic>.from(item);
+        playerData['age'] = ageByPlayerId[playerData['id']?.toString()];
+        playerData['joinedClubOn'] = joinedClubOnByPlayerId[playerData['id']?.toString()];
+        return playerData;
+      }).toList();
+
+      final String legendsJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_legends_profiles.json',
+      );
       final List<dynamic> legendsData = jsonDecode(legendsJson);
 
       final String coachesJson = await rootBundle.loadString('assets/json/prepared_tm_coaches_profiles.json');
       final List<dynamic> coachesData = jsonDecode(coachesJson);
 
-      final String emblemsJson = await rootBundle.loadString('assets/json/prepared_tm_teams_emblems.json');
+      final String emblemsJson = await rootBundle.loadString(
+        'assets/json/prepared_tm_teams_emblems.json',
+      );
       final List<dynamic> emblemsData = jsonDecode(emblemsJson);
 
       try {
         if (_allPlayersCache.isEmpty) {
-          _allPlayersCache = await compute(_parsePlayers, playersData);
+          _allPlayersCache = await compute(_parsePlayers, enrichedPlayersData);
         }
       } catch (e) {
         LogService.log(e.toString());
@@ -136,7 +238,9 @@ class CommonFootballRepository {
         }
 
         for (final emblem in emblemsData) {
-          final team = _allTeamsCache.firstWhereOrNull((team) => team.id == emblem['id']);
+          final team = _allTeamsCache.firstWhereOrNull(
+            (team) => team.id == emblem['id'],
+          );
           if (team != null) {
             final emblemModel = FootballTeamEmblemCardModel.fromTeam(team);
             _allEmblemsCache.add(emblemModel);
@@ -148,7 +252,10 @@ class CommonFootballRepository {
 
       try {
         if (_allConfederationCache.isEmpty) {
-          _allConfederationCache = await compute(_parseConfederations, teamsData);
+          _allConfederationCache = await compute(
+            _parseConfederations,
+            teamsData,
+          );
         }
       } catch (e) {
         LogService.log(e.toString());
@@ -176,7 +283,10 @@ class CommonFootballRepository {
     return [..._allConfederationCache];
   }
 
-  Future<List<FootballNationalTeamModel>> teamsGet({FootballConfederations? confederation, String? teamId}) async {
+  Future<List<FootballNationalTeamModel>> teamsGet({
+    FootballConfederations? confederation,
+    String? teamId,
+  }) async {
     if (confederation == null && teamId == null) {
       return [..._allTeamsCache];
     }
@@ -186,20 +296,33 @@ class CommonFootballRepository {
     }
 
     if (teamId == null && confederation != null) {
-      return [..._allTeamsCache].where((team) => team.confederation == confederation).toList();
+      return [
+        ..._allTeamsCache,
+      ].where((team) => team.confederation == confederation).toList();
     }
 
-    return [..._allTeamsCache].where((team) => team.confederation == confederation && team.id == teamId).toList();
+    return [..._allTeamsCache]
+        .where(
+          (team) => team.confederation == confederation && team.id == teamId,
+        )
+        .toList();
   }
 
-  Future<List<FootballPlayerCardModel>> playersGet({String? id, String? teamId}) async {
+  Future<List<FootballPlayerCardModel>> playersGet({
+    String? id,
+    String? teamId,
+  }) async {
     if (id != null) {
-      return [..._allPlayersCache].where((player) => player.playerId == id).toList();
+      return [
+        ..._allPlayersCache,
+      ].where((player) => player.playerId == id).toList();
     }
     if (teamId == null) {
       return [..._allPlayersCache];
     }
-    return [..._allPlayersCache].where((player) => player.teamId == teamId).toList();
+    return [
+      ..._allPlayersCache,
+    ].where((player) => player.teamId == teamId).toList();
   }
 
   // Future<List<FootballCoachCardModel>> coachesGet(FootballNationalTeamModel? team) async {
@@ -217,7 +340,10 @@ class CommonFootballRepository {
           type: .team,
           title: team.name,
           price: 100,
-          cards: await getRandomCards(team: team, cardTypes: CardType.values.toSet()),
+          cards: await getRandomCards(
+            team: team,
+            cardTypes: CardType.values.toSet(),
+          ),
           // imageAssetPath: "assets/raster/packs/pack-general.png",
           // glbAssetPath: "assets/3d/pack-general.glb",
           imageAssetPath: "assets/raster/packs/countrypackwc26.png",
@@ -246,7 +372,10 @@ class CommonFootballRepository {
         type: .topPlayers,
         title: "Top players",
         price: 100,
-        cards: await getRandomCards(minPrimeTransferValue: 50000000, cardTypes: CardType.values.toSet()),
+        cards: await getRandomCards(
+          minPrimeTransferValue: 50000000,
+          cardTypes: CardType.values.toSet(),
+        ),
         imageAssetPath: "assets/raster/packs/pack-topplayers.png",
         glbAssetPath: "assets/3d/pack-topplayers.glb",
       ),
@@ -254,7 +383,10 @@ class CommonFootballRepository {
         type: .topCountries,
         title: "Top 25 countries",
         price: 25,
-        cards: await getRandomCards(topCountries: true, cardTypes: CardType.values.toSet()),
+        cards: await getRandomCards(
+          topCountries: true,
+          cardTypes: CardType.values.toSet(),
+        ),
         imageAssetPath: "assets/raster/packs/pack-topcountries.png",
         glbAssetPath: "assets/3d/pack-topcountries.glb",
       ),
@@ -274,7 +406,9 @@ class CommonFootballRepository {
   }
 
   // Общий метод для получения всех карт (игроки + тренеры)
-  Future<List<CardModel>> _getAllCards({required Set<CardType> cardTypes}) async {
+  Future<List<CardModel>> _getAllCards({
+    required Set<CardType> cardTypes,
+  }) async {
     final List<CardModel> allCards = [
       if (cardTypes.contains(CardType.player)) ..._allPlayersCache,
       if (cardTypes.contains(CardType.coach)) ..._allCoachesCache,
@@ -286,7 +420,7 @@ class CommonFootballRepository {
 
   /// Возвращает карты с учетом фильтров
   ///
-  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship] влияют только на игроков
+  /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName], [withAge], [withJoinedClubOn] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
     FootballConfederations? confederation,
@@ -296,6 +430,13 @@ class CommonFootballRepository {
     int? minCurrentTransferValue,
     bool? withSponsor,
     bool? withSecondCitizenship,
+    bool? withHeight,
+    bool? withPosition,
+    bool? withFoot,
+    bool? withTeamShirtNumber,
+    bool? withClubName,
+    bool? withAge,
+    bool? withJoinedClubOn,
   }) async {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
@@ -307,7 +448,9 @@ class CommonFootballRepository {
 
       // Фильтрация по конфедерации
       if (confederation != null) {
-        final cardTeam = _allTeamsCache.firstWhereOrNull((t) => t.id == card.teamId);
+        final cardTeam = _allTeamsCache.firstWhereOrNull(
+          (t) => t.id == card.teamId,
+        );
         if (cardTeam?.confederation != confederation) {
           return false;
         }
@@ -341,6 +484,27 @@ class CommonFootballRepository {
         if (withSecondCitizenship == true && (card.citizenship?.length ?? 0) < 2) {
           return false;
         }
+        if (withHeight == true && card.height == null) {
+          return false;
+        }
+        if (withPosition == true && card.position == null) {
+          return false;
+        }
+        if (withFoot == true && card.foot == null) {
+          return false;
+        }
+        if (withTeamShirtNumber == true && (card.teamShirtNumber == null || card.teamShirtNumber == '-')) {
+          return false;
+        }
+        if (withClubName == true && (card.clubName == null || card.clubName == 'Without Club')) {
+          return false;
+        }
+        if (withAge == true && card.age == null) {
+          return false;
+        }
+        if (withJoinedClubOn == true && card.joinedClubOn == null) {
+          return false;
+        }
       }
 
       return true;
@@ -358,13 +522,20 @@ class CommonFootballRepository {
     bool? topCountries,
     bool? withSponsor,
     bool? withSecondCitizenship,
+    bool? withHeight,
+    bool? withPosition,
+    bool? withFoot,
+    bool? withTeamShirtNumber,
+    bool? withClubName,
+    bool? withAge,
+    bool? withJoinedClubOn,
     bool unique = false,
   }) async {
     final result = <CardModel>[];
 
     try {
       // Получаем все доступные карты с учетом фильтров
-      List<CardModel> availableCards = await getCards(
+      final List<CardModel> availableCards = await getCards(
         confederation: confederation,
         team: team,
         minPrimeTransferValue: minPrimeTransferValue,
@@ -372,6 +543,13 @@ class CommonFootballRepository {
         topCountries: topCountries,
         withSponsor: withSponsor,
         withSecondCitizenship: withSecondCitizenship,
+        withHeight: withHeight,
+        withPosition: withPosition,
+        withFoot: withFoot,
+        withTeamShirtNumber: withTeamShirtNumber,
+        withClubName: withClubName,
+        withAge: withAge,
+        withJoinedClubOn: withJoinedClubOn,
         cardTypes: cardTypes,
       );
 

@@ -42,6 +42,9 @@ class CardImageWrapper extends StatelessWidget {
     this.imagePadding = EdgeInsets.zero,
     this.nationalTeamVisibility,
     this.marketValueVisibility,
+    this.numberVisibility,
+    this.positionVisibility,
+    this.clubVisibility,
     // this.height = packHeight,
     // this.width = packWidth,
     // this.onTap,
@@ -65,6 +68,9 @@ class CardImageWrapper extends StatelessWidget {
 
   final CardElementVisibility? marketValueVisibility;
   final CardElementVisibility? nationalTeamVisibility;
+  final CardElementVisibility? positionVisibility;
+  final CardElementVisibility? numberVisibility;
+  final CardElementVisibility? clubVisibility;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +97,11 @@ class CardImageWrapper extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: card is FootballPlayerCardModel
-                ? _PlayerShildik(player: card as FootballPlayerCardModel, innerBorderRadius: borderRadius.bottomRight)
+                ? _PlayerShildik(
+                    player: card as FootballPlayerCardModel,
+                    innerBorderRadius: borderRadius.bottomRight,
+                    clubVisibility: clubVisibility!,
+                  )
                 : card is FootballLegendCardModel
                 ? _LegendShildik(innerBorderRadius: borderRadius.bottomRight)
                 : card is FootballCoachCardModel
@@ -106,6 +116,8 @@ class CardImageWrapper extends StatelessWidget {
                 ? _PlayerTopLeft(
                     player: card as FootballPlayerCardModel,
                     nationalTeamVisibility: nationalTeamVisibility!,
+                    numberVisibility: numberVisibility!,
+                    positionVisibility: positionVisibility!,
                   )
                 : card is FootballLegendCardModel
                 ? _LegendTopLeft(legend: card as FootballLegendCardModel)

@@ -1,0 +1,118 @@
+import 'dart:math';
+
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
+
+import '../../../../../ui_kit/widgets/background_image/background_image.dart';
+import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../../../football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
+import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
+import '../../blocs/balance_bloc/balance_bloc.dart';
+import 'widgets/yandex_ads_banner_mixin.dart';
+
+part 'guess_player_club_screen_presenter.dart';
+part 'widgets/guess_options.dart';
+
+class GuessPlayerClubScreen extends StatelessWidget {
+  const GuessPlayerClubScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
+    return BlocProvider(
+      create: (context) => RandomFootballPlayersBloc(getIt.get()),
+      child: GuessPlayerClubScreenPresenter(
+        child: Builder(
+          builder: (context) {
+            final presenter = GuessPlayerClubScreenPresenter.of(context);
+
+            return Scaffold(
+              body: Stack(
+                children: [
+                  BackgroundImage(),
+                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                    builder: (context, randomPlayersState) {
+                      final allPlayers = randomPlayersState.players ?? [];
+                      final player = allPlayers.firstOrNull;
+
+                      if (player?.clubName == null || player?.clubName == 'Without Club') {
+                        return Align(child: const CircularProgressIndicator());
+                      }
+
+                      final correctAnswer = player!.clubName!;
+                      final wrongOptions = <String>[];
+                      for (final item in allPlayers) {
+                        final clubName = item.clubName;
+                        if (clubName == null ||
+                            clubName == 'Without Club' ||
+                            clubName == correctAnswer ||
+                            wrongOptions.contains(clubName)) {
+                          continue;
+                        }
+                        wrongOptions.add(clubName);
+                      }
+
+                      if (wrongOptions.length < 3) {
+                        SchedulerBinding.instance.addPostFrameCallback((_) {
+                          presenter.loadRandomPlayers();
+                        });
+                        return Align(child: const CircularProgressIndicator());
+                      }
+
+                      final options = [correctAnswer, ...wrongOptions.take(3)];
+                      options.shuffle();
+
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Spacer(),
+                          StreamBuilder<String?>(
+                            stream: presenter.selectedOptionStream$,
+                            builder: (context, selectedOptionSnapshot) {
+                              return Align(
+                                child: FootballPlayerCardWidget(
+                                  player: player,
+                                  badge: .none,
+                                  clubVisibility: selectedOptionSnapshot.data != null ? .show : .none,
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          _GuessOptions(options: options, rightAnswer: correctAnswer),
+                          const SizedBox(height: 20),
+                          StreamBuilder<bool>(
+                            stream: presenter.isBannerAlreadyCreatedStream$,
+                            builder: (context, isBannerAlreadyCreatedSnapshot) {
+                              if (isBannerAlreadyCreatedSnapshot.data != true) {
+                                return const SizedBox(height: 100);
+                              }
+                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                            },
+                          ),
+                          SizedBox(height: mq.padding.bottom),
+                        ],
+                      );
+                    },
+                  ),
+                  Translator(
+                    termin: AppGlossary.guessPlayerClub,
+                    builder: (value) => TransparentAppbar(title: value),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

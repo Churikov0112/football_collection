@@ -1,14 +1,16 @@
 part of '../../card_image_wrapper.dart';
 
 class _PlayerShildik extends StatelessWidget {
-  const _PlayerShildik({required this.innerBorderRadius, required this.player});
+  const _PlayerShildik({required this.innerBorderRadius, required this.player, required this.clubVisibility});
 
   final Radius innerBorderRadius;
   final FootballPlayerCardModel player;
 
+  final CardElementVisibility clubVisibility;
+
   @override
   Widget build(BuildContext context) {
-    if (player.clubName == null) {
+    if (player.clubName == null || clubVisibility == CardElementVisibility.none) {
       return SizedBox.shrink();
     }
 

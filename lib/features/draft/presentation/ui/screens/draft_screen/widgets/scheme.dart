@@ -268,6 +268,7 @@ class _PositionOnField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final presenter = DraftScreenPresenter.of(context);
+    final mq = MediaQuery.of(context);
 
     return StreamBuilder(
       stream: presenter.draftPage$,
@@ -326,8 +327,8 @@ class _PositionOnField extends StatelessWidget {
                           },
                         )
                       : SizedBox(
-                          width: width,
-                          height: height,
+                          width: mq.size.width <= 650 ? width * 0.85 : width,
+                          height: mq.size.height <= 650 ? height * 0.85 : height,
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: color,

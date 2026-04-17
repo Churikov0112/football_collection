@@ -1,0 +1,107 @@
+import 'dart:math';
+
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/toast/toast_service.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:yandex_mobileads/mobile_ads.dart';
+
+import '../../../../../ui_kit/widgets/background_image/background_image.dart';
+import '../../../../../ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
+import '../../../../football_cards/presentation/blocs/random_football_players_bloc/random_football_players_bloc.dart';
+import '../../../../football_cards/presentation/widgets/player_card/football_player_card.dart';
+import '../../blocs/balance_bloc/balance_bloc.dart';
+import 'widgets/yandex_ads_banner_mixin.dart';
+
+part 'guess_player_number_screen_presenter.dart';
+part 'widgets/guess_options.dart';
+
+class GuessPlayerNumberScreen extends StatelessWidget {
+  const GuessPlayerNumberScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
+    return BlocProvider(
+      create: (context) => RandomFootballPlayersBloc(getIt.get()),
+      child: GuessPlayerNumberScreenPresenter(
+        child: Builder(
+          builder: (context) {
+            final presenter = GuessPlayerNumberScreenPresenter.of(context);
+
+            return Scaffold(
+              body: Stack(
+                children: [
+                  BackgroundImage(),
+                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                    builder: (context, randomPlayersState) {
+                      final allPlayers = randomPlayersState.players ?? [];
+                      final player = allPlayers.firstOrNull;
+
+                      if (player?.teamShirtNumber == null || player?.teamShirtNumber == '-') {
+                        return Align(child: const CircularProgressIndicator());
+                      }
+
+                      final correctAnswer = player!.teamShirtNumber!;
+                      final playerPosition = player.position ?? 'Centre-Forward';
+
+                      final numbers = presenter.positionToCommonNumbers[playerPosition] ?? [];
+
+                      final availableNumbers = numbers.where((n) => n != correctAnswer).toList()..shuffle();
+
+                      final wrongOptions = availableNumbers.take(3);
+
+                      final options = [correctAnswer, ...wrongOptions];
+                      options.shuffle();
+
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Spacer(),
+                          StreamBuilder<String?>(
+                            stream: presenter.selectedOptionStream$,
+                            builder: (context, selectedOptionSnapshot) {
+                              return Align(
+                                child: FootballPlayerCardWidget(
+                                  player: player,
+                                  badge: .none,
+                                  numberVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          _GuessOptions(options: options, rightAnswer: correctAnswer),
+                          const SizedBox(height: 20),
+                          StreamBuilder<bool>(
+                            stream: presenter.isBannerAlreadyCreatedStream$,
+                            builder: (context, isBannerAlreadyCreatedSnapshot) {
+                              if (isBannerAlreadyCreatedSnapshot.data != true) {
+                                return const SizedBox(height: 100);
+                              }
+                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                            },
+                          ),
+                          SizedBox(height: mq.padding.bottom),
+                        ],
+                      );
+                    },
+                  ),
+                  Translator(
+                    termin: AppGlossary.guessPlayerNumber,
+                    builder: (value) => TransparentAppbar(title: value),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

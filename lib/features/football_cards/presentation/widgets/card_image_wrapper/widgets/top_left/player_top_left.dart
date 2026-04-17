@@ -1,18 +1,26 @@
 part of '../../card_image_wrapper.dart';
 
 class _PlayerTopLeft extends StatelessWidget {
-  const _PlayerTopLeft({required this.player, required this.nationalTeamVisibility});
+  const _PlayerTopLeft({
+    required this.player,
+    required this.nationalTeamVisibility,
+    required this.numberVisibility,
+    required this.positionVisibility,
+  });
 
   final FootballPlayerCardModel player;
   final CardElementVisibility nationalTeamVisibility;
+  final CardElementVisibility numberVisibility;
+  final CardElementVisibility positionVisibility;
 
   @override
   Widget build(BuildContext context) {
     final hasNumber = player.teamShirtNumber != null && player.teamShirtNumber != "-";
+    final position = player.position;
 
     return Column(
       children: [
-        if (player.position case final position?) _PositionTopLeft(position: position),
+        if (position != null && positionVisibility == CardElementVisibility.show) _PositionTopLeft(position: position),
 
         if (nationalTeamVisibility == .show)
           DecoratedBox(
@@ -41,7 +49,7 @@ class _PlayerTopLeft extends StatelessWidget {
         else
           const SizedBox.shrink(),
 
-        if (hasNumber)
+        if (hasNumber && numberVisibility == CardElementVisibility.show)
           DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.lightGreenAccent,

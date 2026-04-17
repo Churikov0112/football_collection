@@ -3,8 +3,15 @@ import 'package:football_collection/features/football_confederations/presentatio
 import 'package:football_collection/features/leaderboard/presentation/screens/leaderboard_screen/leaderboard_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/club_foundation_date/club_foundation_date_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_club_by_stadium/guess_club_by_stadium_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_foot_screen/guess_foot_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_height_screen/guess_height_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_market_value_up_or_down/guess_market_value_up_or_down_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_player_age_screen/guess_player_age_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_player_club_screen/guess_player_club_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_player_join_date_screen/guess_player_join_date_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_player_number_screen/guess_player_number_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_player_screen/guess_player_screen.dart';
+import 'package:football_collection/features/mini_games/presentation/screens/guess_position_screen/guess_position_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_club/guess_stadium_by_club_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_stadium_by_country_and_seats/guess_stadium_by_country_and_seats_screen.dart';
 import 'package:football_collection/features/mini_games/presentation/screens/guess_transfer_value_screen/guess_transfer_value_screen.dart';
@@ -53,6 +60,13 @@ class RoutePaths {
   static const footballMiniGameGuessWhoIsMoreExpensive = '/footballMiniGameGuessWhoIsMoreExpensive';
   static const footballMiniGameGuessNationalTeam = '/footballMiniGameGuessNationalTeam';
   static const footballMiniGameGuessPlayer = '/footballMiniGameGuessPlayer';
+  static const footballMiniGameGuessHeight = '/footballMiniGameGuessHeight';
+  static const footballMiniGameGuessPosition = '/footballMiniGameGuessPosition';
+  static const footballMiniGameGuessFoot = '/footballMiniGameGuessFoot';
+  static const footballMiniGameGuessPlayerNumber = '/footballMiniGameGuessPlayerNumber';
+  static const footballMiniGameGuessPlayerClub = '/footballMiniGameGuessPlayerClub';
+  static const footballMiniGameGuessPlayerAge = '/footballMiniGameGuessPlayerAge';
+  static const footballMiniGameGuessPlayerJoinDate = '/footballMiniGameGuessPlayerJoinDate';
   static const footballMiniGameMarketValueUpOrDown = '/footballMiniGameMarketValueUpOrDown';
   static const footballMiniGameGuessPlayerSponsor = '/footballMiniGameGuessPlayerSponsor';
   static const footballMiniGameGuessSecondCitizenship = '/footballMiniGameGuessSecondCitizenship';
@@ -98,10 +112,13 @@ class FootballCollectionRouter {
       transitionDuration: const Duration(milliseconds: 300),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0.25, 0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutQuart)),
+          position:
+              Tween<Offset>(
+                begin: const Offset(0.25, 0),
+                end: Offset.zero,
+              ).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutQuart),
+              ),
           child: FadeTransition(opacity: animation, child: child),
         );
       },
@@ -113,8 +130,14 @@ class FootballCollectionRouter {
       navigatorKey: rootNavigatorKey,
       initialLocation: initialRoute,
       routes: [
-        GoRoute(path: RoutePaths.home, builder: (context, state) => const HomeScreen()),
-        GoRoute(path: RoutePaths.onboarding, builder: (context, state) => const OnboardingScreen()),
+        GoRoute(
+          path: RoutePaths.home,
+          builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.onboarding,
+          builder: (context, state) => const OnboardingScreen(),
+        ),
         GoRoute(
           path: RoutePaths.footballConfederations,
           builder: (context, state) => const FootballConfederationsScreen(),
@@ -125,69 +148,111 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.footballPlayersAlbum,
-          builder: (context, state) => FootballPlayersAlbumScreen(country: state.extra as FootballNationalTeamModel),
+          builder: (context, state) => FootballPlayersAlbumScreen(
+            country: state.extra as FootballNationalTeamModel,
+          ),
         ),
         GoRoute(
           path: RoutePaths.footballPlayersPacks,
-          builder: (context, state) => FootballPlayersPacksScreen(args: state.extra as FootballPlayersPacksScreenArgs),
+          builder: (context, state) => FootballPlayersPacksScreen(
+            args: state.extra as FootballPlayersPacksScreenArgs,
+          ),
         ),
         GoRoute(
           path: RoutePaths.footballCardsPackResults,
-          builder: (context, state) =>
-              FootballCardsPackResultsScreen(args: state.extra as FootballCardsPackResultsScreenArgs),
+          builder: (context, state) => FootballCardsPackResultsScreen(
+            args: state.extra as FootballCardsPackResultsScreenArgs,
+          ),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessCountryByFlag,
-          builder: (context, state) => GuessCountryByFlagScreen(),
+          builder: (context, state) => const GuessCountryByFlagScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessFlagByCountry,
-          builder: (context, state) => GuessFlagByCountryScreen(),
+          builder: (context, state) => const GuessFlagByCountryScreen(),
         ),
-        GoRoute(path: RoutePaths.cardsDuplicates, builder: (context, state) => const CardsDuplicatesScreen()),
+        GoRoute(
+          path: RoutePaths.cardsDuplicates,
+          builder: (context, state) => const CardsDuplicatesScreen(),
+        ),
 
-        GoRoute(path: RoutePaths.miniGames, builder: (context, state) => MiniGamesScreen()),
+        GoRoute(
+          path: RoutePaths.miniGames,
+          builder: (context, state) => const MiniGamesScreen(),
+        ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessTransferValue,
-          builder: (context, state) => GuessTransferValueScreen(),
+          builder: (context, state) => const GuessTransferValueScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessWhoIsMoreExpensive,
-          builder: (context, state) => GuessWhichFootballPlayerIsMoreExpensiveScreen(),
+          builder: (context, state) => const GuessWhichFootballPlayerIsMoreExpensiveScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessNationalTeam,
-          builder: (context, state) => GuessNationalTeamScreen(),
+          builder: (context, state) => const GuessNationalTeamScreen(),
         ),
-        GoRoute(path: RoutePaths.footballMiniGameGuessPlayer, builder: (context, state) => GuessPlayerScreen()),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayer,
+          builder: (context, state) => const GuessPlayerScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessHeight,
+          builder: (context, state) => const GuessHeightScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPosition,
+          builder: (context, state) => const GuessPositionScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessFoot,
+          builder: (context, state) => const GuessFootScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerNumber,
+          builder: (context, state) => const GuessPlayerNumberScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerClub,
+          builder: (context, state) => const GuessPlayerClubScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerAge,
+          builder: (context, state) => const GuessPlayerAgeScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.footballMiniGameGuessPlayerJoinDate,
+          builder: (context, state) => const GuessPlayerJoinDateScreen(),
+        ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessPlayerSponsor,
-          builder: (context, state) => GuessPlayerSponsorScreen(),
+          builder: (context, state) => const GuessPlayerSponsorScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessSecondCitizenship,
-          builder: (context, state) => GuessSecondCitizenshipScreen(),
+          builder: (context, state) => const GuessSecondCitizenshipScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessClubByStadium,
-          builder: (context, state) => GuessClubByStadiumScreen(),
+          builder: (context, state) => const GuessClubByStadiumScreen(),
         ),
 
         GoRoute(
           path: RoutePaths.footballMiniGameGuessCountryByFlag,
-          builder: (context, state) => GuessCountryByFlagScreen(),
+          builder: (context, state) => const GuessCountryByFlagScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessFlagByCountry,
-          builder: (context, state) => GuessFlagByCountryScreen(),
+          builder: (context, state) => const GuessFlagByCountryScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessStadiumByClub,
-          builder: (context, state) => GuessStadiumByClubScreen(),
+          builder: (context, state) => const GuessStadiumByClubScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameHowManySeatsInStadium,
-          builder: (context, state) => HowManySeatsInStadiumScreen(),
+          builder: (context, state) => const HowManySeatsInStadiumScreen(),
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameGuessStadiumByCountryAndSeats,
@@ -199,19 +264,37 @@ class FootballCollectionRouter {
         ),
         GoRoute(
           path: RoutePaths.footballMiniGameMarketValueUpOrDown,
-          builder: (context, state) => GuessMarketValueUpOrDownScreen(),
+          builder: (context, state) => const GuessMarketValueUpOrDownScreen(),
         ),
-        GoRoute(path: RoutePaths.draft, builder: (context, state) => const DraftScreen()),
-        GoRoute(path: RoutePaths.draftTournamentStage, builder: (context, state) => const DraftTournamentStageScreen()),
+        GoRoute(
+          path: RoutePaths.draft,
+          builder: (context, state) => const DraftScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.draftTournamentStage,
+          builder: (context, state) => const DraftTournamentStageScreen(),
+        ),
         GoRoute(
           path: RoutePaths.draftMatch,
           builder: (context, state) => DraftMatchScreen(args: state.extra as DraftMatchScreenArguments),
         ),
-        GoRoute(path: RoutePaths.getCardByQr, builder: (context, state) => GetCardByQrScreen()),
-        GoRoute(path: RoutePaths.settings, builder: (context, state) => SettingsScreen()),
-        GoRoute(path: RoutePaths.leaderboard, builder: (context, state) => const LeaderboardScreen()),
+        GoRoute(
+          path: RoutePaths.getCardByQr,
+          builder: (context, state) => const GetCardByQrScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.settings,
+          builder: (context, state) => const SettingsScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.leaderboard,
+          builder: (context, state) => const LeaderboardScreen(),
+        ),
 
-        GoRoute(path: RoutePaths.home, builder: (context, state) => const HomeScreen()),
+        GoRoute(
+          path: RoutePaths.home,
+          builder: (context, state) => const HomeScreen(),
+        ),
         // GoRoute(
         //   path: RoutePaths.map,
         //   builder: (context, state) => const MapScreen(),

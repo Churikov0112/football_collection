@@ -15,6 +15,8 @@ import '../draft_screen/widgets/player_card/draft_football_player_card.dart';
 part 'draft_players_screen_presenter.dart';
 part 'widgets/draft_players_list.dart';
 
+const _kPlayerPhotoHeight = 200.0;
+
 class DraftPlayersScreenArguments {
   final FootballPlayerAbstractPosition position;
   final List<String> playersIdsToExclude;
@@ -46,8 +48,12 @@ class DraftPlayersScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: mq.size.height * 0.35, child: const _DraftPlayersList()),
-              SizedBox(height: mq.padding.bottom),
+              // SizedBox(
+              //   height: mq.size.height <= 650 ? mq.size.height * 0.42 : mq.size.height * 0.35,
+              //   child: const _DraftPlayersList(),
+              // ),
+              // SizedBox(height: mq.size.height <= 650 ? 0 : mq.padding.bottom),
+              SizedBox(height: _kPlayerPhotoHeight + mq.padding.bottom + 100, child: const _DraftPlayersList()),
             ],
           ),
         ),

@@ -15,8 +15,10 @@ class FootballPlayerCardModel extends CardModel {
   final String? teamShirtNumber;
   final String? clubId;
   final String? clubName;
+  final DateTime? joinedClubOn;
   final String? position;
   final String? birthDate;
+  final int? age;
   final int? height;
   final String? outfitter;
   final bool? isRetired;
@@ -32,10 +34,12 @@ class FootballPlayerCardModel extends CardModel {
     required this.name,
     required this.position,
     required this.birthDate,
+    required this.age,
     required this.height,
     required this.foot,
     required this.clubId,
     required this.clubName,
+    required this.joinedClubOn,
     required this.teamId,
     required this.teamName,
     required this.teamShirtNumber,
@@ -55,6 +59,7 @@ class FootballPlayerCardModel extends CardModel {
       name: json['name'],
       position: json['position']?['main'],
       birthDate: json['birth_date'],
+      age: json['age'],
       height: json['height'],
       foot: json['foot'],
       teamShirtNumber: json['team_shirt_number'],
@@ -62,12 +67,18 @@ class FootballPlayerCardModel extends CardModel {
       teamId: json['team_id'],
       teamName: json['team_name'],
       clubName: json['club_name'],
+      joinedClubOn: json['joinedClubOn'] != null
+          ? DateTime.tryParse(json['joinedClubOn'])
+          : null,
       maxMarketValue: json['maxMarketValue'],
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
       citizenship: (json['citizenship'] is List)
-          ? [for (final citizenship in json['citizenship']) citizenship.toString()]
+          ? [
+              for (final citizenship in json['citizenship'])
+                citizenship.toString(),
+            ]
           : null,
     );
   }

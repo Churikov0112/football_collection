@@ -1,11 +1,11 @@
 part of '../draft_players_screen.dart';
 
-class _SortPlayersData {
-  final List<FootballPlayerCardModel> players;
-  final FootballPlayerAbstractPosition targetPosition;
+// class _SortPlayersData {
+//   final List<FootballPlayerCardModel> players;
+//   final FootballPlayerAbstractPosition targetPosition;
 
-  _SortPlayersData(this.players, this.targetPosition);
-}
+//   _SortPlayersData(this.players, this.targetPosition);
+// }
 
 class _DraftPlayersList extends StatelessWidget {
   const _DraftPlayersList();
@@ -94,11 +94,11 @@ class _DraftFootballPlayerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     const playerPhotoAspectRatio = 4 / 3; // height / width
-    final playerPhotoWidth = size.width * 0.3;
-    final playerPhotoHeight = playerPhotoWidth * playerPhotoAspectRatio;
+    // final playerPhotoWidth = size.width * 0.3;
+    final playerPhotoWidth = _kPlayerPhotoHeight * (1 / playerPhotoAspectRatio);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +117,11 @@ class _DraftFootballPlayerListTile extends StatelessWidget {
             );
             context.pop(playerGameModel);
           },
-          child: DraftFootballPlayerCardWidget(player: player, height: playerPhotoHeight + 60, width: playerPhotoWidth),
+          child: DraftFootballPlayerCardWidget(
+            player: player,
+            height: _kPlayerPhotoHeight + 60,
+            width: playerPhotoWidth,
+          ),
         ),
         // Column(
         //   crossAxisAlignment: CrossAxisAlignment.start,

@@ -35,8 +35,8 @@ class MiniGamesScreen extends StatelessWidget {
             backgroundColor: Colors.black,
             body: Stack(
               children: [
-                BackgroundImage(),
-                Column(children: [const _MiniGamesList()]),
+                const BackgroundImage(),
+                const Column(children: [_MiniGamesList()]),
                 Translator(
                   termin: AppGlossary.miniGames,
                   builder: (value) => TransparentAppbar(title: value),
@@ -48,7 +48,9 @@ class MiniGamesScreen extends StatelessWidget {
                   child: StreamBuilder<bool>(
                     stream: presenter.isBannerAlreadyCreatedStream$,
                     builder: (context, isBannerAlreadyCreatedSnapshot) {
-                      if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                      if (isBannerAlreadyCreatedSnapshot.data != true) {
+                        return const SizedBox(height: 100);
+                      }
                       return SizedBox(
                         height: 100,
                         child: Column(
