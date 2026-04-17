@@ -52,7 +52,7 @@ class GuessPlayerNumberScreen extends StatelessWidget {
 
                       final numbers = presenter.positionToCommonNumbers[playerPosition] ?? [];
 
-                      final availableNumbers = numbers.where((n) => n != playerPosition).toList()..shuffle();
+                      final availableNumbers = numbers.where((n) => n != correctAnswer).toList()..shuffle();
 
                       final wrongOptions = availableNumbers.take(3);
 
