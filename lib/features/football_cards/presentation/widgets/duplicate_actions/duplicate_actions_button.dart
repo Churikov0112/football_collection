@@ -1,25 +1,23 @@
-part of "../../card_image_wrapper.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/di/di.dart';
+import 'package:football_collection/services/localization/translator.dart';
 
-class _CountBadge extends StatelessWidget {
-  const _CountBadge({required this.card, required this.onSell, required this.onSellAll, required this.onShare});
+import '../../../../../ui_kit/widgets/button/button.dart';
+import '../../../../abstract/domain/models/card.dart';
+import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
+import 'duplicate_actions.dart';
+
+class DuplicateActionsButton extends StatelessWidget {
+  const DuplicateActionsButton({required this.card, super.key});
 
   final CardModel card;
-
-  final VoidCallback? onSell;
-  final VoidCallback? onSellAll;
-  final VoidCallback? onShare;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await openWhatToDoWithDuplicate(
-          context: context,
-          card: card,
-          onSell: onSell,
-          onSellAll: onSellAll,
-          onShare: onShare,
-        );
+        await openWhatToDoWithDuplicate(context: context, card: card);
       },
       child: BlocBuilder<SavedCardsBloc, SavedCardsState>(
         bloc: getIt.get(),
@@ -36,21 +34,17 @@ class _CountBadge extends StatelessWidget {
             return const SizedBox.shrink();
           }
 
-          return DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.lightGreenAccent,
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12)),
-            ),
-            child: RotatedBox(
-              quarterTurns: 3,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
-                child: Text(
-                  "x$count",
-                  style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
-                ),
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Button(
+                onPressed: () async {
+                  await openWhatToDoWithDuplicate(context: context, card: card);
+                },
+                text: AppGlossary.whatToDoWithDuplicate.translate(),
               ),
-            ),
+            ],
           );
           // return DecoratedBox(
           //   decoration: BoxDecoration(

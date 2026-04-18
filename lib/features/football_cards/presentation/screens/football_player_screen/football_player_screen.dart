@@ -12,6 +12,7 @@ import '../../../../../services/localization/translator.dart';
 import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../domain/cards/player_card.dart';
+import '../../widgets/duplicate_actions/duplicate_actions_button.dart';
 
 part 'football_player_screen_presenter.dart';
 part 'widgets/market_value_history.dart';
@@ -124,7 +125,11 @@ class FootballPlayerScreen extends StatelessWidget {
                       //   width: mq.size.width * 0.3,
                       //   child: _Name(isFake: false, name: player.name, hide: hideName),
                       // ),
-                      FootballPlayerCardWidget(player: player, badge: .none),
+                      FootballPlayerCardWidget(player: player, badge: .showCount),
+
+                      const SizedBox(height: 16),
+
+                      DuplicateActionsButton(card: player),
 
                       const SizedBox(height: 16),
 

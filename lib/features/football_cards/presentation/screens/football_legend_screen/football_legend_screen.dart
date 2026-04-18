@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../services/localization/translator.dart';
 import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../domain/cards/legend_card.dart';
+import '../../widgets/duplicate_actions/duplicate_actions_button.dart';
 import '../../widgets/legend_card/football_legend_card.dart';
 
 part 'football_legend_screen_presenter.dart';
@@ -117,6 +118,10 @@ class FootballLegendScreen extends StatelessWidget {
                       //   child: _Name(isFake: false, name: player.name, hide: hideName),
                       // ),
                       FootballLegendCardWidget(legend: legend, badge: .none),
+
+                      const SizedBox(height: 16),
+
+                      DuplicateActionsButton(card: legend),
 
                       const SizedBox(height: 16),
 
