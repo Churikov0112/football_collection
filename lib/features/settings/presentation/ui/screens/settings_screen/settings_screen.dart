@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
                           builder: (value) => TransparentAppbar(title: value, showBalance: false),
                         ),
                         const SizedBox(height: 20),
-                        LanguageSettingsTile(),
+                        const LanguageSettingsTile(),
                         const SizedBox(height: 20),
                         SwitchListTile(
                           title: Translator(
@@ -96,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
                         //     presenter.changeTrackAutoRotateSpeed(val);
                         //   },
                         // ),
-                        ListTile(title: Text("v. 2.2.6+26")), // CHANGE VERSION
+                        const ListTile(title: Text("v. 2.2.7+27")), // CHANGE VERSION
                       ],
                     ),
                     // Positioned(
