@@ -40,7 +40,7 @@ class GuessNationalTeamScreen extends StatelessWidget {
             return Scaffold(
               body: Stack(
                 children: [
-                  BackgroundImage(),
+                  const BackgroundImage(),
                   FutureBuilder<List<FootballNationalTeamModel>>(
                     future: repo.teamsGet(),
                     builder: (context, allCountriesState) =>
@@ -51,14 +51,16 @@ class GuessNationalTeamScreen extends StatelessWidget {
                             final playerCountry = allCountries.firstWhereOrNull((e) => e.id == player?.teamId);
 
                             if (player == null || playerCountry == null) {
-                              return Align(child: const CircularProgressIndicator());
+                              return const Align(child: CircularProgressIndicator());
                             }
 
                             final options = <FootballNationalTeamModel>[];
                             options.add(playerCountry);
                             while (options.length < 4) {
                               final randomCountry = allCountries[presenter.random.nextInt(allCountries.length)];
-                              if (options.contains(randomCountry)) continue;
+                              if (options.contains(randomCountry)) {
+                                continue;
+                              }
                               options.add(randomCountry);
                             }
                             options.shuffle();
@@ -85,7 +87,9 @@ class GuessNationalTeamScreen extends StatelessWidget {
                                 StreamBuilder<bool>(
                                   stream: presenter.isBannerAlreadyCreatedStream$,
                                   builder: (context, isBannerAlreadyCreatedSnapshot) {
-                                    if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                                    if (isBannerAlreadyCreatedSnapshot.data != true) {
+                                      return const SizedBox(height: 100);
+                                    }
                                     return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
                                   },
                                 ),

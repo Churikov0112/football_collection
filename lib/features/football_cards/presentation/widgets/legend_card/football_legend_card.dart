@@ -85,10 +85,7 @@ class FootballLegendCardWidget extends StatelessWidget {
                         onShare: onShare,
                         nationalTeamVisibility: nationalTeamVisibility,
                         marketValueVisibility: marketValueVisibility,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                        ),
+                        borderRadius: const .only(topLeft: .circular(8), bottomRight: .circular(8)),
                       ),
                       // Positioned(
                       //   top: 5,

@@ -25,18 +25,18 @@ class _PlayerTopLeft extends StatelessWidget {
         if (nationalTeamVisibility == .show)
           DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: hasNumber ? null : BorderRadius.only(bottomRight: .circular(8)),
+              borderRadius: hasNumber ? null : const BorderRadius.only(bottomRight: .circular(8)),
               image: DecorationImage(image: AssetImage('assets/raster/teams_flags/${player.teamId}.jpg')),
             ),
-            child: SizedBox.square(dimension: _kTopLeftElementSize),
+            child: const SizedBox.square(dimension: _kTopLeftElementSize),
           )
         else if (nationalTeamVisibility == .quest)
           DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: hasNumber ? null : BorderRadius.only(bottomRight: .circular(8)),
+              borderRadius: hasNumber ? null : const BorderRadius.only(bottomRight: .circular(8)),
               color: Colors.lightGreenAccent,
             ),
-            child: SizedBox.square(
+            child: const SizedBox.square(
               dimension: _kTopLeftElementSize,
               child: Center(
                 child: Text(
@@ -51,7 +51,7 @@ class _PlayerTopLeft extends StatelessWidget {
 
         if (hasNumber && numberVisibility == CardElementVisibility.show)
           DecoratedBox(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.lightGreenAccent,
               borderRadius: BorderRadius.only(bottomRight: .circular(8)),
             ),
@@ -60,7 +60,7 @@ class _PlayerTopLeft extends StatelessWidget {
               child: Center(
                 child: Text(
                   "#${player.teamShirtNumber}",
-                  style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

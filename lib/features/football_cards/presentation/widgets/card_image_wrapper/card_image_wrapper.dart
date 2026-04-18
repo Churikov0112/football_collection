@@ -89,8 +89,8 @@ class CardImageWrapper extends StatelessWidget {
             child: badge == CardBadge.showCount
                 ? _CountBadge(card: card, onSell: onSell, onSellAll: onSellAll, onShare: onShare)
                 : badge == CardBadge.showNew
-                ? _NewBadge()
-                : SizedBox.shrink(),
+                ? const _NewBadge()
+                : const SizedBox.shrink(),
           ),
 
           Positioned(
@@ -106,7 +106,7 @@ class CardImageWrapper extends StatelessWidget {
                 ? _LegendShildik(innerBorderRadius: borderRadius.bottomRight)
                 : card is FootballCoachCardModel
                 ? _CoachShildik(innerBorderRadius: borderRadius.bottomRight)
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ),
 
           Positioned(
@@ -123,7 +123,7 @@ class CardImageWrapper extends StatelessWidget {
                 ? _LegendTopLeft(legend: card as FootballLegendCardModel)
                 : card is FootballCoachCardModel
                 ? _CoachTopLeft(coach: card as FootballCoachCardModel)
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ),
 
           if (marketValueVisibility == .show)
@@ -134,7 +134,7 @@ class CardImageWrapper extends StatelessWidget {
                   ? _PlayerMarketValue(player: card as FootballPlayerCardModel)
                   : card is FootballLegendCardModel
                   ? _LegendMarketValue(legend: card as FootballLegendCardModel)
-                  : SizedBox.shrink(),
+                  : const SizedBox.shrink(),
             ),
         ],
       ),
