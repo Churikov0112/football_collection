@@ -67,10 +67,11 @@ class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter> 
     }
     final savedCards = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
     if (savedCards.contains(value)) {
+      ToastService.showToast(title: AppGlossary.alreadyInCollection.translate());
       return;
     }
     getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: value));
-    ToastService.showToast(title: "Player added to collection");
+    ToastService.showToast(title: AppGlossary.addedToCollection.translate());
   }
 
   @override
