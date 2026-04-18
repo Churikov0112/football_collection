@@ -103,6 +103,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Finland':
       return '🇫🇮';
     case 'Republic of Ireland':
+    case 'Ireland':
       return '🇮🇪';
     case 'Northern Ireland':
       return '🇯🇪';
@@ -275,6 +276,8 @@ String? emojiFlagByCountryName(String? countryName) {
       return '🇸🇩';
     case 'South Sudan':
       return '🇸🇸';
+    case 'Zanzibar':
+      return "🇹🇿";
 
     // AFC (Азия)
     case 'Japan':
