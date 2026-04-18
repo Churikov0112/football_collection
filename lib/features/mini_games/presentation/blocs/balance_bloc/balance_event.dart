@@ -17,3 +17,11 @@ class BalanceEventDecrease extends BalanceEvent {
     required this.amount,
   });
 }
+
+class BalanceEventSet extends BalanceEvent {
+  final int amount;
+
+  BalanceEventSet({
+    required this.amount,
+  });
+}

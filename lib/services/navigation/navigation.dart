@@ -26,6 +26,7 @@ import '../../features/countries/presentation/screens/countries_screen/countries
 import '../../features/draft/presentation/ui/screens/draft_match_screen/draft_match_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_screen/draft_screen.dart';
 import '../../features/draft/presentation/ui/screens/draft_tournament_stage_screen/draft_tournament_stage_screen.dart';
+import '../../features/export/presentation/screens/export_data_screen/export_data_screen.dart';
 import '../../features/football_cards/presentation/screens/album_screen/football_players_album_screen.dart';
 import '../../features/football_cards/presentation/screens/duplicates_screen/football_players_duplicates_screen.dart';
 import '../../features/football_cards/presentation/screens/packs_screen/football_players_pack_results_screen.dart';
@@ -84,6 +85,7 @@ class RoutePaths {
 
   static const getCardByQr = '/getCardByQr';
   static const settings = '/settings';
+  static const exportData = '/exportData';
   static const leaderboard = '/leaderboard';
 
   // static const main = '/main';
@@ -285,6 +287,10 @@ class FootballCollectionRouter {
         GoRoute(
           path: RoutePaths.settings,
           builder: (context, state) => const SettingsScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.exportData,
+          builder: (context, state) => const ExportDataScreen(),
         ),
         GoRoute(
           path: RoutePaths.leaderboard,

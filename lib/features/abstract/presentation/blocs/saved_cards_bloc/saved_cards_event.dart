@@ -33,3 +33,11 @@ class SavedCardsEventRemoveAll extends SavedCardsEvent {
     required this.cardIds,
   });
 }
+
+class SavedCardsEventSetAll extends SavedCardsEvent {
+  final List<String> cardIds;
+
+  SavedCardsEventSetAll({
+    required this.cardIds,
+  });
+}

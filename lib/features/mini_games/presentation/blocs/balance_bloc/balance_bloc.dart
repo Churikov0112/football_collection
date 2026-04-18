@@ -13,8 +13,17 @@ class BalanceBloc extends HydratedBloc<BalanceEvent, BalanceState> {
       (event, emitter) => switch (event) {
         BalanceEventIncrease() => _increase(event, emitter),
         BalanceEventDecrease() => _decrease(event, emitter),
+        BalanceEventSet() => _set(event, emitter),
       },
     );
+  }
+
+  Future<void> _set(BalanceEventSet event, Emitter emit) async {
+    try {
+      emit(BalanceStateReady(event.amount));
+    } catch (e) {
+      emit(BalanceStateFailed(message: e.toString()));
+    }
   }
 
   Future<void> _increase(BalanceEventIncrease event, Emitter emit) async {

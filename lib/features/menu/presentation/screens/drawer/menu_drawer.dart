@@ -29,12 +29,25 @@ class MenuDrawer extends StatelessWidget {
             // ),
             ListTile(
               onTap: () {
+                context.push(RoutePaths.exportData);
+              },
+              leading: const Icon(Icons.import_export, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.export,
+                builder: (export) => Translator(
+                  termin: AppGlossary.import,
+                  builder: (import) => Text("$export/$import", style: const TextStyle(color: Colors.white)),
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
                 context.push(RoutePaths.leaderboard);
               },
-              leading: Icon(Icons.leaderboard, color: Colors.white),
+              leading: const Icon(Icons.leaderboard, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.rating,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
             // BlocBuilder<SavedCardsBloc, SavedCardsState>(
@@ -66,20 +79,20 @@ class MenuDrawer extends StatelessWidget {
               onTap: () {
                 context.push(RoutePaths.getCardByQr);
               },
-              leading: Icon(Icons.qr_code_2, color: Colors.white),
+              leading: const Icon(Icons.qr_code_2, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.scanQr,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.cardsDuplicates);
               },
-              leading: Icon(Icons.copy, color: Colors.white),
+              leading: const Icon(Icons.copy, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.duplicates,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(
@@ -88,57 +101,57 @@ class MenuDrawer extends StatelessWidget {
                   context: context,
                   isScrollControlled: true,
                   builder: (context) {
-                    return EnterCheatCodeScreen();
+                    return const EnterCheatCodeScreen();
                   },
                 );
               },
-              leading: Icon(Icons.keyboard, color: Colors.white),
+              leading: const Icon(Icons.keyboard, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.cheatCodes,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(
               onTap: () {
                 context.push(RoutePaths.settings);
               },
-              leading: Icon(Icons.settings, color: Colors.white),
+              leading: const Icon(Icons.settings, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.settings,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
-            ListTile(),
+            // const ListTile(),
             ListTile(
               onTap: () async {
                 await openInBrowser("https://football-collection.tilda.ws");
               },
-              leading: Icon(Icons.language, color: Colors.white),
+              leading: const Icon(Icons.language, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.ourWebsite,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
             ListTile(
               onTap: () async {
                 await openInBrowser("https://t.me/dosbrosdev");
               },
-              leading: Icon(Icons.telegram, color: Colors.white),
+              leading: const Icon(Icons.telegram, color: Colors.white),
               title: Translator(
                 termin: AppGlossary.ourTelegram,
-                builder: (value) => Text(value, style: TextStyle(color: Colors.white)),
-              ),
-            ),
-            ListTile(
-              onTap: () async {
-                await openInBrowser("https://chat.whatsapp.com/FRadRMQ6gLP4mX03KDANtf");
-              },
-              leading: const Icon(Icons.chat, color: Colors.white),
-              title: Translator(
-                termin: AppGlossary.ourWhatsApp,
                 builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
+            // ListTile(
+            //   onTap: () async {
+            //     await openInBrowser("https://chat.whatsapp.com/FRadRMQ6gLP4mX03KDANtf");
+            //   },
+            //   leading: const Icon(Icons.chat, color: Colors.white),
+            //   title: Translator(
+            //     termin: AppGlossary.ourWhatsApp,
+            //     builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
+            //   ),
+            // ),
           ],
         ),
       ),

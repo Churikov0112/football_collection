@@ -38,7 +38,7 @@ class FootballConfederationsScreen extends StatelessWidget {
             // drawer: MenuDrawer(),
             body: Stack(
               children: [
-                BackgroundImage(),
+                const BackgroundImage(),
                 Column(
                   children: [
                     FutureBuilder<List<CardModel>>(
@@ -49,7 +49,9 @@ class FootballConfederationsScreen extends StatelessWidget {
                           builder: (context, allCountriesState) {
                             final allCountries = allCountriesState.data ?? [];
                             final allCards = allFootballCardsState.data ?? [];
-                            if (allCountries.isEmpty || allCards.isEmpty) return const LinearProgressIndicator();
+                            if (allCountries.isEmpty || allCards.isEmpty) {
+                              return const LinearProgressIndicator();
+                            }
                             return const _RegionsList();
                           },
                         );
@@ -69,7 +71,7 @@ class FootballConfederationsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: OpenPacksScreenButton(
                       onPressed: () {
-                        context.push(RoutePaths.footballPlayersPacks, extra: FootballPlayersPacksScreenArgs());
+                        context.push(RoutePaths.footballPlayersPacks, extra: const FootballPlayersPacksScreenArgs());
                       },
                     ),
                   ),
