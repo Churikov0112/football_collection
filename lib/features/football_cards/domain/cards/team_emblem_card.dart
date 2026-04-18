@@ -11,14 +11,14 @@ class FootballTeamEmblemCardModel extends CardModel {
   const FootballTeamEmblemCardModel({
     required super.cardId,
     required super.imageAssetPath,
-    super.cardType = CardType.emblem,
     required this.teamId,
     required this.name,
+    super.cardType = CardType.emblem,
   });
 
   factory FootballTeamEmblemCardModel.fromTeam(FootballNationalTeamModel team) {
     return FootballTeamEmblemCardModel(
-      cardId: "football_emblem-${team.id}",
+      cardId: "${CardType.emblem.name}_${team.id}",
       imageAssetPath: "assets/raster/teams_emblems/${team.id}.png",
 
       teamId: team.id,

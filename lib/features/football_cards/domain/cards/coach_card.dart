@@ -16,18 +16,18 @@ class FootballCoachCardModel extends CardModel {
   const FootballCoachCardModel({
     required super.cardId,
     required super.imageAssetPath,
-    super.cardType = CardType.coach,
     required this.coachId,
     required this.name,
     required this.teamId,
     required this.teamName,
     required this.citizenship,
+    super.cardType = CardType.coach,
   });
 
   factory FootballCoachCardModel.fromJson(Map<dynamic, dynamic> json) {
     return FootballCoachCardModel(
       coachId: json['id'],
-      cardId: "football_coach-${json['id']}",
+      cardId: "${CardType.coach.name}_${json['id']}",
       imageAssetPath: "assets/raster/coaches_faces/${json['id']}.jpg",
       name: json['name'],
       teamId: json['current_club']?['id'],

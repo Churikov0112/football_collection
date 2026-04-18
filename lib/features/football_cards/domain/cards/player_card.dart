@@ -53,7 +53,7 @@ class FootballPlayerCardModel extends CardModel {
 
   factory FootballPlayerCardModel.fromJson(Map<dynamic, dynamic> json) {
     return FootballPlayerCardModel(
-      cardId: "football_player-${json['id']}",
+      cardId: "${CardType.player.name}_${json['id']}",
       imageAssetPath: "assets/raster/players_faces/${json['id']}.jpg",
       playerId: json['id'],
       name: json['name'],
@@ -67,17 +67,14 @@ class FootballPlayerCardModel extends CardModel {
       teamId: json['team_id'],
       teamName: json['team_name'],
       clubName: json['club_name'],
-      joinedClubOn: json['joinedClubOn'] != null
-          ? DateTime.tryParse(json['joinedClubOn'])
-          : null,
+      joinedClubOn: json['joinedClubOn'] != null ? DateTime.tryParse(json['joinedClubOn']) : null,
       maxMarketValue: json['maxMarketValue'],
       marketValue: json['marketValue'],
       outfitter: json['outfitter'],
       isRetired: json['isRetired'],
       citizenship: (json['citizenship'] is List)
           ? [
-              for (final citizenship in json['citizenship'])
-                citizenship.toString(),
+              for (final citizenship in json['citizenship']) citizenship.toString(),
             ]
           : null,
     );

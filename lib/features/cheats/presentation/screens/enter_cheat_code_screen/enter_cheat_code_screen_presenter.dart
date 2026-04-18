@@ -17,7 +17,8 @@ enum DisposableCheatCode {
   $final(code: "FINAL"),
   goat(code: "GOAT"),
   ronaldinho23(code: "RONALDINHO23"),
-  klose(code: "KLOSE");
+  klose(code: "KLOSE")
+  ;
 
   const DisposableCheatCode({required this.code});
 
@@ -40,11 +41,11 @@ class EnterCheatCodeScreenPresenter extends StatefulWidget {
 class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPresenter> {
   final TextEditingController cheatCodeTextEditingController = TextEditingController();
 
-  void verifyCheatCode() async {
+  Future<void> verifyCheatCode() async {
     final cheatCode = cheatCodeTextEditingController.value.text;
 
     try {
-      FirebaseAnalytics.instance.logEvent(name: "cheat_code_entered", parameters: {"cheat_code": cheatCode});
+      unawaited(FirebaseAnalytics.instance.logEvent(name: "cheat_code_entered", parameters: {"cheat_code": cheatCode}));
     } catch (e) {
       LogService.error(e.toString(), e);
     }
@@ -135,6 +136,53 @@ class EnterCheatCodeScreenPresenterState extends State<EnterCheatCodeScreenPrese
     //     return;
     //   }
     // }
+
+    final repo = getIt.get<CommonFootballRepository>();
+
+    if (cheatCode.contains(CardType.player.name)) {
+      final cards = await repo.getCards(id: cheatCode, cardTypes: {.player});
+      if (cards.isEmpty) {
+        ToastService.showToast(title: "Player not found", seconds: 2);
+        return;
+      }
+      getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: cards.first.cardId));
+      _onCheatCodeVerified(cheatCode);
+      return;
+    }
+
+    if (cheatCode.contains(CardType.legend.name)) {
+      final cards = await repo.getCards(id: cheatCode, cardTypes: {.legend});
+      if (cards.isEmpty) {
+        ToastService.showToast(title: "Legend not found", seconds: 2);
+        return;
+      }
+      getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: cards.first.cardId));
+      _onCheatCodeVerified(cheatCode);
+      return;
+    }
+
+    if (cheatCode.contains(CardType.coach.name)) {
+      final cards = await repo.getCards(id: cheatCode, cardTypes: {.coach});
+      if (cards.isEmpty) {
+        ToastService.showToast(title: "Coach not found", seconds: 2);
+        return;
+      }
+      getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: cards.first.cardId));
+      _onCheatCodeVerified(cheatCode);
+      return;
+    }
+
+    if (cheatCode.contains(CardType.emblem.name)) {
+      final cards = await repo.getCards(id: cheatCode, cardTypes: {.emblem});
+      if (cards.isEmpty) {
+        ToastService.showToast(title: "Emblem not found", seconds: 2);
+        return;
+      }
+      getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: cards.first.cardId));
+      _onCheatCodeVerified(cheatCode);
+      return;
+    }
+
     if (kDebugMode) {
       if (cheatCode.contains("BALANCE ")) {
         final balanceString = cheatCode.replaceAll("BALANCE ", "");

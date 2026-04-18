@@ -49,7 +49,7 @@ class FootballLegendCardModel extends CardModel {
 
   factory FootballLegendCardModel.fromJson(Map<dynamic, dynamic> json) {
     return FootballLegendCardModel(
-      cardId: "football_legend-${json['id']}",
+      cardId: "${CardType.legend.name}_${json['id']}",
       imageAssetPath: "assets/raster/legends_faces/${json['id']}.jpg",
       playerId: json['id'],
       name: json['name'],

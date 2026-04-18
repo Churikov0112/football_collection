@@ -423,6 +423,7 @@ class CommonFootballRepository {
   /// Параметры [minPrimeTransferValue], [minCurrentTransferValue], [withSponsor], [withSecondCitizenship], [withHeight], [withPosition], [withFoot], [withTeamShirtNumber], [withClubName], [withAge], [withJoinedClubOn] влияют только на игроков
   Future<List<CardModel>> getCards({
     required Set<CardType> cardTypes,
+    String? id,
     FootballConfederations? confederation,
     FootballNationalTeamModel? team,
     bool? topCountries,
@@ -441,6 +442,10 @@ class CommonFootballRepository {
     final allCards = await _getAllCards(cardTypes: cardTypes);
 
     return allCards.where((card) {
+      if (id != null && card.cardId != id) {
+        return false;
+      }
+
       // Фильтрация по команде
       if (team != null && card.teamId != team.id) {
         return false;

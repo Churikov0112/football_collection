@@ -62,9 +62,13 @@ class GetCardByQrScreenPresenterState extends State<GetCardByQrScreenPresenter> 
 
   void handleBarcode(BarcodeCapture capture) {
     final value = capture.barcodes.firstOrNull?.rawValue;
-    if (value == null) return;
+    if (value == null) {
+      return;
+    }
     final savedCards = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? [];
-    if (savedCards.contains(value)) return;
+    if (savedCards.contains(value)) {
+      return;
+    }
     getIt.get<SavedCardsBloc>().add(SavedCardsEventAdd(cardId: value));
     ToastService.showToast(title: "Player added to collection");
   }

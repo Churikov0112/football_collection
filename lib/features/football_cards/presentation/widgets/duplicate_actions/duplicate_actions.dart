@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' show Icons, showModalBottomSheet;
 import 'package:flutter/widgets.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/services/localization/translator.dart';
+import 'package:football_collection/services/navigation/bottom_sheet_controller/bottom_sheet_controller.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../services/toast/toast_service.dart';
@@ -24,9 +25,9 @@ Future<void> openWhatToDoWithDuplicate({
 
   if (whatToDo == WhatToDoWithDuplicate.qr) {
     onShare?.call();
-    await showModalBottomSheet(
-      context: context,
-      builder: (context) => CardQrBottomSheet(card: card),
+    await BottomSheetController.showBottomSheet(
+      context,
+      (context) => CardQrBottomSheet(card: card),
     ).timeout(
       const Duration(milliseconds: 300),
       onTimeout: () async {

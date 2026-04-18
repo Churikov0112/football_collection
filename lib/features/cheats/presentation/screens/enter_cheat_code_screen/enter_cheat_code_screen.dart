@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +35,12 @@ class EnterCheatCodeScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextField(
                   controller: presenter.cheatCodeTextEditingController,
                   decoration: InputDecoration(hintText: AppGlossary.cheatCodeHere.translate()),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Button(onPressed: presenter.verifyCheatCode, text: AppGlossary.confirm.translate()),
                 SizedBox(height: mq.viewInsets.bottom + mq.padding.bottom + 16),
               ],
