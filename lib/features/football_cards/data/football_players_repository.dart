@@ -379,17 +379,17 @@ class CommonFootballRepository {
         imageAssetPath: "assets/raster/packs/pack-topplayers.png",
         glbAssetPath: "assets/3d/pack-topplayers.glb",
       ),
-      PackModel(
-        type: .topCountries,
-        title: "Top 25 countries",
-        price: 25,
-        cards: await getRandomCards(
-          topCountries: true,
-          cardTypes: CardType.values.toSet(),
-        ),
-        imageAssetPath: "assets/raster/packs/pack-topcountries.png",
-        glbAssetPath: "assets/3d/pack-topcountries.glb",
-      ),
+      // PackModel(
+      //   type: .topCountries,
+      //   title: "Top 25 countries",
+      //   price: 25,
+      //   cards: await getRandomCards(
+      //     topCountries: true,
+      //     cardTypes: CardType.values.toSet(),
+      //   ),
+      //   imageAssetPath: "assets/raster/packs/pack-topcountries.png",
+      //   glbAssetPath: "assets/3d/pack-topcountries.glb",
+      // ),
       // if (confederation == null && team == null)
       //   for (final conf in FootballConfederations.values)
       //     if (conf != FootballConfederations.unknown)
