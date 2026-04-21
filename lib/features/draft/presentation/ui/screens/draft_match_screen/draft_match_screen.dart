@@ -193,11 +193,11 @@ class _DraftMatchScreenState extends State<DraftMatchScreen> {
                                     : matchWon
                                     ? Text(
                                         AppGlossary.nextMatch.translate(),
-                                        style: const TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.black),
                                       )
                                     : Text(
                                         AppGlossary.exitDraft.translate(),
-                                        style: const TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.black),
                                       ),
                               );
                             },
