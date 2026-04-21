@@ -54,115 +54,68 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
-            title: AppGlossary.guessHeight,
+            title: AppGlossary.guessPlayerTeam,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_height"},
+                  parameters: {"mini_game": "guess_national_team"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(RoutePaths.footballMiniGameGuessHeight);
+              context.push(RoutePaths.footballMiniGameGuessNationalTeam);
+            },
+          ),
+
+          _MiniGameTile(
+            title: AppGlossary.guessSecondCitizenship,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_second_citizenship"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessSecondCitizenship);
             },
           ),
           _MiniGameTile(
-            title: AppGlossary.guessPosition,
+            title: AppGlossary.guessCountryByFlag,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_position"},
+                  parameters: {"mini_game": "guess_country_by_flag"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(RoutePaths.footballMiniGameGuessPosition);
+              context.push(RoutePaths.footballMiniGameGuessCountryByFlag);
             },
           ),
           _MiniGameTile(
-            title: AppGlossary.guessFoot,
+            title: AppGlossary.guessCountryFlag,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_foot"},
+                  parameters: {"mini_game": "guess_country_flag"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(RoutePaths.footballMiniGameGuessFoot);
-            },
-          ),
-          _MiniGameTile(
-            title: AppGlossary.guessPlayerNumber,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_player_number"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessPlayerNumber);
-            },
-          ),
-          _MiniGameTile(
-            title: AppGlossary.guessPlayerClub,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_player_club"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessPlayerClub);
-            },
-          ),
-          _MiniGameTile(
-            title: AppGlossary.guessPlayerAge,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_player_age"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessPlayerAge);
-            },
-          ),
-          _MiniGameTile(
-            title: AppGlossary.guessPlayerJoinDate,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_player_join_date"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessPlayerJoinDate);
+              context.push(RoutePaths.footballMiniGameGuessFlagByCountry);
             },
           ),
           _MiniGameTile(
@@ -214,39 +167,119 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
           _MiniGameTile(
-            title: AppGlossary.guessPlayerTeam,
+            title: AppGlossary.guessPosition,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_national_team"},
+                  parameters: {"mini_game": "guess_position"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(RoutePaths.footballMiniGameGuessNationalTeam);
+              context.push(RoutePaths.footballMiniGameGuessPosition);
+            },
+          ),
+          _MiniGameTile(
+            title: AppGlossary.guessPlayerClub,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_club"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerClub);
+            },
+          ),
+          _MiniGameTile(
+            title: AppGlossary.guessPlayerNumber,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_number"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerNumber);
+            },
+          ),
+          _MiniGameTile(
+            title: AppGlossary.guessHeight,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_height"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessHeight);
             },
           ),
 
           _MiniGameTile(
-            title: AppGlossary.guessSecondCitizenship,
+            title: AppGlossary.guessFoot,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
 
             onTap: () {
               try {
                 FirebaseAnalytics.instance.logEvent(
                   name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_second_citizenship"},
+                  parameters: {"mini_game": "guess_foot"},
                 );
               } catch (e) {
                 LogService.error(e.toString(), e);
               }
-              context.push(RoutePaths.footballMiniGameGuessSecondCitizenship);
+              context.push(RoutePaths.footballMiniGameGuessFoot);
             },
           ),
 
+          _MiniGameTile(
+            title: AppGlossary.guessPlayerAge,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_age"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerAge);
+            },
+          ),
+          _MiniGameTile(
+            title: AppGlossary.guessPlayerJoinDate,
+            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
+
+            onTap: () {
+              try {
+                FirebaseAnalytics.instance.logEvent(
+                  name: "mini_game_opened",
+                  parameters: {"mini_game": "guess_player_join_date"},
+                );
+              } catch (e) {
+                LogService.error(e.toString(), e);
+              }
+              context.push(RoutePaths.footballMiniGameGuessPlayerJoinDate);
+            },
+          ),
           _MiniGameTile(
             title: AppGlossary.guessPlayerSponsor,
             color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
@@ -345,38 +378,6 @@ class _MiniGamesList extends StatelessWidget {
             },
           ),
 
-          _MiniGameTile(
-            title: AppGlossary.guessCountryByFlag,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_country_by_flag"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessCountryByFlag);
-            },
-          ),
-          _MiniGameTile(
-            title: AppGlossary.guessCountryFlag,
-            color: theme.colorScheme.secondary.darken(0.3).withAlpha(180),
-
-            onTap: () {
-              try {
-                FirebaseAnalytics.instance.logEvent(
-                  name: "mini_game_opened",
-                  parameters: {"mini_game": "guess_country_flag"},
-                );
-              } catch (e) {
-                LogService.error(e.toString(), e);
-              }
-              context.push(RoutePaths.footballMiniGameGuessFlagByCountry);
-            },
-          ),
           // _MiniGameTile(
           //   color: Colors.orange,
           //   title: "Guess national team",
