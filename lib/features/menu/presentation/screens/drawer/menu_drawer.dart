@@ -124,7 +124,7 @@ class MenuDrawer extends StatelessWidget {
             // const ListTile(),
             ListTile(
               onTap: () async {
-                await openInBrowser("https://football-collection.tilda.ws");
+                await openInBrowser("https://football-collection-c7c28.web.app");
               },
               leading: const Icon(Icons.language, color: Colors.white),
               title: Translator(
