@@ -9,6 +9,6 @@
       local area network as this Mac.
       The device must be opted into Developer Mode to connect wirelessly. (code
       -27)
-[✓] Network resources
+[✓] Network resource
 
 • No issues found!
