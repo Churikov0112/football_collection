@@ -7,6 +7,82 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:590271846043:android:49a09d4fc7ceea2a91583e",
+        "android_client_info": {
+          "package_name": "com.dosbrosdev.fc_26_england"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYJB_It0Pa6yEe-S6-DfvganqyMQF_Pfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590271846043:android:73f2752df800a69f91583e",
+        "android_client_info": {
+          "package_name": "com.dosbrosdev.fc_26_germany"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYJB_It0Pa6yEe-S6-DfvganqyMQF_Pfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590271846043:android:dc21b36512a999d191583e",
+        "android_client_info": {
+          "package_name": "com.footballpackee.fcwc26"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYJB_It0Pa6yEe-S6-DfvganqyMQF_Pfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590271846043:android:6678b7948c2e129991583e",
+        "android_client_info": {
+          "package_name": "com.nineone.football_collection_2025"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYJB_It0Pa6yEe-S6-DfvganqyMQF_Pfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:590271846043:android:718ba4305e1b634391583e",
         "android_client_info": {
           "package_name": "com.packee.fcwc26"

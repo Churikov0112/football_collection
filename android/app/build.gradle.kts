@@ -24,7 +24,7 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-    namespace = "com.packee.fcwc26"
+    namespace = "com.footballpackee.fcwc26"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -41,7 +41,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.packee.fcwc26"
+        applicationId = "com.footballpackee.fcwc26"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

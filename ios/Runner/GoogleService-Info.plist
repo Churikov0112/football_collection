@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.packee.fcwc26</string>
+	<string>com.footballpackee.fcwc26</string>
 	<key>PROJECT_ID</key>
 	<string>football-collection-c7c28</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:590271846043:ios:7e882868bd39d06291583e</string>
+	<string>1:590271846043:ios:06c882eb8e6f661e91583e</string>
 </dict>
 </plist>
