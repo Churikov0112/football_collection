@@ -64,7 +64,7 @@ Future<void> main() async {
   }
 
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.transparent),
+    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.transparent),
   );
 
   await SystemChrome.setPreferredOrientations([
@@ -161,7 +161,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   @override
   Widget build(BuildContext context) {
     return !isInitialized
-        ? Center(child: const CircularProgressIndicator(color: Colors.blueAccent))
+        ? const Center(child: CircularProgressIndicator(color: Colors.blueAccent))
         : BlocBuilder<LanguageBloc, LanguageState>(
             bloc: getIt.get(),
             builder: (context, languageState) {
@@ -169,10 +169,10 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                 config: toastificationConfig,
                 child: MaterialApp.router(
                   theme: ThemeData.dark().copyWith(
-                    colorScheme: ColorScheme.dark(primary: Colors.lightGreenAccent, secondary: Colors.blueAccent),
+                    colorScheme: const ColorScheme.dark(primary: Colors.lightGreenAccent, secondary: Colors.blueAccent),
                   ),
                   routerConfig: _router.router,
-                  title: 'World Cup Collection 2026',
+                  title: 'World Cup 2026',
                   color: Colors.black,
                   debugShowCheckedModeBanner: true,
                   locale: languageState.language.locale,
