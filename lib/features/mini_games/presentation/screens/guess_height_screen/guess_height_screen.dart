@@ -70,7 +70,7 @@ class GuessHeightScreen extends StatelessWidget {
                       }
 
                       final options = [correctAnswer, ...wrongOptions.take(3)];
-                      options.shuffle();
+                      options.shuffle(Random(player.playerId.hashCode));
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,

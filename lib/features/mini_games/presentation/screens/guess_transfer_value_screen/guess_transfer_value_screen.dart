@@ -38,18 +38,35 @@ class GuessTransferValueScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                  BlocBuilder<
+                    RandomFootballPlayersBloc,
+                    RandomFootballPlayersState
+                  >(
                     builder: (context, randomPlayersState) {
                       final player = randomPlayersState.players?.firstOrNull;
-                      if (player == null) return Align(child: const CircularProgressIndicator());
+                      if (player == null)
+                        return Align(child: const CircularProgressIndicator());
 
-                      final random = presenter.random;
+                      final random = Random(player.playerId.hashCode);
                       final currentMarketValue = player.marketValue ?? 0;
-                      const allDeviationSteps = [-0.75, -0.5, -0.25, 0.25, 0.5, 0.75, 1];
-                      final selectedStep = allDeviationSteps[random.nextInt(allDeviationSteps.length)];
+                      const allDeviationSteps = [
+                        -0.75,
+                        -0.5,
+                        -0.25,
+                        0.25,
+                        0.5,
+                        0.75,
+                        1,
+                      ];
+                      final selectedStep =
+                          allDeviationSteps[random.nextInt(
+                            allDeviationSteps.length,
+                          )];
 
-                      final randomMarketValues = [currentMarketValue, (currentMarketValue * (1 + selectedStep)).round()]
-                        ..shuffle(random);
+                      final randomMarketValues = [
+                        currentMarketValue,
+                        (currentMarketValue * (1 + selectedStep)).round(),
+                      ]..shuffle(random);
 
                       return DecoratedBox(
                         decoration: BoxDecoration(),
@@ -65,24 +82,39 @@ class GuessTransferValueScreen extends StatelessWidget {
                                   child: FootballPlayerCardWidget(
                                     player: player,
                                     badge: .none,
-                                    marketValueVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
+                                    marketValueVisibility:
+                                        selectedOptionSnapshot.data != null
+                                        ? .show
+                                        : .quest,
                                   ),
                                 );
                               },
                             ),
                             const SizedBox(height: 20),
                             GuessOptions(
-                              options: randomMarketValues.map((e) => beautifyTransferValue(e)).toList(),
-                              rightAnswer: beautifyTransferValue(currentMarketValue),
+                              options: randomMarketValues
+                                  .map((e) => beautifyTransferValue(e))
+                                  .toList(),
+                              rightAnswer: beautifyTransferValue(
+                                currentMarketValue,
+                              ),
                             ),
                             const Spacer(),
                             const SizedBox(height: 20),
                             StreamBuilder<bool>(
                               stream: presenter.isBannerAlreadyCreatedStream$,
-                              builder: (context, isBannerAlreadyCreatedSnapshot) {
-                                if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
-                                return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
-                              },
+                              builder:
+                                  (context, isBannerAlreadyCreatedSnapshot) {
+                                    if (isBannerAlreadyCreatedSnapshot.data !=
+                                        true)
+                                      return const SizedBox(height: 100);
+                                    return SizedBox(
+                                      height: 100,
+                                      child: AdWidget(
+                                        bannerAd: presenter.banner,
+                                      ),
+                                    );
+                                  },
                             ),
                             SizedBox(height: mq.padding.bottom),
                           ],

@@ -37,19 +37,23 @@ class ClubFoundationDateScreen extends StatelessWidget {
             return Scaffold(
               body: Stack(
                 children: [
-                  BackgroundImage(),
-                  BlocBuilder<RandomFootballClubsBloc, RandomFootballClubsState>(
+                  const BackgroundImage(),
+                  BlocBuilder<
+                    RandomFootballClubsBloc,
+                    RandomFootballClubsState
+                  >(
                     builder: (context, randomFootballClubsState) {
                       final club = randomFootballClubsState.value?.firstOrNull;
                       final foundedOn = club?.foundedOn;
 
                       if (foundedOn == null) {
-                        return Align(child: const CircularProgressIndicator());
+                        return const Align(child: CircularProgressIndicator());
                       }
 
-                      final random = presenter.random;
+                      final random = Random(club!.id.hashCode);
                       const allDeviationSteps = [-5, -3, -1, 1, 3, 5];
-                      final shuffledSteps = List<int>.from(allDeviationSteps)..shuffle(random);
+                      final shuffledSteps = List<int>.from(allDeviationSteps)
+                        ..shuffle(random);
                       final selectedSteps = shuffledSteps.take(3).toList();
 
                       final randomFoundedValues = [
@@ -59,7 +63,7 @@ class ClubFoundationDateScreen extends StatelessWidget {
                         (foundedOn.add(Duration(days: 365 * selectedSteps[2]))),
                       ]..shuffle(random);
 
-                      final correctAnswer = club?.foundedOn;
+                      final correctAnswer = foundedOn;
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -69,35 +73,71 @@ class ClubFoundationDateScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Align(
                               child: DecoratedBox(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.all(.circular(8)),
                                   color: Color(0xFF1F5ED3),
-                                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2))],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 5,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
                                 ),
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(.circular(8)),
+                                    borderRadius: const BorderRadius.all(
+                                      .circular(8),
+                                    ),
                                     gradient: LinearGradient(
                                       colors: [
-                                        Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                         const Color.fromARGB(0, 255, 255, 255),
-                                        Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                         const Color.fromARGB(0, 255, 255, 255),
-                                        Color(0xFFFFFFFF).withValues(alpha: 0.3),
-                                        Color.fromARGB(84, 8, 12, 86).withValues(alpha: 0.2),
-                                        Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
+                                        const Color.fromARGB(
+                                          84,
+                                          8,
+                                          12,
+                                          86,
+                                        ).withValues(alpha: 0.2),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                       ],
-                                      stops: [0.05, 0.18, 0.3, 0.50, 0.7, 0.85, 1],
+                                      stops: [
+                                        0.05,
+                                        0.18,
+                                        0.3,
+                                        0.50,
+                                        0.7,
+                                        0.85,
+                                        1,
+                                      ],
                                       begin: Alignment.topRight,
                                       end: Alignment.bottomLeft,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 16,
+                                    ),
                                     child: Text(
-                                      club!.name,
+                                      club.name,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Colors.white),
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -106,7 +146,10 @@ class ClubFoundationDateScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           const Spacer(),
-                          _GuessOptions(options: randomFoundedValues, rightAnswer: correctAnswer!),
+                          _GuessOptions(
+                            options: randomFoundedValues,
+                            rightAnswer: correctAnswer,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
@@ -114,7 +157,10 @@ class ClubFoundationDateScreen extends StatelessWidget {
                               if (isBannerAlreadyCreatedSnapshot.data != true) {
                                 return const SizedBox(height: 100);
                               }
-                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              return SizedBox(
+                                height: 100,
+                                child: AdWidget(bannerAd: presenter.banner),
+                              );
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),

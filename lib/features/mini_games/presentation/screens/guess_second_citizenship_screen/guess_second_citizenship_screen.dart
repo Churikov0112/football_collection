@@ -39,44 +39,64 @@ class GuessSecondCitizenshipScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                  BlocBuilder<
+                    RandomFootballPlayersBloc,
+                    RandomFootballPlayersState
+                  >(
                     builder: (context, randomPlayersState) {
                       final allPlayers = randomPlayersState.players ?? [];
                       final player = allPlayers.firstOrNull;
                       final secondCitizenship = player?.citizenship?[1];
 
-                      if (secondCitizenship == null) return Align(child: const CircularProgressIndicator());
-                      final allWrongCitizenships = allCitizenships.where((e) => e != secondCitizenship).toList();
-                      allWrongCitizenships.shuffle();
+                      if (secondCitizenship == null)
+                        return Align(child: const CircularProgressIndicator());
+                      final questionSeed = player!.playerId.hashCode;
+                      final allWrongCitizenships = allCitizenships
+                          .where((e) => e != secondCitizenship)
+                          .toList();
+                      allWrongCitizenships.shuffle(Random(questionSeed));
                       final wrongOptions = allWrongCitizenships.sublist(0, 3);
 
                       final options = [secondCitizenship, ...wrongOptions];
-                      options.shuffle();
+                      options.shuffle(Random(questionSeed ^ 0x9E3779B9));
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Spacer(),
                           Align(
-                            child: FootballPlayerCardWidget(player: player!, badge: .none),
+                            child: FootballPlayerCardWidget(
+                              player: player,
+                              badge: .none,
+                            ),
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(options: options, rightAnswer: secondCitizenship),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: secondCitizenship,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
                             builder: (context, isBannerAlreadyCreatedSnapshot) {
-                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
+                              if (isBannerAlreadyCreatedSnapshot.data != true)
+                                return const SizedBox(height: 100);
                               return SizedBox(
                                 height: 100,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [AdWidget(bannerAd: presenter.banner)],
+                                  children: [
+                                    AdWidget(bannerAd: presenter.banner),
+                                  ],
                                 ),
                               );
                             },
                           ),
-                          Container(color: Colors.transparent, height: mq.padding.bottom, width: mq.size.width),
+                          Container(
+                            color: Colors.transparent,
+                            height: mq.padding.bottom,
+                            width: mq.size.width,
+                          ),
                         ],
                       );
                     },

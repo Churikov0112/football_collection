@@ -32,16 +32,24 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
       child: GuessStadiumByCountryAndSeatsScreenPresenter(
         child: Builder(
           builder: (context) {
-            final presenter = GuessStadiumByCountryAndSeatsScreenPresenter.of(context);
+            final presenter = GuessStadiumByCountryAndSeatsScreenPresenter.of(
+              context,
+            );
 
             return Scaffold(
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballClubsBloc, RandomFootballClubsState>(
+                  BlocBuilder<
+                    RandomFootballClubsBloc,
+                    RandomFootballClubsState
+                  >(
                     builder: (context, randomFootballClubsState) {
                       final clubs = randomFootballClubsState.value ?? [];
-                      final validClubs = clubs.where(_isClubValidForGame).cast<FootballClubModel>().toList();
+                      final validClubs = clubs
+                          .where(_isClubValidForGame)
+                          .cast<FootballClubModel>()
+                          .toList();
 
                       if (validClubs.isEmpty) {
                         return const Align(child: CircularProgressIndicator());
@@ -52,7 +60,8 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                       final wrongOptions = <String>[];
                       for (final item in validClubs.skip(1)) {
                         final stadiumName = item.stadiumName!;
-                        if (stadiumName == correctAnswer || wrongOptions.contains(stadiumName)) {
+                        if (stadiumName == correctAnswer ||
+                            wrongOptions.contains(stadiumName)) {
                           continue;
                         }
                         wrongOptions.add(stadiumName);
@@ -67,7 +76,7 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                       }
 
                       final options = [correctAnswer, ...wrongOptions];
-                      options.shuffle();
+                      options.shuffle(Random(correctClub.id.hashCode));
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -81,29 +90,59 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.all(.circular(8)),
                                   color: const Color(0xFF1F5ED3),
                                   boxShadow: const [
-                                    BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2)),
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 5,
+                                      offset: Offset(2, 2),
+                                    ),
                                   ],
                                 ),
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(.circular(8)),
+                                    borderRadius: BorderRadius.all(
+                                      .circular(8),
+                                    ),
                                     gradient: LinearGradient(
                                       colors: [
-                                        const Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                         const Color.fromARGB(0, 255, 255, 255),
-                                        const Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                         const Color.fromARGB(0, 255, 255, 255),
-                                        const Color(0xFFFFFFFF).withValues(alpha: 0.3),
-                                        const Color.fromARGB(84, 8, 12, 86).withValues(alpha: 0.2),
-                                        const Color(0xFFFFFFFF).withValues(alpha: 0.3),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
+                                        const Color.fromARGB(
+                                          84,
+                                          8,
+                                          12,
+                                          86,
+                                        ).withValues(alpha: 0.2),
+                                        const Color(
+                                          0xFFFFFFFF,
+                                        ).withValues(alpha: 0.3),
                                       ],
-                                      stops: const [0.05, 0.18, 0.3, 0.50, 0.7, 0.85, 1],
+                                      stops: const [
+                                        0.05,
+                                        0.18,
+                                        0.3,
+                                        0.50,
+                                        0.7,
+                                        0.85,
+                                        1,
+                                      ],
                                       begin: Alignment.topRight,
                                       end: Alignment.bottomLeft,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 16,
+                                    ),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -125,7 +164,9 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.white.withValues(alpha: 0.9),
+                                              color: Colors.white.withValues(
+                                                alpha: 0.9,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -138,7 +179,10 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           const Spacer(),
-                          _GuessOptions(options: options, rightAnswer: correctAnswer),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: correctAnswer,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
@@ -146,7 +190,10 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
                               if (isBannerAlreadyCreatedSnapshot.data != true) {
                                 return const SizedBox(height: 100);
                               }
-                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              return SizedBox(
+                                height: 100,
+                                child: AdWidget(bannerAd: presenter.banner),
+                              );
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),
@@ -169,5 +216,7 @@ class GuessStadiumByCountryAndSeatsScreen extends StatelessWidget {
 }
 
 bool _isClubValidForGame(FootballClubModel club) {
-  return club.stadiumName != null && club.stadiumSeats != null && club.league?.countryName != null;
+  return club.stadiumName != null &&
+      club.stadiumSeats != null &&
+      club.league?.countryName != null;
 }
