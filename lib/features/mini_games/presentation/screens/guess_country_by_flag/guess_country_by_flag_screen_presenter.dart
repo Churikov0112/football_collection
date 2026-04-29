@@ -2,6 +2,7 @@ part of 'guess_country_by_flag_screen.dart';
 
 const _kDefaultRewardValue = 1;
 const _kOptionsCount = 4;
+const _kQuestionRepeatWindow = 10;
 
 class GuessCountryByFlagScreenPresenter extends StatefulWidget {
   static GuessCountryByFlagScreenPresenterState of(BuildContext context) {
@@ -26,6 +27,7 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   List<FootballNationalTeamModel> _allTeams = [];
   Map<String, FootballNationalTeamModel> _teamById = {};
   Map<String, Map<int, double>> _flagColorProfiles = {};
+  final List<String> _recentCorrectAnswerIds = [];
   bool _isPreparingGame = true;
   double _prepareProgress = 0;
 
@@ -84,7 +86,7 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   void _loadNextRound() {
     if (_allTeams.length < _kOptionsCount) return;
 
-    final correctAnswer = _allTeams[random.nextInt(_allTeams.length)];
+    final correctAnswer = _pickNextCorrectAnswer();
     final options = <FootballNationalTeamModel>[correctAnswer];
     final similarTeamIds = _flagColorSimilarityService.findMostSimilarTeamIds(
       targetTeamId: correctAnswer.id,
@@ -106,8 +108,32 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
     }
 
     options.shuffle(random);
+    _rememberCorrectAnswer(correctAnswer.id);
     _selectedOptionSubject.add(null);
     _roundSubject.add(_GuessCountryByFlagRound(correctAnswer: correctAnswer, options: options));
+  }
+
+  FootballNationalTeamModel _pickNextCorrectAnswer() {
+    if (_allTeams.length <= 1) {
+      return _allTeams.first;
+    }
+
+    if (_recentCorrectAnswerIds.isEmpty) {
+      return _allTeams[random.nextInt(_allTeams.length)];
+    }
+
+    final availableTeams = _allTeams.where((team) => !_recentCorrectAnswerIds.contains(team.id)).toList(growable: false);
+    final pool = availableTeams.isNotEmpty ? availableTeams : _allTeams;
+    return pool[random.nextInt(pool.length)];
+  }
+
+  void _rememberCorrectAnswer(String teamId) {
+    _recentCorrectAnswerIds.add(teamId);
+
+    final maxRecentAnswers = min(_kQuestionRepeatWindow, _allTeams.length - 1);
+    while (_recentCorrectAnswerIds.length > maxRecentAnswers) {
+      _recentCorrectAnswerIds.removeAt(0);
+    }
   }
 
   Future<void> showResult({
