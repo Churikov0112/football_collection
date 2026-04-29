@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../di/di.dart';
 import '../../../../../../services/localization/translator.dart';
 import '../../../../../countries/domain/models/national_team.dart';
-import '../../../../../football_cards/data/football_players_repository.dart';
 
 class CountrySelectionBottomSheet extends StatefulWidget {
   const CountrySelectionBottomSheet({super.key});
@@ -24,7 +22,8 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
 
   @override
   Widget build(BuildContext context) {
-    final repo = getIt.get<CommonFootballRepository>();
+    final countries = allCitizenships.where((country) => country.toLowerCase().contains(_query)).toList()
+      ..sort((a, b) => a.compareTo(b));
 
     return Material(
       color: const Color(0xFF101010),
@@ -49,33 +48,22 @@ class _CountrySelectionBottomSheetState extends State<CountrySelectionBottomShee
                 builder: (value) => TextField(
                   controller: _searchController,
                   onChanged: (value) => setState(() => _query = value.trim().toLowerCase()),
-                  decoration: InputDecoration(prefixIcon: const Icon(Icons.search, color: Colors.white70)),
+                  decoration: const InputDecoration(prefixIcon: Icon(Icons.search, color: Colors.white70)),
                 ),
               ),
               const SizedBox(height: 12),
               Expanded(
-                child: FutureBuilder<List<FootballNationalTeamModel>>(
-                  future: repo.teamsGet(),
-                  builder: (context, state) {
-                    final countries =
-                        (state.data ?? <FootballNationalTeamModel>[])
-                            .where((country) => country.name.toLowerCase().contains(_query))
-                            .toList()
-                          ..sort((a, b) => a.name.compareTo(b.name));
-
-                    return ListView.separated(
-                      itemCount: countries.length,
-                      separatorBuilder: (_, _) => const Divider(color: Colors.white12, height: 1),
-                      itemBuilder: (context, index) {
-                        final country = countries[index];
-                        return ListTile(
-                          onTap: () => Navigator.of(context).pop(country.name),
-                          title: Text(
-                            '${emojiFlagByCountryName(country.name) ?? ''} ${country.name}',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        );
-                      },
+                child: ListView.separated(
+                  itemCount: countries.length,
+                  separatorBuilder: (_, _) => const Divider(color: Colors.white12, height: 1),
+                  itemBuilder: (context, index) {
+                    final country = countries[index];
+                    return ListTile(
+                      onTap: () => Navigator.of(context).pop(country),
+                      title: Text(
+                        '${emojiFlagByCountryName(country) ?? ''} $country',
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     );
                   },
                 ),
