@@ -3,10 +3,13 @@ part of 'guess_country_by_flag_screen.dart';
 const _kDefaultRewardValue = 1;
 const _kOptionsCount = 4;
 const _kQuestionRepeatWindow = 10;
+const _kColorDistractorsCount = 2;
+const _kNameSimilarityJitterPool = 3;
 
 class GuessCountryByFlagScreenPresenter extends StatefulWidget {
   static GuessCountryByFlagScreenPresenterState of(BuildContext context) {
-    return context.findAncestorStateOfType<GuessCountryByFlagScreenPresenterState>()!;
+    return context
+        .findAncestorStateOfType<GuessCountryByFlagScreenPresenterState>()!;
   }
 
   final Widget child;
@@ -14,15 +17,19 @@ class GuessCountryByFlagScreenPresenter extends StatefulWidget {
   const GuessCountryByFlagScreenPresenter({required this.child, super.key});
 
   @override
-  State<GuessCountryByFlagScreenPresenter> createState() => GuessCountryByFlagScreenPresenterState();
+  State<GuessCountryByFlagScreenPresenter> createState() =>
+      GuessCountryByFlagScreenPresenterState();
 }
 
-class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScreenPresenter>
+class GuessCountryByFlagScreenPresenterState
+    extends State<GuessCountryByFlagScreenPresenter>
     with GuessCountryByFlagYandexAdsBannerMixin {
   // int winstrick = 0;
   final Random random = Random();
-  final CommonFootballRepository _repository = getIt.get<CommonFootballRepository>();
-  final FlagColorSimilarityService _flagColorSimilarityService = FlagColorSimilarityService();
+  final CommonFootballRepository _repository = getIt
+      .get<CommonFootballRepository>();
+  final FlagColorSimilarityService _flagColorSimilarityService =
+      FlagColorSimilarityService();
 
   List<FootballNationalTeamModel> _allTeams = [];
   Map<String, FootballNationalTeamModel> _teamById = {};
@@ -31,9 +38,11 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   bool _isPreparingGame = true;
   double _prepareProgress = 0;
 
-  final BehaviorSubject<String?> _selectedOptionSubject = BehaviorSubject.seeded(null);
+  final BehaviorSubject<String?> _selectedOptionSubject =
+      BehaviorSubject.seeded(null);
   Stream<String?> get selectedOptionStream$ => _selectedOptionSubject.stream;
-  final BehaviorSubject<_GuessCountryByFlagRound?> _roundSubject = BehaviorSubject.seeded(null);
+  final BehaviorSubject<_GuessCountryByFlagRound?> _roundSubject =
+      BehaviorSubject.seeded(null);
   Stream<_GuessCountryByFlagRound?> get roundStream$ => _roundSubject.stream;
 
   bool get isPreparingGame => _isPreparingGame;
@@ -51,19 +60,24 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   Future<void> _prepareGame() async {
     try {
       final teams = await _repository.teamsGet();
-      final profiles = await _flagColorSimilarityService.buildProfilesFromPrecomputed(
-        teams: teams,
-        precomputedColors: teamFlagColors,
-        onProgress: (current, total) {
-          if (!mounted || total == 0) return;
-          setState(() {
-            _prepareProgress = current / total;
-          });
-        },
-      );
+      final profiles = await _flagColorSimilarityService
+          .buildProfilesFromPrecomputed(
+            teams: teams,
+            precomputedColors: teamFlagColors,
+            onProgress: (current, total) {
+              if (!mounted || total == 0) return;
+              setState(() {
+                _prepareProgress = current / total;
+              });
+            },
+          );
 
-      final teamsWithFlags = teams.where((team) => profiles.containsKey(team.id)).toList(growable: false);
-      final gameTeams = teamsWithFlags.length >= _kOptionsCount ? teamsWithFlags : teams;
+      final teamsWithFlags = teams
+          .where((team) => profiles.containsKey(team.id))
+          .toList(growable: false);
+      final gameTeams = teamsWithFlags.length >= _kOptionsCount
+          ? teamsWithFlags
+          : teams;
 
       if (!mounted) return;
       setState(() {
@@ -88,19 +102,33 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
 
     final correctAnswer = _pickNextCorrectAnswer();
     final options = <FootballNationalTeamModel>[correctAnswer];
-    final similarTeamIds = _flagColorSimilarityService.findMostSimilarTeamIds(
-      targetTeamId: correctAnswer.id,
-      profiles: _flagColorProfiles,
-      limit: _allTeams.length,
-    );
-    final shuffledSimilarTeamIds = List<String>.from(similarTeamIds)..shuffle(random);
+    final englishNamesByTeamId = {
+      for (final team in _allTeams) team.id: team.name,
+    };
+    final similarByColorIds = _flagColorSimilarityService
+        .findMostSimilarByColorTeamIds(
+          targetTeamId: correctAnswer.id,
+          profiles: _flagColorProfiles,
+          limit: _allTeams.length,
+        );
+    final similarByNameIds = _flagColorSimilarityService
+        .findMostSimilarByNameTeamIds(
+          targetTeamId: correctAnswer.id,
+          englishNamesByTeamId: englishNamesByTeamId,
+          limit: _allTeams.length,
+        );
 
-    for (final teamId in shuffledSimilarTeamIds) {
-      final team = _teamById[teamId];
-      if (team == null || options.contains(team)) continue;
-      options.add(team);
-      if (options.length == _kOptionsCount) break;
-    }
+    _addOptionsFromIds(
+      options: options,
+      candidateIds: similarByColorIds
+          .take(_kColorDistractorsCount)
+          .toList(growable: false),
+      maxToAdd: _kColorDistractorsCount,
+    );
+    _addSingleNameDistractorWithJitter(
+      options: options,
+      similarByNameIds: similarByNameIds,
+    );
 
     while (options.length < _kOptionsCount) {
       final randomTeam = _allTeams[random.nextInt(_allTeams.length)];
@@ -111,7 +139,9 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
     options.shuffle(random);
     _rememberCorrectAnswer(correctAnswer.id);
     _selectedOptionSubject.add(null);
-    _roundSubject.add(_GuessCountryByFlagRound(correctAnswer: correctAnswer, options: options));
+    _roundSubject.add(
+      _GuessCountryByFlagRound(correctAnswer: correctAnswer, options: options),
+    );
   }
 
   FootballNationalTeamModel _pickNextCorrectAnswer() {
@@ -123,9 +153,58 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
       return _allTeams[random.nextInt(_allTeams.length)];
     }
 
-    final availableTeams = _allTeams.where((team) => !_recentCorrectAnswerIds.contains(team.id)).toList(growable: false);
+    final availableTeams = _allTeams
+        .where((team) => !_recentCorrectAnswerIds.contains(team.id))
+        .toList(growable: false);
     final pool = availableTeams.isNotEmpty ? availableTeams : _allTeams;
     return pool[random.nextInt(pool.length)];
+  }
+
+  void _addOptionsFromIds({
+    required List<FootballNationalTeamModel> options,
+    required List<String> candidateIds,
+    int? maxToAdd,
+  }) {
+    if (options.length >= _kOptionsCount) return;
+
+    var addedCount = 0;
+    for (final teamId in candidateIds) {
+      if (options.length >= _kOptionsCount) return;
+      final team = _teamById[teamId];
+      if (team == null || options.contains(team)) continue;
+      options.add(team);
+      addedCount++;
+      if (maxToAdd != null && addedCount >= maxToAdd) return;
+      if (options.length == _kOptionsCount) return;
+    }
+  }
+
+  void _addSingleNameDistractorWithJitter({
+    required List<FootballNationalTeamModel> options,
+    required List<String> similarByNameIds,
+  }) {
+    if (similarByNameIds.isEmpty || options.length >= _kOptionsCount) return;
+
+    final jitterPool = similarByNameIds
+        .take(_kNameSimilarityJitterPool)
+        .toList(growable: false);
+    final shuffledPool = List<String>.from(jitterPool)..shuffle(random);
+    _addOptionsFromIds(
+      options: options,
+      candidateIds: shuffledPool,
+      maxToAdd: 1,
+    );
+
+    if (options.length >= _kOptionsCount ||
+        similarByNameIds.length <= _kNameSimilarityJitterPool) {
+      return;
+    }
+
+    _addOptionsFromIds(
+      options: options,
+      candidateIds: similarByNameIds.sublist(_kNameSimilarityJitterPool),
+      maxToAdd: 1,
+    );
   }
 
   void _rememberCorrectAnswer(String teamId) {
@@ -143,15 +222,22 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   }) async {
     _selectedOptionSubject.add(selectedAnswer.id);
     if (selectedAnswer.id == rightAnswer.id) {
-      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue));
+      getIt.get<BalanceBloc>().add(
+        BalanceEventIncrease(amount: _kDefaultRewardValue),
+      );
       ToastService.showToast(
         title: AppGlossary.correct.translate(),
-        subtitle: "${AppGlossary.rewarded.translate()} $_kDefaultRewardValue  🏆",
+        subtitle:
+            "${AppGlossary.rewarded.translate()} $_kDefaultRewardValue  🏆",
         seconds: 2,
       );
       // winstrick++;
     } else {
-      ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
+      ToastService.showErrorToast(
+        title: AppGlossary.incorrect.translate(),
+        subtitle: ":(",
+        seconds: 2,
+      );
       // winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));
@@ -160,7 +246,8 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
 
   @override
   void dispose() {
-    final shouldDestroyBanner = isBannerAlreadyCreatedSubject.valueOrNull == true;
+    final shouldDestroyBanner =
+        isBannerAlreadyCreatedSubject.valueOrNull == true;
     _selectedOptionSubject.close();
     _roundSubject.close();
     isBannerAlreadyCreatedSubject.close();
@@ -177,7 +264,10 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
 }
 
 class _GuessCountryByFlagRound {
-  const _GuessCountryByFlagRound({required this.correctAnswer, required this.options});
+  const _GuessCountryByFlagRound({
+    required this.correctAnswer,
+    required this.options,
+  });
 
   final FootballNationalTeamModel correctAnswer;
   final List<FootballNationalTeamModel> options;
