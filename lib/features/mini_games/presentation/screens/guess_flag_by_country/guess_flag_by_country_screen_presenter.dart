@@ -18,7 +18,7 @@ class GuessFlagByCountryScreenPresenter extends StatefulWidget {
 
 class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScreenPresenter>
     with GuessCountryByFlagYandexAdsBannerMixin {
-  int winstrick = 0;
+  // int winstrick = 0;
   final Random random = Random();
   final CommonFootballRepository _repository = getIt.get<CommonFootballRepository>();
   final FlagColorSimilarityService _flagColorSimilarityService = FlagColorSimilarityService();
@@ -53,7 +53,9 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
         teams: teams,
         precomputedColors: teamFlagColors,
         onProgress: (current, total) {
-          if (!mounted || total == 0) return;
+          if (!mounted || total == 0) {
+            return;
+          }
           setState(() {
             _prepareProgress = current / total;
           });
@@ -63,7 +65,9 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
       final teamsWithFlags = teams.where((team) => profiles.containsKey(team.id)).toList(growable: false);
       final gameTeams = teamsWithFlags.length >= _kOptionsCount ? teamsWithFlags : teams;
 
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         _allTeams = gameTeams;
         _teamById = {for (final team in gameTeams) team.id: team};
@@ -74,7 +78,9 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
 
       _loadNextRound();
     } catch (_) {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         _isPreparingGame = false;
       });
@@ -82,7 +88,9 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
   }
 
   void _loadNextRound() {
-    if (_allTeams.length < _kOptionsCount) return;
+    if (_allTeams.length < _kOptionsCount) {
+      return;
+    }
 
     final correctAnswer = _allTeams[random.nextInt(_allTeams.length)];
     final options = <FootballNationalTeamModel>[correctAnswer];
@@ -94,14 +102,20 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
 
     for (final teamId in similarTeamIds) {
       final team = _teamById[teamId];
-      if (team == null || options.contains(team)) continue;
+      if (team == null || options.contains(team)) {
+        continue;
+      }
       options.add(team);
-      if (options.length == _kOptionsCount) break;
+      if (options.length == _kOptionsCount) {
+        break;
+      }
     }
 
     while (options.length < _kOptionsCount) {
       final randomTeam = _allTeams[random.nextInt(_allTeams.length)];
-      if (options.contains(randomTeam)) continue;
+      if (options.contains(randomTeam)) {
+        continue;
+      }
       options.add(randomTeam);
     }
 
@@ -116,17 +130,16 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
   }) async {
     _selectedOptionSubject.add(selectedAnswer.id);
     if (selectedAnswer.id == rightAnswer.id) {
-      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue + winstrick));
+      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue));
       ToastService.showToast(
         title: AppGlossary.correct.translate(),
-        subtitle:
-            "${AppGlossary.rewarded.translate()} ${_kDefaultRewardValue + winstrick} 🏆, ${AppGlossary.winstrick.translate()} $winstrick",
+        subtitle: "${AppGlossary.rewarded.translate()} $_kDefaultRewardValue 🏆",
         seconds: 2,
       );
-      winstrick++;
+      // winstrick++;
     } else {
       ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
-      winstrick = 0;
+      // winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));
     _loadNextRound();
