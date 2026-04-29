@@ -18,7 +18,7 @@ class GuessCountryByFlagScreenPresenter extends StatefulWidget {
 
 class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScreenPresenter>
     with GuessCountryByFlagYandexAdsBannerMixin {
-  int winstrick = 0;
+  // int winstrick = 0;
   final Random random = Random();
   final CommonFootballRepository _repository = getIt.get<CommonFootballRepository>();
   final FlagColorSimilarityService _flagColorSimilarityService = FlagColorSimilarityService();
@@ -116,17 +116,16 @@ class GuessCountryByFlagScreenPresenterState extends State<GuessCountryByFlagScr
   }) async {
     _selectedOptionSubject.add(selectedAnswer.id);
     if (selectedAnswer.id == rightAnswer.id) {
-      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue + winstrick));
+      getIt.get<BalanceBloc>().add(BalanceEventIncrease(amount: _kDefaultRewardValue));
       ToastService.showToast(
         title: AppGlossary.correct.translate(),
-        subtitle:
-            "${AppGlossary.rewarded.translate()} ${_kDefaultRewardValue + winstrick} 🏆, ${AppGlossary.winstrick.translate()} $winstrick",
+        subtitle: "${AppGlossary.rewarded.translate()} $_kDefaultRewardValue  🏆",
         seconds: 2,
       );
-      winstrick++;
+      // winstrick++;
     } else {
       ToastService.showErrorToast(title: AppGlossary.incorrect.translate(), subtitle: ":(", seconds: 2);
-      winstrick = 0;
+      // winstrick = 0;
     }
     await Future.delayed(const Duration(seconds: 2));
     _loadNextRound();
