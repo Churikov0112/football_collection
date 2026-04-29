@@ -40,7 +40,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
       context,
       (context) => const CountrySelectionBottomSheet(),
     );
-    if (countryName == null || countryName.isEmpty) return;
+    if (countryName == null || countryName.isEmpty) {
+      return;
+    }
     getIt.get<LeaderboardCountryBloc>().add(LeaderboardCountryEventSelect(countryName: countryName));
   }
 
@@ -124,14 +126,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
-                                          border: TableBorder(
+                                          border: const TableBorder(
                                             horizontalInside: BorderSide(color: Colors.white12, width: 1),
                                             verticalInside: BorderSide(color: Colors.white54, width: 1),
                                           ),
                                           columns: [
-                                            DataColumn(
-                                              label: const Center(child: Text('#')),
-                                              columnWidth: const IntrinsicColumnWidth(),
+                                            const DataColumn(
+                                              label: Center(child: Text('#')),
+                                              columnWidth: IntrinsicColumnWidth(),
                                             ),
                                             DataColumn(
                                               label: Text(AppGlossary.nationality.translate()),

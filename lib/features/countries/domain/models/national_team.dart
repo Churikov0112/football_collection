@@ -27,6 +27,8 @@ String? emojiFlagByCountryName(String? countryName) {
     // UEFA (Европа)
     case 'England':
       return '🏴󠁧󠁢󠁥󠁮󠁧󠁿';
+    case "Isle of Man":
+      return '🇮🇲';
     case 'France':
       return '🇫🇷';
     case 'Spain':
@@ -77,8 +79,8 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Russia':
       return '🇷🇺';
     case 'Turkey':
-      return '🇹🇷';
     case 'Turkiye':
+    case "Türkiye":
       return '🇹🇷';
     case 'Romania':
       return '🇷🇴';
@@ -275,6 +277,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Sudan':
       return '🇸🇩';
     case 'South Sudan':
+    case 'Southern Sudan':
       return '🇸🇸';
     case 'Zanzibar':
       return "🇹🇿";
@@ -323,6 +326,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Thailand':
       return '🇹🇭';
     case 'North Korea':
+    case 'Korea, North':
       return '🇰🇵';
     case 'India':
       return '🇮🇳';
@@ -360,6 +364,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Laos':
       return '🇱🇦';
     case 'Macau':
+    case 'Macao':
       return '🇲🇴';
     case 'Maldives':
       return '🇲🇻';
@@ -462,6 +467,7 @@ String? emojiFlagByCountryName(String? countryName) {
     case 'Montserrat':
       return '🇲🇸';
     case 'Turks and Caicos Islands':
+    case "Turks- and Caicosinseln":
       return '🇹🇨';
 
     // OFC (Океания)
