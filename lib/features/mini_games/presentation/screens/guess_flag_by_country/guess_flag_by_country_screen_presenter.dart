@@ -101,8 +101,9 @@ class GuessFlagByCountryScreenPresenterState extends State<GuessFlagByCountryScr
       profiles: _flagColorProfiles,
       limit: _allTeams.length,
     );
+    final shuffledSimilarTeamIds = List<String>.from(similarTeamIds)..shuffle(random);
 
-    for (final teamId in similarTeamIds) {
+    for (final teamId in shuffledSimilarTeamIds) {
       final team = _teamById[teamId];
       if (team == null || options.contains(team)) {
         continue;
