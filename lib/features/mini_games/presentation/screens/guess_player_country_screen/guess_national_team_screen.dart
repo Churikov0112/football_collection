@@ -44,26 +44,39 @@ class GuessNationalTeamScreen extends StatelessWidget {
                   FutureBuilder<List<FootballNationalTeamModel>>(
                     future: repo.teamsGet(),
                     builder: (context, allCountriesState) =>
-                        BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                        BlocBuilder<
+                          RandomFootballPlayersBloc,
+                          RandomFootballPlayersState
+                        >(
                           builder: (context, randomPlayersState) {
-                            final player = randomPlayersState.players?.firstOrNull;
+                            final player =
+                                randomPlayersState.players?.firstOrNull;
                             final allCountries = allCountriesState.data ?? [];
-                            final playerCountry = allCountries.firstWhereOrNull((e) => e.id == player?.teamId);
+                            final playerCountry = allCountries.firstWhereOrNull(
+                              (e) => e.id == player?.teamId,
+                            );
 
                             if (player == null || playerCountry == null) {
-                              return const Align(child: CircularProgressIndicator());
+                              return const Align(
+                                child: CircularProgressIndicator(),
+                              );
                             }
 
+                            final questionSeed = player.playerId.hashCode;
+                            final random = Random(questionSeed);
                             final options = <FootballNationalTeamModel>[];
                             options.add(playerCountry);
                             while (options.length < 4) {
-                              final randomCountry = allCountries[presenter.random.nextInt(allCountries.length)];
+                              final randomCountry =
+                                  allCountries[random.nextInt(
+                                    allCountries.length,
+                                  )];
                               if (options.contains(randomCountry)) {
                                 continue;
                               }
                               options.add(randomCountry);
                             }
-                            options.shuffle();
+                            options.shuffle(Random(questionSeed ^ 0x9E3779B9));
 
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -71,27 +84,45 @@ class GuessNationalTeamScreen extends StatelessWidget {
                                 StreamBuilder<FootballNationalTeamModel?>(
                                   stream: presenter.selectedOptionStream$,
                                   builder: (context, selectedOptionSnapshot) {
-                                    final showResult = selectedOptionSnapshot.data != null;
+                                    final showResult =
+                                        selectedOptionSnapshot.data != null;
                                     return Align(
                                       child: FootballPlayerCardWidget(
                                         player: player,
                                         badge: .none,
-                                        nationalTeamVisibility: showResult ? .show : .quest,
+                                        nationalTeamVisibility: showResult
+                                            ? .show
+                                            : .quest,
                                       ),
                                     );
                                   },
                                 ),
                                 const SizedBox(height: 20),
-                                _GuessOptions(options: options, rightAnswer: playerCountry),
+                                _GuessOptions(
+                                  options: options,
+                                  rightAnswer: playerCountry,
+                                ),
                                 const SizedBox(height: 20),
                                 StreamBuilder<bool>(
-                                  stream: presenter.isBannerAlreadyCreatedStream$,
-                                  builder: (context, isBannerAlreadyCreatedSnapshot) {
-                                    if (isBannerAlreadyCreatedSnapshot.data != true) {
-                                      return const SizedBox(height: 100);
-                                    }
-                                    return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
-                                  },
+                                  stream:
+                                      presenter.isBannerAlreadyCreatedStream$,
+                                  builder:
+                                      (
+                                        context,
+                                        isBannerAlreadyCreatedSnapshot,
+                                      ) {
+                                        if (isBannerAlreadyCreatedSnapshot
+                                                .data !=
+                                            true) {
+                                          return const SizedBox(height: 100);
+                                        }
+                                        return SizedBox(
+                                          height: 100,
+                                          child: AdWidget(
+                                            bannerAd: presenter.banner,
+                                          ),
+                                        );
+                                      },
                                 ),
                                 SizedBox(height: mq.padding.bottom),
                               ],
