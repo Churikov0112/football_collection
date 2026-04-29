@@ -38,12 +38,16 @@ class GuessPlayerSponsorScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                  BlocBuilder<
+                    RandomFootballPlayersBloc,
+                    RandomFootballPlayersState
+                  >(
                     builder: (context, randomPlayersState) {
                       final allPlayers = randomPlayersState.players ?? [];
                       final player = allPlayers.firstOrNull;
 
-                      if (player?.outfitter == null) return Align(child: const CircularProgressIndicator());
+                      if (player?.outfitter == null)
+                        return Align(child: const CircularProgressIndicator());
 
                       final sponsors = [
                         "puma",
@@ -64,31 +68,46 @@ class GuessPlayerSponsorScreen extends StatelessWidget {
                         "diadora",
                       ];
                       final correctAnswer = player!.outfitter!.toLowerCase();
+                      final random = Random(player.playerId.hashCode);
                       final wrongOptions = <String>[];
                       while (wrongOptions.length < 3) {
-                        final wrongOption = sponsors[presenter.random.nextInt(sponsors.length)];
-                        if (!wrongOptions.contains(wrongOption) && wrongOption != correctAnswer) {
+                        final wrongOption =
+                            sponsors[random.nextInt(sponsors.length)];
+                        if (!wrongOptions.contains(wrongOption) &&
+                            wrongOption != correctAnswer) {
                           wrongOptions.add(wrongOption);
                         }
                       }
                       final options = [correctAnswer, ...wrongOptions];
-                      options.shuffle();
+                      options.shuffle(
+                        Random(player.playerId.hashCode ^ 0x9E3779B9),
+                      );
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Spacer(),
                           Align(
-                            child: FootballPlayerCardWidget(player: player, badge: .none),
+                            child: FootballPlayerCardWidget(
+                              player: player,
+                              badge: .none,
+                            ),
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(options: options, rightAnswer: correctAnswer),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: correctAnswer,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
                             builder: (context, isBannerAlreadyCreatedSnapshot) {
-                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
-                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              if (isBannerAlreadyCreatedSnapshot.data != true)
+                                return const SizedBox(height: 100);
+                              return SizedBox(
+                                height: 100,
+                                child: AdWidget(bannerAd: presenter.banner),
+                              );
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),

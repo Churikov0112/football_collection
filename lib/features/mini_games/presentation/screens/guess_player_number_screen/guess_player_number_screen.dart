@@ -38,26 +38,38 @@ class GuessPlayerNumberScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                  BlocBuilder<
+                    RandomFootballPlayersBloc,
+                    RandomFootballPlayersState
+                  >(
                     builder: (context, randomPlayersState) {
                       final allPlayers = randomPlayersState.players ?? [];
                       final player = allPlayers.firstOrNull;
 
-                      if (player?.teamShirtNumber == null || player?.teamShirtNumber == '-') {
+                      if (player?.teamShirtNumber == null ||
+                          player?.teamShirtNumber == '-') {
                         return Align(child: const CircularProgressIndicator());
                       }
 
                       final correctAnswer = player!.teamShirtNumber!;
-                      final playerPosition = player.position ?? 'Centre-Forward';
+                      final playerPosition =
+                          player.position ?? 'Centre-Forward';
 
-                      final numbers = presenter.positionToCommonNumbers[playerPosition] ?? [];
+                      final numbers =
+                          presenter.positionToCommonNumbers[playerPosition] ??
+                          [];
 
-                      final availableNumbers = numbers.where((n) => n != correctAnswer).toList()..shuffle();
+                      final random = Random(player.playerId.hashCode);
+                      final availableNumbers =
+                          numbers.where((n) => n != correctAnswer).toList()
+                            ..shuffle(random);
 
                       final wrongOptions = availableNumbers.take(3);
 
                       final options = [correctAnswer, ...wrongOptions];
-                      options.shuffle();
+                      options.shuffle(
+                        Random(player.playerId.hashCode ^ 0x9E3779B9),
+                      );
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -70,13 +82,19 @@ class GuessPlayerNumberScreen extends StatelessWidget {
                                 child: FootballPlayerCardWidget(
                                   player: player,
                                   badge: .none,
-                                  numberVisibility: selectedOptionSnapshot.data != null ? .show : .quest,
+                                  numberVisibility:
+                                      selectedOptionSnapshot.data != null
+                                      ? .show
+                                      : .quest,
                                 ),
                               );
                             },
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(options: options, rightAnswer: correctAnswer),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: correctAnswer,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
@@ -84,7 +102,10 @@ class GuessPlayerNumberScreen extends StatelessWidget {
                               if (isBannerAlreadyCreatedSnapshot.data != true) {
                                 return const SizedBox(height: 100);
                               }
-                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              return SizedBox(
+                                height: 100,
+                                child: AdWidget(bannerAd: presenter.banner),
+                              );
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),

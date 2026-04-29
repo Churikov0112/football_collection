@@ -40,15 +40,19 @@ class GuessPlayerScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   BackgroundImage(),
-                  BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
+                  BlocBuilder<
+                    RandomFootballPlayersBloc,
+                    RandomFootballPlayersState
+                  >(
                     builder: (context, randomPlayersState) {
                       final allPlayers = randomPlayersState.players ?? [];
                       final correctPlayer = allPlayers.firstOrNull;
 
-                      if (correctPlayer == null) return Align(child: const CircularProgressIndicator());
+                      if (correctPlayer == null)
+                        return Align(child: const CircularProgressIndicator());
 
                       final options = [...allPlayers];
-                      options.shuffle();
+                      options.shuffle(Random(correctPlayer.playerId.hashCode));
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -57,7 +61,8 @@ class GuessPlayerScreen extends StatelessWidget {
                           StreamBuilder<FootballPlayerCardModel?>(
                             stream: presenter.selectedOptionStream$,
                             builder: (context, selectedOptionSnapshot) {
-                              final showResult = selectedOptionSnapshot.data != null;
+                              final showResult =
+                                  selectedOptionSnapshot.data != null;
                               return Align(
                                 child: FootballPlayerCardWidget(
                                   player: correctPlayer,
@@ -68,13 +73,20 @@ class GuessPlayerScreen extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 20),
-                          _GuessOptions(options: options, rightAnswer: correctPlayer),
+                          _GuessOptions(
+                            options: options,
+                            rightAnswer: correctPlayer,
+                          ),
                           const SizedBox(height: 20),
                           StreamBuilder<bool>(
                             stream: presenter.isBannerAlreadyCreatedStream$,
                             builder: (context, isBannerAlreadyCreatedSnapshot) {
-                              if (isBannerAlreadyCreatedSnapshot.data != true) return const SizedBox(height: 100);
-                              return SizedBox(height: 100, child: AdWidget(bannerAd: presenter.banner));
+                              if (isBannerAlreadyCreatedSnapshot.data != true)
+                                return const SizedBox(height: 100);
+                              return SizedBox(
+                                height: 100,
+                                child: AdWidget(bannerAd: presenter.banner),
+                              );
                             },
                           ),
                           SizedBox(height: mq.padding.bottom),
