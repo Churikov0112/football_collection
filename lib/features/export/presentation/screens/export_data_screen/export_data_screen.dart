@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
@@ -22,15 +23,134 @@ import '../../../../mini_games/presentation/blocs/balance_bloc/balance_bloc.dart
 class ExportDataScreen extends StatelessWidget {
   const ExportDataScreen({super.key});
 
+  String _buildExportBase64String() {
+    final savedCardsIds = getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
+    final balance = getIt.get<BalanceBloc>().state.balance ?? 0;
+
+    final jsonString = jsonEncode({
+      'savedCardsIds': savedCardsIds,
+      'balance': balance,
+    });
+
+    return base64Encode(utf8.encode(jsonString));
+  }
+
+  Future<void> _clearProgressAfterTransfer() async {
+    getIt.get<BalanceBloc>().add(BalanceEventSet(amount: 0));
+    getIt.get<SavedCardsBloc>().add(SavedCardsEventSetAll(cardIds: []));
+  }
+
+  Future<void> _exportByShare(BuildContext context) async {
+    try {
+      final base64String = _buildExportBase64String();
+      final directory = await getTemporaryDirectory();
+      final file = File('${directory.path}/progress.txt');
+      await file.writeAsString(base64String);
+
+      final result = await SharePlus.instance.share(
+        ShareParams(files: [XFile(file.path)]),
+      );
+
+      if (result.status == ShareResultStatus.success) {
+        await _clearProgressAfterTransfer();
+        ToastService.showToast(title: AppGlossary.dataExported.translate());
+        if (context.mounted) {
+          context.pop();
+        }
+      }
+    } catch (e) {
+      ToastService.showErrorToast(title: e.toString());
+    }
+  }
+
+  Future<void> _exportBySaveToFile(BuildContext context) async {
+    try {
+      final base64String = _buildExportBase64String();
+      final bytes = Uint8List.fromList(utf8.encode(base64String));
+
+      await FileSaver.instance.saveAs(
+        name: 'progress',
+        bytes: bytes,
+        fileExtension: 'txt',
+        mimeType: MimeType.text,
+      );
+
+      await _clearProgressAfterTransfer();
+      ToastService.showToast(title: AppGlossary.dataExported.translate());
+      if (context.mounted) {
+        context.pop();
+      }
+    } catch (e) {
+      ToastService.showErrorToast(title: e.toString());
+    }
+  }
+
+  Future<String?> _readPickedFileAsString(PlatformFile pickedFile) async {
+    if (pickedFile.path != null) {
+      return File(pickedFile.path!).readAsString();
+    }
+
+    final bytes = pickedFile.bytes;
+    if (bytes != null) {
+      return utf8.decode(bytes);
+    }
+
+    return null;
+  }
+
+  Future<void> _importFromFile(BuildContext context) async {
+    try {
+      final result = await FilePicker.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['txt'],
+        withData: true,
+      );
+
+      final pickedFile = result?.files.firstOrNull;
+      if (pickedFile == null) {
+        return;
+      }
+
+      final raw = await _readPickedFileAsString(pickedFile);
+      if (raw == null) {
+        ToastService.showErrorToast(title: 'Unable to read selected file');
+        return;
+      }
+
+      final decodedBytes = base64Decode(raw);
+      final jsonString = utf8.decode(decodedBytes);
+      final data = jsonDecode(jsonString);
+
+      if (data is! Map<String, dynamic>) {
+        ToastService.showErrorToast(title: 'Invalid file format');
+        return;
+      }
+
+      final savedCardsIds = (data['savedCardsIds'] as List?)?.map((e) => e.toString()).toList() ?? <String>[];
+      final balanceRaw = data['balance'];
+      final balance = balanceRaw is int ? balanceRaw : int.tryParse(balanceRaw.toString());
+
+      if (balance == null) {
+        ToastService.showErrorToast(title: 'Invalid file format');
+        return;
+      }
+
+      getIt.get<BalanceBloc>().add(BalanceEventSet(amount: balance));
+      getIt.get<SavedCardsBloc>().add(SavedCardsEventSetAll(cardIds: savedCardsIds));
+      ToastService.showToast(title: AppGlossary.dataImported.translate());
+      if (context.mounted) {
+        context.pop();
+      }
+    } catch (e) {
+      ToastService.showErrorToast(title: e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final mq = MediaQuery.of(context);
-
     return Scaffold(
-      // drawer: MenuDrawer(),
       body: Stack(
         children: [
-          // const BackgroundImage(),
           Padding(
             padding: const .symmetric(horizontal: 16),
             child: Column(
@@ -93,81 +213,12 @@ class ExportDataScreen extends StatelessWidget {
                                             ),
                                             const SizedBox(width: 16),
                                             Button(
-                                              onPressed: () async {
-                                                final savedCardsIds =
-                                                    getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
-                                                final balance = getIt.get<BalanceBloc>().state.balance ?? 0;
-                                                final jsonString = jsonEncode({
-                                                  'savedCardsIds': savedCardsIds,
-                                                  'balance': balance,
-                                                });
-                                                final base64String = base64Encode(utf8.encode(jsonString));
-
-                                                final directory = await getTemporaryDirectory();
-                                                final file = File('${directory.path}/progress.txt');
-                                                await file.writeAsString(base64String);
-
-                                                final result = await SharePlus.instance.share(
-                                                  ShareParams(files: [XFile(file.path)]),
-                                                );
-                                                if (result.status == .success) {
-                                                  getIt.get<BalanceBloc>().add(BalanceEventSet(amount: 0));
-                                                  getIt.get<SavedCardsBloc>().add(SavedCardsEventSetAll(cardIds: []));
-                                                  ToastService.showToast(title: AppGlossary.dataExported.translate());
-                                                  context.pop();
-                                                }
-                                              },
+                                              onPressed: () => _exportByShare(context),
                                               icon: Icons.share,
                                             ),
                                             const SizedBox(width: 16),
                                             Button(
-                                              onPressed: () async {
-                                                final savedCardsIds =
-                                                    getIt.get<SavedCardsBloc>().state.savedCardsIds ?? <String>[];
-                                                final balance = getIt.get<BalanceBloc>().state.balance ?? 0;
-                                                final jsonString = jsonEncode({
-                                                  'savedCardsIds': savedCardsIds,
-                                                  'balance': balance,
-                                                });
-                                                final base64String = base64Encode(utf8.encode(jsonString));
-                                                final bytes = utf8.encode(base64String);
-
-                                                await FileSaver.instance.saveAs(
-                                                  name: "progress",
-                                                  bytes: bytes,
-                                                  fileExtension: "txt",
-                                                  mimeType: MimeType.text,
-                                                );
-
-                                                Directory? directory;
-                                                try {
-                                                  directory = await getDownloadsDirectory();
-                                                } catch (e) {
-                                                  directory = await getExternalStorageDirectory();
-                                                }
-
-                                                if (directory == null) {
-                                                  ToastService.showToast(
-                                                    title: "Error",
-                                                    subtitle:
-                                                        "getDownloadsDirectory & getExternalStorageDirectory are both null",
-                                                  );
-                                                  return;
-                                                }
-
-                                                try {
-                                                  final file = File('${directory.path}/progress.txt');
-                                                  await file.writeAsString(base64String);
-                                                  getIt.get<BalanceBloc>().add(BalanceEventSet(amount: 0));
-                                                  getIt.get<SavedCardsBloc>().add(SavedCardsEventSetAll(cardIds: []));
-                                                  ToastService.showToast(
-                                                    title: AppGlossary.dataExported.translate(),
-                                                  );
-                                                  context.pop();
-                                                } catch (e) {
-                                                  ToastService.showToast(title: e.toString());
-                                                }
-                                              },
+                                              onPressed: () => _exportBySaveToFile(context),
                                               icon: Icons.download,
                                             ),
                                           ],
@@ -186,9 +237,7 @@ class ExportDataScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 32),
-
                 DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: .circular(20),
@@ -247,38 +296,7 @@ class ExportDataScreen extends StatelessWidget {
                                             const SizedBox(width: 16),
                                             Expanded(
                                               child: Button(
-                                                onPressed: () async {
-                                                  final result = await FilePicker.pickFiles(
-                                                    type: FileType.custom,
-                                                    allowedExtensions: ['txt'],
-                                                  );
-                                                  final files = result?.files.map((f) => File(f.path!)).toList();
-                                                  final file = files?.firstOrNull;
-                                                  if (file != null) {
-                                                    try {
-                                                      final base64String = await file.readAsString();
-                                                      final bytes = base64Decode(base64String);
-                                                      final jsonString = utf8.decode(bytes);
-                                                      final data = jsonDecode(jsonString);
-                                                      final savedCardsIds = (data['savedCardsIds'] as List?)
-                                                          ?.map((e) => e.toString())
-                                                          .toList();
-                                                      final balance = data['balance'];
-                                                      if (savedCardsIds is List<String> && balance is int) {
-                                                        getIt.get<BalanceBloc>().add(BalanceEventSet(amount: balance));
-                                                        getIt.get<SavedCardsBloc>().add(
-                                                          SavedCardsEventSetAll(cardIds: savedCardsIds),
-                                                        );
-                                                        ToastService.showToast(
-                                                          title: AppGlossary.dataImported.translate(),
-                                                        );
-                                                        context.pop();
-                                                      }
-                                                    } catch (e) {
-                                                      ToastService.showErrorToast(title: e.toString());
-                                                    }
-                                                  }
-                                                },
+                                                onPressed: () => _importFromFile(context),
                                                 text: AppGlossary.confirm.translate(),
                                               ),
                                             ),
