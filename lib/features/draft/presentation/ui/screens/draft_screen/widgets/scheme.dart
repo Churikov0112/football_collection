@@ -133,7 +133,10 @@ class _Scheme extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Image.asset("assets/raster/field/field_goal_top.jpg"),
+                                Image.asset(
+                                  "assets/raster/field/field_goal_top.jpg",
+                                  fit: BoxFit.fill,
+                                ),
                                 Expanded(
                                   child: Image.asset(
                                     "assets/raster/field/field_space_top.jpg",
@@ -141,7 +144,10 @@ class _Scheme extends StatelessWidget {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                                Image.asset("assets/raster/field/field_center.jpg"),
+                                Image.asset(
+                                  "assets/raster/field/field_center.jpg",
+                                  fit: BoxFit.fill,
+                                ),
                                 Expanded(
                                   child: Image.asset(
                                     "assets/raster/field/field_space_bottom.jpg",
@@ -149,7 +155,10 @@ class _Scheme extends StatelessWidget {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                                Image.asset("assets/raster/field/field_goal_bottom.jpg"),
+                                Image.asset(
+                                  "assets/raster/field/field_goal_bottom.jpg",
+                                  fit: BoxFit.fill,
+                                ),
                               ],
                             ),
                             StreamBuilder(
@@ -202,7 +211,7 @@ class _Scheme extends StatelessWidget {
                         // Кружки позиций
                         ...yourSchemePositions.map((pof) {
                           const double _cardAspectRatio = 2 / 3;
-                          final double cardHeight = fieldWidth * 0.25; // mqSize.width * 0.23;
+                          final double cardHeight = fieldWidth * 0.225; // mqSize.width * 0.23;
                           final double cardWidth = cardHeight * _cardAspectRatio;
                           final double x = pof.x * fieldWidth;
                           final double y = (1 - pof.y) * fieldHeight;

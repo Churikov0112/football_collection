@@ -50,9 +50,7 @@ Future<void> main() async {
     LogService.error(e.toString(), e);
   }
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.black, statusBarColor: Colors.transparent),
-  );
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

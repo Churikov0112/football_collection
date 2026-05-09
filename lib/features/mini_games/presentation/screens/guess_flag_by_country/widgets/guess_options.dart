@@ -19,10 +19,11 @@ class _GuessOptions extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           shrinkWrap: true,
           itemCount: options.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
+            childAspectRatio: 2 / 1,
           ),
           itemBuilder: (context, index) {
             final option = options[index];
@@ -83,7 +84,7 @@ class _Option extends StatelessWidget {
       child: Stack(
         children: [
           DecoratedBox(
-            decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.all(Radius.circular(12))),
+            decoration: const BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.all(Radius.circular(12))),
             child: Center(child: Text(emoji, style: const TextStyle(fontSize: 48))),
           ),
           if (overlayColor != null) ...[
@@ -93,7 +94,10 @@ class _Option extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                decoration: BoxDecoration(color: overlayColor, borderRadius: BorderRadius.all(Radius.circular(12))),
+                decoration: BoxDecoration(
+                  color: overlayColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                ),
               ),
             ),
             Center(child: Icon(isRight ? Icons.check : Icons.close, color: Colors.white, size: 32)),
