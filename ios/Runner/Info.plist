@@ -32,6 +32,8 @@
 	<true/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs it for export game progress to file and import from file</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
