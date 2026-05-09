@@ -1266,16 +1266,16 @@ PODS:
     - Firebase/Firestore (= 12.9.0)
     - firebase_core
     - Flutter
-  - DivKit (32.44.0):
-    - DivKit_LayoutKit (= 32.44.0)
-    - DivKit_Serialization (= 32.44.0)
+  - DivKit (32.45.0):
+    - DivKit_LayoutKit (= 32.45.0)
+    - DivKit_Serialization (= 32.45.0)
     - VGSL (~> 7.19)
-  - DivKit_LayoutKit (32.44.0):
-    - DivKit_LayoutKitInterface (= 32.44.0)
+  - DivKit_LayoutKit (32.45.0):
+    - DivKit_LayoutKitInterface (= 32.45.0)
     - VGSL (~> 7.19)
-  - DivKit_LayoutKitInterface (32.44.0):
+  - DivKit_LayoutKitInterface (32.45.0):
     - VGSL (~> 7.19)
-  - DivKit_Serialization (32.44.0):
+  - DivKit_Serialization (32.45.0):
     - VGSL (~> 7.19)
   - DivKitBinaryCompatibilityFacade (5.2.2):
     - DivKit (~> 32.14)
@@ -1586,9 +1586,9 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - SDWebImage (5.21.6):
-    - SDWebImage/Core (= 5.21.6)
-  - SDWebImage/Core (5.21.6)
+  - SDWebImage (5.21.7):
+    - SDWebImage/Core (= 5.21.7)
+  - SDWebImage/Core (5.21.7)
   - share_plus (0.0.1):
     - Flutter
   - sqflite_darwin (0.0.4):
@@ -1754,10 +1754,10 @@ SPEC CHECKSUMS:
   AppMetricaSynchronization: 76f438564c57b4688d640b7befc5600e21bff875
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
   cloud_firestore: 698d4d849c58da2ef2b3b8b9db27d2cd56614e7e
-  DivKit: c83f23989d57a12322d51ba86075a1a255da2b8d
-  DivKit_LayoutKit: 0a1b9bc137515b2c6627242f41eee0a69f99faf5
-  DivKit_LayoutKitInterface: 7dd8496e76f14ecf81fe58a19626b88c7d8a27c2
-  DivKit_Serialization: 9c84d5c0d10fd7ae7a9521fe721966ef240e2768
+  DivKit: f638186feeeab74e0ec8137b86acc1109700be1d
+  DivKit_LayoutKit: 7245cb92112df83e63fe21072108173fbcc942e3
+  DivKit_LayoutKitInterface: e6f2c416a62a54b18014d1f2226da5e779f59782
+  DivKit_Serialization: a66abd21f5d0a8edaa94f75f78de56a18a0b7865
   DivKitBinaryCompatibilityFacade: 77c240b799c62d65c826aeb9c8f0081e1ffe7b56
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
@@ -1794,7 +1794,7 @@ SPEC CHECKSUMS:
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  SDWebImage: 1bb6a1b84b6fe87b972a102bdc77dd589df33477
+  SDWebImage: e9fc87c1aab89a8ab1bbd74eba378c6f53be8abf
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
@@ -1807,6 +1807,6 @@ SPEC CHECKSUMS:
   yandex_mobileads: 46a4640d682a8ac44b36ce03b79259f384418b19
   YandexMobileAds: 09962403db0e809df440cf0641c43592fbdcef60
 
-PODFILE CHECKSUM: 1f19b2b0ccfaa881b20e651d5644ccf2f4e23c6f
+PODFILE CHECKSUM: c04e89a3871d76fec147b5639eae1db778296023
 
 COCOAPODS: 1.16.2

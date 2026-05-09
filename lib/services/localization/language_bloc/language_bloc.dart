@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../firebase/firebase_methods.dart';
+import '../../firebase/firebase_service.dart';
 import '../../log/log_service.dart';
 import '../dictionary.dart';
 
@@ -24,8 +24,8 @@ class LanguageBloc extends HydratedBloc<LanguageBlocEvent, LanguageState> {
     emit(LanguageState(language: event.language));
 
     try {
-      await FirebaseStaticMethods.subscribeToTopic(event.language.englishName);
-      await FirebaseStaticMethods.unsubscribeFromTopic(previousLanguage.englishName);
+      await FirebaseService.subscribeToTopic(event.language.englishName);
+      await FirebaseService.unsubscribeFromTopic(previousLanguage.englishName);
     } catch (e) {
       LogService.error(e.toString(), e);
     }

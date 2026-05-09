@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:football_collection/features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart';
 import 'package:football_collection/features/football_cards/data/football_players_repository.dart';
-import 'package:football_collection/services/firebase/firebase_methods.dart';
 import 'package:football_collection/services/localization/dictionary.dart';
 import 'package:football_collection/services/localization/language_bloc/language_bloc.dart';
 import 'package:football_collection/services/log/log_service.dart';
@@ -20,15 +18,9 @@ import 'package:yandex_mobileads/mobile_ads.dart';
 import 'config/toastification.dart';
 import 'di/di.dart';
 import 'firebase_options.dart';
+import 'services/firebase/firebase_service.dart';
 import 'services/navigation/navigation.dart';
 import 'ui_kit/ui_kit.dart';
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  debugPrint("Handling a background message: ${message.messageId}");
-  debugPrint('Message data: ${message.data}');
-  debugPrint('Message notification title: ${message.notification?.title}');
-  debugPrint('Message notification body: ${message.notification?.body}');
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,11 +38,6 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    await FirebaseStaticMethods.requestNotificationPermission();
-    await FirebaseStaticMethods.getToken();
-    final defaultLanguage = Languages.english;
-    FirebaseStaticMethods.initInfo(defaultLanguage);
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
@@ -102,59 +89,24 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
 
     _router = FootballCollectionRouter(isFirstLaunch ? RoutePaths.onboarding : RoutePaths.home);
 
-    isInitialized = true;
-    setState(() {});
-
     try {
-      MobileAds.setUserConsent(true);
-      MobileAds.setAgeRestrictedUser(true);
-      MobileAds.initialize();
+      await MobileAds.setUserConsent(true);
+      await MobileAds.setAgeRestrictedUser(true);
+      await MobileAds.initialize();
     } catch (e) {
       LogService.error(e.toString(), e);
     }
 
     try {
-      await Future.delayed(const Duration(milliseconds: 330), () {
-        setupInteractedMessage();
+      await Future.delayed(const Duration(milliseconds: 330), () async {
+        await FirebaseService.init();
       });
     } catch (e) {
       LogService.error(e.toString(), e);
     }
-  }
 
-  Future<void> setupInteractedMessage() async {
-    final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) {
-      _handleMessage(initialMessage);
-    }
-  }
-
-  void _handleMessage(RemoteMessage message) {
-    // if (message.data['screen'] == RoutePaths. '/benefits_and_season_tickets') {
-    //   rootNavigatorKey.currentState?.push(
-    //     MaterialPageRoute(
-    //       builder: (context) => const BenefitsAndAbonementsScreen(),
-    //     ),
-    //   );
-    // }
-
-    // if (message.data['screen'] == '/notification') {
-    //   getIt.get<NotificationsBloc>().add(NotificationsEventSaveFromPush(message.data));
-
-    //   rootNavigatorKey.currentState?.push(
-    //     MaterialPageRoute(
-    //       builder: (context) => NotificationScreen(
-    //         notification: NotificationModel(
-    //           id: FwdId.fromString(message.data['notification_id']),
-    //           insertedAt: DateTime.now(),
-    //           text: message.data['body'],
-    //           viewed: false,
-    //           title: message.data['title'],
-    //         ),
-    //       ),
-    //     ),
-    //   );
-    // }
+    isInitialized = true;
+    setState(() {});
   }
 
   // This widget is the root of your application.
