@@ -7,6 +7,7 @@ import 'package:football_collection/services/localization/translator.dart';
 import 'package:football_collection/services/toast/toast_service.dart';
 import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparent_appbar.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:throttling/throttling.dart';
 
 part 'get_card_by_qr_screen_presenter.dart';
 
@@ -41,7 +42,7 @@ class GetCardByQrScreen extends StatelessWidget {
                       dimension: mq.size.width * 0.8,
                       child: MobileScanner(
                         controller: presenter.mobileScannerController,
-                        onDetect: presenter.handleBarcode,
+                        onDetect: presenter._handleBarcode,
                       ),
                     ),
                     const SizedBox(height: 16),
