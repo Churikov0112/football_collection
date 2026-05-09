@@ -26,8 +26,8 @@ class _AdConfiguration {
 // );
 
 final _googlePlayAdConfig = _AdConfiguration(
-  openPackRewardedAd: 'R-M-19184843-2',
-  miniGamesBottomBanner: "R-M-19184843-1",
+  openPackRewardedAd: 'R-M-19249322-2',
+  miniGamesBottomBanner: "R-M-19249322-1",
 );
 
 // final _ruStoreAdConfig = _AdConfiguration(
