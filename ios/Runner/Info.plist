@@ -30,6 +30,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to scan QR codes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs it for export game progress to file and import from file</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
