@@ -144,7 +144,7 @@ class FirebaseStaticMethods {
         ?.createNotificationChannel(channel);
 
     await flutterLocalNotificationsPlugin.initialize(
-      settings: const InitializationSettings(android: AndroidInitializationSettings('@mipmap/ic_notification')),
+      settings: const InitializationSettings(android: AndroidInitializationSettings('ic_notification')),
       onDidReceiveNotificationResponse: _onMessageTapAndroid,
       onDidReceiveBackgroundNotificationResponse: _onMessageTapAndroid,
     );
@@ -163,6 +163,7 @@ class FirebaseStaticMethods {
               channel.id,
               channel.name,
               channelDescription: channel.description,
+              icon: 'ic_notification',
               // largeIcon: ByteArrayAndroidBitmap(bitmap),
               priority: Priority.max,
               importance: Importance.max,
