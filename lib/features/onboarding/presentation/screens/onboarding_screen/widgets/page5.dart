@@ -11,7 +11,9 @@ class _OnboardingPage5 extends StatelessWidget {
     return BlocBuilder<RandomFootballPlayersBloc, RandomFootballPlayersState>(
       builder: (context, randomFootballPlayersState) {
         final players = randomFootballPlayersState.players ?? [];
-        if (players.isEmpty) return Center(child: CircularProgressIndicator());
+        if (players.isEmpty) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -24,7 +26,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(height: 20),
@@ -33,7 +35,7 @@ class _OnboardingPage5 extends StatelessWidget {
                 builder: (value) => Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                 ),
               ),
               const Spacer(),

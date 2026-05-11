@@ -1,4 +1,4 @@
-part of "../../card_image_wrapper.dart";
+part of "../../card_widget_wrapper.dart";
 
 class _CountBadge extends StatelessWidget {
   const _CountBadge({required this.card, required this.onSell, required this.onSellAll, required this.onShare});
@@ -44,10 +44,10 @@ class _CountBadge extends StatelessWidget {
             child: RotatedBox(
               quarterTurns: 3,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 child: Text(
                   "x$count",
-                  style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
