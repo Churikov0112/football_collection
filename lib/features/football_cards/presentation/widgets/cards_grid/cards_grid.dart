@@ -13,7 +13,7 @@ import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../../domain/cards/team_emblem_card.dart';
 import '../../screens/football_legend_screen/football_legend_screen.dart';
-import '../card_image_wrapper/card_image_wrapper.dart';
+import '../card_widget_wrapper/card_widget_wrapper.dart';
 import '../coach_card/football_coach_card.dart';
 import '../legend_card/football_legend_card.dart';
 import '../player_card/football_player_card.dart';

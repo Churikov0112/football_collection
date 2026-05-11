@@ -13,7 +13,7 @@ import 'package:football_collection/ui_kit/widgets/transparent_appbar/transparen
 import '../../../../abstract/domain/models/card.dart';
 import '../../../../leaderboard/presentation/screens/leaderboard_screen/widgets/country_selection_bottom_sheet.dart';
 import '../../../data/football_players_repository.dart';
-import '../../widgets/card_image_wrapper/card_image_wrapper.dart';
+import '../../widgets/card_widget_wrapper/card_widget_wrapper.dart';
 
 part 'football_players_duplicates_screen_presenter.dart';
 part 'widgets/duplicates_grid.dart';

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:football_collection/di/di.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -9,15 +7,11 @@ import '../../../../../services/localization/translator.dart';
 import '../../../../../services/toast/toast_service.dart';
 import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
 import '../../../../abstract/domain/models/card.dart';
-import '../../../../abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart';
 import '../../../domain/cards/coach_card.dart';
 import '../../../domain/cards/legend_card.dart';
 import '../../../domain/cards/player_card.dart';
-import '../duplicate_actions/duplicate_actions.dart';
 
 part '../duplicate_actions/widgets/card_qr_bs.dart';
-part 'widgets/badge/count_badge.dart';
-part 'widgets/badge/new_badge.dart';
 part 'widgets/market_value/legend_market_value.dart';
 part 'widgets/market_value/player_market_value.dart';
 part 'widgets/shildik/coach_shildik.dart';
@@ -28,8 +22,6 @@ part 'widgets/top_left/legend_top_left.dart';
 part 'widgets/top_left/player_top_left.dart';
 part 'widgets/top_left/position.dart';
 
-enum CardBadge { none, showCount, showNew }
-
 enum CardElementVisibility { none, show, quest }
 
 const _kTopLeftElementSize = 24.0;
@@ -37,7 +29,6 @@ const _kTopLeftElementSize = 24.0;
 class CardImageWrapper extends StatelessWidget {
   const CardImageWrapper({
     required this.card,
-    required this.badge,
     required this.borderRadius,
     this.imagePadding = EdgeInsets.zero,
     this.nationalTeamVisibility,
@@ -45,27 +36,12 @@ class CardImageWrapper extends StatelessWidget {
     this.numberVisibility,
     this.positionVisibility,
     this.clubVisibility,
-    // this.height = packHeight,
-    // this.width = packWidth,
-    // this.onTap,
-    this.onSell,
-    this.onSellAll,
-    this.onShare,
     super.key,
   });
 
   final CardModel card;
-  final CardBadge badge;
-  // final double height;
-  // final double width;
-  // final VoidCallback? onTap;
-  final VoidCallback? onSell;
-  final VoidCallback? onSellAll;
-  final VoidCallback? onShare;
-
   final EdgeInsetsGeometry imagePadding;
   final BorderRadius borderRadius;
-
   final CardElementVisibility? marketValueVisibility;
   final CardElementVisibility? nationalTeamVisibility;
   final CardElementVisibility? positionVisibility;
@@ -81,16 +57,6 @@ class CardImageWrapper extends StatelessWidget {
           Padding(
             padding: imagePadding,
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Image.asset(card.imageAssetPath)]),
-          ),
-
-          Positioned(
-            top: 0,
-            right: 0,
-            child: badge == CardBadge.showCount
-                ? _CountBadge(card: card, onSell: onSell, onSellAll: onSellAll, onShare: onShare)
-                : badge == CardBadge.showNew
-                ? const _NewBadge()
-                : const SizedBox.shrink(),
           ),
 
           Positioned(
