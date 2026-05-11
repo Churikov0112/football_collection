@@ -158,7 +158,7 @@ class FirebaseService {
 
     await flutterLocalNotifications.initialize(
       settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_notification'),
+        android: AndroidInitializationSettings('ic_notification'),
         iOS: DarwinInitializationSettings(),
       ),
       onDidReceiveNotificationResponse: _onMessageTapAndroid,
@@ -179,6 +179,7 @@ class FirebaseService {
               channel.id,
               channel.name,
               channelDescription: channel.description,
+              icon: 'ic_notification',
               // largeIcon: ByteArrayAndroidBitmap(bitmap),
               priority: Priority.max,
               importance: Importance.max,
