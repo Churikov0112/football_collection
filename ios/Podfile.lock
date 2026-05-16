@@ -1188,6 +1188,8 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240722.0)
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - AppMetricaAdSupport (5.14.0):
     - AppMetricaCore (= 5.14.0)
     - AppMetricaCoreExtension (= 5.14.0)
@@ -1621,6 +1623,7 @@ PODS:
     - DivKitBinaryCompatibilityFacade (~> 5.2.1)
 
 DEPENDENCIES:
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - file_saver (from `.symlinks/plugins/file_saver/ios`)
@@ -1700,6 +1703,8 @@ SPEC REPOS:
     - YandexMobileAds
 
 EXTERNAL SOURCES:
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   file_picker:
@@ -1733,6 +1738,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
+  app_tracking_transparency: 3d84f147f67ca82d3c15355c36b1fa6b66ca7c92
   AppMetricaAdSupport: 702bdcf46b81a7fed457de56f6b0554d0480b5a3
   AppMetricaCore: d1c73033e83316264d5797d003f0c8f7957b7f31
   AppMetricaCoreExtension: 02a8409b471de413ac5ccf9249b12223816737c1

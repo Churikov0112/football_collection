@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -76,6 +77,20 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   bool isInitialized = false;
   bool isLogged = false;
 
+  Future<void> requestTrackingPermissionIfNeeded() async {
+    if (defaultTargetPlatform != TargetPlatform.iOS) return;
+
+    try {
+      final status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      if (status == TrackingStatus.notDetermined) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        await AppTrackingTransparency.requestTrackingAuthorization();
+      }
+    } catch (e) {
+      LogService.error(e.toString(), e);
+    }
+  }
+
   Future<void> initializeApp() async {
     await configureDependencies();
     await getIt.allReady();
@@ -86,6 +101,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
     await getIt.get<CommonFootballRepository>().ensureInitialized();
 
     _router = FootballCollectionRouter(isFirstLaunch ? RoutePaths.onboarding : RoutePaths.home);
+    await requestTrackingPermissionIfNeeded();
 
     try {
       await MobileAds.setUserConsent(true);
