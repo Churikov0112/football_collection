@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Scaffold, CircularProgressIndicator, Colors;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +9,10 @@ import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
 
 import '../../../di/di.dart';
+import '../../../main.dart';
+import '../../../services/firebase/firebase_service.dart';
 import '../../../services/localization/translator.dart';
+import '../../../services/log/log_service.dart';
 import '../../../services/navigation/navigation.dart';
 import '../../../ui_kit/widgets/background_image/background_image.dart';
 import '../../../ui_kit/widgets/frosted_glass_container/frosted_glass_container.dart';

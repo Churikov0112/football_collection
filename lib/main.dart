@@ -1,6 +1,6 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,9 +19,10 @@ import 'package:yandex_mobileads/mobile_ads.dart';
 import 'config/toastification.dart';
 import 'di/di.dart';
 import 'firebase_options.dart';
-import 'services/firebase/firebase_service.dart';
 import 'services/navigation/navigation.dart';
 import 'ui_kit/ui_kit.dart';
+
+bool isTrackingAllowed = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,17 +78,29 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
   bool isInitialized = false;
   bool isLogged = false;
 
-  Future<void> requestTrackingPermissionIfNeeded() async {
-    if (defaultTargetPlatform != TargetPlatform.iOS) return;
+  Future<bool> requestTrackingPermissionIfNeeded() async {
+    if (defaultTargetPlatform != TargetPlatform.iOS) {
+      return true;
+    }
 
     try {
       final status = await AppTrackingTransparency.trackingAuthorizationStatus;
-      if (status == TrackingStatus.notDetermined) {
-        await Future.delayed(const Duration(milliseconds: 300));
-        await AppTrackingTransparency.requestTrackingAuthorization();
+      if (status == TrackingStatus.authorized) {
+        return true;
       }
+
+      if (status == TrackingStatus.notDetermined) {
+        // Wait for first frame to ensure iOS can present ATT dialog.
+        await WidgetsBinding.instance.endOfFrame;
+        await Future.delayed(const Duration(milliseconds: 300));
+        final updatedStatus = await AppTrackingTransparency.requestTrackingAuthorization();
+        return updatedStatus == TrackingStatus.authorized;
+      }
+
+      return false;
     } catch (e) {
       LogService.error(e.toString(), e);
+      return false;
     }
   }
 
@@ -101,20 +114,12 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
     await getIt.get<CommonFootballRepository>().ensureInitialized();
 
     _router = FootballCollectionRouter(isFirstLaunch ? RoutePaths.onboarding : RoutePaths.home);
-    await requestTrackingPermissionIfNeeded();
+    isTrackingAllowed = await requestTrackingPermissionIfNeeded();
 
     try {
-      await MobileAds.setUserConsent(true);
+      await MobileAds.setUserConsent(isTrackingAllowed);
       await MobileAds.setAgeRestrictedUser(true);
       await MobileAds.initialize();
-    } catch (e) {
-      LogService.error(e.toString(), e);
-    }
-
-    try {
-      await Future.delayed(const Duration(milliseconds: 330), () async {
-        await FirebaseService.init();
-      });
     } catch (e) {
       LogService.error(e.toString(), e);
     }

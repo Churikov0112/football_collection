@@ -18,8 +18,25 @@ class HomeScreenPresenterState extends State<HomeScreenPresenter> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // loadBannerAd();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        await Future.delayed(const Duration(milliseconds: 330), () async {
+          await FirebaseService.init();
+        });
+
+        final language = getIt.get<LanguageBloc>().state.language;
+        await FirebaseService.subscribeToTopic(language.englishName);
+      } catch (e) {
+        LogService.error(e.toString(), e);
+      }
+
+      try {
+        if (defaultTargetPlatform == TargetPlatform.iOS) {
+          await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(isTrackingAllowed);
+        }
+      } catch (e) {
+        LogService.error(e.toString(), e);
+      }
     });
   }
 

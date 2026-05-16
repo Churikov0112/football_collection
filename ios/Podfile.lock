@@ -1268,17 +1268,17 @@ PODS:
     - Firebase/Firestore (= 12.9.0)
     - firebase_core
     - Flutter
-  - DivKit (32.45.0):
-    - DivKit_LayoutKit (= 32.45.0)
-    - DivKit_Serialization (= 32.45.0)
-    - VGSL (~> 7.19)
-  - DivKit_LayoutKit (32.45.0):
-    - DivKit_LayoutKitInterface (= 32.45.0)
-    - VGSL (~> 7.19)
-  - DivKit_LayoutKitInterface (32.45.0):
-    - VGSL (~> 7.19)
-  - DivKit_Serialization (32.45.0):
-    - VGSL (~> 7.19)
+  - DivKit (32.49.0):
+    - DivKit_LayoutKit (= 32.49.0)
+    - DivKit_Serialization (= 32.49.0)
+    - VGSL (~> 7.21)
+  - DivKit_LayoutKit (32.49.0):
+    - DivKit_LayoutKitInterface (= 32.49.0)
+    - VGSL (~> 7.21)
+  - DivKit_LayoutKitInterface (32.49.0):
+    - VGSL (~> 7.21)
+  - DivKit_Serialization (32.49.0):
+    - VGSL (~> 7.21)
   - DivKitBinaryCompatibilityFacade (5.2.2):
     - DivKit (~> 32.14)
   - DKImagePickerController/Core (4.3.9):
@@ -1760,10 +1760,10 @@ SPEC CHECKSUMS:
   AppMetricaSynchronization: 76f438564c57b4688d640b7befc5600e21bff875
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
   cloud_firestore: 698d4d849c58da2ef2b3b8b9db27d2cd56614e7e
-  DivKit: f638186feeeab74e0ec8137b86acc1109700be1d
-  DivKit_LayoutKit: 7245cb92112df83e63fe21072108173fbcc942e3
-  DivKit_LayoutKitInterface: e6f2c416a62a54b18014d1f2226da5e779f59782
-  DivKit_Serialization: a66abd21f5d0a8edaa94f75f78de56a18a0b7865
+  DivKit: 12341c074d850ec3560d16d7d60b825337f5243b
+  DivKit_LayoutKit: e2a5c1fc2c4c822adfd42982fe45e3ddab0792ac
+  DivKit_LayoutKitInterface: 38fff18ad1028e452401b70ea5189d9f458c9336
+  DivKit_Serialization: 38b341aa36346f00dcd20d9af945ae6b694c7a17
   DivKitBinaryCompatibilityFacade: 77c240b799c62d65c826aeb9c8f0081e1ffe7b56
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
