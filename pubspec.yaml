@@ -94,7 +94,6 @@ dependencies:
   firebase_crashlytics: 5.0.1
   cloud_firestore: 6.2.0
   flutter_local_notifications: 21.0.0
-  app_tracking_transparency: 2.0.6
 
   yandex_mobileads: 7.18.0
 
