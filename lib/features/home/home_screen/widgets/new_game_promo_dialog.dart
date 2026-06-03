@@ -14,7 +14,10 @@ class _NewGamePromoDialog extends StatelessWidget {
             SizedBox.square(
               dimension: 50,
               child: DecoratedBox(
-                decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/raster/icon/icon.png'))),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(image: AssetImage('assets/raster/icon/icon.png')),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -46,8 +49,12 @@ class _NewGamePromoDialog extends StatelessWidget {
                     onPressed: () {
                       context.pop();
                       getIt.get<PromoBloc>().add(PromoEventSetDownloaded(isDownloadClicked: true));
+                      final language = getIt.get<LanguageBloc>().state.language;
+                      final langCode = language.locale.languageCode;
                       launchUrl(
-                        Uri.parse('https://football-collection-c7c28.web.app/ru/games/world_cup_collection_2026/'),
+                        Uri.parse(
+                          'https://football-collection-c7c28.web.app/$langCode/games/world_cup_collection_2026/',
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
