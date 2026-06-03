@@ -52,7 +52,7 @@ class _NewGamePromoDialog extends StatelessWidget {
                       context.pop();
                       getIt.get<PromoBloc>().add(PromoEventSetDownloaded(isDownloadClicked: true));
                       launchUrl(
-                        Uri.parse('https://play.google.com/store/apps/details?id=com.footballpackee.fcwc26&hl=en_NZ'),
+                        Uri.parse('https://football-collection-c7c28.web.app/ru/games/world_cup_collection_2026/'),
                       );
                     },
                     style: ElevatedButton.styleFrom(
