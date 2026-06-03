@@ -24,12 +24,7 @@ class _NewGamePromoDialog extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
-            Text(
-              AppGlossary.newGamePromoSubtitle.translate(),
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white70, fontSize: 15, height: 1.4),
-            ),
+
             const SizedBox(height: 24),
             Row(
               children: [
