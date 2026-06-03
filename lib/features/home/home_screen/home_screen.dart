@@ -1,11 +1,14 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/material.dart' show Scaffold, CircularProgressIndicator, Colors;
+import 'package:flutter/material.dart'
+    show Scaffold, CircularProgressIndicator, Colors, Dialog, ElevatedButton, OutlinedButton, showDialog;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_collection/features/abstract/presentation/blocs/promo_launch_bloc/promo_bloc.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
 import 'package:football_collection/features/football_cards/data/football_players_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:square_progress_indicator/square_progress_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../di/di.dart';
 import '../../../services/localization/translator.dart';
@@ -27,6 +30,7 @@ import '../../menu/presentation/screens/drawer/menu_drawer.dart';
 part 'home_screen_presenter.dart';
 part 'widgets/collection_tile.dart';
 part 'widgets/mini_games_tile.dart';
+part 'widgets/new_game_promo_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
