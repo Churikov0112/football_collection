@@ -14,6 +14,8 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../features/abstract/presentation/blocs/first_launch_bloc/first_launch_bloc.dart'
     as _i717;
+import '../features/abstract/presentation/blocs/promo_launch_bloc/promo_bloc.dart'
+    as _i498;
 import '../features/abstract/presentation/blocs/saved_cards_bloc/saved_cards_bloc.dart'
     as _i367;
 import '../features/abstract/presentation/blocs/settings_bloc/settings_bloc.dart'
@@ -46,6 +48,7 @@ _i174.GetIt $initGetIt(
 }) {
   final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
   gh.singleton<_i717.FirstLaunchBloc>(() => _i717.FirstLaunchBloc());
+  gh.singleton<_i498.PromoBloc>(() => _i498.PromoBloc());
   gh.singleton<_i367.SavedCardsBloc>(() => _i367.SavedCardsBloc());
   gh.singleton<_i809.SettingsBloc>(() => _i809.SettingsBloc());
   gh.singleton<_i153.CheatCodesHistoryBloc>(
