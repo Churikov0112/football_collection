@@ -139,55 +139,6 @@ class FootballLegendScreen extends StatelessWidget {
                         hidePrimeTransferValue: hidePrimeTransferValue,
                         hideCurrentTransferValue: hideCurrentTransferValue,
                       ),
-                      // const SizedBox(height: 16),
-                      // if (hideCurrentTransferValue == false) ...[
-                      //   _MarketValueHistory(player: player, hide: hideTransferValueHisory),
-                      //   const SizedBox(height: 16),
-                      // ],
-
-                      // _SofifaRatings(player: player, hide: hideRatings),
-                      // const SizedBox(height: 16),
-
-                      // DecoratedBox(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.amber,
-                      //   ),
-                      //   child: SizedBox(
-                      //     height: 400,
-                      //     width: mq.size.width,
-                      //   ),
-                      // ),
-                      // DecoratedBox(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.red,
-                      //   ),
-                      //   child: SizedBox(
-                      //     height: 400,
-                      //     width: mq.size.width,
-                      //   ),
-                      // ),
-                      // DecoratedBox(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.blue,
-                      //   ),
-                      //   child: SizedBox(
-                      //     height: 400,
-                      //     width: mq.size.width,
-                      //   ),
-                      // ),
-                      // DecoratedBox(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.green,
-                      //   ),
-                      //   child: SizedBox(
-                      //     height: 400,
-                      //     width: mq.size.width,
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 2000,
-                      //   width: mq.size.width,
-                      // ),
                     ],
                   ),
                 ),

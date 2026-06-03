@@ -143,7 +143,7 @@ class _FootballPackCollectionAppState extends State<FootballPackCollectionApp> {
                     colorScheme: const ColorScheme.dark(primary: Colors.lightGreenAccent, secondary: Colors.blueAccent),
                   ),
                   routerConfig: _router.router,
-                  title: 'World Cup 2026',
+                  title: 'World Tour 2026',
                   color: Colors.black,
                   debugShowCheckedModeBanner: true,
                   locale: languageState.language.locale,

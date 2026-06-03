@@ -2,21 +2,17 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:football_collection/di/di.dart';
 import 'package:football_collection/features/countries/domain/models/national_team.dart';
-import 'package:football_collection/features/draft/domain/models/ratings.dart';
 import 'package:football_collection/features/football_cards/data/market_values_repository.dart';
 import 'package:football_collection/features/football_cards/presentation/widgets/player_card/football_player_card.dart';
-import 'package:football_collection/ui_kit/colors/colors.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../services/localization/translator.dart';
 import '../../../../../ui_kit/utils/transfer_value_beautifier.dart';
-import '../../../../abstract/presentation/blocs/utils/ratings.dart';
 import '../../../domain/cards/player_card.dart';
 import '../../widgets/duplicate_actions/duplicate_actions_button.dart';
 
 part 'football_player_screen_presenter.dart';
 part 'widgets/market_value_history.dart';
-part 'widgets/sofifa_ratings.dart';
 part 'widgets/tm_player_bio.dart';
 
 class FootballPlayerScreen extends StatelessWidget {
@@ -153,7 +149,6 @@ class FootballPlayerScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                       ],
 
-                      _SofifaRatings(player: player, hide: hideRatings),
                       const SizedBox(height: 16),
 
                       // DecoratedBox(

@@ -346,8 +346,8 @@ class CommonFootballRepository {
           ),
           // imageAssetPath: "assets/raster/packs/pack-general.png",
           // glbAssetPath: "assets/3d/pack-general.glb",
-          imageAssetPath: "assets/raster/packs/countrypackwc26.png",
-          glbAssetPath: "assets/3d/countrywc26.glb",
+          imageAssetPath: "assets/raster/packs/pack-country.png",
+          glbAssetPath: "assets/3d/pack-country.glb",
         ),
       // if (confederation != null && confederation != FootballConfederations.unknown)
       //   PackModel(
@@ -360,13 +360,13 @@ class CommonFootballRepository {
       //   ),
       PackModel(
         type: .common,
-        title: "World Cup",
+        title: "World Tour",
         price: 5,
         cards: await getRandomCards(cardTypes: CardType.values.toSet()),
         // imageAssetPath: "assets/raster/packs/pack-worldtour.png",
         // glbAssetPath: "assets/3d/pack-worldtour.glb",
-        imageAssetPath: "assets/raster/packs/generalpackwc2026.png",
-        glbAssetPath: "assets/3d/generalwc26.glb",
+        imageAssetPath: "assets/raster/packs/pack-general.png",
+        glbAssetPath: "assets/3d/pack-general.glb",
       ),
       PackModel(
         type: .topPlayers,

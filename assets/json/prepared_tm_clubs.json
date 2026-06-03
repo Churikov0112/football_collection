@@ -3712,7 +3712,7 @@
     "colors": [
       "#138702"
     ],
-    "stadiumName": "Jeonju World Cup Stadium",
+    "stadiumName": "Jeonju Stadium",
     "stadiumSeats": 50000,
     "currentMarketValue": 16250000,
     "league": {
@@ -3805,7 +3805,7 @@
       "#993333",
       "#000088"
     ],
-    "stadiumName": "Daejeon World Cup Stadium",
+    "stadiumName": "Daejeon Stadium",
     "stadiumSeats": 42176,
     "currentMarketValue": 14350000,
     "league": {
@@ -7917,7 +7917,7 @@
       "#FF0000",
       "#000000"
     ],
-    "stadiumName": "Seoul World Cup Stadium",
+    "stadiumName": "Seoul Stadium",
     "stadiumSeats": 66704,
     "currentMarketValue": 11800000,
     "league": {
