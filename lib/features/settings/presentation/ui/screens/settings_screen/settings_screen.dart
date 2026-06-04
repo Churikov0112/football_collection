@@ -62,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
                             presenter.toggleEnableConfetti(val);
                           },
                         ),
-                        ListTile(title: Text("v. 2.2.5+25")), // CHANGE VERSION
+                        ListTile(title: Text("v. 2.2.6+26")), // CHANGE VERSION
                       ],
                     ),
                     // Positioned(
