@@ -4,6 +4,7 @@ import 'package:football_collection/services/navigation/navigation.dart';
 import 'package:football_collection/ui_kit/utils/open_in_browser.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../di/di.dart';
 import '../../../../cheats/presentation/screens/enter_cheat_code_screen/enter_cheat_code_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -124,7 +125,9 @@ class MenuDrawer extends StatelessWidget {
             // const ListTile(),
             ListTile(
               onTap: () async {
-                await openInBrowser("https://packee-dev.github.io/packee_website");
+                final language = getIt.get<LanguageBloc>().state.language;
+                final code = language.locale.languageCode;
+                await openInBrowser('https://football-collection-c7c28.web.app/$code/games/world_cup_collection_2026/');
               },
               leading: const Icon(Icons.language, color: Colors.white),
               title: Translator(
