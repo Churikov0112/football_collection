@@ -124,7 +124,7 @@ class MenuDrawer extends StatelessWidget {
             // const ListTile(),
             ListTile(
               onTap: () async {
-                await openInBrowser("https://football-collection-c7c28.web.app");
+                await openInBrowser("https://packee-dev.github.io/packee_website");
               },
               leading: const Icon(Icons.language, color: Colors.white),
               title: Translator(
