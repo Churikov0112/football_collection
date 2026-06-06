@@ -96,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
                         //     presenter.changeTrackAutoRotateSpeed(val);
                         //   },
                         // ),
-                        const ListTile(title: Text("v. 2.2.13+33")), // CHANGE VERSION
+                        const ListTile(title: Text("v. 2.2.15+35")), // CHANGE VERSION
                       ],
                     ),
                     // Positioned(
