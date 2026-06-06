@@ -127,9 +127,7 @@ class MenuDrawer extends StatelessWidget {
               onTap: () async {
                 final language = getIt.get<LanguageBloc>().state.language;
                 final code = language.locale.languageCode;
-                await openInBrowser(
-                  'https://packee-dev.github.io/packee_website/$code/games/world_cup_collection_2026/',
-                );
+                await openInBrowser('https://packee-dev.github.io/packee_website/$code/');
               },
               leading: const Icon(Icons.language, color: Colors.white),
               title: Translator(
