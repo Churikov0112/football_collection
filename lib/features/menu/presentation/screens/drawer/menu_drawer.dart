@@ -128,7 +128,7 @@ class MenuDrawer extends StatelessWidget {
                 final language = getIt.get<LanguageBloc>().state.language;
                 final code = language.locale.languageCode;
                 await openInBrowser(
-                  'https://packee-dev.github.io/packee_website$code/games/world_cup_collection_2026/',
+                  'https://packee-dev.github.io/packee_website/$code/games/world_cup_collection_2026/',
                 );
               },
               leading: const Icon(Icons.language, color: Colors.white),
