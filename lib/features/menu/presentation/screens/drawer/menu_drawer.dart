@@ -145,16 +145,16 @@ class MenuDrawer extends StatelessWidget {
                 builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
               ),
             ),
-            // ListTile(
-            //   onTap: () async {
-            //     await openInBrowser("https://chat.whatsapp.com/FRadRMQ6gLP4mX03KDANtf");
-            //   },
-            //   leading: const Icon(Icons.chat, color: Colors.white),
-            //   title: Translator(
-            //     termin: AppGlossary.ourWhatsApp,
-            //     builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
-            //   ),
-            // ),
+            ListTile(
+              onTap: () async {
+                await openInBrowser("https://chat.whatsapp.com/IPWLCIt4hAY3dxHh2jWKMf");
+              },
+              leading: const Icon(Icons.chat, color: Colors.white),
+              title: Translator(
+                termin: AppGlossary.ourWhatsApp,
+                builder: (value) => Text(value, style: const TextStyle(color: Colors.white)),
+              ),
+            ),
           ],
         ),
       ),
